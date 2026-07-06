@@ -1,0 +1,21 @@
+/* Container que organiza título + botão e lista em bloco */
+.product-list {
+    display: grid;
+    gap: 12px;
+    padding-bottom: 20px;
+}
+
+/* Cabeçalho da faixa: título e ação “Ver tudo” */
+.product-strip-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+}
+
+/* Ajuste da largura do card em telas pequenas para melhor encaixe */
+@media (max-width: 540px) {
+    .product-card {
+        flex: 0 0 82vw;
+    }
+}

@@ -1,0 +1,77 @@
+/* Card de produto: padrão visual com borda, raio e sombra */
+.product-card {
+    /* mantém largura fixa para permitir rolagem lateral uniforme */
+    flex: 0 0 330px;
+    scroll-snap-align: start;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 14px;
+    box-shadow: var(--card-shadow);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* Visual do produto */
+.product-image {
+    height: 130px;
+    border-radius: 14px;
+    margin: 0 auto 12px;
+    display: block;
+    object-fit: cover;
+}
+
+/* Nome do produto */
+.product-card h2 {
+    margin: 0;
+    font-size: 1.05rem;
+}
+
+/* Texto descritivo do produto */
+.product-card p {
+    margin: 8px 0 12px;
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.35rem;
+}
+
+/* Rodapé do card: preço + botão de ação */
+.product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+/* Avaliações e métricas */
+.rate {
+    font-weight: bold;
+}
+
+.metrics-product {
+    display: flex;
+
+}
+
+.views {
+    padding-left: 10px;
+}
+
+/* Destaca o valor do produto */
+.current-price {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* Valor anterior do produto */
+.past-price {
+    color: var(--primary);
+    font-weight: 400;
+    padding-left: 6px;
+    text-decoration: line-through;
+}
+
+
+

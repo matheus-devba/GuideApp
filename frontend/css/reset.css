@@ -1,0 +1,4 @@
+/* Reset de box model para consistência de tamanho entre todos os elementos */
+* {
+    box-sizing: border-box;
+}

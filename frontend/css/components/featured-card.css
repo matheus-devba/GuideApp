@@ -1,0 +1,40 @@
+/* Lista de cards na vertical */
+.product-list-all {
+    display: grid;
+    /* Cria exatamente 2 colunas com tamanhos iguais (1fr cada) */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 16px; /* Espaço entre os cards */
+    padding-bottom: 0;
+}
+
+.product-list-all .product-card {
+    /* REMOVA o width: 50%. O próprio Grid já vai controlar a largura deles perfeitamente */
+    width: 100%; 
+    min-width: 0; /* Evita que o card quebre ou estoure o tamanho da coluna */
+}
+
+
+/* Lista de cards na lateral */
+.product-grid, .products-grid {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 12px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+}
+
+.product-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.product-grid::-webkit-scrollbar-thumb {
+    background: #d1daf0;
+    border-radius: 999px;
+}
+
+.product-grid::-webkit-scrollbar-track {
+    background: #eef2ff;
+    border-radius: 999px;
+}

@@ -1,0 +1,49 @@
+/* Campo e botão de pesquisa/filtro da loja */
+.store-controls {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+}
+
+.store-controls form {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+}
+
+.store-controls input {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    height: 44px;
+    padding: 0 14px;
+    font-size: 0.96rem;
+    background: var(--surface);
+}
+
+.store-controls button, .store-controls a {
+    border: none;
+    background: var(--primary);
+    color: white;
+    border-radius: 12px;
+    padding: 0 18px;
+    height: 44px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    justify-content: center;
+    line-height: 40px;
+}
+
+/* Botão de ação do card */
+.product-footer button {
+    border: 1px solid var(--primary);
+    background: transparent;
+    color: var(--primary);
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+

@@ -1,0 +1,137 @@
+@import url("../global.css");
+@import url("../variables.css");
+@import url("../consumer/loja.css");
+
+
+input[type="checkbox"] {
+    transform: scale(1.5); /* Aumenta o tamanho do checkbox uniformemente */
+    margin: 10px;          /* Opcional: adiciona um espaço ao redor para não grudar no texto */
+    cursor: pointer;
+}
+
+.cta-product {
+    display: inline-flex; 
+    align-items: center;  
+    gap: 8px;        
+    text-decoration: none; 
+}
+
+.cta-product img {
+    width: 24px;          /* Ajuste o tamanho do ícone conforme necessário */
+    height: 24px;
+    display: block;
+}
+
+.right-group {
+    display: grid;
+    margin-top: 10px;
+    top: 0;
+}
+
+.right-group a {
+    justify-content: center;
+    place-items: center;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: var(--primary);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    
+}
+/* Card de produto: padrão visual com borda, raio e sombra */
+.product-card-all {
+    /* mantém largura fixa para permitir rolagem lateral uniforme */
+    scroll-snap-align: start;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 14px;
+    box-shadow: var(--card-shadow);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+   
+}
+
+/* Visual do produto */
+.product-image-all {
+    height: 100px;
+    border-radius: 14px;
+    margin: 0 auto 12px;
+    display: block;
+    object-fit: cover;
+}
+
+/* Nome do produto */
+.product-card-all h2 {
+    margin: 0;
+    font-size: 14px
+}
+
+/* Texto descritivo do produto */
+.product-card-all p {
+    margin: 8px 0 12px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.35rem;
+    margin-left: 0;
+}
+
+/* Rodapé do card: preço + botão de ação */
+.product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+/* Avaliações e métricas */
+.metrics-product-all .rate {
+    font-weight: bold;
+}
+
+
+.metrics-product-all .views {
+    font-size: 12px;
+    padding-left: 0;
+}
+
+/* Destaca o valor do produto */
+.price-group-all .current-price {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 16px;
+}
+.price-group-all {
+    display: flex;
+    flex-direction: column;
+}
+/* Valor anterior do produto */
+.price-group-all .past-price {
+    color: var(--primary);
+    font-weight: 400;
+    padding-left: 0px;
+    font-size: 10px;
+    text-decoration: line-through;
+}
+
+.product-footer-all button {
+    border: 1px solid var(--primary);
+    background: transparent;
+    color: var(--primary);
+    border-radius: 10px;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.product-footer-all {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+

@@ -1,0 +1,101 @@
+@import url("../global.css");
+@import url("../variables.css");
+@import url("../consumer/loja.css");
+
+
+/* Card de produto: padrão visual com borda, raio e sombra */
+.product-card-all {
+    /* mantém largura fixa para permitir rolagem lateral uniforme */
+    scroll-snap-align: start;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 14px;
+    box-shadow: var(--card-shadow);
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+   
+}
+
+/* Visual do produto */
+.product-image-all {
+    height: 100px;
+    border-radius: 14px;
+    margin: 0 auto 12px;
+    display: block;
+    object-fit: cover;
+}
+
+/* Nome do produto */
+.product-card-all h2 {
+    margin: 0;
+    font-size: 14px
+}
+
+/* Texto descritivo do produto */
+.product-card-all p {
+    margin: 8px 0 12px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.35rem;
+    margin-left: 0;
+}
+
+/* Rodapé do card: preço + botão de ação */
+.product-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+/* Avaliações e métricas */
+.metrics-product-all .rate {
+    font-weight: bold;
+}
+
+
+.metrics-product-all .views {
+    font-size: 12px;
+    padding-left: 0;
+}
+
+/* Destaca o valor do produto */
+.price-group-all .current-price {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 16px;
+}
+.price-group-all {
+    display: flex;
+    flex-direction: column;
+}
+/* Valor anterior do produto */
+.price-group-all .past-price {
+    color: var(--primary);
+    font-weight: 400;
+    padding-left: 0px;
+    font-size: 10px;
+    text-decoration: line-through;
+}
+
+.product-footer-all button {
+    border: 1px solid var(--primary);
+    background: transparent;
+    color: var(--primary);
+    border-radius: 10px;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.product-footer-all {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/consumer/loja.css">
+</head>
+<body>
+    
+    <!--NavBar -->
+    <div class="store-page">
+        <header class="top-bar">
+                <img class="guide-icon" src="../assets/icons/icone-guide.png" >
+           
+            <h1 class="store-title">Perfumaria Store</h1>
+            <button class="top-icon-btn">
+                <img class="top-icon" src="../assets/icons/share.png">
+            </button>
+        </header>
+
+
+        <!-- Arte loja -->
+        <section class="media-store">
+            <img class="banner-media" src="../assets/images/lojas/banners/perfumaria-store.jpeg" alt="Banner da loja">
+            <img class="logo-media" src="../assets/images/lojas/logo/logo-paris.jpeg" alt="Logo da loja">
+        </section>
+
+        <section class="store-controls">
+            <form class="store-search-form" action="/frontend/consumer/pesquisa.html" method="GET">
+                <input type="search" placeholder="Buscar produtos..." name="query">
+                <button type="submit" >Buscar</button>
+            </form>
+        </section>
+
+    <main class="principal-info">
+        <!-- Listas -->
+        <section class="product-list">
+            <header class="product-strip-header">
+                <h2 class="sections-title">Listas para você</h2>
+            </header>
+
+            <section class="list-grid" role="list">
+                <!-- Dados -->
+            </section>
+        </section>
+
+         <!-- Em destaque -->
+        <main class="product-list">
+            <header class="product-strip-header">
+                <h2 class="sections-title">Em destaque</h2>
+                <a class="product-view-all" href="./destaques.html">Ver tudo</a>
+            </header>
+    
+
+            <section class="product-grid" >
+                <!-- Dados -->
+            </section>
+        </main>
+
+        <!-- O que você quer hoje -->
+        <section class="product-list">
+            <header class="product-strip-header">
+                <h2 class="sections-title">O que você quer hoje?</h2>
+            </header>
+
+            <section class="list-grid" role="list">
+                <div class="list-category" role="listitem">
+                    <!-- Dados -->
+                </div>
+            </section>
+        </section>
+
+        <!-- Todos os produtos -->
+        <section class="product-list">
+            <header class="product-strip-header">
+                <h2 class="sections-title">Exclusivos da Perfumaria Store</h2>
+                <a class="product-view-all" href="./produtos.html">Ver tudo</a>
+            </header>
+
+
+        <section class="products-grid" role="list">
+            <!-- Dados -->
+        </section>
+             
+
+     </div>
+    </main>
+</body>
+<script type="module" src="../js/consumer/app.js" defer></script>
+</html>

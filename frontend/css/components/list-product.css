@@ -1,0 +1,100 @@
+@import url("../consumer/loja.css");
+
+/* Lista de cards da seção “Listas para você” */
+.list-grid {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 12px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    padding-bottom: 2px;
+}
+
+
+.list-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.list-grid::-webkit-scrollbar-thumb {
+    background: #d1daf0;
+    border-radius: 999px;
+}
+
+.list-grid::-webkit-scrollbar-track {
+    background: #eef2ff;
+    border-radius: 999px;
+}
+
+
+/*Lista de produto: padrão visual e imagem */
+.list-product-card {
+    /* mantém largura fixa para permitir rolagem lateral uniforme */
+    flex: 0 0 210px;
+    scroll-snap-align: start;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 14px;
+    box-shadow: var(--card-shadow);
+    box-sizing: border-box;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  
+}
+
+
+
+.list-card-images {
+    position:relative;
+    height:40px;
+    bottom: 2px;
+}
+
+.list-image{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    object-fit:cover;
+    position:absolute;
+}
+
+.back {
+  left:0;
+}
+
+.front {
+    left:22px;
+    border:2px solid white;
+}
+
+.badge{
+    position:absolute;
+    left:64px;
+    top:7px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width:28px;
+    height:28px;
+    background-color: var(--primary);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius:50%;
+}
+
+
+.list-content h4 {
+    margin: 0 0 2px 0; 
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+.list-content p {
+    margin: 0;
+}

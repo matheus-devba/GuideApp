@@ -1,0 +1,23 @@
+
+
+/* Variáveis globais da página de loja */
+:root {
+    --bg: #f4f7fb;
+    --surface: #ffffff;
+    --text: #1f2a44;
+    --muted: #6b7385;
+    --line: #e2e8f0;
+    --primary: #004aad;
+    --secundary: #00bf63;
+    --card-shadow: 0 16px 32px rgba(17, 24, 39, 0.09);
+}
+
+/* Estilo global da página: tipografia, margem padrão e fundo gradiente */
+body {
+    margin: 0;
+    font-family: "Alexandria", "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(180deg, #f8fbff, var(--bg));
+    color: var(--text);
+    min-height: 100vh;
+    padding: 16px;
+}
