@@ -4,9 +4,10 @@ export const products = [
         name : "Florata Rose",
         image: "../assets/images/produtos/floratta-rose.webp",
         rate: "4,8 ⭐⭐⭐⭐",
-        view: "8 pessoas já viram",
+        view: "8",
         pastPrice: "R$ 210,00",
-        currentPrice: "R$ 20,00"
+        currentPrice: "R$ 20,00",
+        interested: "90"
       },
 
       {
@@ -14,9 +15,10 @@ export const products = [
         name : "Desodorante Marlot",
         image: "../assets/images/produtos/desodorante-merlot.webp",
         rate: "4,8 ⭐⭐⭐⭐",
-        view: "8 pessoas já viram",
+        view: "8",
         pastPrice: "R$ 210,00",
-        currentPrice: "R$ 20,00"
+        currentPrice: "R$ 20,00",
+        interested: "90"
       },
 
         {
@@ -24,9 +26,10 @@ export const products = [
         name : "Egeo",
         image: "../assets/images/produtos/egeo.webp",
         rate: "4,8 ⭐⭐⭐⭐",
-        view: "8 pessoas já viram",
+        view: "8",
         pastPrice: "R$ 210,00",
-        currentPrice: "R$ 20,00"
+        currentPrice: "R$ 20,00",
+        interested: "90"
       },
 
       {
@@ -34,17 +37,19 @@ export const products = [
         name : "Sabonete",
         image: "../assets/images/produtos/sabonete.webp",
         rate: "4,8 ⭐⭐⭐⭐",
-        view: "8 pessoas já viram",
+        view: "8",
         pastPrice: "R$ 210,00",
-        currentPrice: "R$ 20,00"
+        currentPrice: "R$ 20,00",
+        interested: "90"
       },
       {
         id: "5",
         name : "Hidratante",
         image: "../assets/images/produtos/combo-nativa.jpeg",
         rate: "4,8 ⭐⭐⭐⭐",
-        view: "8 pessoas já viram",
+        view: "8",
         pastPrice: "R$ 210,00",
-        currentPrice: "R$ 20,00"
+        currentPrice: "R$ 20,00",
+        interested: "90"
       }
     ]

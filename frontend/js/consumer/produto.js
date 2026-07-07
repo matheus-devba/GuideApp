@@ -31,7 +31,7 @@ function renderProduto (productId) {
         <span class="past-price">${productSelected.pastPrice}</span>
             <div class="metrics-product">
                 <p class="rate">${productSelected.rate}</p>
-                <p class="views">${productSelected.view}</p>
+                <p class="views">${productSelected.view} pessoas já viram</p>
             </div>
     </div>
 

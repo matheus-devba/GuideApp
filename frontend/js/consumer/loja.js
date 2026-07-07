@@ -38,7 +38,7 @@ function createCard(product) {
             <h2>${product.name}</h2>
             <span class="metrics-product">
                 <p class="rate">${product.rate}</p>
-                <p class="views">${product.view}</p>
+                <p class="views">${product.view} pessoas já viram</p>
             </span>
             <div class="product-footer">
                 <div class="price-group">

@@ -1,29 +1,17 @@
-import { lists } from "../mocks/listas_db.js"
+import { products } from "../mocks/produtos_db.js"
 
-export function initLista() {
-  const params = new URLSearchParams(window.location.search);
-  const listId = params.get("id");
-
-  renderLista(listId);
+export function initProdutos() {
+  renderProdutos();
 }
 
-
-
-function renderLista (listId) {
+function renderProdutos () {
   const container = document.querySelector(".product-list-all");
   if (!container) return;
 
-  const list = lists.find((item) => item.id === listId);
-  if (!list) return;
-
-  const titleList = document.querySelector(".sections-title")
-  titleList.innerHTML = list.title
-
-
-  container.innerHTML = list.products
-    .map((product) => `
-            <a class="product-card-all" href="../consumer/produto.html?id=${product.id}">
-                <input type="checkbox">
+  container.innerHTML = products
+    .map(
+      (product) => `
+            <a class="product-card-all" href="../merchant/produto.html?id=${product.id}">
                 <img class="product-image-all" src="${product.image}">
                 <h2>${product.name}</h2>
                 <span class="metrics-product-all">
@@ -38,6 +26,7 @@ function renderLista (listId) {
                     <button type="button">Ver</button>
                 </div>
             </a>
-      `)
+      `
+    )
     .join("");
 }

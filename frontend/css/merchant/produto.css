@@ -1,0 +1,105 @@
+@import url("../global.css");
+@import url("../reset.css");
+@import url("../components/navbar.css");
+@import url("../components/button.css");
+@import url("../components/card-product.css");
+
+/* Configuação do campo da imagem do produto */
+.media-product {
+    padding: 30px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: var(--card-shadow);
+    
+}
+
+/* Configuação de imagem do produto */
+.image-product {
+    width: 180px;
+}
+/* Configuação das informações iniciais do produto */
+.initial-info {
+    padding: 30px;
+  
+}
+
+.initial-info h1 {
+    margin-top: 3px;  
+    margin-bottom: 5px; 
+    font-weight: 500;
+}
+.initial-info label {
+   color: white;
+   background-color: var(--primary);
+   padding: 5px;
+   border-radius: 10px;
+   font-size: 12px;
+}
+
+.initial-info hr {
+    margin-top: 18px;
+    background-color:rgb(227, 236, 242);
+    height: 2px;
+    border: none;
+}
+.initial-info span {
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.metrics-product {
+    display: grid;
+}
+
+.left-group {
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.right-group {
+    display: grid;
+    margin-top: 10px;
+    top: 0;
+}
+
+.product-options {
+    display: grid;
+    margin-top: 10px;
+    top: 0;
+    justify-content: center;
+    place-items: center;
+    padding: 10px 14px;
+    border-radius: 12px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+}
+.product-options.edit {
+    background: var(--edit);
+}
+.product-options.delete {
+    background: var(--delete);
+}
+.product-options.muted {
+    background: var(--muted);
+}
+
+.product-options.activate {
+    background: var(--secundary);
+}
+
+.right-group-merchant {
+    justify-content: center;
+    align-items: center;
+    place-items: center;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: var(--edit);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+

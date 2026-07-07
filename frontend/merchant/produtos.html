@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/merchant/produtos.css">
+</head>
+<body>
+    <!--NavBar -->
+    <div class="store-page">
+        <header class="top-bar">
+            <button class="top-icon-btn" onclick="history.back()">
+                <img class="top-icon" src="../assets/icons/back.png" >
+            </button>
+            <h1 class="store-title">Perfumaria Store</h1>
+        </header>
+
+        <section class="group-menu"> 
+            <a class="selected-item" href="/frontend/merchant/home.html">Home</a>
+            <a class="menu-item" href="/frontend/merchant/produtos.html">Produtos</a>
+            <a class="menu-item" href="/frontend/merchant/listas.html">Listas</a>
+            <a class="menu-item" href="/frontend/merchant/destaques.html">Destaques</a>
+            <a class="menu-item" href="/frontend/merchant/perfil.html">Perfil</a>
+        </section>
+
+
+        <!-- Todos os produtos -->
+        <section class="product-list">
+            <header class="product-strip-header">
+                <h2 class="sections-title">Meus Produtos</h2>
+                <section>
+                    <a class="new-product-btn" href="/frontend/merchant/formProduto.html?action=novo">Novo Produto +</a>
+                </section>
+            </header>
+        </section>
+
+        
+        <section class="store-controls">
+            <form class="store-search-form" action="/frontend/merchant/pesquisa.html" method="GET">
+                <input type="search" placeholder="Buscar produtos..." name="query">
+                <button type="submit" >Buscar</button>
+            </form>
+        </section>
+
+
+        <section class="product-list-all">
+         
+        </section>
+    </div>
+</body>
+
+<script type="module" src="../js/merchant/app.js" defer></script>
+</html>

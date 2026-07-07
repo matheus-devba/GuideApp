@@ -16,7 +16,7 @@ function renderProdutos () {
                 <h2>${product.name}</h2>
                 <span class="metrics-product-all">
                     <p class="rate">${product.rate}</p>
-                    <p class="views">${product.view}</p>
+                    <p class="views">${product.view} pessoas já viram</p>
                 </span>
                 <div class="product-footer-all">
                     <div class="price-group-all">

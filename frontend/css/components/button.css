@@ -37,7 +37,7 @@
 }
 
 /* Botão de ação do card */
-.product-footer button {
+.product-footer button, .submit-button {
     border: 1px solid var(--primary);
     background: transparent;
     color: var(--primary);
@@ -45,5 +45,26 @@
     padding: 8px 12px;
     font-weight: 600;
     cursor: pointer;
+}
+
+.new-product-btn {
+    border: 1px solid var(--primary);
+    background: transparent;
+    color: var(--secundary);
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+}
+.edit-product-btn {
+    border: 1px solid var(--primary);
+    background: transparent;
+    color: var(--edit);
+    border-radius: 10px;
+    padding: 8px 12px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
 }
 

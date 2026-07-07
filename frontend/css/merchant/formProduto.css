@@ -1,0 +1,108 @@
+@import url("../global.css");
+@import url("../reset.css");
+@import url("../components/navbar.css");
+@import url("../components/button.css");
+@import url("../components/card-product.css");
+
+.product-page {
+    padding-bottom: 100px;
+}
+.image-product {
+    width: 200px;
+    border-radius: 14px;
+    object-fit: cover;
+}
+
+.image-product-container {
+    justify-content: center;
+    align-items: center;
+}
+.image-product {
+    display: block;
+    margin: 0 auto;
+}
+.product-edit {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 24px;
+    align-items: start;
+    margin-top: 24px;
+}
+
+.form-product-container,
+.image-product-container {
+    display: grid;
+    gap: 16px;
+}
+
+.product-form {
+    display: grid;
+    gap: 14px;
+}
+
+.form-group {
+    display: grid;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #1f2937;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    background: #fff;
+    font: inherit;
+    color: #111827;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #2563eb;
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.image-product {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 14px;
+    object-fit: cover;
+}
+
+.image-upload {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.image-upload-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    background: #f9fafb;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+    .product-edit {
+        grid-template-columns: 1fr;
+    }
+}
