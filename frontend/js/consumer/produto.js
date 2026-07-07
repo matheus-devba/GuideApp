@@ -36,7 +36,7 @@ function renderProduto (productId) {
     </div>
 
     <div class="right-group">  
-        <a class="cta-product" href="/frontend/consumer/loja.html"> 
+        <a class="cta-product" href="./loja.html"> 
             <img src="../assets/icons/whatsapp.png">
             <h8>Tenho Interesse</h8>
         </a>
