@@ -11,7 +11,7 @@ export const lists = [
         name : "Florata Rose",
         image: "../assets/images/produtos/floratta-rose.webp",
         rate: "4,8 ⭐⭐⭐⭐",
-        view: "8 pessoas já viram",
+        view: "8",
         pastPrice: "R$ 210,00",
         currentPrice: "R$ 20,00"
       },
@@ -21,7 +21,7 @@ export const lists = [
         name : "Desodorante Marlot",
         image: "../assets/images/produtos/desodorante-merlot.webp",
         rate: "4,8 ⭐⭐⭐⭐",
-        view: "8 pessoas já viram",
+        view: "8",
         pastPrice: "R$ 210,00",
         currentPrice: "R$ 20,00"
       }
@@ -40,7 +40,7 @@ export const lists = [
         name : "Egeo",
         image: "../assets/images/produtos/egeo.webp",
         rate: "4,8 ⭐⭐⭐⭐",
-        view: "8 pessoas já viram",
+        view: "8",
         pastPrice: "R$ 210,00",
         currentPrice: "R$ 20,00"
       },
@@ -50,7 +50,7 @@ export const lists = [
         name : "Sabonete",
         image: "../assets/images/produtos/sabonete.webp",
         rate: "4,8 ⭐⭐⭐⭐",
-        view: "8 pessoas já viram",
+        view: "8 ",
         pastPrice: "R$ 210,00",
         currentPrice: "R$ 20,00"
       }

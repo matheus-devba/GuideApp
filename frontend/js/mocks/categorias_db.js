@@ -10,7 +10,7 @@ export const categorias = [
         name : "Hidratante",
         image: "../assets/images/produtos/combo-nativa.jpeg",
         rate: "4,8 ⭐⭐⭐⭐",
-        view: "8 pessoas já viram",
+        view: "8",
         pastPrice: "R$ 210,00",
         currentPrice: "R$ 20,00"
       }
@@ -26,7 +26,7 @@ export const categorias = [
         name : "Florata Rose",
         image: "../assets/images/produtos/floratta-rose.webp",
         rate: "4,8 ⭐⭐⭐⭐",
-        view: "8 pessoas já viram",
+        view: "8",
         pastPrice: "R$ 210,00",
         currentPrice: "R$ 20,00"
     }
@@ -42,7 +42,7 @@ export const categorias = [
         name : "Desodorante",
         image: "../assets/images/produtos/desodorante-merlot.webp",
         rate: "4,8 ⭐⭐⭐⭐",
-        view: "8 pessoas já viram",
+        view: "8",
         pastPrice: "R$ 210,00",
         currentPrice: "R$ 20,00"
     }
@@ -58,7 +58,7 @@ export const categorias = [
         name : "Sabonete",
         image: "../assets/images/produtos/sabonete.webp",
         rate: "4,8 ⭐⭐⭐⭐",
-        view: "8 pessoas já viram",
+        view: "8",
         pastPrice: "R$ 210,00",
         currentPrice: "R$ 20,00"
     }
