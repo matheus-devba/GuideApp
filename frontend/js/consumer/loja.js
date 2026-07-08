@@ -42,8 +42,8 @@ function createCard(product) {
             </span>
             <div class="product-footer">
                 <div class="price-group">
-                    <span class="past-price">${product.pastPrice}</span>
-                    <span class="current-price">${product.currentPrice}</span>
+                      <span class="promocional-price">R$ ${product.promocionalPrice} </span>
+                      <span class="normal-price-all">R$ ${product.normalPrice}</span>
                 </div>
                 <button type="button">Ver</button>
             </div>

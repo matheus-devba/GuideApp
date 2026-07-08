@@ -27,12 +27,12 @@ function renderProduto (productId) {
     <hr>
 
     <div class="left-group">
-        <span>${productSelected.currentPrice}</span>
-        <span class="past-price">${productSelected.pastPrice}</span>
-            <div class="metrics-product">
-                <p class="rate">${productSelected.rate}</p>
-                <p class="views">${productSelected.view} pessoas já viram</p>
-            </div>
+      <span class="promocional-price">R$ ${productSelected.promocionalPrice} </span>
+      <span class="normal-price">R$ ${productSelected.normalPrice}</span>
+        <div class="metrics-product">
+            <p class="rate">${productSelected.rate}</p>
+            <p class="views">${productSelected.view} pessoas já viram</p>
+        </div>
     </div>
 
     <div class="right-group">  

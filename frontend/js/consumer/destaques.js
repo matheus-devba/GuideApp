@@ -20,8 +20,8 @@ function renderDestaque () {
                 </span>
                 <div class="product-footer-all">
                     <div class="price-group-all">
-                        <span class="past-price">${product.pastPrice}</span>
-                        <span class="current-price">${product.currentPrice}</span>
+                      <span class="promocional-price">R$ ${product.promocionalPrice} </span>
+                      <span class="normal-price-all">R$ ${product.normalPrice}</span>
                     </div>
                     <button type="button">Ver</button>
                 </div>

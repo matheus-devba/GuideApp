@@ -60,15 +60,24 @@
 }
 
 /* Destaca o valor do produto */
-.current-price {
+.promocional-price {
     color: var(--primary);
     font-weight: 700;
 }
 
-/* Valor anterior do produto */
-.past-price {
-    color: var(--primary);
+/* Valor normal do produto */
+.normal-price {
+    color: var(--text);
     font-weight: 400;
+    font-size: 18px !important;
+    padding-left: 6px;
+    text-decoration: line-through;
+}
+
+.normal-price-all {
+    color: var(--text);
+    font-weight: 400;
+    font-size: 14px !important;
     padding-left: 6px;
     text-decoration: line-through;
 }

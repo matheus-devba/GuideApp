@@ -29,8 +29,8 @@ export function renderProduto (productId) {
     <hr>
 
     <div class="left-group">
-        <span>${productSelected.currentPrice}</span>
-        <span class="past-price">${productSelected.pastPrice}</span>
+        <span class="promocional-price">R$ ${productSelected.promocionalPrice} </span>
+        <span class="normal-price">R$ ${productSelected.normalPrice}</span>
             <div class="metrics-product-merchant">
                 <p>${productSelected.rate}</p>
                 <p>${productSelected.view} pessoas já viram</p>

@@ -7,8 +7,8 @@ export const destaques = [
         image: "../assets/images/produtos/floratta-rose.webp",
         rate: "4,8 ⭐⭐⭐⭐",
         view: "8",
-        pastPrice: "R$ 210,00",
-        currentPrice: "R$ 20,00"
+        normalPrice: "210.00",
+        promocionalPrice: "20.00"
       },
 
       {
@@ -17,8 +17,8 @@ export const destaques = [
         image: "../assets/images/produtos/desodorante-merlot.webp",
         rate: "4,8 ⭐⭐⭐⭐",
         view: "8",
-        pastPrice: "R$ 210,00",
-        currentPrice: "R$ 20,00"
+        normalPrice: "210.00",
+        promocionalPrice: "20.00"
       }
     ],
   }

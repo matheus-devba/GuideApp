@@ -7,6 +7,7 @@ export function initFormProduto() {
   const action = params.get("action");
 
   renderFormProduto(productId, action);
+  fillFormWithProductData(products.find((item) => item.id === productId));
 }
 
 function renderFormProduto (productId, action) {
@@ -50,15 +51,15 @@ function renderFormProduto (productId, action) {
     
     } else {
     const mediaProduct = document.querySelector('.media-product')
-  mediaProduct.innerHTML = `
-    <section class="image-product-container">
-        <div class="image-upload">
-            <input type="file" id="image" name="image" accept="image/*" hidden>
-            <label for="image" class="image-upload-label">Enviar Imagem</label>
-        </div>
-    </section>  
-    
-    `
+    mediaProduct.innerHTML = `
+      <section class="image-product-container">
+          <div class="image-upload">
+              <input type="file" id="image" name="image" accept="image/*" hidden>
+              <label for="image" class="image-upload-label">Enviar Imagem</label>
+          </div>
+      </section>  
+      
+      `
     const classificaoesSelect = document.getElementById('classificacoes')
     classificaoesSelect.innerHTML =
     `
@@ -82,4 +83,26 @@ function renderFormProduto (productId, action) {
 
 
   
+}
+
+function fillFormWithProductData(productSelected) {
+  const nameInput = document.getElementById('product-name')
+  const normalPriceInput = document.getElementById('product-price-normal')
+  const promocionalPriceInput = document.getElementById('product-price-promocional')
+  const classificaoesSelect = document.getElementById('classificacoes')
+  const destaqueOption = document.getElementById('destaqueOption')
+  const productDescription = document.getElementById('product-description')
+
+  if (productSelected.description === undefined || productSelected.description === null) {
+    productSelected.description = '';
+  }
+
+  const classificacao = classificacoes.find((item) => item.id === productSelected.classificacoesId);
+
+  nameInput.value = productSelected.name
+  normalPriceInput.value = productSelected.normalPrice
+  promocionalPriceInput.value = productSelected.promocionalPrice
+  classificaoesSelect.value = classificacao.id
+  destaqueOption.value = productSelected.destaque.toString()
+  productDescription.value = productSelected.description
 }

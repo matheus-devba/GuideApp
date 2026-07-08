@@ -63,7 +63,7 @@
 }
 
 /* Destaca o valor do produto */
-.price-group-all .current-price {
+.price-group-all .promocional-price {
     color: var(--primary);
     font-weight: 700;
     font-size: 16px;
@@ -73,8 +73,8 @@
     flex-direction: column;
 }
 /* Valor anterior do produto */
-.price-group-all .past-price {
-    color: var(--primary);
+.price-group-all .normal-price-all {
+    color: var(--text);
     font-weight: 400;
     padding-left: 0px;
     font-size: 10px;
