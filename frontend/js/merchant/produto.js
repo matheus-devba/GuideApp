@@ -39,7 +39,7 @@ export function renderProduto (productId) {
     </div>
 
     <div class="options-group">  
-      <a class="product-options edit" href="/frontend/merchant/formProduto.html?id=${productSelected.id}&action=edit">Editar</a>
+      <a class="product-options edit" href="./formProduto.html?id=${productSelected.id}&action=edit">Editar</a>
       <a class="product-options muted" id="muted" href="#">Ocultar</a>
       <a class="product-options delete" id="delete" href="#">Excluir</a>
     </div>
@@ -76,7 +76,7 @@ function deleteItem () {
     const confirmAction = prompt('Deseja realmente excluir este produto? (Digite "sim" para confirmar)').toLowerCase()
     if (confirmAction === "sim") {
       alert('Produto excluído com sucesso!')
-      window.location.href = '/frontend/merchant/produtos.html'
+      window.location.href = './produtos.html'
     }
   })
 }
