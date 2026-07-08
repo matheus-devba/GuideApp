@@ -3,8 +3,10 @@ import { initDestaques } from "../consumer/destaques.js";
 import { initProdutos } from "../merchant/produtos.js";
 import { initCategoria } from "../consumer/categoria.js";
 import { initProduto} from "../merchant/produto.js";
-import { initSearch} from "../merchant/pesquisa.js";
+import { initFormLista} from "../merchant/formLista.js";
 import { initFormProduto } from "../merchant/formProduto.js";
+import { initListas } from "../merchant/listas.js";
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const path = window.location.pathname;
@@ -26,10 +28,13 @@ document.addEventListener("DOMContentLoaded", () => {
   if (path.includes("produto.html")) {
     initProduto();
   }
-  if (path.includes("pesquisa.html")) {
-    initSearch();
+  if (path.includes("formLista.html")) {
+    initFormLista();
   }
   if (path.includes("formProduto.html")) {
     initFormProduto();
+  }
+  if (path.includes("listas.html")) {
+    initListas();
   }
 });

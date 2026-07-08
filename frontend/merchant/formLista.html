@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/merchant/formLista.css">
+</head>
+<body>
+    <!--NavBar -->
+    <div class="product-page">
+        <header class="top-bar">
+            <button class="top-icon-btn" onclick="history.back()">
+                <img class="top-icon" src="../assets/icons/back.png" >
+            </button>
+            
+            <h1 class="store-title">Perfumaria Store</h1>
+
+            <button class="top-icon-btn">
+                <img class="top-icon" src="../assets/icons/share.png">
+            </button>
+        </header>
+
+        
+    <main class="new-list">
+        <section class="form-newList-container">
+            <form class="newList-form" id="newList-form">
+            <div class="form-group">
+                <label for="list-name">Nome da lista</label>
+                <input type="text" id="product-name" name="list-name" required>
+            </div>
+            <button type="submit" id="submit-button" class="submit-button-float">Criar Lista</button>
+            <p>Selecione os produtos para a lista</p>
+
+            <section class="store-controls">
+                <form class="store-search-form" action="./listas.html" method="GET">
+                    <input type="search" placeholder="Buscar produtos..." name="query" class="search">
+                    <button type="submit" >Buscar</button>
+                </form>
+            </section>
+        </section>
+        
+
+        <section class="product-list-all"></section>
+        
+
+    </main>
+    </div>    
+</body>
+<script type="module" src="../js/merchant/app.js" defer></script>
+</html>

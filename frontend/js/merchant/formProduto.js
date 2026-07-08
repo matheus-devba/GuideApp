@@ -7,7 +7,11 @@ export function initFormProduto() {
   const action = params.get("action");
 
   renderFormProduto(productId, action);
-  fillFormWithProductData(products.find((item) => item.id === productId));
+  
+  if (productId) {
+      fillFormWithProductData(products.find((item) => item.id === productId));
+  }
+
 }
 
 function renderFormProduto (productId, action) {

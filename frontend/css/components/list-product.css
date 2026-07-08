@@ -1,4 +1,5 @@
 @import url("../consumer/loja.css");
+@import url("../global.css");
 
 /* Lista de cards da seção “Listas para você” */
 .list-grid {
@@ -97,4 +98,21 @@
 
 .list-content p {
     margin: 0;
+    font-size: 0.9rem;
+}
+
+.metric-icon {
+    width: 16px;
+    margin-right: 4px;
+}
+
+.metric {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.metric p {
+    font-size: 0.8rem;
+    color: var(--muted);
 }

@@ -6,7 +6,10 @@ import { categorias } from "../mocks/categorias_db.js";
 
 
 export function initLoja() {
-  renderLists();
+  const linkPrefix = "../consumer/lista.html?id=";
+  const containerSelector = ".list-grid";
+
+  renderLists(linkPrefix, containerSelector);
   renderDestaque()
   renderProdutos()
   renderCategoria()
@@ -15,9 +18,9 @@ export function initLoja() {
 
 
 
-function createListCard(list) {
+function createListCard(list, linkPrefix) {
  return `
-        <a class="list-product-card" href="../consumer/lista.html?id=${list.id}">
+        <a class="list-product-card" href="${linkPrefix}${list.id}">
           <div class="list-card-images">
             <img src="${list.imageBack}" class="list-image back">
             <img src="${list.imageFront}" class="list-image front">
@@ -26,6 +29,11 @@ function createListCard(list) {
           <div class="list-content">
             <h4>${list.title}</h4>
             <p>${list.count}</p>
+            <span class="metric"> 
+              <img src="../assets/icons/eye.png" class="metric-icon">
+              <p class="metric-text">${list.metricTitle} visualizações</p>
+            </span>
+          
           </div>
         </a>
       `
@@ -60,11 +68,12 @@ function createListCategory(list) {
   `
 }
 
-function renderLists () {
-  const container = document.querySelector(".list-grid");
+export function renderLists (linkPrefix, containerSelector) {
+  const container = document.querySelector(containerSelector);
   if (!container) return;
 
-  container.innerHTML = lists.map((list) => createListCard(list)).join('')
+  
+  container.innerHTML = lists.map((list) => createListCard(list, linkPrefix)).join('')
 
 }
 

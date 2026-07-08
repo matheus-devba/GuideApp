@@ -68,3 +68,22 @@
     text-decoration: none;
 }
 
+
+.submit-button-float {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--primary);
+    color: var(--surface);
+    font-size: 20px;
+    border-radius: 12px;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    box-shadow: var(--card-shadow);
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    backdrop-filter: blur(6px);
+}

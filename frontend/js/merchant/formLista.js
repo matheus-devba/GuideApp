@@ -1,12 +1,7 @@
 import { products } from "../mocks/produtos_db.js"
 
-export function initProdutos() {
+export function initFormLista() {
   renderProdutos();
-
-  const menuItem = document.querySelector('.menu-item.produtos');
-  if (menuItem) {
-    menuItem.classList.add('selected-item');
-  }
 }
 
 function renderProdutos () {
@@ -17,7 +12,8 @@ function renderProdutos () {
     .map(
       (product) => `
             <a class="product-card-all" href="../merchant/produto.html?id=${product.id}">
-                <img class="product-image-all" src="${product.image}">
+            <input type="checkbox">    
+            <img class="product-image-all" src="${product.image}">
                 <h2>${product.name}</h2>
                 <span class="metrics-product-all">
                     <p class="rate">${product.rate}</p>

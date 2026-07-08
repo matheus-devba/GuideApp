@@ -34,7 +34,7 @@
 
 .selected-item {
     background-color: var(--primary);
-    color: var(--surface);
+    color: var(--surface) !important;
     flex: 0 0 auto;
     text-decoration: none;
     padding: 10px 14px;

@@ -5,6 +5,7 @@ export const lists = [
     imageBack: "../assets/images/produtos/floratta-rose.webp",
     imageFront: "../assets/images/produtos/desodorante-merlot.webp",
     badge: "+12",
+    metricTitle: "8",
     products: [
       {
         id: "1",
@@ -13,7 +14,7 @@ export const lists = [
         rate: "4,8 ⭐⭐⭐⭐",
         view: "8",
         normalPrice: "210.00",
-        promocionalPrice: "20.00"
+        promocionalPrice: "20.00",
       },
 
       {
@@ -34,6 +35,7 @@ export const lists = [
     imageBack: "../assets/images/produtos/egeo.webp",
     imageFront: "../assets/images/produtos/floratta-rose.webp",
     badge: "+5",
+    metricTitle: "7",
     products: [
       {
         id: "3",
@@ -42,7 +44,8 @@ export const lists = [
         rate: "4,8 ⭐⭐⭐⭐",
         view: "8",
         normalPrice: "210.00",
-        promocionalPrice: "20.00"
+        promocionalPrice: "20.00",
+        metricTitle: "8"
       },
 
       {

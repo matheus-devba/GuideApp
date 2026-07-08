@@ -14,7 +14,7 @@ export function filterProducts (query, products) {
 
 }
 
-export function searchRender(query) {
+export function searchRenderProduct(query) {
     const awnserProduct = filterProducts(query, products) // Depois posso colocar uma lista específica (ex: hidratantes, perfumes...)
 
     const container = document.querySelector(".product-list-all");
