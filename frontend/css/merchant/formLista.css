@@ -51,3 +51,77 @@
 .form-newList-container {
     margin-bottom: 10px;
 }
+
+/* Container dos produtos selecionados em carrossel horizontal */
+.selected-products {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 2px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 12px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  margin-bottom: 50px;
+}
+
+/* Estilo da barra de rolagem no Chrome, Edge e Safari */
+.selected-products::-webkit-scrollbar {
+  height: 8px;
+}
+
+.selected-products::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 999px;
+}
+
+.selected-products::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Cada card selecionado mantém largura fixa para deslizar corretamente */
+.product-card-selected {
+  flex: 0 0 186px;
+  scroll-snap-align: start;
+}
+
+.product-card-selected {
+    width: 186px;
+    height: auto;
+    margin-right: 18px;
+    text-decoration: none;
+    display:grid;
+    background: hsl(157, 78%, 95%);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 14px;
+    box-shadow: var(--card-shadow);
+}
+
+.product-card-selected img {
+    width: 40px;
+    margin: 0 auto 12px;
+}
+
+.product-card-selected h2 {
+    font-size: 15px;
+    text-decoration: none;
+    color: var(--text);
+}
+
+.product-card-selected p {
+    font-size: 12px;
+    text-decoration: none;
+    color: var(--secundary);
+    margin: 0 auto 12px;
+}
+
+/* Checkbox com o mesmo tamanho nas duas listas */
+.product-card-all .selectProduct,
+.product-card-selected .selectProduct {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  flex: 0 0 auto;
+  accent-color: var(--primary);
+}

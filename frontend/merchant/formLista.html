@@ -13,8 +13,8 @@
     <!--NavBar -->
     <div class="product-page">
         <header class="top-bar">
-            <button class="top-icon-btn" onclick="history.back()">
-                <img class="top-icon" src="../assets/icons/back.png" >
+            <button class="top-icon-btn"  id="back">
+                <img class="top-icon" src="../assets/icons/back.png">
             </button>
             
             <h1 class="store-title">Perfumaria Store</h1>
@@ -24,26 +24,24 @@
             </button>
         </header>
 
-        
+    
     <main class="new-list">
         <section class="form-newList-container">
             <form class="newList-form" id="newList-form">
             <div class="form-group">
                 <label for="list-name">Nome da lista</label>
-                <input type="text" id="product-name" name="list-name" required>
+                <input type="text"id="list-name" name="list-name" required>
             </div>
             <button type="submit" id="submit-button" class="submit-button-float">Criar Lista</button>
             <p>Selecione os produtos para a lista</p>
 
             <section class="store-controls">
-                <form class="store-search-form" action="./listas.html" method="GET">
-                    <input type="search" placeholder="Buscar produtos..." name="query" class="search">
-                    <button type="submit" >Buscar</button>
-                </form>
+                    <input type="search" placeholder="Buscar produtos..." class="searchProduct">
+                    <button type="button" class="buttonSearch">Buscar</button>
             </section>
         </section>
         
-
+        <section class="selected-products"></section>
         <section class="product-list-all"></section>
         
 
