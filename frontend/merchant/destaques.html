@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/merchant/destaques.css">
+</head>
+<body>
+    <!--NavBar -->
+    <div class="product-page">
+        <header class="top-bar">
+            <button class="top-icon-btn"  id="back">
+                <img class="top-icon" src="../assets/icons/back.png">
+            </button>
+            
+            <h1 class="store-title">Perfumaria Store</h1>
+
+            <button class="top-icon-btn">
+                <img class="top-icon" src="../assets/icons/share.png">
+            </button>
+        </header>
+
+        <section class="destaques">
+            <button type="submit" id="submit-button" class="submit-button-float">Salvar Produtos</button>
+            <p>Selecione MAIS produtos para destaque!</p>
+
+            <section class="store-controls">
+                    <input type="search" placeholder="Buscar produtos..." class="searchProduct">
+                    <button type="button" class="buttonSearch">Buscar</button>
+            </section>
+        </section>
+        
+        <section class="selected-products"></section>
+        <section class="product-list-all"></section>
+        
+
+   
+    </div>    
+</body>
+<script type="module" src="../js/merchant/app.js" defer></script>
+</html>

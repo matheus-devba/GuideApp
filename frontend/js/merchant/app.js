@@ -1,11 +1,10 @@
-import { initLista } from "../consumer/lista.js";
-import { initDestaques } from "../consumer/destaques.js";
 import { initProdutos } from "../merchant/produtos.js";
 import { initCategoria } from "../consumer/categoria.js";
 import { initProduto} from "../merchant/produto.js";
 import { initFormLista} from "../merchant/formLista.js";
 import { initFormProduto } from "../merchant/formProduto.js";
 import { initListas } from "../merchant/listas.js";
+import { initDestaques } from "../merchant/destaques.js";
 
 
 document.addEventListener("DOMContentLoaded", () => {
