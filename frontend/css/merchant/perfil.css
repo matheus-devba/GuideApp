@@ -1,0 +1,102 @@
+@import url("../components/navbar.css");
+@import url("../components/topic-headers.css");
+@import url("../components/card-product.css");
+@import url("../components/button.css");
+@import url("../components/featured-card.css");
+@import url("../components/list-product.css");
+@import url("../components/category-list.css");
+@import url("../global.css");
+@import url("../reset.css");
+@import url("../consumer/loja.css");
+@import url("../merchant/formProduto.css");
+
+.group-menu {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+}
+
+.form-perfil-container {
+    display: grid;
+    gap: 16px;
+    margin-top: 30px;
+}
+
+.perfil-form {
+    display: grid;
+    gap: 14px;
+}
+
+.form-group {
+    display: grid;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #1f2937;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    background: #fff;
+    font: inherit;
+    color: #111827;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #2563eb;
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.group-menu .menu-item {
+    flex: 0 0 auto;
+    text-decoration: none;
+    padding: 10px 14px;
+    white-space: nowrap;
+    cursor: pointer;
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+}
+
+.image-upload {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.image-upload-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 12px;
+    background: #f9fafb;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+@media (max-width: 600px) {
+    .group-menu {
+        justify-content: flex-start;
+    }
+}

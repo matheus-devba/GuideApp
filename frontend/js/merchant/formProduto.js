@@ -45,7 +45,6 @@ function renderFormProduto (productId, action) {
     )
     .join("")}
     `
-
     const submitButton = document.getElementById('submit-button')
     if (action === 'edit') {
       submitButton.textContent = 'Salvar Alterações'

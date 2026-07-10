@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/merchant/perfil.css">
+</head>
+<body>
+    <!--NavBar -->
+    <div class="product-page">
+        <header class="top-bar">
+            <button class="top-icon-btn" onclick="history.back()">
+                <img class="top-icon" src="../assets/icons/back.png" >
+            </button>
+            
+            <h1 class="store-title">Perfumaria Store</h1>
+
+            <button class="top-icon-btn">
+                <img class="top-icon" src="../assets/icons/share.png">
+            </button>
+        </header>
+
+
+    <section class="form-perfil-container">
+        <form class="perfil-form" id="perfil-form">
+        <div class="form-group">
+            <div class="image-upload">
+                <input type="file" id="imageCapa" name="image" accept="image/*" hidden>
+                <label for="image" class="image-upload-label">Alterar Capa</label>
+            </div>
+        </div>
+
+        <div class="form-group"> 
+            <div class="image-upload">
+                <input type="file" id="image" name="imagePerfil" accept="image/*" hidden>
+                <label for="image" class="image-upload-label">Alterar Foto de Perfil</label>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="store-name">Nome da Loja</label>
+            <input type="text" id="store-name" name="store-name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="whatsapp">WhatsApp</label>
+            <input type="number" id="whatsapp" name="whatsapp" required>
+        </div>
+
+        <div class="form-group">
+            <label for="nichoOption">Nicho</label>
+            <select id="nichoOption" name="nichoOption" required>
+                <!-- <option value="vestuario">Vestuário</option>
+                <option value="true">Sim</option> -->
+            </select>
+        </div>
+
+        <button type="submit" id="submit-button" class="submit-button-float">Salvar Alterações</button>
+    </form>
+    </section>
+        
+    </main>
+    </div>    
+</body>
+<script type="module" src="../js/merchant/app.js" defer></script>
+</html>

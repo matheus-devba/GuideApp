@@ -1,5 +1,5 @@
 import { initProdutos } from "../merchant/produtos.js";
-import { initCategoria } from "../consumer/categoria.js";
+import { initPerfil } from "../merchant/perfil.js";
 import { initProduto} from "../merchant/produto.js";
 import { initFormLista} from "../merchant/formLista.js";
 import { initFormProduto } from "../merchant/formProduto.js";
@@ -10,8 +10,8 @@ import { initDestaques } from "../merchant/destaques.js";
 document.addEventListener("DOMContentLoaded", () => {
   const path = window.location.pathname;
 
-  if (path.includes("lista.html")) {
-    initLista();
+  if (path.includes("perfil.html")) {
+    initPerfil();
   }
 
   if (path.includes("destaques.html")) {
@@ -21,9 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
     initProdutos();
   }
 
-  if (path.includes("categoria.html")) {
-    initCategoria();
-  }
   if (path.includes("produto.html")) {
     initProduto();
   }
