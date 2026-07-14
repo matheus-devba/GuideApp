@@ -1,40 +1,66 @@
-/* Lista de cards na vertical */
+/* Lista de cards na vertical (2 colunas) */
 .product-list-all {
     display: grid;
-    /* Cria exatamente 2 colunas com tamanhos iguais (1fr cada) */
     grid-template-columns: repeat(2, 1fr); 
-    gap: 16px; /* Espaço entre os cards */
-    padding-bottom: 0;
+    gap: 12px; /* Reduzi levemente o espaço para dar mais área útil aos cards menores */
+    padding: 12px; /* Espaçamento opcional nas bordas da tela */
 }
 
-.product-list-all .product-card {
-    /* REMOVA o width: 50%. O próprio Grid já vai controlar a largura deles perfeitamente */
-    width: 100%; 
-    min-width: 0; /* Evita que o card quebre ou estoure o tamanho da coluna */
-}
-
-
-/* Lista de cards na lateral */
+/* Lista de cards na lateral (Rolagem) */
 .product-grid, .products-grid {
     display: flex;
-    gap: 16px;
+    gap: 19px; /* Reduzi o gap para combinar com a grade vertical */
     overflow-x: auto;
     overflow-y: hidden;
-    padding-bottom: 12px;
+    padding: 12px 12px 16px 12px;
     scroll-snap-type: x mandatory;
     scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch; /* Rolagem suave no iOS */
 }
 
+/* Estilização da barra de rolagem */
 .product-grid::-webkit-scrollbar {
-    height: 8px;
+    height: 6px; /* Um pouco mais fina para não poluir visualmente */
 }
-
 .product-grid::-webkit-scrollbar-thumb {
     background: #d1daf0;
     border-radius: 999px;
 }
-
 .product-grid::-webkit-scrollbar-track {
     background: #eef2ff;
     border-radius: 999px;
+}
+
+/* Card Base (Estilo Mercado Livre) */
+.product-card-all, 
+.product-list-all .product-card,
+.product-grid .product-card {
+    background: var(--surface, #ffffff);
+    border: 1px solid var(--line, #e0e0e0);
+    border-radius: 12px; /* Cantos ligeiramente menores para combinar com o card menor */
+    padding: 0; /* REMOVIDO: O card não tem padding próprio */
+    overflow: hidden; /* Corta a imagem nas curvas do card */
+    box-shadow: var(--card-shadow, 0 2px 8px rgba(0,0,0,0.05));
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    transition: transform 0.2s ease;
+}
+
+/* Ajuste específico para quando estiver na ROLAGEM LATERAL */
+.product-grid .product-card,
+.products-grid .product-card {
+    scroll-snap-align: start;
+    flex: 0 0 210px; /* Largura fixa ideal para o card menor na rolagem lateral */
+    min-width: 200px;
+}
+
+/* Ajuste específico para quando estiver na GRADE VERTICAL */
+.product-list-all .product-card {
+    width: 100%;
+    min-width: 0; /* Permite que o card encolha conforme a coluna do grid */
 }

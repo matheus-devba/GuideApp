@@ -16,7 +16,7 @@
 
 /* Configuação de imagem do produto */
 .image-product {
-    width: 180px;
+    height: 400px;
 }
 /* Configuação das informações iniciais do produto */
 .initial-info {
@@ -86,4 +86,12 @@
     width: 24px;          /* Ajuste o tamanho do ícone conforme necessário */
     height: 24px;
     display: block;
+}
+
+.description-title {
+    margin-top: 140px;
+    white-space: pre-line
+}
+.description {
+    white-space: pre-line
 }

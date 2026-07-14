@@ -41,20 +41,45 @@ function createListCard(list, linkPrefix) {
 
 function createCard(product) {
   return `
-        <a class="product-card" href="../consumer/produto.html?id=${product.id}">
+        <a class="product-card" href="../consumer/produto.html?id=${product.id}" >
             <img class="product-image" src="${product.image}">
-            <h2>${product.name}</h2>
-            <span class="metrics-product">
-                <p class="rate">${product.rate}</p>
-                <p class="views">${product.view} pessoas já viram</p>
-            </span>
-            <div class="product-footer">
-                <div class="price-group">
-                      <span class="promocional-price">R$ ${product.promocionalPrice} </span>
-                      <span class="normal-price-all">R$ ${product.normalPrice}</span>
-                </div>
-                <button type="button">Ver</button>
-            </div>
+            <div class="product-info-all">
+              <h2>${product.name}</h2>
+              <span class="metrics-product">
+                  <p class="rate">${product.rate}</p>
+                  <p class="views">${product.view} pessoas já viram</p>
+              </span>
+              <div class="product-footer">
+                  <div class="price-group">
+                        <span class="promocional-price">R$ ${product.promocionalPrice} </span>
+                        <span class="normal-price-all">R$ ${product.normalPrice}</span>
+                  </div>
+                  <button type="button">Ver</button>
+              </div>
+            </div>  
+        </a>
+      `
+}
+
+function createCardAll(product) {
+  return `
+        <a class="product-card-all" href="../consumer/produto.html?id=${product.id}" >
+            <img class="product-image-all" src="${product.image}">
+            <div class="product-info-all">
+              <h2>${product.name}</h2>
+              <span class="metrics-product-all">
+                  <p class="rate">${product.rate}</p>
+                  <p class="views">${product.view}</p>
+              </span>
+              <div class="product-footer">
+                  <div class="price-group">
+                        <span class="promocional-price">R$ ${product.promocionalPrice} </span>
+                        <span class="normal-price-all">R$ ${product.normalPrice}</span>
+                  </div>
+                  <button type="button">Ver</button>
+              </div>
+        
+            </div>  
         </a>
       `
 }
@@ -86,10 +111,10 @@ function renderDestaque() {
 
 
 function renderProdutos() {
-  const container = document.querySelector(".products-grid");
+  const container = document.querySelector(".product-list-all");
   if (!container) return;
 
-  container.innerHTML = products.map((product) => createCard(product)).join("")
+  container.innerHTML = products.map((product) => createCardAll(product)).join("")
 }
 
 function renderCategoria() {

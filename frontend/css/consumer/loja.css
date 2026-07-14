@@ -63,7 +63,7 @@
 /* Título das seções */
 .sections-title {
     color: #000000;
-    font-size: 1.3rem;
+    font-size: 17px;
 }
 
 /* Bloco de subtítulo, separado visualmente por card */
@@ -80,9 +80,6 @@
     font-size: 0.92rem;
 }
 
-.store-controls {
-    gap: 2px;
-}
 
 .product-view-all{
     font-size: 13px;

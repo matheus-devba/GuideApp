@@ -3,6 +3,10 @@
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 12px;
+     position: sticky;
+    top: 80px;
+    
+    z-index: 1000;
 }
 
 .store-controls form {

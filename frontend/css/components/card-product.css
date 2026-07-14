@@ -6,7 +6,7 @@
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: 18px;
-    padding: 14px;
+    padding: 0;
     box-shadow: var(--card-shadow);
     cursor: pointer;
     text-decoration: none;
@@ -16,17 +16,20 @@
 
 /* Visual do produto */
 .product-image {
-    height: 130px;
-    border-radius: 14px;
-    margin: 0 auto 12px;
-    display: block;
-    object-fit: cover;
+    width: 100% !important;  /* Define uma altura fixa ou proporcional para a imagem preencher */
+    height: 200px ; 
+    object-fit: cover; 
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-self: center;
+    margin-bottom: 8px;
 }
 
 /* Nome do produto */
 .product-card h2 {
     margin: 0;
-    font-size: 1.05rem;
+    font-size: 1.0rem;
 }
 
 /* Texto descritivo do produto */
@@ -50,14 +53,10 @@
     font-weight: bold;
 }
 
-.metrics-product {
-    display: flex;
-
+.price-group {
+    display: grid;
 }
 
-.views {
-    padding-left: 10px;
-}
 
 /* Destaca o valor do produto */
 .promocional-price {
@@ -70,7 +69,6 @@
     color: var(--text);
     font-weight: 400;
     font-size: 18px !important;
-    padding-left: 6px;
     text-decoration: line-through;
 }
 
@@ -78,7 +76,6 @@
     color: var(--text);
     font-weight: 400;
     font-size: 14px !important;
-    padding-left: 6px;
     text-decoration: line-through;
 }
 
