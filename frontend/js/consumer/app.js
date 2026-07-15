@@ -5,10 +5,14 @@ import { initProdutos } from "../consumer/produtos.js";
 import { initCategoria } from "../consumer/categoria.js";
 import { initProduto} from "../consumer/produto.js";
 import { initSearch} from "../consumer/pesquisa.js";
+import { initLojas } from "../consumer/lojas.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const path = window.location.pathname;
 
+  if (path.includes("lojas")) {
+    initLojas()
+  }
   if (path.includes("loja.html")) {
     initLoja();
   }

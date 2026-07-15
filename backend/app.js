@@ -7,6 +7,8 @@ const app = express()
 app.use(express.json())
 app.use(express.static(path.join(__dirname, "..", "frontend")))
 
+app.use("/uploads", express.static(path.join(__dirname, "uploads")))
+
 
 app.get("/lojas", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "lojas.html"))

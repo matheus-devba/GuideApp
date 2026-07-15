@@ -1,0 +1,15 @@
+@import url("../global.css");
+@import url("../reset.css");
+@import url("../consumer/loja.css");
+
+.logo-store {
+    width: 100px;
+    margin-bottom: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%; /* Defina a largura desejada para a imagem */
+    border-radius: 10px;
+
+}
+
