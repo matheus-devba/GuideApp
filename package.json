@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/server.js",
+    "dev": "nodemon backend/server.js",
     "migration:create": "node-pg-migrate --envPath backend/config/.env create",
     "migration:up": "node-pg-migrate --envPath backend/config/.env up",
     "migration:down": "node-pg-migrate --envPath backend/config/.env down"

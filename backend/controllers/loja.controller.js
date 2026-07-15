@@ -37,7 +37,8 @@ class LojaController {
 
     async atualizar(req, res) {
         try {
-            const loja = await LojaService.atualizar(req.body)
+            const { id } = req.params
+            const loja = await LojaService.atualizar(id,req.body)
             return res.status(200).json(loja)
         } catch (error) {
             return res.status(500).json({
@@ -50,6 +51,18 @@ class LojaController {
         try {
             const { id } = req.params
             const loja = await LojaService.desativar(id)
+            return res.status(200).json(loja)
+        } catch (error) {
+            return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
+
+    async ativar(req, res) {
+        try {
+            const { id } = req.params
+            const loja = await LojaService.ativar(id)
             return res.status(200).json(loja)
         } catch (error) {
             return res.status(500).json({

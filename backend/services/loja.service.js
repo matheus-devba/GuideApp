@@ -24,12 +24,21 @@ class LojaService{
     }
 
     async desativar (id) {
-        const loja = LojaRepository.buscarPorId(id)
+        const loja = await LojaRepository.buscarPorId(id)
 
         if (!loja) {
             throw new Error("Loja não encontrada")
         }
         return await LojaRepository.desativar(id)
+    }
+
+    async ativar (id) {
+        const loja = await LojaRepository.buscarPorId(id)
+
+        if (!loja) {
+            throw new Error("Loja não encontrada")
+        }
+        return await LojaRepository.ativar(id)
     }
 }
 
