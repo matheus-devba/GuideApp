@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon backend/server.js",
+    "dev": "nodemon --watch backend backend/server.js",
     "migration:create": "node-pg-migrate --envPath backend/config/.env create",
     "migration:up": "node-pg-migrate --envPath backend/config/.env up",
     "migration:down": "node-pg-migrate --envPath backend/config/.env down"
@@ -18,5 +18,8 @@
     "express": "^5.2.1",
     "node-pg-migrate": "^7.6.1",
     "pg": "^8.22.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
   }
 }
