@@ -1,4 +1,4 @@
-const pool = require("../database/connection");
+const pool = require("../database/connection.js");
 
 class LojaRepository {
     async buscarTodas() {

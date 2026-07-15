@@ -1,4 +1,4 @@
-const LojaService = require("../services/loja.services.js")
+const LojaService = require("../services/loja.service.js")
 
 class LojaController {
     async buscarTodas(req, res) {
