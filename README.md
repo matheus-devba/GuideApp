@@ -1,0 +1,1 @@
+Enviar seeds -> node seeds/loja.seed.js ou node seeds/index.js
