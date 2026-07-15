@@ -1,0 +1,36 @@
+const LojaRepository = require("../repositories/loja.repository.js")
+
+class LojaService{
+    async buscarTodas() {
+    return await LojaRepository.buscarTodas();
+    }
+
+    async buscarPorId(id) {
+        const loja = await LojaRepository.buscarPorId(id)
+
+        if (!loja) {
+            throw new Error("Loja não encontrada")
+        }
+
+        return loja
+    }
+
+    async criar (dados) {
+        return await LojaRepository.criarLoja(dados)
+    }
+
+    async atualizar (id, dados) {
+        return await LojaRepository.atualizar(id, dados)
+    }
+
+    async desativar (id) {
+        const loja = LojaRepository.buscarPorId(id)
+
+        if (!loja) {
+            throw new Error("Loja não encontrada")
+        }
+        return await LojaRepository.desativar(id)
+    }
+}
+
+module.exports = new LojaService();
