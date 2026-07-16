@@ -1,6 +1,17 @@
 const LojaService = require("../services/loja.service.js")
 
 class LojaController {
+    async buscarAtivas(req, res) {
+        try {
+            const lojas = await LojaService.buscarAtivas()
+            return res.status(200).json(lojas)
+        } catch (error) {
+            return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
+
     async buscarTodas(req, res) {
         try {
             const lojas = await LojaService.buscarTodas()

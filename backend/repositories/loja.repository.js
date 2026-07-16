@@ -1,7 +1,7 @@
 const pool = require("../database/connection.js");
 
 class LojaRepository {
-    async buscarTodas() {
+    async buscarAtivas() {
 
     const { rows } = await pool.query(`
         SELECT *
@@ -11,7 +11,18 @@ class LojaRepository {
     `);
 
     return rows;
-}
+    }
+
+    async buscarTodas() {
+
+    const { rows } = await pool.query(`
+        SELECT *
+        FROM lojas
+        ORDER BY id;
+    `);
+
+    return rows;
+    }
 
     async buscarPorId(id) {
         const { rows } = await pool.query(`

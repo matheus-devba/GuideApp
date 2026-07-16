@@ -4,6 +4,9 @@ class LojaService{
     async buscarTodas() {
     return await LojaRepository.buscarTodas();
     }
+    async buscarAtivas() {
+    return await LojaRepository.buscarAtivas();
+    }
 
     async buscarPorId(id) {
         const loja = await LojaRepository.buscarPorId(id)

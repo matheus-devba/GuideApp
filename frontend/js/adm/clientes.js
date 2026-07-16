@@ -1,32 +1,47 @@
 import { API_BASE_URL } from "../api/config.js"
 import { formatDateTime } from "../utils/formatDate.js"
 
-export function initClientes() {
-renderClientes()
+export async function initClientes() {
+    const pathParts = window.location.pathname.split("-")
+    const id = pathParts[pathParts.length - 1] // pega sempre o ultimo pathParts que é o ID
+    await renderClientes()
+    
+    const btnHidden = document.querySelectorAll(".btn.btn-hidden")
+    const btnActive = document.querySelectorAll(".btn.btn-active")
+    
+    btnActive.forEach((button) => {
+        button.addEventListener("click", async() => {
+            const idClient = button.dataset.id
+            activeClient(idClient)
+        })
+    })
 
+    btnHidden.forEach((button) => {
+        button.addEventListener("click", async() => {
+            const idClient = button.dataset.id
+            hiddenClient(idClient)
+        })
+    })
 }
+
+   
 
 async function renderClientes() {
     try {
         
-        const response = await fetch(`${API_BASE_URL}/api/lojas`); // 1. Aguarda a resposta da requisição HTTP
+        const response = await fetch(`${API_BASE_URL}/api/lojas/all`); // 1. Aguarda a resposta da requisição HTTP
         const clientes = await response.json();// 2. Aguarda a conversão da resposta para um Objeto/Array JavaScript
 
         const container = document.querySelector(".container-clients");
         if (!container) return;
 
-        console.log(clientes)
         container.innerHTML = clientes.map((client) => createListClientes(client)).join("");
         
     } catch (error) {
         console.error("Erro ao buscar lojas do servidor:", error);
     }
 
-
-
-
 }
-
 
 
 function createListClientes(client) {
@@ -38,14 +53,60 @@ function createListClientes(client) {
         <td><strong>${client.nome}</strong></td>
         <td>${createdAt}</td>
         <td>${updatedAt}</td>
-        <td><span class="status ${client.ativo  == true ? `status-active`: "" } s">${client.ativo == true ? `Ativo` : `Não ativo`}</span></td>
-        <td><a href="#" style="color: #3b82f6; text-decoration: none;">${API_BASE_URL}/adm/clientes/${client.id}</a></td>
+        <td><span class="status ${client.ativo  == true ? `status-active`: `status-inativo` }">${client.ativo == true ? `Ativo` : `Inativo`}</span></td>
+        <td><a href="${API_BASE_URL}/lojas/id=${client.id}" style="color: #3b82f6; text-decoration: none;">${API_BASE_URL}/lojas/${client.id}</a></td>
         <td class="text-right">
           <a class="btn btn-view" href="${API_BASE_URL}/adm/clientes/${client.id}" >View</a>
-           <button class="btn btn-hidden">Hidden</button>
+           <button class="btn btn-hidden" data-id="${client.id}">Hidden</button>
+           <button class="btn btn-active" data-id="${client.id}">Active</button>
            <button class="btn btn-delete">Delete</button>
 
         </td>
       </tr>
       `
+}
+
+
+async function hiddenClient(id) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/lojas/hidden/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type":"application/json",
+                }
+            })
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`)
+            }
+            alert("Loja ocultada")
+
+        } catch (error) {
+            console.error("Erro ao ocultar loja", error)
+        }
+   
+
+}
+
+async function activeClient(id) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/lojas/active/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type":"application/json",
+                }
+            })
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`)
+            }
+            const loja = await response.json()
+            alert("Loja ativada")
+            console.log("Loja ativada", loja)
+
+        } catch (error) {
+            console.error("Erro ao ativar a loja", error)
+        }
+   
+
 }
