@@ -7,6 +7,11 @@ import { initProduto} from "../consumer/produto.js";
 import { initSearch} from "../consumer/pesquisa.js";
 import { initLojas } from "../consumer/lojas.js";
 
+// const path = window.location.pathname
+// if (path.startsWith("/lojas/")) {
+//   initLoja()
+// }
+
 document.addEventListener("DOMContentLoaded", () => {
   const path = window.location.pathname;
 

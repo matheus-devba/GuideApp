@@ -30,8 +30,8 @@ async function renderLojas() {
 
 function createListLojas(list) {
  return `
-        <a class="list-product-card" href="/lojas/${list.id}">
-        <img src="${list.logo_url}" class="logo-store">
+        <a class="list-product-card" href="${API_BASE_URL}/lojas/${list.id}">
+        <img src="${API_BASE_URL}${list.logo_url}" class="logo-store">
           <div class="list-content">
             <h4>${list.nome}</h4>
             <p>${list.nicho}</p>
