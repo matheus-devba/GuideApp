@@ -7,7 +7,7 @@ renderLojas()
 async function renderLojas() {
     try {
         
-        const response = await fetch('/api/lojas'); // 1. Aguarda a resposta da requisição HTTP
+        const response = await fetch('http://localhost:3000/api/lojas'); // 1. Aguarda a resposta da requisição HTTP
         const lojas = await response.json();// 2. Aguarda a conversão da resposta para um Objeto/Array JavaScript
 
 
