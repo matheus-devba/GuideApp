@@ -14,6 +14,7 @@ app.use(cors({
 }))
 
 app.use(express.json())
+
 app.use(express.static(path.join(__dirname, "..", "frontend")))
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")))
@@ -25,6 +26,14 @@ app.get("/lojas", (req, res) => {
 
 app.get("/lojas/:id", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "loja.html"))
+})
+
+app.get("/adm/clientes", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "adm", "clientes.html"))
+})
+
+app.get("/adm/clientes/:id", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "adm", "cliente.html"))
 })
 
 // API separada da página

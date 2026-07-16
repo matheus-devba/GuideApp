@@ -1,9 +1,11 @@
-import { initCliente } from "./cliente.js";
+import { initClientes } from "./clientes.js"
+import { initCliente } from "./cliente.js"
 
-document.addEventListener("DOMContentLoaded", () => {
-  const path = window.location.pathname;
+const path = window.location.pathname
 
-  if (path.includes("cliente.html")) {
-    initCliente();
-  }
-})
+if (path.startsWith("/adm/clientes")) {
+  initClientes()
+}
+if (path.startsWith("/adm/clientes/")) {
+  initCliente()
+}

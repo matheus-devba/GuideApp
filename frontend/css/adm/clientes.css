@@ -48,6 +48,8 @@ tbody tr:hover {
 /* Utility classes */
 .text-right {
   text-align: right;
+  display: flex;
+
 }
 
 /* Status Badges */
