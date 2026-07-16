@@ -1,8 +1,17 @@
 const path = require("path")
 const express = require("express")
+const cors = require("cors")
 const lojaRoutes = require("./routes/loja.routes.js")
 
 const app = express()
+
+app.use(cors({
+  origin: [
+    "https://guide-app-sigma.vercel.app",
+    "http://127.0.0.1:5500",
+    "http://localhost:5500"
+  ]
+}))
 
 app.use(express.json())
 app.use(express.static(path.join(__dirname, "..", "frontend")))
