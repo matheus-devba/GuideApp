@@ -1,11 +1,13 @@
 import { initClientes } from "./clientes.js"
 import { initCliente } from "./cliente.js"
+import { initNewClient } from "./formCliente.js"
 
 const path = window.location.pathname
 
-if (path.startsWith("/adm/clientes")) {
+if (path === "/adm/clientes/new") {
+  initNewClient()
+} else if (path === "/adm/clientes") {
   initClientes()
-}
-if (path.startsWith("/adm/clientes/") && path !== '/adm/clientes' ) {
+} else if (/^\/adm\/clientes\/\d+$/.test(path)) {
   initCliente()
 }

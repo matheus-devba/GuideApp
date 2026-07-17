@@ -32,9 +32,20 @@ app.get("/adm/clientes", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "adm", "clientes.html"))
 })
 
+app.get("/adm/clientes/new", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "adm", "formNewClient.html"))
+})
+
 app.get("/adm/clientes/:id", (req, res) => {
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+
   res.sendFile(path.join(__dirname, "..", "frontend", "adm", "cliente.html"))
 })
+
 
 // API separada da página
 app.use("/api/lojas", lojaRoutes)

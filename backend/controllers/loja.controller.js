@@ -37,7 +37,16 @@ class LojaController {
 
     async criar(req, res) {
         try {
-            const loja = await LojaService.criar(req.body)
+            const { body, files } = req
+
+            const logoFile = files?.logo?.[0]
+            const bannerFile = files?.banner?.[0]
+
+            const loja = await LojaService.criar({
+            ...body,
+            logo_url: logoFile ? `/uploads/logo/${logoFile.filename}` : null,
+            banner_url: bannerFile ? `/uploads/banners/${bannerFile.filename}` : null,
+            })
             return res.status(201).json(loja)
         } catch (error) {
             return res.status(400).json({

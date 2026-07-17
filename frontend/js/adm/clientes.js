@@ -1,10 +1,13 @@
 import { API_BASE_URL } from "../api/config.js"
 import { formatDateTime, formatUpdatedAt } from "../utils/formatDate.js"
+import { renderMenuAdm } from "../components/renderMenuAdm.js"
 
 export async function initClientes() {
     const pathParts = window.location.pathname.split("-")
     const id = pathParts[pathParts.length - 1] // pega sempre o ultimo pathParts que é o ID
     await renderClientes()
+    renderMenuAdm()
+    btnNewClient()
     
     const btnHidden = document.querySelectorAll(".btn.btn-hidden")
     const btnActive = document.querySelectorAll(".btn.btn-active")
@@ -24,6 +27,15 @@ export async function initClientes() {
     })
 }
 
+
+function btnNewClient() {
+    const container = document.querySelector(".newClient")
+    if (!container) return
+
+    container.innerHTML = `
+    <a class="new-product-btn" href="${API_BASE_URL}/adm/clientes/new">Novo Cliente</a>
+    `
+}
    
 
 export async function renderClientes() {
