@@ -16,3 +16,15 @@ export function formatDateTime(date) {
 
     return finalResult
 }
+
+export function formatUpdatedAt(updatedAt) {
+  if (!updatedAt) return "Sem data";
+
+  const date = new Date(updatedAt);
+  if (Number.isNaN(date.getTime())) return "Data inválida";
+
+  return date.toLocaleString("pt-BR", {
+    dateStyle: "short",
+    timeStyle: "short",
+  });
+}

@@ -85,7 +85,8 @@ class LojaRepository {
             banner_url = $7,
             descricao = $8,
             whatsapp = $9,
-            ativo = $10
+            ativo = $10,
+            updated_at = CURRENT_TIMESTAMP
         WHERE id = $1
         RETURNING *;
     `,

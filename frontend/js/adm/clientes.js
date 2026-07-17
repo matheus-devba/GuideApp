@@ -1,5 +1,5 @@
 import { API_BASE_URL } from "../api/config.js"
-import { formatDateTime } from "../utils/formatDate.js"
+import { formatDateTime, formatUpdatedAt } from "../utils/formatDate.js"
 
 export async function initClientes() {
     const pathParts = window.location.pathname.split("-")
@@ -26,7 +26,7 @@ export async function initClientes() {
 
    
 
-async function renderClientes() {
+export async function renderClientes() {
     try {
         
         const response = await fetch(`${API_BASE_URL}/api/lojas/all`); // 1. Aguarda a resposta da requisição HTTP
@@ -46,7 +46,7 @@ async function renderClientes() {
 
 function createListClientes(client) {
     const createdAt = formatDateTime(client.created_at)
-    const updatedAt = formatDateTime(client.updatedAt)
+    const updatedAt = formatUpdatedAt(client.updated_at)
  
     return `
         <tr>
@@ -80,6 +80,7 @@ async function hiddenClient(id) {
                 throw new Error(`HTTP ${response.status}`)
             }
             alert("Loja ocultada")
+            renderClientes()
 
         } catch (error) {
             console.error("Erro ao ocultar loja", error)
@@ -103,6 +104,7 @@ async function activeClient(id) {
             const loja = await response.json()
             alert("Loja ativada")
             console.log("Loja ativada", loja)
+            renderClientes()
 
         } catch (error) {
             console.error("Erro ao ativar a loja", error)

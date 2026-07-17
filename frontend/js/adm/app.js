@@ -6,6 +6,6 @@ const path = window.location.pathname
 if (path.startsWith("/adm/clientes")) {
   initClientes()
 }
-if (path.startsWith("/adm/clientes/")) {
+if (path.startsWith("/adm/clientes/") && path !== '/adm/clientes' ) {
   initCliente()
 }
