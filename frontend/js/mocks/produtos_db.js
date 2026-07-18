@@ -24,7 +24,7 @@ export const products = [
       rate: "",
       view: "",
       normalPrice: "139.90",
-      promocionalPrice: "116.90",
+      promocionalPrice: "119.90",
       interested: "90",
       classificacoesId: "1",
       destaque: true
@@ -54,7 +54,7 @@ export const products = [
         rate: "",
         view: "",
         normalPrice: "139.90",
-        promocionalPrice: "116.90",
+        promocionalPrice: "119.90",
         interested: "90",
         classificacoesId: "1",
         destaque: true
@@ -85,7 +85,7 @@ export const products = [
         rate: "",
         view: "",
         normalPrice: "139.90",
-        promocionalPrice: "114.80",
+        promocionalPrice: "119.90",
         interested: "90",
         classificacoesId: "1",
         destaque: true
@@ -116,7 +116,7 @@ export const products = [
         rate: "",
         view: "",
         normalPrice: "139.90",
-        promocionalPrice: "114.80",
+        promocionalPrice: "119.90",
         interested: "90",
         classificacoesId: "1",
         destaque: true
@@ -144,8 +144,8 @@ export const products = [
         "• Comprimento: 88 cm",
         rate: "",
         view: "",
-        normalPrice: "99.99",
-        promocionalPrice: "89.90",
+        normalPrice: "129.99",
+        promocionalPrice: "119.90",
         interested: "90",
         classificacoesId: "1",
         destaque: true
@@ -168,8 +168,8 @@ export const products = [
         "- Tecido: Sedinha Premium (super macio, leve e confortável)",
         rate: "",
         view: "",
-        normalPrice: "109.90",
-        promocionalPrice: "99.99",
+        normalPrice: "129.90",
+        promocionalPrice: "119.99",
         interested: "90",
         classificacoesId: "1",
         destaque: true
@@ -194,7 +194,7 @@ export const products = [
         rate: "",
         view: "",
         normalPrice: "125.90",
-        promocionalPrice: "109.90",
+        promocionalPrice: "119.90",
         interested: "90",
         classificacoesId: "1",
         destaque: true
@@ -224,7 +224,7 @@ export const products = [
         rate: "",
         view: "",
         normalPrice: "139.90",
-        promocionalPrice: "109.90",
+        promocionalPrice: "119.90",
         interested: "90",
         classificacoesId: "1",
         destaque: true
@@ -254,7 +254,7 @@ export const products = [
         rate: "",
         view: "",
         normalPrice: "139.90",
-        promocionalPrice: "109.90",
+        promocionalPrice: "119.90",
         interested: "90",
         classificacoesId: "1",
         destaque: true
@@ -284,7 +284,7 @@ export const products = [
         rate: "",
         view: "",
         normalPrice: "139.90",
-        promocionalPrice: "109.90",
+        promocionalPrice: "119.90",
         interested: "90",
         classificacoesId: "1",
         destaque: true
@@ -314,7 +314,7 @@ export const products = [
         rate: "",
         view: "",
         normalPrice: "139.90",
-        promocionalPrice: "109.90",
+        promocionalPrice: "119.90",
         interested: "90",
         classificacoesId: "1",
         destaque: true

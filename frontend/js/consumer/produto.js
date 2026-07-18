@@ -21,7 +21,7 @@ function renderProduto (productId) {
 
   const initialInfo = document.querySelector('.initial-info')
   initialInfo.innerHTML = ` 
-    <h7>MF Boutique</h7>
+    <h7>Mary Boutique</h7>
     <h1>${productSelected.name}</h1>
     <label>Novidade!</label>
     <hr>

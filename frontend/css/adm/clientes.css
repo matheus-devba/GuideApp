@@ -91,9 +91,16 @@ tbody tr:hover {
   background-color: #2563eb;
 }
 
-.btn-delete {
-  background-color: #000000;
-  color: #e9edf1;
+.btn-active {
+  background-color: #0f6f4a;
+  color: #e3eff9;
+  border-color: #cbd5e1;
+  margin-left: 4px;
+}
+
+.btn-hidden {
+  background-color: #bbc1bf;
+  color: #031322;
   border-color: #cbd5e1;
   margin-left: 4px;
 }

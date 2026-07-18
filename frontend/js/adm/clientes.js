@@ -71,7 +71,6 @@ function createListClientes(client) {
           <a class="btn btn-view" href="${API_BASE_URL}/adm/clientes/${client.id}" >View</a>
            <button class="btn btn-hidden" data-id="${client.id}">Hidden</button>
            <button class="btn btn-active" data-id="${client.id}">Active</button>
-           <button class="btn btn-delete">Delete</button>
 
         </td>
       </tr>
