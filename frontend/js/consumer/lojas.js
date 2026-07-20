@@ -34,7 +34,7 @@ function createListLojas(list) {
         <img src="${API_BASE_URL}${list.logo_url}" class="logo-store">
           <div class="list-content">
             <h4>${list.nome}</h4>
-            <p>${list.nicho}</p>
+            <p>${list.nicho_id}</p>
             <span class="metric"> 
               ${list.views < 2 ? "" : `<img src="../assets/icons/eye.png" class="metric-icon">`}
               <p class="metric-text">${list.views < 2 ? "" : `${list.views} visualizações`}</p>

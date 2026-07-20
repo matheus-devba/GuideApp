@@ -42,7 +42,7 @@ class LojaRepository {
             nome,
             endereco,
             telefone,
-            nicho,
+            nicho_id,
             logo_url,
             banner_url,
             descricao,
@@ -62,7 +62,7 @@ class LojaRepository {
             loja.nome,
             loja.endereco,
             loja.telefone,
-            loja.nicho,
+            loja.nicho_id,
             loja.logo_url,
             loja.banner_url,
             loja.descricao,
@@ -81,7 +81,7 @@ class LojaRepository {
             nome = $2,
             endereco = $3,
             telefone = $4,
-            nicho = $5,
+            nicho_id = $5,
             logo_url = $6,
             banner_url = $7,
             descricao = $8,
@@ -96,7 +96,7 @@ class LojaRepository {
         loja.nome,        // $2
         loja.endereco,    // $3
         loja.telefone,    // $4
-        loja.nicho,       // $5
+        loja.nicho_id,       // $5
         loja.logo_url,    // $6
         loja.banner_url,  // $7
         loja.descricao,   // $8

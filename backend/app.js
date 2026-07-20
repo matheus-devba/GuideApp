@@ -2,6 +2,7 @@ const path = require("path")
 const express = require("express")
 const cors = require("cors")
 const lojaRoutes = require("./routes/loja.routes.js")
+const categoriasRoutes = require("./routes/categorias.routes.js")
 
 const app = express()
 
@@ -19,7 +20,13 @@ app.use(express.static(path.join(__dirname, "..", "frontend")))
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 
+app.use("/api/lojas", lojaRoutes);
 
+app.use("/api/categorias", categoriasRoutes)
+
+
+
+//emulação front end
 app.get("/lojas", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "lojas.html"))
 })
@@ -45,9 +52,5 @@ app.get("/adm/clientes/:id", (req, res) => {
 
   res.sendFile(path.join(__dirname, "..", "frontend", "adm", "cliente.html"))
 })
-
-
-// API separada da página
-app.use("/api/lojas", lojaRoutes)
 
 module.exports = app
