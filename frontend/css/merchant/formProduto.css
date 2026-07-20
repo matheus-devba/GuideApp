@@ -3,6 +3,7 @@
 @import url("../components/navbar.css");
 @import url("../components/button.css");
 @import url("../components/card-product.css");
+@import url("../components/list-product.css");
 
 .product-page {
     padding-bottom: 100px;
@@ -100,6 +101,82 @@
     cursor: pointer;
     font-size: 0.95rem;
 }
+
+/* Container que alinha os blocos lado a lado */
+.upload-gallery-container {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto; /* Permite scroll horizontal se passar da tela */
+    padding: 10px 0;
+}
+
+/* O bloco cinza de adicionar (baseado na foto) */
+.gallery-add-block {
+    min-width: 160px;
+    width: 160px;
+    height: 160px;
+    background-color: #262626; /* Cinza escuro idêntico */
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-block-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 15px;
+    text-align: center;
+}
+
+.camera-icon {
+    font-size: 24px;
+    color: #fff;
+}
+
+.add-text {
+    font-size: 12px;
+    color: #fff;
+    font-weight: 500;
+}
+
+/* Os blocos de fotos que já foram adicionadas */
+.gallery-item {
+    position: relative;
+    min-width: 160px;
+    width: 160px;
+    height: 160px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* O botão 'X' discreto por cima da imagem */
+.btn-delete-img {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 @media (max-width: 768px) {
     .product-edit {
