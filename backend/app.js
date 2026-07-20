@@ -35,6 +35,8 @@ app.get("/lojas/:id", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "loja.html"))
 })
 
+
+
 app.get("/adm/clientes", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "adm", "clientes.html"))
 })
@@ -51,6 +53,26 @@ app.get("/adm/clientes/:id", (req, res) => {
   }
 
   res.sendFile(path.join(__dirname, "..", "frontend", "adm", "cliente.html"))
+})
+
+
+
+app.get("/adm/categorias", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "adm", "categorias.html"))
+})
+
+app.get("/adm/categorias/new", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "adm", "formNewCategoria.html"))
+})
+
+app.get("/adm/categorias/:id", (req, res) => {
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+
+  res.sendFile(path.join(__dirname, "..", "frontend", "adm", "formNewCategoria.html"))
 })
 
 module.exports = app

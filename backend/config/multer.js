@@ -4,9 +4,11 @@ const multer = require("multer")
 
 const logoDir = path.join(__dirname, "..", "uploads", "logo")
 const bannerDir = path.join(__dirname, "..", "uploads", "banners")
+const iconDir = path.join(__dirname, "..", "uploads", "icons_categorias")
 
 fs.mkdirSync(logoDir, { recursive: true })
 fs.mkdirSync(bannerDir, { recursive: true })
+fs.mkdirSync(iconDir, { recursive: true })
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -17,6 +19,10 @@ const storage = multer.diskStorage({
     if (file.fieldname === "banner") {
       return cb(null, bannerDir)
     }
+
+    if (file.fieldname === "icon") {
+    return cb(null, iconDir)
+  }
 
     cb(null, path.join(__dirname, "..", "uploads"))
   },

@@ -16,7 +16,8 @@ class CategoriasController {
 
     async buscarPorId(req, res) {
         try {
-            const categoria = await CategoriaService.buscarPorId()
+            const { id } = req.params
+            const categoria = await CategoriaService.buscarPorId(id)
             return res.status(200).json(categoria)
         }
         catch (error) {
@@ -35,7 +36,7 @@ class CategoriasController {
 
             const categoria = await CategoriaService.criar({
             ...body,
-            icon_url: iconFile ? `/uploads/icons_categoria/${iconFile.filename}` : null,
+            icon_url: iconFile ? `/uploads/icons_categorias/${iconFile.filename}` : null,
             })
             return res.status(201).json(categoria)
         } catch (error) {
@@ -43,6 +44,9 @@ class CategoriasController {
                 message: error.message
             })
         }
+
+       
+        
   
     }
 
@@ -56,7 +60,7 @@ class CategoriasController {
 
             const categoria = await CategoriaService.atualizar(id, {
             ...body,
-            icon_url: iconFile ? `/uploads/icons_url/${iconFile.filename}` : current.icon_url,
+            icon_url: iconFile ? `/uploads/icons_categorias/${iconFile.filename}` : current.icone_url,
             })
 
             return res.status(200).json(categoria)

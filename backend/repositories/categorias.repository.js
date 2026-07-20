@@ -20,13 +20,14 @@ class CategoriasRepository {
 
     async criarCategoria(categoria) {
         const { rows } = await pool.query(`
-            INSERT INTO categorias (icone_url, nome, created_at)
-            VALUES ($1, $2, CURRENT_TIMESTAMP)
+            INSERT INTO categorias (icone_url, nome, nicho_id, created_at)
+            VALUES ($1, $2, $3, CURRENT_TIMESTAMP)
             RETURNING *;
             `,
             [
-                categoria.icone_url,
-                categoria.nome
+                categoria.icon_url,
+                categoria.nome,
+                categoria.nicho_id
             ]
         )
         
@@ -34,25 +35,31 @@ class CategoriasRepository {
     }
 
     async editarCategoria(id, categoria) {
-        const { rows } = await pool.query(`
-            UPDATE categorias (icone_url, nome)
+    const { rows } = await pool.query(`
+        UPDATE categorias 
+        SET 
+            icone_url = $2, 
+            nome = $3, 
+            nicho_id = $4
             WHERE id = $1
-            VALUES ($2, $3)
-            
-            RETURNING *;
-            `,
-            [   id,
-                categoria.icone_url,
-                categoria.nome
-            ]
-        )
+        
+        RETURNING *;
+        `,
+        [   
+            id,
+            categoria.icon_url,
+            categoria.nome,
+            categoria.nicho_id
+        ]
+    );
+
         
         return rows[0]
     }
 
     async excluirCategoria(id) {
         const { rows } = await pool.query(`
-            DELETE categoria
+            DELETE FROM categorias
             WHERE id = $1
             RETURNING *
             `,

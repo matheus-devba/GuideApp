@@ -67,12 +67,7 @@ function createListClientes(client) {
         <td>${updatedAt}</td>
         <td><span class="status ${client.ativo  == true ? `status-active`: `status-inativo` }">${client.ativo == true ? `Ativo` : `Inativo`}</span></td>
         <td><a href="${API_BASE_URL}/lojas/id=${client.id}" style="color: #3b82f6; text-decoration: none;">${API_BASE_URL}/lojas/${client.id}</a></td>
-        <td class="text-right">
-          <a class="btn btn-view" href="${API_BASE_URL}/adm/clientes/${client.id}" >View</a>
-           <button class="btn btn-hidden" data-id="${client.id}">Hidden</button>
-           <button class="btn btn-active" data-id="${client.id}">Active</button>
 
-        </td>
       </tr>
       `
 }

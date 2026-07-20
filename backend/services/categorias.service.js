@@ -16,7 +16,7 @@ class CategoriasService {
     }
 
     async criar(dados) {
-        return await CategoriasRepository.criarCategoria()
+        return await CategoriasRepository.criarCategoria(dados)
     }
 
     async atualizar(id, dados) {
