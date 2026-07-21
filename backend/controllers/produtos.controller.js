@@ -1,11 +1,35 @@
 const ProdutosService = require('../services/produtos.service.js')
 
 class ProdutoController {
+    async buscarAtivos(req, res) {
+        try {
+            const produtosAtivos = await ProdutosService.buscarAtivos()
+            return res.status(200).json(produtosAtivos)
+        }
+        catch (error) {
+            return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
     async buscarAtivosPorLoja(req, res) {
         try {
             const { id } = req.params 
             const produtosAtivos = await ProdutosService.buscarAtivosPorLoja(id)
             return res.status(200).json(produtosAtivos)
+        }
+        catch (error) {
+            return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
+    
+    async buscarProduto(req, res) {
+        try {
+            const { id } = req.params 
+            const produto = await ProdutosService.buscarProduto(id)
+            return res.status(200).json(produto)
         }
         catch (error) {
             return res.status(500).json({

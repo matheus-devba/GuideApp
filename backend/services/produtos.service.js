@@ -1,6 +1,14 @@
 const ProdutosRepository = require('../repositories/produtos.repository.js')
 
 class ProdutosService {
+    async buscarAtivos () {
+        return await ProdutosRepository.buscarAtivos()
+    }
+    
+    async buscarProduto (id) {
+        return await ProdutosRepository.buscarProduto(id)
+    }
+    
     async buscarAtivosPorLoja (id_loja) {
         return await ProdutosRepository.buscarAtivosPorLoja(id_loja)
     }

@@ -31,10 +31,21 @@ class ProdutosRepository {
         return rows
     }
 
+    async buscarProduto(id) {
+        const { rows } = await pool.query(`
+            SELECT * FROM produtos
+            WHERE id = $1
+            AND ativo = true
+            `,
+            [id]
+        )
+        return rows[0]
+    } 
+    
     async buscarAtivosPorLoja(id_loja) {
         const { rows } = await pool.query(`
             SELECT * FROM produtos
-            WHERE id_loja = $1
+            WHERE loja_id = $1
             AND ativo = true
             ORDER BY id desc
             `,
@@ -46,7 +57,7 @@ class ProdutosRepository {
     async buscarOcultosPorLoja(id_loja) {
         const { rows } = await pool.query(`
             SELECT * FROM produtos
-            WHERE id_loja = $1
+            WHERE loja_id = $1
             AND ativo = false
             ORDER BY id desc
             `,
@@ -57,7 +68,7 @@ class ProdutosRepository {
     } 
 
     async criar(produto) {
-        const { rows } = pool.query(`
+        const { rows } = await pool.query(`
         INSERT INTO produtos
         (
             loja_id,
@@ -112,7 +123,7 @@ class ProdutosRepository {
             RETURNING *
             `,
             [
-                produto.id,
+                id,
                 produto.categoria_id,
                 produto.nome,
                 produto.preco_normal,
@@ -126,7 +137,7 @@ class ProdutosRepository {
     }
 
     async desativar(id) {
-        const { rows } = pool.query(`
+        const { rows } = await pool.query(`
             UPDATE produtos
             SET ativo = false
             WHERE id = $1
@@ -139,7 +150,7 @@ class ProdutosRepository {
     }
 
     async ativar(id) {
-        const { rows } = pool.query(`
+        const { rows } = await pool.query(`
             UPDATE produtos
             SET ativo = true
             WHERE id = $1

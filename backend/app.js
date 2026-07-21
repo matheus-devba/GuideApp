@@ -3,6 +3,7 @@ const express = require("express")
 const cors = require("cors")
 const lojaRoutes = require("./routes/loja.routes.js")
 const categoriasRoutes = require("./routes/categorias.routes.js")
+const produtosRoutes = require("./routes/produtos.routes.js")
 
 const app = express()
 
@@ -23,6 +24,8 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 app.use("/api/lojas", lojaRoutes);
 
 app.use("/api/categorias", categoriasRoutes)
+
+app.use("/api/produtos", produtosRoutes)
 
 
 
@@ -75,7 +78,15 @@ app.get("/adm/categorias/:id", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "adm", "formNewCategoria.html"))
 })
 
+app.get("/produtos/:id", (req, res) => {
+  const { id } = req.params
 
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+
+  res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "produto.html"))
+})
 
 
 module.exports = app
