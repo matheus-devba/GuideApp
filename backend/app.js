@@ -75,4 +75,7 @@ app.get("/adm/categorias/:id", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "adm", "formNewCategoria.html"))
 })
 
+
+
+
 module.exports = app
