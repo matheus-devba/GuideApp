@@ -18,6 +18,7 @@ function renderProdutos () {
       (product) => `
             <a class="product-card-all" href="../merchant/produto.html?id=${product.id}">
                 <img class="product-image-all" src="${product.image}">
+                <div class="product-info-all">
                 <h2>${product.name}</h2>
                 <span class="metrics-product-all">
                     <p class="rate">${product.rate}</p>
@@ -29,6 +30,7 @@ function renderProdutos () {
                       <span class="normal-price-all">R$ ${product.normalPrice}</span>
                     </div>
                     <button type="button">Ver</button>
+                </div>
                 </div>
             </a>
       `

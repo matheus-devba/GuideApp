@@ -8,27 +8,39 @@
 
 /* Card de produto: padrão visual com borda, raio e sombra */
 .product-card-all {
-    /* mantém largura fixa para permitir rolagem lateral uniforme */
     scroll-snap-align: start;
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: 18px;
-    padding: 14px;
+    padding: 0; 
+    overflow: hidden; 
     box-shadow: var(--card-shadow);
     cursor: pointer;
     text-decoration: none;
     color: inherit;
-    display: block;
-   
+    flex: 0 0 calc(50% - 8px); 
+    min-width: 140px; 
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Visual do produto */
+
 .product-image-all {
-    height: 100px;
-    border-radius: 14px;
-    margin: 0 auto 12px;
-    display: block;
-    object-fit: cover;
+    width: 100% !important;  /* Define uma altura fixa ou proporcional para a imagem preencher */
+    height: 200px ; 
+    object-fit: cover; 
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-self: center;
+    margin-bottom: 8px;
+}
+.product-info-all {
+    padding: 12px; /* O respiro que antes ficava no card, agora fica aqui */
+    display: flex;
+    flex-direction: column;
+    gap: 4px; /* Espaçamento vertical uniforme entre os textos */
 }
 
 /* Nome do produto */
@@ -66,7 +78,7 @@
 }
 
 /* Destaca o valor do produto */
-.price-group-all .current-price {
+.price-group-all .promocional-price {
     color: var(--primary);
     font-weight: 700;
     font-size: 16px;
@@ -76,8 +88,8 @@
     flex-direction: column;
 }
 /* Valor anterior do produto */
-.price-group-all .past-price {
-    color: var(--primary);
+.price-group-all .normal-price-all {
+    color: var(--text);
     font-weight: 400;
     padding-left: 0px;
     font-size: 10px;
@@ -102,3 +114,13 @@
     gap: 8px;
 }
 
+@media (max-width: 480px) {
+  .product-card-all {
+    flex: 1 1 calc(50% - 8px);
+    min-width: 0;
+  }
+
+  .product-image-all {
+    width: clamp(100px, 38vw, 140px);
+  }
+}
