@@ -78,14 +78,13 @@ class ProdutosRepository {
             preco_promocional,
             descricao,
             destaque,
-            forma_de_pagamento,
             ativo,
             created_at
         )
 
         VALUES
 
-        ($1, $2, $3, $4, $5, $6, $7, $8, $9, CURRENT_TIMESTAMP)
+        ($1, $2, $3, $4, $5, $6, $7, $8, CURRENT_TIMESTAMP)
 
         RETURNING *
 
@@ -97,9 +96,7 @@ class ProdutosRepository {
             produto.preco_promocional,
             produto.descricao,
             produto.destaque,
-            produto.forma_de_pagamento,
             produto.ativo
-
         ]
 
     )

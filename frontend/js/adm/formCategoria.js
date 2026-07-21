@@ -3,7 +3,6 @@ import { renderCategorias } from "./categorias.js"
 
 export async function initNewCategoria () {
     await createCategoria()
-    console.log('d')
     setImagePreview()
 }
 

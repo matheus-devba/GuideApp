@@ -1,20 +1,22 @@
 import { products } from "../mocks/produtos_db.js";
 import { classificacoes } from "../mocks/classificacoes_db.js";
+import { API_BASE_URL } from "../api/config.js"
 
 // 1. UM ÚNICO ARRAY CONTROLADOR E UM ÚNICO CONTAINER
 const mediaProduct = document.querySelector('.list-grid'); 
 let imagensDoProduto = []; 
 
-export function initFormProduto() {
+export async function initFormProduto() {
   const params = new URLSearchParams(window.location.search);
   const productId = params.get("id");
-  const action = params.get("action");
 
-  renderFormProduto(productId, action);
+  renderFormProduto(productId);
   
   if (productId) {
       fillFormWithProductData(products.find((item) => item.id === productId));
-  }
+  } 
+
+  await criarProduto()
 
   // 2. GERENCIAMENTO DE EVENTOS UNIFICADO
   mediaProduct.addEventListener('change', (e) => {
@@ -40,7 +42,48 @@ export function initFormProduto() {
   });
 }
 
-function renderFormProduto (productId, action) {
+async function criarProduto() {
+    const form = document.querySelector("#product-form")
+    if (!form) return
+
+
+    form.addEventListener("submit", async(event) => {
+    event.preventDefault()
+    const payload = {
+    loja_id: 3, // depois trocar pelo merchant logado
+    categoria_id: Number(document.querySelector("#categoria").value),
+    nome: document.querySelector("#product-name").value,
+    descricao: document.querySelector("#product-description").value,
+    preco_normal: Number(document.querySelector("#product-price-normal").value),
+    preco_promocional: Number(document.querySelector("#product-price-promocional").value) || null,
+    destaque: document.querySelector("#destaqueOption").value === "true",
+    ativo: true
+    }
+
+    
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/produtos/new`, {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+    })
+
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`)
+        }
+
+        const produto = await response.json()
+        alert("produto criada")
+        console.log("produto criada", produto)
+    } catch (error) {
+        console.error("Erro ao criar a produto", error)
+    }
+})
+}
+
+async function renderFormProduto (productId) {
   const container = document.querySelector(".product-page");
   if (!container) return;
 
@@ -63,15 +106,13 @@ function renderFormProduto (productId, action) {
   atualizarGaleriaTela();
 
   // Renderiza o select de classificações (removido código duplicado)
-  const classificaoesSelect = document.getElementById('classificacoes');
+  const response = await fetch(`${API_BASE_URL}/api/categorias`)
+  const categorias = await response.json()
+  const classificaoesSelect = document.getElementById('categoria');
   classificaoesSelect.innerHTML = `
-    <option>Selecione uma classificação</option>
-    ${classificacoes.map(c => `<option value="${c.id}">${c.name}</option>`).join("")}
+    <option>Selecione uma categoria</option>
+    ${categorias.map(c => `<option value="${c.id}">${c.nome}</option>`).join("")}
   `;
-
-  // Define o texto do botão
-  const submitButton = document.getElementById('submit-button');
-  submitButton.textContent = action === 'edit' ? 'Salvar Alterações' : 'Cadastrar Produto';
 }
 
 function fillFormWithProductData(productSelected) {

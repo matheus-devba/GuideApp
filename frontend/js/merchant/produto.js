@@ -1,4 +1,6 @@
-import { products } from "../mocks/produtos_db.js";
+import { API_BASE_URL } from "../api/config.js"
+import { formatMoney } from '../utils/formatMoney.js'
+
 
 export function initProduto() {
   const params = new URLSearchParams(window.location.search);
