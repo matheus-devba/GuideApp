@@ -22,12 +22,12 @@ function renderProdutos () {
                 <h2>${product.name}</h2>
                 <span class="metrics-product-all">
                     <p class="rate">${product.rate}</p>
-                    <p class="views">${product.view} pessoas já viram</p>
+                    <p class="views">${product.view}</p>
                 </span>
                 <div class="product-footer-all">
                     <div class="price-group-all">
-                      <span class="promocional-price">R$ ${product.promocionalPrice} </span>
-                      <span class="normal-price-all">R$ ${product.normalPrice}</span>
+                      <span class="promocional-price">R$ ${product.promocionalPrice == "" ? product.normalPrice: product.promocionalPrice} </span>
+                      <span class="normal-price-all">${product.promocionalPrice == "" ? "": `R$` + product.normalPrice}</span>
                     </div>
                     <button type="button">Ver</button>
                 </div>
