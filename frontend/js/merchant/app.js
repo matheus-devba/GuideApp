@@ -6,9 +6,20 @@ import { initFormProduto } from "../merchant/formProduto.js";
 import { initListas } from "../merchant/listas.js";
 import { initDestaques } from "../merchant/destaques.js";
 
+const path = window.location.pathname;
+
+if (path === "/merchant/produtos/new") {
+  initFormProduto()
+} else if (path === "/merchant/produtos") {
+  initProdutos()
+} else if (/^\/produtos\/\d+$/.test(path)) {
+  initProduto()
+}
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const path = window.location.pathname;
+
 
   if (path.includes("perfil.html")) {
     initPerfil();

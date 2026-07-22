@@ -11,6 +11,6 @@ router.get("/ativos/:id", ProdutoController.buscarAtivosPorLoja)
 router.get("/ocultos/:id", ProdutoController.buscarOcultosPorLoja)
 router.patch("/hidden/:id", ProdutoController.desativar)
 router.patch("/active/:id", ProdutoController.ativar)
-router.patch("/delete/:id", ProdutoController.deletar)
+router.delete("/delete/:id", ProdutoController.deletar)
 
 module.exports = router

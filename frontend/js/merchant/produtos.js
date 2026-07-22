@@ -2,7 +2,13 @@ import { API_BASE_URL } from "../api/config.js"
 import { formatMoney } from '../utils/formatMoney.js'
 
 export function initProdutos() {
-  renderProdutos();
+  renderProdutos("ativosAll"); //resolver render e hidden
+
+  const btnHidden = document.querySelector('.hidden-product-btn')
+
+  btnHidden.addEventListener('click', async() => {
+    renderProdutos("hidden")
+  })
 
   const menuItem = document.querySelector('.menu-item.produtos');
   if (menuItem) {
@@ -10,11 +16,12 @@ export function initProdutos() {
   }
 }
 
-async function renderProdutos () {
+
+async function renderProdutos (filter) {
   const container = document.querySelector(".product-list-all");
   if (!container) return;
 
-  const response = await fetch(`${API_BASE_URL}/api/produtos/ativosAll`);
+  const response = await fetch(`${API_BASE_URL}/api/produtos/${filter}`);
   const products = await response.json();
 
   container.innerHTML = products
@@ -49,3 +56,4 @@ async function renderProdutos () {
     )
     .join("");
 }
+
