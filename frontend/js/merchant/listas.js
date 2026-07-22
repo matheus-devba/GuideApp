@@ -1,6 +1,7 @@
-import { lists } from "../mocks/listas_db.js"
+import { API_BASE_URL } from "../api/config.js"
 import { filterLists, searchRenderLists } from "../components/searchLista.js";
-import { renderLists } from "../consumer/loja.js"
+import { lists } from "../mocks/listas_db.js"
+
 
 
 export function initListas() {
@@ -16,7 +17,7 @@ export function initListas() {
   const linkPrefix = "../merchant/listas.html?id=";
   const containerSelector = ".product-list-all";
 
-  renderLists(linkPrefix, containerSelector);
+  renderLists();
 
   if (listQuery) {
     const awnserList = filterLists(listQuery)
@@ -29,3 +30,36 @@ export function initListas() {
 
 }
 
+async function renderLists () {
+  const container = document.querySelector('.product-list-all');
+  if (!container) return;
+
+  console.log('w')
+
+  const response = await fetch(`${API_BASE_URL}/api/listas`)
+  const listas = await response.json()
+  
+  container.innerHTML = listas.map((list) => createListCard(list)).join('')
+
+}
+
+function createListCard(list) {
+ return `
+        <a class="list-product-card" href="">
+          <div class="list-card-images">
+            <img src="${list.imageBack}" class="list-image back">
+            <img src="${list.imageFront}" class="list-image front">
+            <span class="badge">${list.badge}</span>
+          </div>
+          <div class="list-content">
+            <h4>${list.nome}</h4>
+            <p class="quantidade_produtos">${list.count}</p>
+            <span class="metric"> 
+              <img src="../assets/icons/eye.png" class="metric-icon">
+              <p class="metric-text">${list.views} visualizações</p>
+            </span>
+          
+          </div>
+        </a>
+      `
+}

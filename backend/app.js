@@ -5,6 +5,7 @@ const lojaRoutes = require("./routes/loja.routes.js")
 const categoriasRoutes = require("./routes/categorias.routes.js")
 const produtosRoutes = require("./routes/produtos.routes.js")
 const produtoImagensRoutes = require("./routes/produto-imagens.routes.js")
+const listasRoutes = require("./routes/listas.routes.js")
 
 const app = express()
 
@@ -29,6 +30,8 @@ app.use("/api/categorias", categoriasRoutes)
 app.use("/api/produtos", produtosRoutes)
 
 app.use("/api/produto_imagens", produtoImagensRoutes)
+
+app.use("/api/listas", listasRoutes)
 
 
 
