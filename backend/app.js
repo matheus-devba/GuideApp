@@ -4,6 +4,7 @@ const cors = require("cors")
 const lojaRoutes = require("./routes/loja.routes.js")
 const categoriasRoutes = require("./routes/categorias.routes.js")
 const produtosRoutes = require("./routes/produtos.routes.js")
+const produtoImagensRoutes = require("./routes/produto-imagens.routes.js")
 
 const app = express()
 
@@ -26,6 +27,8 @@ app.use("/api/lojas", lojaRoutes);
 app.use("/api/categorias", categoriasRoutes)
 
 app.use("/api/produtos", produtosRoutes)
+
+app.use("/api/produto_imagens", produtoImagensRoutes)
 
 
 

@@ -28,9 +28,32 @@ export async function renderProduto (productId) {
   const responseCategoria = await fetch(`${API_BASE_URL}/api/categorias/${categoriaId}`);
   const categorias = await responseCategoria.json();
 
+  const responseImagens = await fetch(`${API_BASE_URL}/api/produto_imagens/buscar_imagens/${productId}`)
+  const imagens = await responseImagens.json()
 
   const mediaProduct = document.querySelector('.media-product')
-  mediaProduct.innerHTML = `<img class="image-product" src=${productSelected.image} >`
+ 
+  if (mediaProduct) {
+      // Cria a estrutura do carrossel com todas as imagens e os botões
+      mediaProduct.innerHTML = `
+        <div class="carousel-container">
+          <div class="carousel-track">
+            ${imagens.map((img, index) => `
+              <img class="image-product ${index === 0 ? 'active' : ''}" src="${img.url}" alt="Imagem ${index + 1}">
+            `).join('')}
+          </div>
+          <!-- Só renderiza os botões se houver mais de uma imagem -->
+          ${imagens.length > 1 ? `
+            <button class="carousel-btn prev-btn" id="prevImage">&lt;</button>
+            <button class="carousel-btn next-btn" id="nextImage">&gt;</button>
+          ` : ''}
+        </div>
+      `;
+      
+      // Ativa o controle de cliques do carrossel
+      inicializarCarrossel();
+    }
+  
 
   const initialInfo = document.querySelector('.initial-info')
   initialInfo.innerHTML = ` 
@@ -56,6 +79,39 @@ export async function renderProduto (productId) {
       <a class="product-options delete" id="delete" href="#">Excluir</a>
     </div>
   `
+  }
+
+function inicializarCarrossel() {
+  const prevBtn = document.getElementById('prevImage');
+  const nextBtn = document.getElementById('nextImage');
+  const imagens = document.querySelectorAll('.carousel-track .image-product');
+  
+  if (!imagens.length) return;
+  
+  let currentIndex = 0;
+
+  function mostrarImagem(index) {
+    // Remove a classe active de todas as imagens
+    imagens.forEach(img => img.classList.remove('active'));
+    // Adiciona a classe active apenas na imagem atual
+    imagens[index].classList.add('active');
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      // Volta uma imagem, ou vai para a última se estiver na primeira
+      currentIndex = (currentIndex === 0) ? imagens.length - 1 : currentIndex - 1;
+      mostrarImagem(currentIndex);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      // Avança uma imagem, ou volta para a primeira se estiver na última
+      currentIndex = (currentIndex === imagens.length - 1) ? 0 : currentIndex + 1;
+      mostrarImagem(currentIndex);
+    });
+  }
 }
 
 

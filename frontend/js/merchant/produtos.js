@@ -35,7 +35,7 @@ async function renderProdutos (filter) {
 
         return `
             <a class="product-card-all" href="${API_BASE_URL}/produtos/${product.id}">
-                <img class="product-image-all" src="${product.image}">
+                <img class="product-image-all" src="${API_BASE_URL}/api/produto_imagens/buscar_imagem/${product.id}">
                 <div class="product-info-all">
                 <h2>${product.nome}</h2>
                 <span class="metrics-product-all">
