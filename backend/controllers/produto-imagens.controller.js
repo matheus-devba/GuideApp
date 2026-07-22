@@ -14,6 +14,32 @@ class ProdutoImagensController {
         }
   
     }
+
+async criarImagens(req, res) {
+    try {
+      const { id } = req.params
+      const { files } = req
+
+      if (!files || files.length === 0) {
+        return res.status(400).json({
+          message: "Envie ao menos uma imagem"
+        })
+      }
+
+      const imagens = files.map((file, index) => ({
+        url: `/uploads/produto_imagens/${file.filename}`,
+        ordem: index + 1
+      }))
+
+      const result = await ProdutoImagensService.criarImagens(id, imagens)
+      return res.status(201).json(result)
+    } catch (error) {
+      return res.status(500).json({
+        message: error.message
+      })
+    }
+  }
+
     async buscarPrimeiraImagem(req, res) {
         try {
             const { id } = req.params

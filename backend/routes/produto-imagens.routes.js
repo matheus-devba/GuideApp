@@ -11,6 +11,7 @@ const upload = require("../config/multer.js")
 //   { name: "icon", maxCount: 1 }
 // ]), CategoriasController.atualizar)
 
+router.post("/new/:id", upload.array("imagens", 5), ProdutoImagensController.criarImagens)
 router.get("/buscar_imagens/:id", ProdutoImagensController.buscarImagens)
 router.get("/buscar_imagem/:id", ProdutoImagensController.buscarPrimeiraImagem)
 

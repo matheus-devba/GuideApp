@@ -81,6 +81,11 @@ app.get("/adm/categorias/:id", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "adm", "formNewCategoria.html"))
 })
 
+app.get("/produtos/new", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "formProduto.html"))
+})
+
+
 app.get("/produtos/:id", (req, res) => {
   const { id } = req.params
 

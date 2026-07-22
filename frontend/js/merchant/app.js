@@ -8,7 +8,7 @@ import { initDestaques } from "../merchant/destaques.js";
 
 const path = window.location.pathname;
 
-if (path === "/merchant/produtos/new") {
+if (path === "/produtos/new") { //depois mudar para MERCHANT ID
   initFormProduto()
 } else if (path === "/merchant/produtos") {
   initProdutos()

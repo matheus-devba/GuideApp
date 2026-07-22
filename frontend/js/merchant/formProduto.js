@@ -75,12 +75,37 @@ async function criarProduto() {
         }
 
         const produto = await response.json()
+        await enviarImagensProduto(produto.id)
+        
         alert("produto criada")
         console.log("produto criada", produto)
     } catch (error) {
         console.error("Erro ao criar a produto", error)
     }
 })
+}
+
+async function enviarImagensProduto(produtoId) {
+  const files = imagensDoProduto.filter((item) => item instanceof File)
+
+  if (files.length === 0) return
+
+  const formData = new FormData()
+
+  files.forEach((file) => {
+    formData.append("imagens", file)
+  })
+
+  const response = await fetch(`${API_BASE_URL}/api/produto_imagens/new/${produtoId}`, {
+    method: "POST",
+    body: formData
+  })
+
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status}`)
+  }
+
+  return await response.json()
 }
 
 async function renderFormProduto (productId) {

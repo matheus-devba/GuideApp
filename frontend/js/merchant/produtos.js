@@ -4,6 +4,12 @@ import { formatMoney } from '../utils/formatMoney.js'
 export function initProdutos() {
   renderProdutos("ativosAll"); //resolver render e hidden
 
+  const sectionActions = document.querySelector('.actions')
+  sectionActions.innerHTML = `
+    <a class="new-product-btn" href="${API_BASE_URL}/produtos/new">Novo Produto +</a>
+    <a class="hidden-product-btn" href="#">Produtos Ocultos</a>
+  `
+
   const btnHidden = document.querySelector('.hidden-product-btn')
 
   btnHidden.addEventListener('click', async() => {
