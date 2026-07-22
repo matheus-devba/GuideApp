@@ -30,36 +30,56 @@ export function initListas() {
 
 }
 
-async function renderLists () {
-  const container = document.querySelector('.product-list-all');
+async function renderLists() {
+  const container = document.querySelector(".product-list-all");
   if (!container) return;
 
-  console.log('w')
+  const responseListas = await fetch(`${API_BASE_URL}/api/listas`);
+  const listas = await responseListas.json();
 
-  const response = await fetch(`${API_BASE_URL}/api/listas`)
-  const listas = await response.json()
-  
-  container.innerHTML = listas.map((list) => createListCard(list)).join('')
+  const html = await Promise.all(
+    listas.map(async (list) => {
+      const responseProdutos = await fetch(
+        `${API_BASE_URL}/api/lista-produtos/lista/${list.id}`
+      );
+      const produtos = await responseProdutos.json();
+      
+      if(produtos.length < 1) return //caso nao tiver produtos (mas posso colocar um <=)
 
-}
 
-function createListCard(list) {
- return `
+      const produtoBack = produtos[0];
+      const produtoFront = produtos[1];
+
+      let imageBack = "../assets/images/default.webp"; //caso tiver 1 produto apenas na lista
+      let imageFront = "../assets/images/default.webp";
+
+      if (produtoBack) {
+        imageBack = `${API_BASE_URL}/api/produto_imagens/buscar_imagem/${produtoBack.produto_id}`;
+      }
+      if (produtoFront) {
+        imageFront = `${API_BASE_URL}/api/produto_imagens/buscar_imagem/${produtoFront.produto_id}`;
+      }
+
+      return `
         <a class="list-product-card" href="">
           <div class="list-card-images">
-            <img src="${list.imageBack}" class="list-image back">
-            <img src="${list.imageFront}" class="list-image front">
-            <span class="badge">${list.badge}</span>
+            <img src="${imageBack}" class="list-image back">
+            <img src="${imageFront}" class="list-image front">
+            <span class="badge">+${produtos.length}</span>
           </div>
           <div class="list-content">
             <h4>${list.nome}</h4>
-            <p class="quantidade_produtos">${list.count}</p>
+            <p class="quantidade_produtos">${produtos.length} produto(s) salvo(s)</p>
             <span class="metric"> 
-              <img src="../assets/icons/eye.png" class="metric-icon">
-              <p class="metric-text">${list.views} visualizações</p>
+               ${list.views < 2 ? "": `<img src="../assets/icons/eye.png" class="metric-icon">`}
+              ${list.views < 2 ? "": `<p class="metric-text">${list.views} visualizações</p>`}
             </span>
-          
           </div>
         </a>
-      `
+      `;
+    })
+  );
+
+  container.innerHTML = html.join("");
 }
+
