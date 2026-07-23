@@ -12,6 +12,19 @@ class ListaProdutoController {
             })
         }
     }
+
+    async atualizar(req, res) {
+        try {
+            const { body } = req
+            const { id } = req.params
+            const produtos =  await ListaProdutoService.atualizar(id, body)
+            return res.status(200).json(produtos)
+        } catch (error) {
+             return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
 }
 
 

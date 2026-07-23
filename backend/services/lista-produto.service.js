@@ -5,6 +5,10 @@ class ListaProdutoService {
         //depois, fazer verificação se a lista existe 
         return await ListaProdutoRepository.buscarProdutosEmLista(lista_id)
     }
+    async atualizar (lista_id, produtos) {
+        //depois, fazer verificação se a lista existe 
+        return await ListaProdutoRepository.atualizar(lista_id, produtos)
+    }
 
 }
 

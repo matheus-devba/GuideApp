@@ -13,6 +13,27 @@ class ListaProdutoRepository {
         return rows
     }
 
+ async atualizar (lista_id, produtos) {
+    const resultados =  []
+
+    for (const produto of produtos) {
+      const { rows } = await pool.query(`
+        UPDATE lista_produto (
+          lista_id,
+          produto_id
+        )
+        SET ($1, $2)
+        RETURNING *
+      `, [
+        lista_id,
+        produto.produto_id
+      ])
+
+      resultados.push(rows[0])
+    }
+        return resultados
+    }
+
 
 }
 

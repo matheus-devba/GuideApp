@@ -1,11 +1,12 @@
 import { API_BASE_URL } from "../api/config.js"
 import { formatMoney } from '../utils/formatMoney.js'
 
+const pathParts = window.location.pathname.split("/")
+const idLista = pathParts[pathParts.length - 1]
+
  export async function initLista() {
-    const pathParts = window.location.pathname.split("/")
-    const id = pathParts[pathParts.length - 1]
-    renderLista(id)
-    console.log(id)
+    renderLista(idLista)
+    console.log(idLista)
 
 }
 
@@ -65,7 +66,7 @@ async function renderLista(lista_id) {
 function buttonOptions(productId) {
     const container = document.querySelector('.options-group')
     const options = `
-            <a class="product-options edit" href="${API_BASE_URL}/produtos/update/${productId}">Editar</a>
+            <a class="product-options edit" href="${API_BASE_URL}/lista-produto/update/${idLista}">Editar</a>
             <a class="product-options muted" id="muted" href="#">Ocultar</a>
             <a class="product-options delete" id="delete" href="#">Excluir</a>
     `

@@ -3,7 +3,8 @@ const express = require("express")
 const router = express.Router()
 
 router.get("/", ListasController.buscarListas)
-router.get("/merchant/:id", ListasController.buscarListaPorId) // tem que vim merchant/lista/:id
+router.get("/merchant/:id", ListasController.buscarListaPorId) 
+// router.get("/merchant/update/:id", ListasController.atualizar) 
 
 
 

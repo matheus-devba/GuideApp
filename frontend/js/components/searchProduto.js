@@ -1,11 +1,11 @@
-import { products } from "../mocks/produtos_db.js";
+// import { products } from "../mocks/produtos_db.js";
 
 
 export function filterProducts (query, products) {
     const search = normalizeText(query)
 
     return products.filter((product) => {
-        const name = normalizeText(product.name || "")
+        const name = normalizeText(product.nome || "")
 
         return (
             name.includes(search)
@@ -14,7 +14,7 @@ export function filterProducts (query, products) {
 
 }
 
-export function searchRenderProduct(query) {
+export function searchRenderProduct(query, products) {
     const awnserProduct = filterProducts(query, products) // Depois posso colocar uma lista específica (ex: hidratantes, perfumes...)
 
     const container = document.querySelector(".product-list-all");

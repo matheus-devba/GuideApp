@@ -12,6 +12,10 @@ class ListasService {
 
         return lista
     }
+    async atualizar (id, body) {
+        const lista = await ListasRepository.atualizar(id, body)
+        return lista
+    }
 
 }
 

@@ -7,6 +7,7 @@ import { initEditProduto } from "./formProdutoEdit.js";
 import { initListas } from "../merchant/listas.js";
 import { initDestaques } from "../merchant/destaques.js";
 import { initLista } from "./lista.js";
+import { initFormListaUpdate } from "./formListaUpdate.js";
 
 const path = window.location.pathname;
 
@@ -25,6 +26,11 @@ else if (/^\/produtos\/\d+$/.test(path)) {
 if (/^\/listas\/merchant\/\d+$/.test(path)) {
   initLista()
 }
+
+if (/^\/lista-produto\/update\/\d+$/.test(path)) {
+  initFormListaUpdate()
+}
+
 
 
 document.addEventListener("DOMContentLoaded", () => {

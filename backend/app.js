@@ -130,6 +130,18 @@ app.get("/listas/merchant/:id", (req, res) => { // tem que ser merchant/listas/i
 
 
 
+app.get("/lista-produto/update/:id", (req, res) => { 
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+
+  res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "formLista.html"))
+})
+
+
+
 
 
 module.exports = app

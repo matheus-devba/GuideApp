@@ -3,6 +3,7 @@ const express = require("express")
 const router = express.Router()
 
 router.get("/lista/:id", ListaProdutoController.buscarProdutosEmLista)
+router.get("/update/:id", ListaProdutoController.atualizar)
 
 
 
