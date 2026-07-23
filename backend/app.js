@@ -90,7 +90,7 @@ app.get("/adm/categorias/:id", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "adm", "formNewCategoria.html"))
 })
 
-app.get("/produtos/new", (req, res) => {
+app.get("/produtos/merchant/new", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "formProduto.html"))
 })
 

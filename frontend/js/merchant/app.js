@@ -10,7 +10,7 @@ import { initLista } from "./lista.js";
 
 const path = window.location.pathname;
 
-if (path === "/produtos/new") { 
+if (path === "/produtos/merchant/new") { 
   initCreateProduto()
 } else if (path === "/merchant/produtos") {
   initProdutos()

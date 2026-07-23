@@ -6,7 +6,7 @@ export function initProdutos() {
 
   const sectionActions = document.querySelector('.actions')
   sectionActions.innerHTML = `
-    <a class="new-product-btn" href="${API_BASE_URL}/produtos/new">Novo Produto +</a>
+    <a class="new-product-btn" href="${API_BASE_URL}/produtos/merchant/new">Novo Produto +</a>
     <a class="hidden-product-btn" href="#">Produtos Ocultos</a>
   `
 
