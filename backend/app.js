@@ -117,6 +117,9 @@ app.get("/produtos/:id", (req, res) => { // tem que ser merchant/produtos/id
 })
 
 
+app.get("/listas/merchant/new", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "formLista.html"))
+})
 
 app.get("/listas/merchant/:id", (req, res) => { // tem que ser merchant/listas/id
   const { id } = req.params
@@ -127,6 +130,7 @@ app.get("/listas/merchant/:id", (req, res) => { // tem que ser merchant/listas/i
 
   res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "lista.html"))
 })
+
 
 
 

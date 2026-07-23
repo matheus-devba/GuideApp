@@ -25,6 +25,18 @@ class ListaProdutoController {
             })
         }
     }
+
+    async buscarIdPorListaId(req, res) {
+        try {
+            const { id } = req.params
+            const idListaProduto =  await ListaProdutoService.buscarIdPorListaId(id)
+            return res.status(200).json(idListaProduto)
+        } catch (error) {
+             return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
 }
 
 

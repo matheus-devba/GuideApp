@@ -12,8 +12,8 @@ class ListasService {
 
         return lista
     }
-    async atualizar (id, body) {
-        const lista = await ListasRepository.atualizar(id, body)
+    async atualizar (id, nome ) {
+        const lista = await ListasRepository.atualizar(id, nome )
         return lista
     }
 

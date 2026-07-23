@@ -5,9 +5,17 @@ class ListaProdutoService {
         //depois, fazer verificação se a lista existe 
         return await ListaProdutoRepository.buscarProdutosEmLista(lista_id)
     }
-    async atualizar (lista_id, produtos) {
-        //depois, fazer verificação se a lista existe 
-        return await ListaProdutoRepository.atualizar(lista_id, produtos)
+    async atualizar(lista_id, payload) {
+    const produtos = Array.isArray(payload)
+        ? payload
+        : Array.isArray(payload?.produtos)
+        ? payload.produtos
+        : [];
+
+    return await ListaProdutoRepository.atualizar(lista_id, produtos);
+    }
+    async buscarIdPorListaId (lista_id) {
+        return await ListaProdutoRepository.buscarIdPorListaId(lista_id)
     }
 
 }

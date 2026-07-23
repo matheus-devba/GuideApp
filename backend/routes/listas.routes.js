@@ -4,7 +4,7 @@ const router = express.Router()
 
 router.get("/", ListasController.buscarListas)
 router.get("/merchant/:id", ListasController.buscarListaPorId) 
-// router.get("/merchant/update/:id", ListasController.atualizar) 
+router.put("/merchant/update/:id", ListasController.atualizar) 
 
 
 

@@ -26,7 +26,10 @@ export function initListas() {
   //   container.innerHTML = ""
   //   searchRenderLists(listQuery);
   // }
- 
+ const actions = document.querySelector('.actions')
+ actions.innerHTML = `
+    <a class="new-product-btn" href="${API_BASE_URL}/listas/new">Nova Lista +</a>
+ `
 
 }
 

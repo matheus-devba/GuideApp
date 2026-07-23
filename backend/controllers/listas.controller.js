@@ -25,8 +25,8 @@ class ListasController {
     async atualizar(req, res) {
         try {
             const { id } = req.params
-            const { body } = req
-            const lista =  await ListasService.atualizar(id, body)
+            const { nome  } = req.body
+            const lista =  await ListasService.atualizar(id, nome )
             return res.status(200).json(lista)
         } catch (error) {
              return res.status(500).json({
