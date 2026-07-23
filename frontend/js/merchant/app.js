@@ -1,18 +1,23 @@
 import { initProdutos } from "../merchant/produtos.js";
 import { initPerfil } from "../merchant/perfil.js";
-import { initProduto} from "../merchant/produto.js";
-import { initFormLista} from "../merchant/formLista.js";
-import { initFormProduto } from "../merchant/formProduto.js";
+import { initProduto } from "../merchant/produto.js";
+import { initFormLista } from "../merchant/formLista.js";
+import { initCreateProduto } from "./formProdutoCreate.js";
+import { initEditProduto } from "./formProdutoEdit.js";
 import { initListas } from "../merchant/listas.js";
 import { initDestaques } from "../merchant/destaques.js";
 
 const path = window.location.pathname;
 
-if (path === "/produtos/new") { //depois mudar para MERCHANT ID
-  initFormProduto()
+if (path === "/produtos/new") { 
+  initCreateProduto()
 } else if (path === "/merchant/produtos") {
   initProdutos()
-} else if (/^\/produtos\/\d+$/.test(path)) {
+} else if (/^\/produtos\/update\/\d+$/.test(path))  {
+  initEditProduto()
+}
+
+else if (/^\/produtos\/\d+$/.test(path)) {
   initProduto()
 }
 

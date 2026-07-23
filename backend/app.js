@@ -22,6 +22,7 @@ app.use(express.json())
 
 app.use(express.static(path.join(__dirname, "..", "frontend")))
 
+
 app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 
 app.use("/api/lojas", lojaRoutes);
@@ -94,7 +95,18 @@ app.get("/produtos/new", (req, res) => {
 })
 
 
-app.get("/produtos/:id", (req, res) => {
+app.get("/produtos/update/:id", (req, res) => {
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+
+  res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "formProduto.html"))
+})
+
+
+app.get("/produtos/:id", (req, res) => { // tem que ser merchant/produtos/id
   const { id } = req.params
 
   if (!/^\d+$/.test(id)) {
