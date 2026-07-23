@@ -6,6 +6,7 @@ import { initCreateProduto } from "./formProdutoCreate.js";
 import { initEditProduto } from "./formProdutoEdit.js";
 import { initListas } from "../merchant/listas.js";
 import { initDestaques } from "../merchant/destaques.js";
+import { initLista } from "./lista.js";
 
 const path = window.location.pathname;
 
@@ -19,6 +20,10 @@ if (path === "/produtos/new") {
 
 else if (/^\/produtos\/\d+$/.test(path)) {
   initProduto()
+}
+
+if (/^\/listas\/merchant\/\d+$/.test(path)) {
+  initLista()
 }
 
 

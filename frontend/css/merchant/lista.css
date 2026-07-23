@@ -1,0 +1,119 @@
+@import url("../global.css");
+@import url("../variables.css");
+@import url("../consumer/loja.css");
+@import url("../components/card-product.css");
+
+
+input[type="checkbox"] {
+    transform: scale(1.5); /* Aumenta o tamanho do checkbox uniformemente */
+    margin: 10px;          /* Opcional: adiciona um espaço ao redor para não grudar no texto */
+    cursor: pointer;
+}
+
+.cta-product {
+    display: inline-flex; 
+    align-items: center;  
+    gap: 8px;        
+    text-decoration: none; 
+}
+
+.cta-product img {
+    width: 24px;          /* Ajuste o tamanho do ícone conforme necessário */
+    height: 24px;
+    display: block;
+}
+
+.right-group {
+    display: grid;
+    margin-top: 10px;
+    top: 0;
+}
+
+.right-group a {
+    justify-content: center;
+    place-items: center;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: var(--primary);
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    
+}
+
+.product-footer-all button {
+    border: 1px solid var(--primary);
+    background: transparent;
+    color: var(--primary);
+    border-radius: 10px;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.product-footer-all {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+
+/* Container que agrupa o produto e os botões abaixo dele */
+.product-card-item {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px; /* Aljuste este valor para controlar a largura máxima na tela */
+    font-family: sans-serif;
+}
+
+/* Container dos botões empilhados verticalmente */
+.options-group {
+    display: flex;
+    flex-direction: column; /* Faz os botões ficarem um embaixo do outro */
+    width: 100%;
+    gap: 12px; /* Espaçamento entre cada botão */
+    margin-top: 15px; /* Distância entre o preço/texto e os botões */
+}
+
+/* Estilo geral e comum para todos os três botões */
+.product-options {
+    display: block;
+    width: 100%;
+    box-sizing: border-box; /* Garante que o padding não quebre os 100% de largura */
+    padding: 14px 0; /* Altura interna do botão */
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 12px; /* Deixa as bordas arredondadas igual à imagem */
+    color: #FFFFFF; /* Texto branco para todos */
+    transition: background-color 0.2s;
+}
+
+/* Cores específicas de cada ação baseadas na imagem */
+.product-options.edit {
+    background-color: #E28800; /* Laranja do Editar */
+}
+
+.product-options.edit:hover {
+    background-color: #C67700;
+}
+
+.product-options.muted {
+    background-color: #6C757D; /* Cinza do Ocultar */
+}
+
+.product-options.muted:hover {
+    background-color: #5A6268;
+}
+
+.product-options.delete {
+    background-color: #E50000; /* Vermelho do Excluir */
+}
+
+.product-options.delete:hover {
+    background-color: #B80000;
+}
