@@ -53,7 +53,7 @@ async function handleCreateSubmit(event) {
       return;
     }
 
-    const response = await fetch(`${API_BASE_URL}/api/produtos/new`, {
+    const response = await fetch(`${API_BASE_URL}/api/produtos/merchant/new`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
