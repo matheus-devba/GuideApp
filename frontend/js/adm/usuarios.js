@@ -5,8 +5,17 @@ import { formatDateTime, formatUpdatedAt } from "../utils/formatDate.js"
 
 
 export async function initUsuarios() {
-    renderMenuAdm()
-    renderUsuarios()
+    await renderMenuAdm()
+    await renderUsuarios()
+    const btnDelete = document.querySelectorAll(".btn.btn-delete")
+    
+    btnDelete.forEach((button) => {
+        button.addEventListener("click", async() => {
+            const idClient = button.dataset.id
+            deleteUsuario(idClient)
+        })
+    })
+
 }
 
 
@@ -60,4 +69,23 @@ async function createListUsuarios(usuario) {
         </td>
       </tr>
     `;
+}
+
+async function deleteUsuario(id) {
+        try {
+            const response = await fetch(`${API_BASE_URL}/api/usuarios/delete/${id}`, {
+                method: "DELETE"
+            })
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`)
+            }
+            alert("usuario deletado")
+            renderUsuarios()
+
+        } catch (error) {
+            console.error("Erro ao ocultar usuario", error)
+        }
+   
+
 }

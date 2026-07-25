@@ -1,6 +1,13 @@
 const pool = require("../database/connection.js")
 
 class UsuariosRepository {
+    async buscarTodos() {
+        const { rows } = await pool.query(`
+            SELECT * FROM usuarios
+            ORDER BY id
+            `)
+        return rows
+    }
     async buscarUsuarios() {
         const { rows } = await pool.query(`
             SELECT * FROM usuarios
@@ -97,10 +104,9 @@ class UsuariosRepository {
         UPDATE usuarios 
         SET 
             nome = $2, 
-            email = $3, 
-            password_hash = $4
-            tipo = $5
-            ativo = $6
+            email = $3,
+            tipo = $4,
+            ativo = $5
             WHERE id = $1
         
         RETURNING *;
@@ -109,7 +115,6 @@ class UsuariosRepository {
             id,
             dados.nome,
             dados.email,
-            dados.password_hash,
             dados.tipo,
             dados.ativo,
         ]

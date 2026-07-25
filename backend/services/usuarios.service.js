@@ -1,6 +1,9 @@
 const UsuariosRepository = require("../repositories/usuarios.repository.js")
 
 class UsuariosService {
+    async buscarTodos() {
+        return await UsuariosRepository.buscarTodos()
+    }
     async buscarUsuarios() {
         return await UsuariosRepository.buscarUsuarios()
     }

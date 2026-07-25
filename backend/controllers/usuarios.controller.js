@@ -1,6 +1,18 @@
 const UsuariosService = require("../services/usuarios.service.js")
 
 class UsuariosController {
+    async buscarTodos(req, res) {
+        try {
+            const usuarios = await UsuariosService.buscarTodos()
+            return res.status(200).json(usuarios)
+        }
+        catch (error) {
+            return res.status(500).json({
+                message: error.message
+            })
+        }
+  
+    }
     async buscarUsuarios(req, res) {
         try {
             const usuarios = await UsuariosService.buscarUsuarios()
@@ -43,7 +55,7 @@ class UsuariosController {
     async criarAdm(req, res) {
         try {
             const { body } = req
-            const adm = await ProdutosService.criarAdm(body)
+            const adm = await UsuariosService.criarAdm(body)
             return res.status(201).json(adm)
         }
         catch (error) {
@@ -56,7 +68,7 @@ class UsuariosController {
     async criarUsuario(req, res) {
         try {
             const { body } = req
-            const usuario = await ProdutosService.criarUsuario(body)
+            const usuario = await UsuariosService.criarUsuario(body)
             return res.status(201).json(usuario)
         }
         catch (error) {
@@ -71,7 +83,7 @@ class UsuariosController {
         try {
             const { id } = req.params
             const { dados  } = req.body
-            const usuario =  await ListasService.editarUsuario(id, dados )
+            const usuario =  await UsuariosService.editarUsuario(id, dados )
             return res.status(200).json(usuario)
         } catch (error) {
              return res.status(500).json({
