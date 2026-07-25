@@ -38,7 +38,7 @@ class UsuariosRepository {
     async criarAdm(dados) {
         const { rows } = await pool.query(`
             INSERT INTO usuarios (nome, email, password_hash, tipo, ativo, created_at)
-            VALUES ($1, $2, $3, $4, $5 CURRENT_TIMESTAMP)
+            VALUES ($1, $2, $3, $4, $5, CURRENT_TIMESTAMP)
             RETURNING *;
             `,
             [
@@ -56,7 +56,7 @@ class UsuariosRepository {
     async criarUsuario(dados) {
         const { rows } = await pool.query(`
             INSERT INTO usuarios (nome, email, password_hash, tipo, ativo, loja_id, created_at)
-            VALUES ($1, $2, $3, $4, $5, $6 CURRENT_TIMESTAMP)
+            VALUES ($1, $2, $3, $4, $5, $6, CURRENT_TIMESTAMP)
             RETURNING *;
             `,
             [
@@ -99,6 +99,30 @@ class UsuariosRepository {
         return rows[0]
     }
 
+    async editarUsuario(id, dados) {
+    const { rows } = await pool.query(`
+        UPDATE usuarios 
+        SET 
+            nome = $2, 
+            email = $3,
+            tipo = $4,
+            ativo = $5
+            WHERE id = $1
+        
+        RETURNING *;
+        `,
+        [   
+            id,
+            dados.nome,
+            dados.email,
+            dados.tipo,
+            dados.ativo,
+        ]
+    );
+
+        
+        return rows[0]
+    }
     async editarUsuario(id, dados) {
     const { rows } = await pool.query(`
         UPDATE usuarios 

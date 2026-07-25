@@ -91,6 +91,18 @@ class UsuariosController {
             })
         }
     }
+    async editarUsuario(req, res) {
+        try {
+            const { id } = req.params
+            const { dados  } = req.body
+            const usuario =  await UsuariosService.editarUsuario(id, dados )
+            return res.status(200).json(usuario)
+        } catch (error) {
+             return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
 
     async excluirUsuario(req, res) {
         try {

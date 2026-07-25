@@ -12,6 +12,7 @@ router.post("/root/new", UsuariosController.criarAdm)
 router.post("/new", UsuariosController.criarUsuario) 
 
 router.put("/update/:id", UsuariosController.editarUsuario) 
+router.put("/update/:id", UsuariosController.editarUsuario) 
 router.delete("/delete/:id", UsuariosController.excluirUsuario) 
 
 

@@ -19,17 +19,8 @@ async function renderUsuario(id) {
   try {
     const response = await fetch(`${API_BASE_URL}/api/usuarios/${id}`);
 
-    if (!response.ok) {
-      container.innerHTML = `<p>Usuário não encontrado (status ${response.status}).</p>`;
-      return;
-    }
-
     const usuarioData = await response.json();
 
-    if (!usuarioData || !usuarioData.id) {
-      container.innerHTML = `<p>Dados inválidos do usuário.</p>`;
-      return;
-    }
 
     const html = await insertDataUsuario(usuarioData);
     container.innerHTML = html;
@@ -40,6 +31,7 @@ async function renderUsuario(id) {
 }
 
 async function insertDataUsuario(data) {
+    console.log(data)
     let nomeDaLoja = "";
 
     try {
@@ -89,12 +81,9 @@ async function insertDataUsuario(data) {
             </select>
         </div>
 
+    <button type="submit" id="submit-button" class="submit-button">Salvar</button>
 
-        <button type="submit" id="submit-button" class="submit-button">Salvar</button>
-
-
-        
-    `
+ `
 }
 
 async function editClient(id) {

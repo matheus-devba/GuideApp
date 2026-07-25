@@ -7,6 +7,7 @@ import { formatDateTime, formatUpdatedAt } from "../utils/formatDate.js"
 export async function initUsuarios() {
     await renderMenuAdm()
     await renderUsuarios()
+    btnNewUser()
     const btnDelete = document.querySelectorAll(".btn.btn-delete")
     
     btnDelete.forEach((button) => {
@@ -18,6 +19,15 @@ export async function initUsuarios() {
 
 }
 
+function btnNewUser() {
+    const container = document.querySelector(".newUser")
+    if (!container) return
+
+    container.innerHTML = `
+    <a class="new-product-btn" href="${API_BASE_URL}/adm/usuarios/new">Novo Usuario</a>
+    <a class="new-product-btn" href="${API_BASE_URL}/adm/root/new">Novo Adm</a>
+    `
+}
 
 export async function renderUsuarios() {
     try {

@@ -1,6 +1,10 @@
 const path = require("path")
 const express = require("express")
 const cors = require("cors")
+
+
+
+const hash = require("./routes/criarHash.routes.js")
 const lojaRoutes = require("./routes/loja.routes.js")
 const categoriasRoutes = require("./routes/categorias.routes.js")
 const produtosRoutes = require("./routes/produtos.routes.js")
@@ -25,6 +29,8 @@ app.use(express.static(path.join(__dirname, "..", "frontend")))
 
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")))
+
+app.use("/api/usuarios/gerar-hash", hash);
 
 app.use("/api/lojas", lojaRoutes);
 
@@ -155,11 +161,11 @@ app.get("/adm/usuarios", (req, res) => {
 })
 
 app.get("/adm/usuarios/new", (req, res) => { // tem que ser merchant/listas/id
-  const { id } = req.params
 
-  if (!/^\d+$/.test(id)) {
-    return res.status(404).send("Página não encontrada")
-  }
+  res.sendFile(path.join(__dirname, "..", "frontend", "adm", "formNewUser.html"))
+
+})
+app.get("/adm/root/new", (req, res) => { // tem que ser merchant/listas/id
 
   res.sendFile(path.join(__dirname, "..", "frontend", "adm", "formNewUser.html"))
 })
@@ -174,15 +180,7 @@ app.get("/adm/usuarios/:id", (req, res) => { // tem que ser merchant/listas/id
   res.sendFile(path.join(__dirname, "..", "frontend", "adm", "usuario.html"))
 })
 
-app.get("/adm/root/new", (req, res) => { // tem que ser merchant/listas/id
-  const { id } = req.params
 
-  if (!/^\d+$/.test(id)) {
-    return res.status(404).send("Página não encontrada")
-  }
-
-  res.sendFile(path.join(__dirname, "..", "frontend", "adm", "formNewUser.html"))
-})
 
 
 
