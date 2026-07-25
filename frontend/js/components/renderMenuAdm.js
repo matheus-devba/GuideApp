@@ -9,6 +9,7 @@ export function renderMenuAdm() {
         <a class="selected-item" href="./home.html">Home</a>
         <a class="menu-item" href="${API_BASE_URL}/adm/clientes">Clientes</a>
         <a class="menu-item" href="${API_BASE_URL}/adm/categorias">Categorias</a>
+        <a class="menu-item" href="${API_BASE_URL}/adm/usuarios">Usuarios</a>
         <a class="menu-item" href="./configuracoes.html">Configurações</a>
     `
            

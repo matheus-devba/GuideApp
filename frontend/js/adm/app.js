@@ -6,6 +6,11 @@ import { initNewCategoria } from "./formCategoria.js"
 import { initCategorias } from "./categorias.js"
 import { initCategoria } from "./categoria.js"
 
+import { initUsuarios } from "./usuarios.js"
+import { initUsuario } from "./usuario.js"
+import { initNewUsuario, initNewAdm } from "./formUsuario.js"
+
+
 const path = window.location.pathname
 
 if (path === "/adm/clientes/new") {
@@ -23,4 +28,14 @@ if (path === "/adm/categorias/new") {
   initCategorias()
 } else if (/^\/adm\/categorias\/\d+$/.test(path)) {
   initCategoria()
+}
+
+if (path === "/adm/usuarios") {
+  initUsuarios()
+} else if (path === "/adm/usuarios/new") {
+  initNewUsuario()
+} else if (path === "/adm/root/new") {
+  initNewAdm()
+} else if (/^\/adm\/usuarios\/\d+$/.test(path)) {
+  initUsuario()
 }

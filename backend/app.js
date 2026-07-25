@@ -7,6 +7,7 @@ const produtosRoutes = require("./routes/produtos.routes.js")
 const produtoImagensRoutes = require("./routes/produto-imagens.routes.js")
 const listasRoutes = require("./routes/listas.routes.js")
 const listaProdutoRoutes = require("./routes/lista-produto.routes.js")
+const usuariosRoutes = require("./routes/usuarios.routes.js")
 
 const app = express()
 
@@ -36,6 +37,8 @@ app.use("/api/produto_imagens", produtoImagensRoutes)
 app.use("/api/listas", listasRoutes)
 
 app.use("/api/lista-produtos", listaProdutoRoutes)
+
+app.use("/api/usuarios", usuariosRoutes)
 
 
 
@@ -145,6 +148,41 @@ app.get("/lista-produto/update/:id", (req, res) => {
 })
 
 
+
+
+app.get("/adm/usuarios", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "adm", "usuarios.html"))
+})
+
+app.get("/adm/usuarios/new", (req, res) => { // tem que ser merchant/listas/id
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+
+  res.sendFile(path.join(__dirname, "..", "frontend", "adm", "formNewUser.html"))
+})
+
+app.get("/adm/usuarios/:id", (req, res) => { // tem que ser merchant/listas/id
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+
+  res.sendFile(path.join(__dirname, "..", "frontend", "adm", "usuario.html"))
+})
+
+app.get("/adm/root/new", (req, res) => { // tem que ser merchant/listas/id
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+
+  res.sendFile(path.join(__dirname, "..", "frontend", "adm", "formNewUser.html"))
+})
 
 
 

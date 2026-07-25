@@ -5,6 +5,7 @@ const seedProdutos = require("./produtos.seed.js")
 const seedProdutoImagens = require("./produto-imagens.seed.js")
 const seedListas = require("./listas.seed.js")
 const seedListaProduto = require("./lista-produto.seed.js")
+const seedUsuarios = require("./usuarios.seed.js")
 
 async function run() {
     // await seedNicho()
@@ -14,6 +15,7 @@ async function run() {
     // await seedProdutoImagens()
     // await seedListas()
     // await seedListaProduto()
+    await seedUsuarios()
    
     console.log("Dados inseridos com sucesso")
     process.exit(0)
