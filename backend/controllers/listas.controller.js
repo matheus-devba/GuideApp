@@ -34,6 +34,39 @@ class ListasController {
             })
         }
     }
+    async criar(req, res) {
+        try {
+            const { nome, loja_id } = req.body
+            const lista = await ListasService.criar({ nome, loja_id });
+            return res.status(201).json(lista)
+        } catch (error) {
+             return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
+    async deletar(req, res) {
+        try {
+            const { id } = req.body
+            const lista = await ListasService.deletar(id);
+            return res.status(200).json(lista)
+        } catch (error) {
+             return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
+    async ocultar(req, res) {
+        try {
+            const { id } = req.body
+            const lista = await ListasService.ocultar(id);
+            return res.status(200).json(lista)
+        } catch (error) {
+             return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
 }
 
 

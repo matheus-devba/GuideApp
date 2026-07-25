@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../api/config.js";
+import {getListaID, renderProdutos, searchProductList, bindSelection, renderSelectedProducts} from "./formLista.shared.js"
 import { filterProducts } from "../components/searchProduto.js"
 
 
@@ -6,7 +7,80 @@ export async function initFormListaCreate() {
   const containerPrincipal = document.querySelector(".product-list-all");
   const containerSelected = document.querySelector(".selected-products");
 
-  const containerProducts = document.querySelector('.selected-products');
+  const selectedProductsState = []
 
+  const responseProdutos = await fetch(`${API_BASE_URL}/api/produtos/ativosAll`)
+  const produtosAtivos = await responseProdutos.json()
 
+  renderProdutos(produtosAtivos, containerPrincipal, selectedProductsState);
+    searchProductList(containerPrincipal, selectedProductsState, containerSelected);
+
+  bindSelection(
+    containerPrincipal,
+    containerSelected,
+    selectedProductsState
+  );
+
+  const form = document.querySelector('.newList-form')  
+  form.addEventListener("submit", (handleSubmitCreate)); //envia os produtos
+}
+
+async function handleSubmitCreate(event) {
+  // Evita recarregar a página
+  event.preventDefault();
+
+  // Pega o nome digitado no formulário
+  const nome = document.querySelector("#list-name").value.trim();
+
+  if (nome === "") {
+    alert("Defina o nome antes de criar a lista");
+    return;
+  }
+
+  // Pega apenas os produtos marcados
+  const produtos = Array.from(
+    document.querySelectorAll(".product-card-all .selectProduct:checked")
+  )
+    .map((checkbox) => Number(checkbox.closest(".product-card-all")?.dataset?.id))
+    .filter((id) => Number.isInteger(id) && id > 0);
+
+  try {
+    const loja_id = 3 //DEFAULT
+    const payload = {nome: nome, loja_id: loja_id}
+    // 1. Cria a lista e obtém o ID retornado pelo backend
+    const responseLista = await fetch(`${API_BASE_URL}/api/listas/merchant/new`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    if (!responseLista.ok) {
+      const erroNome = await responseLista.json().catch(() => ({}));
+      throw new Error(`HTTP ${responseLista.status} - ${erroNome.message || "Erro ao criar lista"}`);
+    }
+
+    // Extrai os dados da resposta (contendo o ID)
+    const dadosLista = await responseLista.json();
+    const idLista = dadosLista.id; // Garanta que seu backend retorna o campo 'id'
+
+    // 2. Se houver produtos, salva na rota de vinculação
+    if (produtos.length > 0) {
+      const responseProdutos = await fetch(`${API_BASE_URL}/api/lista-produtos/update/${idLista}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ produtos }),
+      });
+
+      if (!responseProdutos.ok) {
+        const erroProdutos = await responseProdutos.json().catch(() => ({}));
+        throw new Error(`HTTP ${responseProdutos.status} - ${erroProdutos.message || "Erro ao adicionar produtos"}`);
+      }
+    }
+
+    alert("Lista criada com sucesso!");
+    window.location.href = `/listas/merchant/${idLista}`;
+  } catch (error) {
+    console.error("Erro ao processar lista:", error);
+    alert(error.message || "Não foi possível criar a lista.");
+  }
 }

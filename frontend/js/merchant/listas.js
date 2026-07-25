@@ -28,7 +28,7 @@ export function initListas() {
   // }
  const actions = document.querySelector('.actions')
  actions.innerHTML = `
-    <a class="new-product-btn" href="${API_BASE_URL}/listas/new">Nova Lista +</a>
+    <a class="new-product-btn" href="${API_BASE_URL}/listas/merchant/new">Nova Lista +</a>
  `
 
 }
