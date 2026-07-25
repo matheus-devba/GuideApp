@@ -5,6 +5,10 @@ class ProdutosService {
         return await ProdutosRepository.buscarAtivos()
     }
     
+    async buscarDestaques () {
+        return await ProdutosRepository.buscarDestaques()
+    }
+    
     async buscarProduto (id) {
         return await ProdutosRepository.buscarProduto(id)
     }
@@ -31,6 +35,9 @@ class ProdutosService {
 
     async ativar (id) {
         return await ProdutosRepository.ativar(id)
+    }
+    async destacar (id, status) {
+        return await ProdutosRepository.destacar(id, status)
     }
 
     async deletar (id) {

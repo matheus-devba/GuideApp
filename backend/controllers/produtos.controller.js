@@ -12,6 +12,17 @@ class ProdutoController {
             })
         }
     }
+    async buscarDestaques(req, res) {
+        try {
+            const produtosDestaques = await ProdutosService.buscarDestaques()
+            return res.status(200).json(produtosDestaques)
+        }
+        catch (error) {
+            return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
     async buscarAtivosPorLoja(req, res) {
         try {
             const { id } = req.params 
@@ -95,6 +106,19 @@ class ProdutoController {
         try {
             const { id } = req.params
             const produto = await ProdutosService.ativar(id)
+            return res.status(200).json(produto)
+        }
+        catch (error) {
+            return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
+    async destacar(req, res) {
+        try {
+            const { id } = req.params
+            const { status } = req.body
+            const produto = await ProdutosService.destacar(id, status)
             return res.status(200).json(produto)
         }
         catch (error) {

@@ -11,6 +11,16 @@ class ProdutosRepository {
 
         return rows
     }
+    async buscarDestaques () {
+        // desestruturação do pool com {rows}
+        const { rows } = await pool.query(` 
+            SELECT * FROM produtos 
+            WHERE destaque = true
+            ORDER BY id desc
+        `)
+
+        return rows
+    }
 
     async buscarTodos() {
         const { rows } = await pool.query(`
@@ -155,6 +165,18 @@ class ProdutosRepository {
             `,
             
             [id]
+        )
+        return rows[0]
+    }
+    async destacar(id, status) {
+        const { rows } = await pool.query(`
+            UPDATE produtos
+            SET destaque = $2
+            WHERE id = $1
+            RETURNING *
+            `,
+            
+            [id, status]
         )
         return rows[0]
     }

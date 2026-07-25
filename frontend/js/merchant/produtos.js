@@ -8,12 +8,19 @@ export function initProdutos() {
   sectionActions.innerHTML = `
     <a class="new-product-btn" href="${API_BASE_URL}/produtos/merchant/new">Novo Produto +</a>
     <a class="hidden-product-btn" href="#">Produtos Ocultos</a>
+    <a class="destaques-product-btn" href="#">Produtos Destacados</a>
   `
 
   const btnHidden = document.querySelector('.hidden-product-btn')
 
   btnHidden.addEventListener('click', async() => {
     renderProdutos("hidden")
+  })
+
+  const btnDestaques = document.querySelector('.destaques-product-btn')
+
+  btnDestaques.addEventListener('click', async() => {
+    renderProdutos("destaques")
   })
 
   const menuItem = document.querySelector('.menu-item.produtos');

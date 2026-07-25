@@ -1,7 +1,6 @@
 import { initProdutos } from "../merchant/produtos.js";
 import { initPerfil } from "../merchant/perfil.js";
 import { initProduto } from "../merchant/produto.js";
-import { initFormLista } from "../merchant/formLista.js";
 import { initCreateProduto } from "./formProdutoCreate.js";
 import { initEditProduto } from "./formProdutoEdit.js";
 import { initListas } from "../merchant/listas.js";
@@ -56,9 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (path.includes("produto.html")) {
     initProduto();
   }
-  if (path.includes("formLista.html")) {
-    initFormLista();
-  }
+
   if (path.includes("formProduto.html")) {
     initFormProduto();
   }
