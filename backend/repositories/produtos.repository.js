@@ -41,11 +41,10 @@ class ProdutosRepository {
         return rows
     }
 
-    async buscarProduto(id) {
+    async buscarProduto(id) { //tirei o ativo = true
         const { rows } = await pool.query(`
             SELECT * FROM produtos
             WHERE id = $1
-            AND ativo = true
             `,
             [id]
         )

@@ -9,6 +9,8 @@ export async function initProduto() {
   await renderProduto(id);
   alternarStatusProduto()
   deleteItem()
+
+  
   
 }
 
@@ -17,9 +19,8 @@ export async function renderProduto (productId) {
   const container = document.querySelector(".product-page");
   if (!container) return;
 
-  const responseProdutos = await fetch(`${API_BASE_URL}/api/produtos/ativosAll`);
-  const products = await responseProdutos.json();
-  const productSelected = products.find((item) => item.id === Number(productId));
+  const responseProdutos = await fetch(`${API_BASE_URL}/api/produtos/${productId}`);
+  const productSelected = await responseProdutos.json();
 
   if (!productSelected) return;
 
@@ -65,11 +66,11 @@ export async function renderProduto (productId) {
     <hr>
 
     <div class="left-group">
-        <span class="promocional-price">R$ ${productSelected.preco_promocional} </span>
-        <span class="normal-price">R$ ${productSelected.preco_normal}</span>
+        <span class="promocional-price">${formatMoney(productSelected.preco_promocional)} </span>
+        <span class="normal-price">${formatMoney(productSelected.preco_normal)}</span>
             <div class="metrics-product-merchant">
                 <p>${productSelected.views} pessoas já viram</p>
-                <p>${productSelected.interested} pessoas estão interessadas</p>
+                
             </div>
     </div>
 

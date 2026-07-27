@@ -66,16 +66,7 @@
     gap: 8px;
 }
 
-/* Avaliações e métricas */
-.metrics-product-all .rate {
-    font-weight: bold;
-}
 
-
-.metrics-product-all .views {
-    font-size: 12px;
-    padding-left: 0;
-}
 
 /* Destaca o valor do produto */
 .price-group-all .promocional-price {

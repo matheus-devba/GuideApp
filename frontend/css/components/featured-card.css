@@ -64,3 +64,22 @@
     width: 100%;
     min-width: 0; /* Permite que o card encolha conforme a coluna do grid */
 }
+
+.metrics-product-all {
+    display: flex;
+    align-items: center;
+    gap: 4px; /* Espaço entre o ícone do olho e o texto de visualizações */
+    margin: 4px 0;
+}
+.metrics-product-all .eye {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    opacity: 0.6; /* Deixa o ícone sutil e elegante */
+}
+.metrics-product-all .views {
+    font-size: 12px;
+    margin: 0;
+    color: var(--muted);
+    line-height: 1;
+}

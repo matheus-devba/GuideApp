@@ -74,6 +74,7 @@ async function renderProdutos (filter, loja_id) {
                 <div class="product-info-all">
                 <h2>${product.nome}</h2>
                 <span class="metrics-product-all">
+                    <img class="eye" src="../assets/icons/eye.png">
                     <p class="views">${product.views}</p>
                 </span>
                 <div class="product-footer-all">
