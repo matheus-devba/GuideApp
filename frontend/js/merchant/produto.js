@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../api/config.js"
+import { getLojaId, insertNomeDaLoja, verificarUser } from "../services/requisicoesMerchant.js";
 import { formatMoney } from '../utils/formatMoney.js'
 
 
@@ -6,12 +7,19 @@ export async function initProduto() {
   const pathParts = window.location.pathname.split("/")
   const id = pathParts[pathParts.length - 1]
 
+  // 1. Executa a verificação inicial do usuário logado
+  const user = await verificarUser();
+  // Se não estiver logado, a função acima redireciona para o login e nós encerramos a execução aqui
+  if (!user) return; 
+
+  const lojaId = await getLojaId()
+
+  await insertNomeDaLoja(lojaId.id)
+
   await renderProduto(id);
   alternarStatusProduto()
   deleteItem()
 
-  
-  
 }
 
 

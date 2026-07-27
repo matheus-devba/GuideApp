@@ -1,4 +1,6 @@
 import { API_BASE_URL } from "../api/config.js";
+import { verificarUser, getLojaId, insertNomeDaLoja } from "../services/requisicoesMerchant.js";
+
 import {
   buildProdutoPayload,
   loadCategorias,
@@ -19,6 +21,15 @@ let gallery = null;
 export async function initCreateProduto() {
   const form = document.querySelector("#product-form");
   if (!form) return;
+
+  // 1. Executa a verificação inicial do usuário logado
+  const user = await verificarUser();
+  // Se não estiver logado, a função acima redireciona para o login e nós encerramos a execução aqui
+  if (!user) return; 
+
+  const lojaId = await getLojaId()
+
+  await insertNomeDaLoja(lojaId.id)
 
   // Carrega o select de categorias
   await loadCategorias();
