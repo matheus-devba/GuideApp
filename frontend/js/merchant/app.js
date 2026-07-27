@@ -9,6 +9,7 @@ import { initLista } from "./lista.js";
 import { initFormListaUpdate } from "./formListaUpdate.js";
 import { initFormListaCreate } from "./formListaCreate.js";
 import { initLogin } from "./login.js";
+import { initSearchLoja } from "./pesquisa.js";
 
 const path = window.location.pathname;
 
@@ -48,21 +49,15 @@ document.addEventListener("DOMContentLoaded", () => {
     initPerfil();
   }
 
-  if (path.includes("destaques.html")) {
-    initDestaques();
-  }
   if (path.includes("produtos.html")) {
     initProdutos();
   }
 
-  if (path.includes("produto.html")) {
-    initProduto();
-  }
-
-  if (path.includes("formProduto.html")) {
-    initFormProduto();
-  }
   if (path.includes("listas.html")) {
     initListas();
+  }
+
+  if (path.includes("pesquisa.html")) {
+    initSearchLoja();
   }
 });

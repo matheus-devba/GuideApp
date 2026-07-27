@@ -13,16 +13,16 @@
     <!--NavBar -->
     <div class="store-page">
         <header class="top-bar">
-             <button class="top-icon-btn" onclick="history.back()">
+             <a class="top-icon-btn" href="./produtos.html">
                 <img class="top-icon" src="../assets/icons/back.png" >
-            </button>
+             </a>
             
             <h1 class="store-title">Perfumaria Store</h1>
         </header>
 
         <section class="store-controls">
             <form class="store-search-form" action="./pesquisa.html" method="GET">
-                <input type="search" placeholder="Buscar produtos..." name="query">
+                <input type="search" placeholder="Buscar produtos..." name="query" value="" class="search">
                 <button type="submit" >Buscar</button>
             </form>
         </section>
@@ -38,5 +38,5 @@
                 <!-- Dados -->
             </section>
 </body>
-<script type="module" src="../js/consumer/app.js" defer></script>
+<script type="module" src="../js/merchant/app.js" defer></script>
 </html>
