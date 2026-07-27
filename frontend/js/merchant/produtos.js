@@ -1,7 +1,17 @@
 import { API_BASE_URL } from "../api/config.js"
 import { formatMoney } from '../utils/formatMoney.js'
+import { verificarUser, getLojaId } from "../services/verificarUser.js";
 
-export function initProdutos() {
+
+export async function initProdutos() {
+ // 1. Executa a verificação inicial do usuário logado
+  const user = await verificarUser();
+  // Se não estiver logado, a função acima redireciona para o login e nós encerramos a execução aqui
+  if (!user) return; 
+
+  const lojaId = await getLojaId()
+  console.log(lojaId)
+
   renderProdutos("ativosAll"); //resolver render e hidden
 
   const sectionActions = document.querySelector('.actions')
@@ -17,11 +27,6 @@ export function initProdutos() {
   //   renderProdutos("hidden")
   // })
 
-  // const btnDestaques = document.querySelector('.destaques-product-btn')
-
-  // btnDestaques.addEventListener('click', async() => {
-  //   renderProdutos("destaques")
-  // })
 
   const menuItem = document.querySelector('.menu-item.produtos');
   if (menuItem) {
@@ -30,7 +35,7 @@ export function initProdutos() {
 }
 
 
-async function renderProdutos (filter) {
+async function renderProdutos (filter, loja_id) {
   const container = document.querySelector(".product-list-all");
   if (!container) return;
 

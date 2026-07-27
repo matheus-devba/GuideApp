@@ -41,18 +41,19 @@ async function logar() {
                 body: JSON.stringify({ email, password })
             });
             const data = await response.json();
+
             if (!response.ok) {
                 throw new Error(data.message || "E-mail ou senha incorretos.");
             }
             // Salva os dados do lojista no localStorage
-            if (data.id) {
-                localStorage.setItem("merchant_id", JSON.stringify(data.id));
+            if (data.usuario.id) {
+                localStorage.setItem("merchant_id", JSON.stringify(data.usuario.id));
             }
-            if (data.loja_id) {
-                localStorage.setItem("merchant_loja_id", JSON.stringify(data.loja_id));
+            if (data.usuario.loja_id) {
+                localStorage.setItem("merchant_loja_id", JSON.stringify(data.usuario.loja_id));
             }
-            if (data.tipo) {
-                localStorage.setItem("merchant_tipo", JSON.stringify(data.tipo));
+            if (data.usuario.tipo) {
+                localStorage.setItem("merchant_tipo", JSON.stringify(data.usuario.tipo));
             }
             // Redireciona para o painel do lojista
             window.location.replace("./home.html");
