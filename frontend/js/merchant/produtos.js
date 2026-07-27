@@ -1,6 +1,6 @@
 import { API_BASE_URL } from "../api/config.js"
 import { formatMoney } from '../utils/formatMoney.js'
-import { verificarUser, getLojaId } from "../services/verificarUser.js";
+import { verificarUser, getLojaId, insertNomeDaLoja } from "../services/requisicoesMerchant.js";
 
 
 export async function initProdutos() {
@@ -10,22 +10,39 @@ export async function initProdutos() {
   if (!user) return; 
 
   const lojaId = await getLojaId()
-  console.log(lojaId)
 
-  renderProdutos("ativosAll"); //resolver render e hidden
+  await insertNomeDaLoja(lojaId.id)
+  renderProdutos("ativos", lojaId.id); //resolver render e hidden
 
-  const sectionActions = document.querySelector('.actions')
-  // sectionActions.innerHTML = `
-  //   <a class="new-product-btn" href="${API_BASE_URL}/produtos/merchant/new">Novo Produto +</a>
-  //   <a class="hidden-product-btn" href="#">Produtos Ocultos</a>
-  //   <a class="destaques-product-btn" href="#">Produtos Destacados</a>
-  // `
+  const sectionActions = document.querySelector('.btn-actions')
+  sectionActions.innerHTML = `
+    <a class="new" href="${API_BASE_URL}/produtos/merchant/new">Criar Produto</a>
 
-  // const btnHidden = document.querySelector('.hidden-product-btn')
+  `
+  const sectionFilter = document.querySelector('.filter')
+  sectionFilter.innerHTML = `
+            <a class="all" href="#">Todos</a>
+            <a class="hidden" href="#">Ocultos</a>
+            <a class="destaque" href="#">Destacados</a>
 
-  // btnHidden.addEventListener('click', async() => {
-  //   renderProdutos("hidden")
-  // })
+  `
+
+  const btnAll = document.querySelector('.all')
+
+  btnAll.addEventListener('click', async() => {
+    renderProdutos("ativos", lojaId.id)
+  })
+  const btnHidden = document.querySelector('.hidden')
+
+  btnHidden.addEventListener('click', async() => {
+    renderProdutos("ocultos", lojaId.id)
+  })
+
+  const btnDestaque = document.querySelector('.destaque')
+
+  btnDestaque.addEventListener('click', async() => {
+    renderProdutos("destaques", lojaId.id)
+  })
 
 
   const menuItem = document.querySelector('.menu-item.produtos');
@@ -39,7 +56,7 @@ async function renderProdutos (filter, loja_id) {
   const container = document.querySelector(".product-list-all");
   if (!container) return;
 
-  const response = await fetch(`${API_BASE_URL}/api/produtos/${filter}`);
+  const response = await fetch(`${API_BASE_URL}/api/produtos/${filter}/${loja_id}`);
   const products = await response.json();
 
   container.innerHTML = products

@@ -16,6 +16,9 @@ class ProdutosService {
     async buscarAtivosPorLoja (id_loja) {
         return await ProdutosRepository.buscarAtivosPorLoja(id_loja)
     }
+    async buscarDestaquesPorLoja (id_loja) {
+        return await ProdutosRepository.buscarDestaquesPorLoja(id_loja)
+    }
     
     async buscarOcultosPorLoja (id_loja) {
         return await ProdutosRepository.buscarOcultosPorLoja(id_loja)

@@ -113,9 +113,53 @@
     justify-content: space-between;
     gap: 8px;
 }
-.actions {
+/* ----------------------------------------- */
+/* 1. Layout Base & Filtros / Ações          */
+/* ----------------------------------------- */
+
+.btn-actions {
     display: flex;
-    margin-bottom: 15px;
+    gap: 12px;
+    margin: 16px 0;
+}
+
+/* Padronização de botões e links de ação */
+.btn-actions a, 
+.filter a {
+    text-decoration: none;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Estados visuais específicos */
+.new {
+    background-color: var(--primary);
+    color: #fff !important; /* Destaque para criação */
+    border-color: var(--primary) !important;
+}
+
+.new:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.filter {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.filter a:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(var(--primary-rgb), 0.05); /* Leve feedback de hover */
 }
 
 @media (max-width: 480px) {

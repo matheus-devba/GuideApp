@@ -8,8 +8,11 @@ router.put("/update/:id", ProdutoController.atualizar)
 router.get("/ativosAll", ProdutoController.buscarAtivos)
 router.get("/destaques", ProdutoController.buscarDestaques)
 router.get("/:id", ProdutoController.buscarProduto)
+
+router.get("/destaques/:id", ProdutoController.buscarDestaquesPorLoja)
 router.get("/ativos/:id", ProdutoController.buscarAtivosPorLoja)
 router.get("/ocultos/:id", ProdutoController.buscarOcultosPorLoja)
+
 router.patch("/hidden/:id", ProdutoController.desativar)
 router.patch("/active/:id", ProdutoController.ativar)
 router.patch("/destacar/:id", ProdutoController.destacar)

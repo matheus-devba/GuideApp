@@ -33,3 +33,10 @@ export async function getLojaId() {
         return null;
     }
 }
+
+export async function insertNomeDaLoja(id) {
+    const response = await fetch(`${API_BASE_URL}/api/lojas/${id}`)
+    const nome = await response.json()
+
+    document.querySelector('.store-title').innerHTML = nome.nome
+}

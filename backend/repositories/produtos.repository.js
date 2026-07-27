@@ -63,6 +63,17 @@ class ProdutosRepository {
         )
         return rows
     } 
+    async buscarDestaquesPorLoja(id_loja) {
+        const { rows } = await pool.query(`
+            SELECT * FROM produtos
+            WHERE loja_id = $1
+            AND destaque = true
+            ORDER BY id desc
+            `,
+            [id_loja]
+        )
+        return rows
+    } 
 
     async buscarOcultosPorLoja(id_loja) {
         const { rows } = await pool.query(`
@@ -76,6 +87,7 @@ class ProdutosRepository {
 
         return rows
     } 
+
 
     async criar(produto) {
         const { rows } = await pool.query(`
