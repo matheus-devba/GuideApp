@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Lojista - Guide</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="../css/merchant/login.css">
+</head>
+<body>
+    <main class="login-container">
+        <div class="login-card">
+            <header class="login-header">
+                <img class="login-logo" src="../assets/icons/icone-guide.png" alt="Logo Guide">
+                <h1 class="login-title">Painel do Lojista</h1>
+                <p class="login-subtitle">Gerencie sua loja, produtos e listas em um só lugar</p>
+            </header>
+
+            <form id="login-form" class="login-form">
+                <!-- Erro de login dinâmico -->
+                <div id="error-message" class="error-banner hidden">
+                    <span class="error-text">E-mail ou senha incorretos.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <div class="input-wrapper">
+                        <input type="email" id="email" name="email" placeholder="nome@sualoja.com" required autocomplete="email">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Senha de acesso</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" name="password" placeholder="Digite sua senha" required autocomplete="current-password">
+                        <button type="button" id="toggle-password" class="toggle-password-btn" aria-label="Mostrar senha">
+                            <img src="../assets/icons/eye.png" alt="Olho">
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember" name="remember">
+                        <span>Lembrar-me</span>
+                    </label>
+                    <!-- <a href="#" class="forgot-password">Esqueceu a senha?</a> -->
+                </div>
+
+                <button type="submit" id="btn-submit" class="btn-primary">
+                    <span class="btn-text">Entrar no Painel</span>
+                    <div class="loader hidden"></div>
+                </button>
+            </form>
+
+            <!-- <footer class="login-footer">
+                <p>Não tem uma conta lojista? <a href="#" class="signup-link">Solicitar acesso</a></p>
+            </footer> -->
+        </div>
+    </main>
+
+    <!-- JS Logic -->
+    <script type="module" src="../js/merchant/app.js" defer></script>
+</body>
+</html>

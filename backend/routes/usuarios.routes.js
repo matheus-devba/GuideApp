@@ -15,6 +15,6 @@ router.put("/update/:id", UsuariosController.editarUsuario)
 router.put("/update/:id", UsuariosController.editarUsuario) 
 router.delete("/delete/:id", UsuariosController.excluirUsuario) 
 
-
+router.post("/login", UsuariosController.login)
 
 module.exports = router

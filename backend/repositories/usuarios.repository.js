@@ -159,6 +159,15 @@ class UsuariosRepository {
         
         return rows[0]
     }
+
+    
+    async buscarPorEmail(email) { // PARA LOGIN
+        const { rows } = await pool.query(`
+            SELECT * FROM usuarios
+            WHERE email = $1
+        `, [email]);
+        return rows[0];
+    }
 }
 
 

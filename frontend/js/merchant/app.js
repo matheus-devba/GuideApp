@@ -8,6 +8,7 @@ import { initDestaques } from "../merchant/destaques.js";
 import { initLista } from "./lista.js";
 import { initFormListaUpdate } from "./formListaUpdate.js";
 import { initFormListaCreate } from "./formListaCreate.js";
+import { initLogin } from "./login.js";
 
 const path = window.location.pathname;
 
@@ -35,7 +36,9 @@ if (/^\/lista-produto\/update\/\d+$/.test(path)) {
   initFormListaUpdate()
 }
 
-
+if (path === '/merchant/login') {
+  initLogin()
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   const path = window.location.pathname;

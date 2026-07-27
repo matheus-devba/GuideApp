@@ -1,4 +1,5 @@
 const UsuariosService = require("../services/usuarios.service.js")
+const bcrypt = require("bcryptjs")
 
 class UsuariosController {
     async buscarTodos(req, res) {
@@ -116,6 +117,46 @@ class UsuariosController {
             
         }
     }
+
+    async login(req, res) {
+    try {
+        const { email, password } = req.body;
+
+        if (!email || !password) {
+            return res.status(400).json({ message: "E-mail e senha são obrigatórios." });
+        }
+
+        // Busca o usuário no banco pelo e-mail
+        // Importante: vamos usar o repositório diretamente ou através do service
+        const usuario = await UsuariosService.buscarPorEmail(email);
+
+        if (!usuario) {
+            return res.status(401).json({ message: "E-mail ou senha inválidos." });
+        }
+
+        if (!usuario.ativo) {
+            return res.status(403).json({ message: "Este usuário está desativado." });
+        }
+
+        // Compara a senha informada com o hash salvo no banco
+        const senhaValida = await bcrypt.compare(password, usuario.password_hash);
+
+        if (!senhaValida) {
+            return res.status(401).json({ message: "E-mail ou senha inválidos." });
+        }
+
+        // Remove a senha do objeto de retorno por segurança
+        delete usuario.password_hash;
+
+        return res.status(200).json({
+            message: "Login realizado com sucesso!",
+            usuario
+        });
+
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+}
 }
 
 module.exports = new UsuariosController();

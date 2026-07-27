@@ -181,7 +181,10 @@ app.get("/adm/usuarios/:id", (req, res) => { // tem que ser merchant/listas/id
 })
 
 
+app.get("/merchant/login", (req, res) => { 
 
+  res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "login.html"))
+})
 
 
 module.exports = app

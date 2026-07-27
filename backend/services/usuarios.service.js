@@ -36,6 +36,11 @@ class UsuariosService {
     async excluirUsuario(id) {
         return await UsuariosRepository.excluirUsuario(id)
     }
+
+    // LOGINN
+    async buscarPorEmail(email) {
+        return await UsuariosRepository.buscarPorEmail(email);
+    }
 }
 
 module.exports = new UsuariosService();
