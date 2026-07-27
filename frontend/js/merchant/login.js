@@ -41,6 +41,7 @@ async function logar() {
                 body: JSON.stringify({ email, password })
             });
             const data = await response.json();
+            console.log(data)
 
             if (!response.ok) {
                 throw new Error(data.message || "E-mail ou senha incorretos.");

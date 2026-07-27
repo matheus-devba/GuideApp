@@ -25,9 +25,19 @@ class ProdutoImagensRepository {
 
         return rows[0]
     }
- async criarImagens (produto_id, imagens) {
+  async criarImagens (produto_id, imagens) {
     const resultados = []
 
+    // 1. Busca a maior ordem já cadastrada para esse produto
+    const { rows: maxRows } = await pool.query(
+      `SELECT COALESCE(MAX(ordem), 0) as max_ordem FROM produto_imagens WHERE produto_id = $1`,
+      [produto_id]
+    );
+    
+    // Define a próxima ordem disponível
+    let proximaOrdem = Number(maxRows[0].max_ordem) + 1;
+
+    // 2. Insere as novas imagens incrementando a ordem a partir da última
     for (const imagem of imagens) {
       const { rows } = await pool.query(`
         INSERT INTO produto_imagens (
@@ -41,14 +51,24 @@ class ProdutoImagensRepository {
       `, [
         produto_id,
         imagem.url,
-        imagem.ordem
-      ])
+        proximaOrdem
+      ]);
 
-      resultados.push(rows[0])
+      proximaOrdem++;
+      resultados.push(rows[0]);
     }
 
-    return resultados
+    return resultados;
 }
+
+  async deletarPorUrl(produto_id, url) {
+    const { rows } = await pool.query(`
+      DELETE FROM produto_imagens 
+      WHERE produto_id = $1 AND url = $2
+      RETURNING *
+    `, [produto_id, url]);
+    return rows[0];
+  }
 }
 
 module.exports = new ProdutoImagensRepository();

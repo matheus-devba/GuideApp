@@ -12,6 +12,10 @@ class ProdutoImagensService {
     async criarImagens(produto_id, imagens) {
         return await ProdutoImagensRepository.criarImagens(produto_id, imagens)
   }
+
+    async deletarPorUrl(produto_id, url) {
+    return await ProdutoImagensRepository.deletarPorUrl(produto_id, url);
+  }
 }
 
 module.exports = new ProdutoImagensService();

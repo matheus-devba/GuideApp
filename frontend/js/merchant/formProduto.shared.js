@@ -1,6 +1,7 @@
 import { API_BASE_URL } from "../api/config.js";
 
-export const DEFAULT_LOJA_ID = 3;
+import { getLojaId } from "../services/requisicoesMerchant.js";
+
 
 /**
  * Pega o id do produto pela URL:
@@ -55,9 +56,10 @@ export async function loadCategorias(selectedId = "") {
  * Monta o payload do produto com os campos do formulário.
  * Esse payload serve tanto para criar quanto para editar.
  */
-export function buildProdutoPayload(lojaId = DEFAULT_LOJA_ID) {
+export async function buildProdutoPayload() {
+  const lojaId = await getLojaId()
   return {
-    loja_id: lojaId,
+    loja_id: lojaId.id,
     categoria_id: Number(document.querySelector("#categoria")?.value),
     nome: document.querySelector("#product-name")?.value?.trim() || "",
     descricao: document.querySelector("#product-description")?.value?.trim() || "",

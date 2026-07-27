@@ -14,7 +14,7 @@ const upload = require("../config/multer.js")
 router.post("/new/:id", upload.array("imagens", 5), ProdutoImagensController.criarImagens)
 router.get("/buscar_imagens/:id", ProdutoImagensController.buscarImagens)
 router.get("/buscar_imagem/:id", ProdutoImagensController.buscarPrimeiraImagem)
-
+router.delete("/delete/:id", ProdutoImagensController.deletarPorUrl);
 
 
 module.exports = router

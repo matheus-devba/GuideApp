@@ -6,7 +6,7 @@ export async function verificarUser() {
     const userTipo = localStorage.getItem("merchant_tipo");
     // Se não houver dados de login no localStorage, impede o acesso e redireciona
     if (!userId && !userTipo) {
-        window.location.replace("./login.html");
+        window.location.replace(`${API_BASE_URL}/merchant/login`);
         return null;
     }
     try {

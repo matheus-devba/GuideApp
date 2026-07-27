@@ -1,13 +1,14 @@
 import { API_BASE_URL } from "../api/config.js";
-import { verificarUser, getLojaId, insertNomeDaLoja } from "../services/requisicoesMerchant.js";
+import { verificarUser, insertNomeDaLoja, getLojaId } from "../services/requisicoesMerchant.js";
 
 import {
   buildProdutoPayload,
   loadCategorias,
   setupImageGallery,
-  uploadProdutoImagens,
-  DEFAULT_LOJA_ID,
+  uploadProdutoImagens
 } from "./formProduto.shared.js";
+
+
 
 let gallery = null;
 
@@ -34,6 +35,7 @@ export async function initCreateProduto() {
   // Carrega o select de categorias
   await loadCategorias();
 
+
   // Galeria começa vazia no modo criação
   gallery = setupImageGallery({
     containerSelector: ".list-grid",
@@ -57,7 +59,9 @@ async function handleCreateSubmit(event) {
   event.preventDefault();
 
   try {
-    const payload = buildProdutoPayload(DEFAULT_LOJA_ID);
+    
+    const payload = await buildProdutoPayload();
+    console.log(payload)
 
     if (!payload.nome || !payload.categoria_id || Number.isNaN(payload.preco_normal)) {
       alert("Preencha os campos obrigatórios.");

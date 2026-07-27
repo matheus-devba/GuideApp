@@ -7,10 +7,13 @@ import {
   loadCategorias,
   setupImageGallery,
   uploadProdutoImagens,
-  DEFAULT_LOJA_ID,
 } from "./formProduto.shared.js";
+import { verificarUser, insertNomeDaLoja, getLojaId } from "../services/requisicoesMerchant.js";
+
 
 let gallery = null;
+let imagensIniciaisUrls = []; // Guardará as URLs originais da loja
+
 
 /**
  * Inicializa a tela de edição de produto.
@@ -29,6 +32,16 @@ export async function initEditProduto() {
   const produtoId = getProdutoIdFromPath();
   if (!produtoId) return;
 
+  // 1. Executa a verificação inicial do usuário logado
+  const user = await verificarUser();
+  // Se não estiver logado, a função acima redireciona para o login e nós encerramos a execução aqui
+  if (!user) return; 
+
+  const lojaId = await getLojaId()
+
+  await insertNomeDaLoja(lojaId.id)
+
+
   const produto = await fetchProduto(produtoId);
 
   if (!produto) {
@@ -39,16 +52,15 @@ export async function initEditProduto() {
   preencherCampos(produto);
   await loadCategorias(produto.categoria_id);
 
-  const imagens = await fetchProdutoImagens(produtoId);
-
-  // No modo edição, a galeria começa com as imagens já cadastradas
+ const imagens = await fetchProdutoImagens(produtoId);
+  
+  // Salva as URLs iniciais vindas do banco
+  imagensIniciaisUrls = imagens.map((img) => img.url);
   gallery = setupImageGallery({
     containerSelector: ".list-grid",
-    initialItems: imagens.map((img) => img.url),
+    initialItems: [...imagensIniciaisUrls],
     maxFiles: 5,
   });
-
-  // Evita duplicar submit
   if (!form.dataset.submitBound) {
     form.dataset.submitBound = "true";
     form.addEventListener("submit", (event) => handleEditSubmit(event, produtoId));
@@ -89,28 +101,31 @@ function preencherCampos(produto) {
  */
 async function handleEditSubmit(event, produtoId) {
   event.preventDefault();
-
   try {
-    const payload = buildProdutoPayload(DEFAULT_LOJA_ID);
-
+    const payload = await buildProdutoPayload();
+    // 1. Atualiza dados do produto (nome, preço, etc.)
     const response = await fetch(`${API_BASE_URL}/api/produtos/update/${produtoId}`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
-
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
-    }
-
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const produtoAtualizado = await response.json();
-
-    // Se o usuário adicionou novas imagens, elas entram aqui
-    await uploadProdutoImagens(produtoId, gallery?.getItems?.() || []); //referência ao multer
-
-    alert("Produto atualizado com sucesso!");
+    // 2. Pega todos os itens atuais que estão visíveis na galeria
+    const itensAtuais = gallery?.getItems?.() || [];
+    // 3. Descobre quais URLs foram removidas pelo usuário
+    const urlsRemovidas = imagensIniciaisUrls.filter(url => !itensAtuais.includes(url));
+    // 4. Deleta do banco cada imagem antiga que foi removida da tela
+    for (const url of urlsRemovidas) {
+      await fetch(`${API_BASE_URL}/api/produto_imagens/delete/${produtoId}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url }),
+      });
+    }
+    // 5. Envia as fotos NOVAS adicionadas (arquivos do tipo File)
+    await uploadProdutoImagens(produtoId, itensAtuais);
+    alert("Produto e imagens atualizados com sucesso!");
     window.location.href = `/produtos/${produtoAtualizado.id || produtoId}`;
   } catch (error) {
     console.error("Erro ao atualizar produto:", error);
