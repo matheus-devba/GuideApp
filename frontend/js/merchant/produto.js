@@ -84,7 +84,7 @@ export async function renderProduto (productId) {
 
     <div class="options-group">  
       <a class="product-options edit" href="${API_BASE_URL}/produtos/update/${productSelected.id}">Editar</a>
-      <a class="product-options muted" id="muted" href="#">Ocultar</a>
+      ${productSelected.ativo == true ? `<a class="product-options muted" id="muted" href="#">Ocultar</a>`: `<a class="product-options activate" id="muted" href="#">Ativar</a>` }
       <a class="product-options delete" id="delete" href="#">Excluir</a>
     </div>
   `
@@ -163,11 +163,14 @@ async function alternarStatusProduto() {
         alert('Produto ativado com sucesso!');
         btnMuted.textContent = 'Ocultar Produto';
         btnMuted.className = 'product-options muted';
+
       } else {
         alert('Produto oculto com sucesso!');
         btnMuted.textContent = 'Ativar Produto';
         btnMuted.className = 'product-options activate';
       }
+
+      window.location.href = `${API_BASE_URL}/merchant/produtos.html`
 
     } catch (error) {
       console.error(`Erro ao processar requisição (${url}):`, error);

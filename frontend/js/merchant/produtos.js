@@ -52,7 +52,7 @@ export async function initProdutos() {
 }
 
 
-async function renderProdutos (filter, loja_id) {
+export async function renderProdutos (filter, loja_id) {
   const container = document.querySelector(".product-list-all");
   if (!container) return;
 
