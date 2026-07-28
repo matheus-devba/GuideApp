@@ -2,6 +2,6 @@
   "rewrites": [
     { "source": "/lojas", "destination": "/consumer/lojas.html" },
     { "source": "/loja", "destination": "/consumer/loja.html" },
-    { "source": "/clientes", "destination": "/adm/clientes.html" }
+    { "source": "/adm/clientes", "destination": "/adm/clientes.html" }
   ]
 }
