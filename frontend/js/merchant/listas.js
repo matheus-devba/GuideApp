@@ -1,31 +1,39 @@
 import { API_BASE_URL } from "../api/config.js"
 import { filterLists, searchRenderLists } from "../components/searchLista.js";
-import { lists } from "../mocks/listas_db.js"
+import { verificarUser, getLojaId, insertNomeDaLoja, verificacaoUsuario } from "../services/requisicoesMerchant.js";
 
 
 
-export function initListas() {
-  // const params = new URLSearchParams(window.location.search);
-  // const listId = params.get("id");
-  // const listQuery = params.get("query");
+export async function initListas() {
+  const params = new URLSearchParams(window.location.search);
+  const listQuery = params.get("query");
 
   const menuItem = document.querySelector('.menu-item.listas');
   if (menuItem) {
     menuItem.classList.add('selected-item');
   }
+  const verificar = await verificacaoUsuario();
+  if (!verificar) return; // Se for false (não logado), para a execução aqui.
+
+  const lojaId = await getLojaId()
+
+  const responseLists = await fetch(`${API_BASE_URL}/api/listas/merchant/lojas/${lojaId.id}`);
+  const listas = await responseLists.json();
 
   // const linkPrefix = "../merchant/listas.html?id=";
-  // const containerSelector = ".product-list-all";
+  const containerSelector = ".product-list-all";
 
-  renderLists();
+  await renderLists(lojaId);
 
-  // if (listQuery) {
-  //   const awnserList = filterLists(listQuery)
-  //   const container = document.querySelector(containerSelector)
-  //   const search = document.querySelector(".search").value = listQuery
-  //   container.innerHTML = ""
-  //   searchRenderLists(listQuery);
-  // }
+  if (listQuery) {
+    // const awnserList = filterLists(listQuery)
+    const container = document.querySelector(containerSelector)
+    const search = document.querySelector(".search").value = listQuery
+    container.innerHTML = ""
+    await searchRenderLists(listQuery, listas);
+  }
+
+
  const actions = document.querySelector('.actions')
  actions.innerHTML = `
     <a class="new-product-btn" href="${API_BASE_URL}/listas/merchant/new">Nova Lista +</a>
@@ -33,12 +41,13 @@ export function initListas() {
 
 }
 
-async function renderLists() {
+async function renderLists(lojaId) {
   const container = document.querySelector(".product-list-all");
   if (!container) return;
 
-  const responseListas = await fetch(`${API_BASE_URL}/api/listas`);
+  const responseListas = await fetch(`${API_BASE_URL}/api/listas/merchant/lojas/${lojaId.id}`);
   const listas = await responseListas.json();
+
 
   const html = await Promise.all(
     listas.map(async (list) => {

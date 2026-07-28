@@ -12,6 +12,9 @@ class ListasService {
 
         return lista
     }
+    async buscarListaPorLojaId (loja_id) {
+        return await ListasRepository.buscarListaPorLojaId(loja_id)
+    }
     async atualizar (id, nome ) {
         const lista = await ListasRepository.atualizar(id, nome )
         return lista

@@ -8,7 +8,7 @@ import {
   setupImageGallery,
   uploadProdutoImagens,
 } from "./formProduto.shared.js";
-import { verificarUser, insertNomeDaLoja, getLojaId } from "../services/requisicoesMerchant.js";
+import { verificarUser, insertNomeDaLoja, getLojaId, verificacaoUsuario } from "../services/requisicoesMerchant.js";
 
 
 let gallery = null;
@@ -32,15 +32,8 @@ export async function initEditProduto() {
   const produtoId = getProdutoIdFromPath();
   if (!produtoId) return;
 
-  // 1. Executa a verificação inicial do usuário logado
-  const user = await verificarUser();
-  // Se não estiver logado, a função acima redireciona para o login e nós encerramos a execução aqui
-  if (!user) return; 
-
-  const lojaId = await getLojaId()
-
-  await insertNomeDaLoja(lojaId.id)
-
+  const verificar = await verificacaoUsuario();
+  if (!verificar) return; // Se for false (não logado), para a execução aqui.
 
   const produto = await fetchProduto(produtoId);
 

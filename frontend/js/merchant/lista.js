@@ -1,11 +1,20 @@
+import { API_BASE_URL } from "../api/config.js"
+import { filterLists, searchRenderLists } from "../components/searchLista.js";
+import { verificarUser, getLojaId, insertNomeDaLoja, verificacaoUsuario } from "../services/requisicoesMerchant.js";
+
+
 const pathParts = window.location.pathname.split("/")
 const idLista = Number(pathParts[pathParts.length - 1])
 const optionsContainer = document.querySelector('.options-group')
-import { API_BASE_URL } from "../api/config.js"
+
 
 export async function initLista() {
   // Só continua se a URL trouxer um ID válido
   if (!Number.isInteger(idLista)) return
+
+  const verificar = await verificacaoUsuario();
+  if (!verificar) return; // Se for false (não logado), para a execução aqui.
+  
 
   // Aguarda a lista renderizar para montar as opções e ligar o botão
   await renderLista(idLista)

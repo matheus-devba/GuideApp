@@ -1,6 +1,5 @@
 import { API_BASE_URL } from "../api/config.js";
-
-import { getLojaId } from "../services/requisicoesMerchant.js";
+import { verificarUser, getLojaId, insertNomeDaLoja } from "../services/requisicoesMerchant.js";
 
 
 /**

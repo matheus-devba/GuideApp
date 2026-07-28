@@ -1,10 +1,14 @@
 import { API_BASE_URL } from "../api/config.js";
 import {getListaID, renderProdutos, searchProductList, bindSelection, renderSelectedProducts} from "./formLista.shared.js"
 import { filterProducts } from "../components/searchProduto.js"
+import { verificacaoUsuario } from "../services/requisicoesMerchant.js";
 
 
 
 export async function initFormListaUpdate() {
+  const verificar = await verificacaoUsuario();
+  if (!verificar) return; // Se for false (não logado), para a execução aqui.
+
   const containerPrincipal = document.querySelector(".product-list-all");
   const containerSelected = document.querySelector(".selected-products");
   const idLista = getListaID()

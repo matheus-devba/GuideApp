@@ -11,7 +11,7 @@ export function renderProdutos(productsList, container, selectedState) {
   container.innerHTML = productsList
     .map(
       (product) => `
-        <a class="product-card-all" data-id="${product.id}" href="../merchant/produto.html?id=${product.id}">
+        <a class="product-card-all" data-id="${product.id}" href="${API_BASE_URL}/produtos/${product.id}">
           <input 
             type="checkbox" 
             class="selectProduct"
