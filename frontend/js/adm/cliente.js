@@ -18,7 +18,7 @@ async function renderCliente(id) {
         const container = document.querySelector(".client-form")
         if(!container) return
 
-        const innerHTMLClient = insertDataClient(clientData)
+        const innerHTMLClient =  insertDataClient(clientData)
         container.innerHTML = innerHTMLClient
     } catch (error) {
         console.error("Erro ao busca loja do servidor:", error);
@@ -26,7 +26,8 @@ async function renderCliente(id) {
 
 }
 
-function insertDataClient(data) {
+ function insertDataClient(data) {
+
     return `
         <div class="form-group">
             <label>Nome da Loja</label>
@@ -47,9 +48,9 @@ function insertDataClient(data) {
         <div class="form-group">
             <label>Nicho</label>
             <select id="nicho">
-                <option value="${data.nicho}">${data.nicho}</option>
-                <option value="Moda" id="moda" name="moda">Moda</option>
-                <option value="Cosméticos" id="cosmeticos" name="cosmeticos">Cosméticos</option>
+                <option value="${data.nicho_id}">${data.nicho_id}</option>
+                <option value="1" id="moda" name="moda">Moda</option>
+                <option value="2" id="cosmeticos" name="cosmeticos">Cosméticos</option>
             </select>
         </div>
 
@@ -116,7 +117,7 @@ function editClient(id) {
         formData.append("nome", document.querySelector("#store-name").value)
         formData.append("endereco", document.querySelector("#endereco").value)
         formData.append("telefone", document.querySelector("#telefone").value)
-        formData.append("nicho", document.querySelector("#nicho").value)
+        formData.append("nicho_id", document.querySelector("#nicho").value)
         formData.append("descricao", document.querySelector("#descricao").value)
         formData.append("whatsapp", document.querySelector("#whatsapp").value)
         formData.append("ativo", document.querySelector("#ativo").value)

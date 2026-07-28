@@ -17,6 +17,15 @@ class CategoriasRepository {
             
         return rows[0]
     }
+    async buscarPorNicho(id) {
+        const { rows } = await pool.query(`
+            SELECT * FROM categorias
+            WHERE nicho_id = $1
+            ORDER BY nome asc
+            `,[id])
+            
+        return rows
+    }
 
     async criarCategoria(categoria) {
         const { rows } = await pool.query(`

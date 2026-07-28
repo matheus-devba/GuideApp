@@ -14,6 +14,15 @@ class CategoriasService {
 
         return categoria
     }
+    async buscarPorNicho(id) {
+        const categorias = await CategoriasRepository.buscarPorNicho(id)
+
+        if (!categorias) {
+            throw new Error ("Categoria não encontrada")
+        }
+
+        return categorias
+    }
 
     async criar(dados) {
         return await CategoriasRepository.criarCategoria(dados)

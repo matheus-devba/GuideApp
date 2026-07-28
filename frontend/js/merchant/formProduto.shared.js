@@ -16,17 +16,26 @@ export function getProdutoIdFromPath() {
  * Se receber selectedId, já deixa a categoria marcada.
  */
 export async function loadCategorias(selectedId = "") {
+  const lojaId = await getLojaId()
+  const responseLoja = await fetch(`${API_BASE_URL}/api/lojas/${lojaId.id}`)
+  const loja = await responseLoja.json()
+
+
+
   const select = document.querySelector("#categoria");
   if (!select) return [];
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api/categorias`);
+    // const response = await fetch(`${API_BASE_URL}/api/categorias`);
+      const responseNicho = await fetch(`${API_BASE_URL}/api/categorias/nicho/${loja.nicho_id}`)
 
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
+    if (!responseNicho.ok) {
+      throw new Error(`HTTP ${responseNicho.status}`);
     }
 
-    const categorias = await response.json();
+    // const categorias = await response.json();
+    const categorias = await responseNicho.json()
+
 
     select.innerHTML = `
       <option value="">Selecione uma categoria</option>
