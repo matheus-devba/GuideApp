@@ -1,6 +1,7 @@
 {
   "rewrites": [
     { "source": "/lojas", "destination": "/consumer/lojas.html" },
-    { "source": "/loja", "destination": "/consumer/loja.html" }
+    { "source": "/loja", "destination": "/consumer/loja.html" },
+    { "source": "/merchant", "destination": "/merchant/home.html" }
   ]
 }
