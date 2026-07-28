@@ -25,6 +25,9 @@ class LojaService{
     async atualizar (id, dados) {
         return await LojaRepository.atualizar(id, dados)
     }
+    async atualizarPerfil (id, dados) {
+        return await LojaRepository.atualizarPerfil(id, dados)
+    }
 
     async desativar (id) {
         const loja = await LojaRepository.buscarPorId(id)

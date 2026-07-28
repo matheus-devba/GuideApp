@@ -28,6 +28,16 @@ export async function getLojaId() {
     return { id: lojaId };
 }
 
+export async function getUserId() {
+    const userId = localStorage.getItem("merchant_id");
+    
+    if (!userId) {
+        window.location.replace(`${API_BASE_URL}/merchant/login`); // Usando URL absoluta do config
+        return null;
+    }
+    return { id: userId };
+}
+
 export async function insertNomeDaLoja(id) {
     const response = await fetch(`${API_BASE_URL}/api/lojas/${id}`);
     const nome = await response.json();

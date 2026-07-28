@@ -108,6 +108,30 @@ class LojaRepository {
         return rows[0]
     }
 
+    async atualizarPerfil (id, loja) {
+    const { rows } = await pool.query(`
+        UPDATE lojas 
+        SET 
+            nome = $2,
+            logo_url = $3,
+            banner_url = $4,
+            whatsapp = $5,
+            updated_at = CURRENT_TIMESTAMP
+        WHERE id = $1
+        RETURNING *;
+    `,
+    [
+        id,               
+        loja.nome,       
+        loja.logo_url,    
+        loja.banner_url,  
+        loja.whatsapp
+    ]
+
+    );
+        return rows[0]
+    }
+
     async desativar (id) {
         const { rows } = await pool.query(`
             UPDATE lojas 

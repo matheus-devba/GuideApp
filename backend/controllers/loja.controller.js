@@ -77,6 +77,29 @@ class LojaController {
             })
         }
     }
+    
+    async atualizarPerfil(req, res) {
+        try {
+            const { id } = req.params
+            const { body, files } = req
+            const current = await LojaService.buscarPorId(id) // para pegar a imagem atual (caso ela não for alterada para nao dá null)
+
+            const logoFile = files?.logo?.[0]
+            const bannerFile = files?.banner?.[0]
+
+            const loja = await LojaService.atualizarPerfil(id, {
+            ...body,
+            logo_url: logoFile ? `/uploads/logo/${logoFile.filename}` : current.logo_url,
+            banner_url: bannerFile ? `/uploads/banners/${bannerFile.filename}` : current.banner_url,
+            })
+
+            return res.status(200).json(loja)
+        } catch (error) {
+            return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
 
     async ocultar(req, res) {
         try {

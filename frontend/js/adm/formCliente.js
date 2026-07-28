@@ -59,7 +59,7 @@ function createClient() {
 
 
 
-function setImagePreview() {
+export function setImagePreview() {
     const logoInput = document.getElementById("logo-file")
     const bannerInput = document.getElementById("banner-file")
 

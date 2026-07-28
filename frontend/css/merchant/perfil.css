@@ -9,6 +9,7 @@
 @import url("../reset.css");
 @import url("../consumer/loja.css");
 @import url("../merchant/formProduto.css");
+@import url("../adm/formCliente.css");
 
 .group-menu {
     display: flex;
