@@ -67,6 +67,7 @@ class ProdutosRepository {
             SELECT * FROM produtos
             WHERE loja_id = $1
             AND destaque = true
+            AND ativo = true
             ORDER BY id desc
             `,
             [id_loja]

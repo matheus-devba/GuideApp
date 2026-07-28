@@ -26,6 +26,20 @@ class CategoriasRepository {
             
         return rows
     }
+    
+    async buscarPorLoja(loja_id) {
+        const { rows } = await pool.query(`
+            SELECT DISTINCT c.*
+            FROM categorias c
+            INNER JOIN produtos p ON p.categoria_id = c.id
+            WHERE p.loja_id = $1 
+              AND p.ativo = true 
+              AND c.ativo = true
+            ORDER BY c.nome ASC;
+        `, [loja_id]);
+            
+        return rows;
+    }
 
     async criarCategoria(categoria) {
         const { rows } = await pool.query(`

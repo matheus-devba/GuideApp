@@ -40,6 +40,19 @@ class CategoriasController {
         }
   
     }
+    async buscarPorLoja(req, res) {
+        try {
+            const { id } = req.params
+            const categorias = await CategoriaService.buscarPorLoja(id)
+            return res.status(200).json(categorias)
+        }
+        catch (error) {
+            return res.status(404).json({
+                message: error.message
+            })
+        }
+  
+    }
 
     async criar(req, res) {
         try {

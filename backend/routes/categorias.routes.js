@@ -12,6 +12,7 @@ router.put("/update/:id", upload.fields([
 ]), CategoriasController.atualizar)
 
 router.get("/", CategoriasController.buscarCategorias)
+router.get("/lojas/:id", CategoriasController.buscarPorLoja)
 router.get("/:id", CategoriasController.buscarPorId)
 router.get("/nicho/:id", CategoriasController.buscarPorNicho)
 router.patch("/delete/:id", CategoriasController.deletar)

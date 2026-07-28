@@ -11,35 +11,40 @@ import { initLojas } from "../consumer/lojas.js";
 // if (path.startsWith("/lojas/")) {
 //   initLoja()
 // }
+const path = window.location.pathname;
 
-document.addEventListener("DOMContentLoaded", () => {
-  const path = window.location.pathname;
+ if (/^\/lojas\/\d+$/.test(path)) {
+  initLoja()
+}
 
-  if (path.includes("lojas")) {
-    initLojas()
-  }
-  if (path.includes("loja.html")) {
-    initLoja();
-  }
+// document.addEventListener("DOMContentLoaded", () => {
+//   const path = window.location.pathname;
 
-  if (path.includes("lista.html")) {
-    initLista();
-  }
+//   if (path.includes("lojas")) {
+//     initLojas()
+//   }
+//   if (path.includes("loja.html")) {
+//     initLoja();
+//   }
 
-  if (path.includes("destaques.html")) {
-    initDestaques();
-  }
-  if (path.includes("produtos.html")) {
-    initProdutos();
-  }
+//   if (path.includes("lista.html")) {
+//     initLista();
+//   }
 
-  if (path.includes("categoria.html")) {
-    initCategoria();
-  }
-  if (path.includes("produto.html")) {
-    initProduto();
-  }
-  if (path.includes("pesquisa.html")) {
-    initSearch();
-  }
-});
+//   if (path.includes("destaques.html")) {
+//     initDestaques();
+//   }
+//   if (path.includes("produtos.html")) {
+//     initProdutos();
+//   }
+
+//   if (path.includes("categoria.html")) {
+//     initCategoria();
+//   }
+//   if (path.includes("produto.html")) {
+//     initProduto();
+//   }
+//   if (path.includes("pesquisa.html")) {
+//     initSearch();
+//   }
+// });
