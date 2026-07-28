@@ -115,7 +115,7 @@ app.get("/produtos/update/:id", (req, res) => {
 })
 
 
-app.get("/produtos/:id", (req, res) => { // tem que ser merchant/produtos/id
+app.get("/produtos/merchant/:id", (req, res) => { // tem que ser merchant/produtos/id
   const { id } = req.params
 
   if (!/^\d+$/.test(id)) {

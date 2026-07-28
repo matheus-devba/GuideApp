@@ -21,7 +21,7 @@ if (path === "/produtos/merchant/new") {
   initEditProduto()
 }
 
-else if (/^\/produtos\/\d+$/.test(path)) {
+else if (/^\/produtos\/merchant\/\d+$/.test(path)) {
   initProduto()
 }
 
