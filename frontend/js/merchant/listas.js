@@ -56,7 +56,7 @@ async function renderLists(lojaId) {
       );
       const produtos = await responseProdutos.json();
       
-      if(produtos.length < 1) return //caso nao tiver produtos (mas posso colocar um <=)
+      // if(produtos.length < 1) return //caso nao tiver produtos (mas posso colocar um <=)
 
 
       const produtoBack = produtos[0];

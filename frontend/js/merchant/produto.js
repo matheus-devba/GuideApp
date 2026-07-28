@@ -71,7 +71,7 @@ export async function renderProduto (productId) {
         <span class="promocional-price">${formatMoney(productSelected.preco_promocional)} </span>
         <span class="normal-price">${formatMoney(productSelected.preco_normal)}</span>
             <div class="metrics-product-merchant">
-                <p>${productSelected.views} pessoas já viram</p>
+                <p hidden>${productSelected.views} pessoas já viram</p>
                 
             </div>
     </div>

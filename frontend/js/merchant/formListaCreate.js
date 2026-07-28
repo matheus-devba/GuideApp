@@ -17,7 +17,7 @@ export async function initFormListaCreate() {
   const produtosAtivos = await responseProdutos.json()
 
   renderProdutos(produtosAtivos, containerPrincipal, selectedProductsState);
-    searchProductList(containerPrincipal, selectedProductsState, containerSelected);
+  searchProductList(containerPrincipal, selectedProductsState, containerSelected);
 
   bindSelection(
     containerPrincipal,
@@ -48,8 +48,12 @@ async function handleSubmitCreate(event) {
     .map((checkbox) => Number(checkbox.closest(".product-card-all")?.dataset?.id))
     .filter((id) => Number.isInteger(id) && id > 0);
 
+  if (produtos.length < 2 ) {
+    alert("Adicione ao menos 2 produtos")
+    return
+  }
+
   try {
-    const loja_id = 3 //DEFAULT
     const payload = {nome: nome, loja_id: loja_id}
     // 1. Cria a lista e obtém o ID retornado pelo backend
     const responseLista = await fetch(`${API_BASE_URL}/api/listas/merchant/new`, {

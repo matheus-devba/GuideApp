@@ -1,6 +1,7 @@
 import { API_BASE_URL } from "../api/config.js"
 import { filterLists, searchRenderLists } from "../components/searchLista.js";
 import { verificarUser, getLojaId, insertNomeDaLoja, verificacaoUsuario } from "../services/requisicoesMerchant.js";
+import { initListas } from "./listas.js";
 
 
 const pathParts = window.location.pathname.split("/")
@@ -45,7 +46,7 @@ async function renderLista(lista_id) {
             <div class="product-info-all">
               <h2>${product.nome}</h2>
               <span class="metrics-product-all">
-                <p class="views">${product.views || 0}</p>
+                <p class="views" hidden>${product.views || 0}</p>
               </span>
               <div class="product-footer-all">
                 <div class="price-group-all">
@@ -97,6 +98,7 @@ function bindDeleteItem() {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         alert('Lista excluída com sucesso!');
         history.back()
+        initListas()
       } catch (error) {
         console.error("Erro ao excluir lista:", error);
         alert('Não foi possível excluir lista. Tente novamente mais tarde.');
