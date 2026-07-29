@@ -11,7 +11,7 @@ export function renderProdutos(productsList, container, selectedState) {
   container.innerHTML = productsList
     .map(
       (product) => `
-        <a class="product-card-all" data-id="${product.id}" href="${API_BASE_URL}/produtos/${product.id}">
+        <a class="product-card-all" data-id="${product.id}" href="${API_BASE_URL}/produtos/merchant/${product.id}">
           <input 
             type="checkbox" 
             class="selectProduct"
@@ -108,7 +108,7 @@ export async function renderSelectedProducts(selectedState, container) {
       if (!produtos) return ""; // Evita renderizar cards vazios caso o produto seja deletado
 
       return `
-        <a class="product-card-selected" data-id="${produtos.id}" href="../merchant/produto.html?id=${produtos.id}">
+        <a class="product-card-selected" data-id="${produtos.id}" href="${API_BASE_URL}/produtos/merchant/${produtos.id}">
           <input type="checkbox" class="selectProduct" checked>
           <p class="selectText">Selecionado</p>
           <img src="${API_BASE_URL}/api/produto_imagens/buscar_imagem/${produtos.id}">

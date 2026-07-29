@@ -17,7 +17,7 @@ export async function initListas() {
 
   const lojaId = await getLojaId()
 
-  const responseLists = await fetch(`${API_BASE_URL}/api/listas/merchant/lojas/${lojaId.id}`);
+  const responseLists = await fetch(`${API_BASE_URL}/api/listas/lojas/${lojaId.id}`);
   const listas = await responseLists.json();
 
   // const linkPrefix = "../merchant/listas.html?id=";
@@ -45,7 +45,7 @@ async function renderLists(lojaId) {
   const container = document.querySelector(".product-list-all");
   if (!container) return;
 
-  const responseListas = await fetch(`${API_BASE_URL}/api/listas/merchant/lojas/${lojaId.id}`);
+  const responseListas = await fetch(`${API_BASE_URL}/api/listas/lojas/${lojaId.id}`);
   const listas = await responseListas.json();
 
 

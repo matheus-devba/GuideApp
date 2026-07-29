@@ -7,6 +7,7 @@ export async function initProduto() {
   const pathParts = window.location.pathname.split("/")
   const id = pathParts[pathParts.length - 1]
 
+
   const verificar = await verificacaoUsuario();
   if (!verificar) return; // Se for false (não logado), para a execução aqui.
 

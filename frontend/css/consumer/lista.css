@@ -2,12 +2,17 @@
 @import url("../variables.css");
 @import url("../consumer/loja.css");
 @import url("../components/card-product.css");
+@import url("../components/button.css");
 
 
-input[type="checkbox"] {
-    transform: scale(1.5); /* Aumenta o tamanho do checkbox uniformemente */
-    margin: 10px;          /* Opcional: adiciona um espaço ao redor para não grudar no texto */
-    cursor: pointer;
+.selectProduct{
+  width: 16px;
+  height: 19px;
+  margin-top: 10px;
+  margin-left: 10px;
+  /* margin: 0;
+  flex: 0 0 auto; */
+  accent-color: var(--primary);
 }
 
 .cta-product {
@@ -15,6 +20,13 @@ input[type="checkbox"] {
     align-items: center;  
     gap: 8px;        
     text-decoration: none; 
+    justify-content: center;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    backdrop-filter: blur(6px);
 }
 
 .cta-product img {

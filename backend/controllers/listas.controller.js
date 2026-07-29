@@ -22,6 +22,18 @@ class ListasController {
             })
         }
     }
+    
+    async buscarLista(req, res) {
+        try {
+            const { id } = req.params
+            const lista =  await ListasService.buscarLista(id)
+            return res.status(200).json(lista)
+        } catch (error) {
+             return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
     async buscarListaPorLojaId(req, res) {
         try {
             const { id } = req.params

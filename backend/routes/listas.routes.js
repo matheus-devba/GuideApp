@@ -3,8 +3,9 @@ const express = require("express")
 const router = express.Router()
 
 router.get("/", ListasController.buscarListas)
+router.get("/:id", ListasController.buscarLista) //para consumer
 router.get("/merchant/:id", ListasController.buscarListaPorId) 
-router.get("/merchant/lojas/:id", ListasController.buscarListaPorLojaId) 
+router.get("/lojas/:id", ListasController.buscarListaPorLojaId) //para render
 router.put("/merchant/update/:id", ListasController.atualizar) 
 router.post("/merchant/new", ListasController.criar) 
 router.delete("/merchant/deletar/:id", ListasController.deletar) 

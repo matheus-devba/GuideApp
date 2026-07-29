@@ -12,6 +12,14 @@ class ListasService {
 
         return lista
     }
+    async buscarLista (id) {
+        const lista = await ListasRepository.buscarLista(id)
+        if(!lista) {
+            throw new Error("Lista não encontrada")
+        }
+
+        return lista
+    }
     async buscarListaPorLojaId (loja_id) {
         return await ListasRepository.buscarListaPorLojaId(loja_id)
     }

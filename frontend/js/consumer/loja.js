@@ -1,9 +1,3 @@
-
-import { lists } from "../mocks/listas_db.js"
-import { destaques } from "../mocks/destaques_db.js"
-import { products } from "../mocks/produtos_db.js";
-import { categorias } from "../mocks/categorias_db.js";
-
 import { API_BASE_URL } from "../api/config.js"
 import { insertNomeDaLoja } from "../services/requisicoesConsumer.js";
 import { formatMoney } from '../utils/formatMoney.js'
@@ -14,14 +8,12 @@ export async function initLoja() {
   const pathParts = window.location.pathname.split("/")
   const loja_id = Number(pathParts[pathParts.length - 1])
 
-  const linkPrefix = "../consumer/lista.html?id=";
-
   await renderMedia(loja_id)
   await insertNomeDaLoja(loja_id)
   await renderLists(loja_id);
   await renderDestaque(loja_id)
   await renderCategoria(loja_id);
-   await renderProdutos(loja_id)
+  await renderProdutos(loja_id)
 }
 
 
@@ -44,7 +36,7 @@ async function renderLists (loja_id) {
   const container = document.querySelector('.list-grid');
   if (!container) return;
 
-  const response = await fetch(`${API_BASE_URL}/api/listas/merchant/lojas/${loja_id}`)
+  const response = await fetch(`${API_BASE_URL}/api/listas/lojas/${loja_id}`)
   const listas = await response.json()
 
 
@@ -72,7 +64,7 @@ async function renderLists (loja_id) {
       }
 
       return `
-        <a class="list-product-card" href="${API_BASE_URL}/listas/merchant/${list.id}">
+        <a class="list-product-card" href="${API_BASE_URL}/listas/${list.id}">
           <div class="list-card-images">
             <img src="${imageBack}" class="list-image back">
             <img src="${imageFront}" class="list-image front">

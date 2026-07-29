@@ -15,6 +15,16 @@ class ListasRepository {
         )
         return rows[0]
     }
+    async buscarLista (id) {
+        const { rows } = await pool.query(`
+            SELECT * FROM listas
+            WHERE id = $1
+            `,
+            [id]
+        )
+        return rows[0]
+    }
+    
     async buscarListaPorLojaId (loja_id) {
         const { rows } = await pool.query(`
             SELECT * FROM listas
