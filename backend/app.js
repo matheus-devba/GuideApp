@@ -51,14 +51,27 @@ app.use("/api/usuarios", usuariosRoutes)
 
 
 //emulação front end
+
+// CONSUMER
 app.get("/lojas", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "lojas.html"))
 })
 
 app.get("/lojas/:id", (req, res) => {
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
   res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "loja.html"))
 })
+
 app.get("/produtos/:id", (req, res) => {
+    const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
   res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "produto.html"))
 })
 
@@ -70,6 +83,16 @@ app.get("/listas/:id", (req, res) => {
   }
 
   res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "lista.html"))
+})
+
+app.get("/destaques/:id", (req, res) => {
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+
+  res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "destaques.html"))
 })
 
 

@@ -19,6 +19,9 @@ const path = window.location.pathname;
  if (/^\/listas\/\d+$/.test(path)) {
   initLista()
 }
+ if (/^\/destaques\/\d+$/.test(path)) {
+  initDestaques()
+}
 
 // document.addEventListener("DOMContentLoaded", () => {
 //   const path = window.location.pathname;

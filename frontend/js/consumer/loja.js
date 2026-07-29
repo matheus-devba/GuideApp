@@ -14,8 +14,20 @@ export async function initLoja() {
   await renderDestaque(loja_id)
   await renderCategoria(loja_id);
   await renderProdutos(loja_id)
+  renderHeaders(loja_id)
 }
 
+
+ function renderHeaders (loja_id) {
+  const container = document.querySelector('.product-strip-header.destaques')
+  if (!container) return
+
+  container.innerHTML =  `
+    <h3 class="sections-title">Em destaque</h3>
+    <a class="product-view-all" href="${API_BASE_URL}/destaques/${loja_id}">Ver tudo</a>
+  `
+
+}
 
 async function renderMedia(loja_id) {
   const container = document.querySelector('.media-store')
