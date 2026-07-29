@@ -50,6 +50,17 @@ class ProdutosRepository {
         )
         return rows[0]
     } 
+
+    async buscarProdutoAtivo(id) { 
+        const { rows } = await pool.query(`
+            SELECT * FROM produtos
+            WHERE id = $1
+            AND ativo = true
+            `,
+            [id]
+        )
+        return rows[0]
+    } 
     
     async buscarAtivosPorLoja(id_loja) {
         const { rows } = await pool.query(`

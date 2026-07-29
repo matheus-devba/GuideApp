@@ -104,7 +104,7 @@ async function renderLists (loja_id) {
       }
 
       return `
-        <a class="list-product-card" href="${API_BASE_URL}/listas/${list.id}">
+        <a class="list-product-card" href="${API_BASE_URL}/listas/${list.id}?list_id=${list.id}&loja_id=${loja_id}">
           <div class="list-card-images">
             <img src="${imageBack}" class="list-image back">
             <img src="${imageFront}" class="list-image front">
@@ -145,7 +145,7 @@ async function renderDestaque(loja_id) {
         const precoExibido = temPromocao ? product.preco_promocional : product.preco_normal;
 
         return `
-            <a class="product-card" href="${API_BASE_URL}/produtos/${product.id}" >
+            <a class="product-card" href="${API_BASE_URL}/produtos/${product.id}?loja_id=${loja_id}&produto_id=${product.id}" >
             <img class="product-image" src="${API_BASE_URL}/api/produto_imagens/buscar_imagem/${product.id}">
             <div class="product-info-all">
               <h2>${product.nome}</h2>
@@ -189,7 +189,7 @@ async function renderProdutos (loja_id) {
         const precoExibido = temPromocao ? product.preco_promocional : product.preco_normal;
 
         return `
-            <a class="product-card-all" href="${API_BASE_URL}/produtos/${product.id}">
+            <a class="product-card-all" href="${API_BASE_URL}/produtos/${product.id}?loja_id=${loja_id}&produto_id=${product.id}">
                 <img class="product-image-all" src="${API_BASE_URL}/api/produto_imagens/buscar_imagem/${product.id}">
                 <div class="product-info-all">
                 <h2>${product.nome}</h2>
@@ -223,7 +223,7 @@ async function renderCategoria(loja_id) {
   const categorias = await response.json();
   container.innerHTML = categorias
     .map((cat) => `
-<a class="circle-category" href="${API_BASE_URL}/categorias/${loja_id}?categoria_id=${cat.id}&loja_id=${loja_id}">          <img src="${cat.icone_url || '../assets/images/default.webp'}" class="category-image">
+          <a class="circle-category" href="${API_BASE_URL}/categorias/${loja_id}?categoria_id=${cat.id}&loja_id=${loja_id}">          <img src="${cat.icone_url || '../assets/images/default.webp'}" class="category-image">
           <h4>${cat.nome}</h4>
       </a>
     `)

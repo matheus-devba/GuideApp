@@ -11,6 +11,7 @@ router.get("/:id", ProdutoController.buscarProduto)
 
 router.get("/destaques/:id", ProdutoController.buscarDestaquesPorLoja)
 router.get("/ativos/:id", ProdutoController.buscarAtivosPorLoja)
+// router.get("/ativo/:id", ProdutoController.buscarProdutoAtivo) // para consumer
 router.get("/ocultos/:id", ProdutoController.buscarOcultosPorLoja)
 router.get("/categorias/:id", ProdutoController.buscarPorCategoria)
 

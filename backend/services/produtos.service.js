@@ -13,6 +13,10 @@ class ProdutosService {
         return await ProdutosRepository.buscarProduto(id)
     }
     
+    async buscarProdutoAtivo (id) {
+        return await ProdutosRepository.buscarProdutoAtivo(id)
+    }
+    
     async buscarAtivosPorLoja (id_loja) {
         return await ProdutosRepository.buscarAtivosPorLoja(id_loja)
     }

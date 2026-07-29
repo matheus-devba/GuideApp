@@ -94,6 +94,7 @@ app.get("/destaques/:id", (req, res) => {
 
   res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "destaques.html"))
 })
+
 app.get("/categorias/:id", (req, res) => {
   const { id } = req.params
 
@@ -102,6 +103,16 @@ app.get("/categorias/:id", (req, res) => {
   }
 
   res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "categoria.html"))
+})
+
+app.get("/produtos/:id", (req, res) => {
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+
+  res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "produto.html"))
 })
 
 

@@ -4,15 +4,16 @@ import { formatMoney } from '../utils/formatMoney.js'
 
 
 export async function initLista() {
-  const pathParts = window.location.pathname.split("/")
-  const list_id = Number(pathParts[pathParts.length - 1])
-  await renderLista(list_id);
+  const params = new URLSearchParams(window.location.search)
+  const loja_id = Number(params.get("loja_id"))
+  const list_id = Number(params.get("list_id"))
+  await renderLista(list_id, loja_id);
   selectedProdutos()
 }
 
 
 
-async function renderLista (list_id) {
+async function renderLista (list_id, loja_id) {
   const container = document.querySelector(".product-list-all");
   if (!container) return;
 
@@ -47,7 +48,7 @@ async function renderLista (list_id) {
 
       return `
         <div class="product-card-item">
-          <a class="product-card-all" href="${API_BASE_URL}/produtos/${product.id}">
+          <a class="product-card-all"href="${API_BASE_URL}/produtos/${product.id}?loja_id=${loja_id}&produto_id=${product.id}"">
           <input 
             type="checkbox" 
             class="selectProduct"

@@ -76,6 +76,18 @@ class ProdutoController {
             })
         }
     }
+    async buscarProdutoAtivo(req, res) {
+        try {
+            const { id } = req.params 
+            const produto = await ProdutosService.buscarProdutoAtivo(id)
+            return res.status(200).json(produto)
+        }
+        catch (error) {
+            return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
 
     async buscarOcultosPorLoja(req, res) {
         try {

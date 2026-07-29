@@ -25,6 +25,9 @@ const path = window.location.pathname;
  if (/^\/categorias\/\d+$/.test(path)) {
   initCategoria()
 }
+ if (/^\/produtos\/\d+$/.test(path)) {
+  initProduto()
+}
 
 // document.addEventListener("DOMContentLoaded", () => {
 //   const path = window.location.pathname;

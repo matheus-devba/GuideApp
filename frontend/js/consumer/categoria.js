@@ -43,7 +43,7 @@ async function renderCategoria (loja_id, categoria_id) {
         const precoExibido = temPromocao ? product.preco_promocional : product.preco_normal;
 
         return `
-            <a class="product-card-all" href="${API_BASE_URL}/produtos/${product.id}">
+            <a class="product-card-all" href="${API_BASE_URL}/produtos/${product.id}?loja_id=${loja_id}&produto_id=${product.id}">
                 <img class="product-image-all" src="${API_BASE_URL}/api/produto_imagens/buscar_imagem/${product.id}">
                 <div class="product-info-all">
                 <h2>${product.nome}</h2>
