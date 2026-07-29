@@ -35,6 +35,22 @@ class ProdutoController {
             })
         }
     }
+    async buscarPorCategoria(req, res) {
+        try {
+            const { id } = req.params 
+            const { loja_id } = req.query
+            const produtos = await ProdutosService.buscarPorCategoria(
+            Number(loja_id),
+            Number(id)
+            )
+            return res.status(200).json(produtos)
+        }
+        catch (error) {
+            return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
     async buscarDestaquesPorLoja(req, res) {
         try {
             const { id } = req.params 

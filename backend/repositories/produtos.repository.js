@@ -62,6 +62,16 @@ class ProdutosRepository {
         )
         return rows
     } 
+    async buscarPorCategoria(categoria_id, loja_id) {
+        const { rows } = await pool.query(`
+            SELECT * FROM produtos
+            WHERE loja_id = $2 AND categoria_id = $1 AND ativo = true
+            ORDER BY id ASC 
+            `,
+            [loja_id, categoria_id]
+        )
+        return rows
+    } 
     async buscarDestaquesPorLoja(id_loja) {
         const { rows } = await pool.query(`
             SELECT * FROM produtos

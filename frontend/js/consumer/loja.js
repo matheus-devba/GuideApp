@@ -223,8 +223,7 @@ async function renderCategoria(loja_id) {
   const categorias = await response.json();
   container.innerHTML = categorias
     .map((cat) => `
-      <a class="circle-category" href="../consumer/categoria.html?id=${cat.id}">
-          <img src="${cat.icone_url || '../assets/images/default.webp'}" class="category-image">
+<a class="circle-category" href="${API_BASE_URL}/categorias/${loja_id}?categoria_id=${cat.id}&loja_id=${loja_id}">          <img src="${cat.icone_url || '../assets/images/default.webp'}" class="category-image">
           <h4>${cat.nome}</h4>
       </a>
     `)
