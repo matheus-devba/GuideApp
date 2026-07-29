@@ -7,26 +7,54 @@ import { formatMoney } from '../utils/formatMoney.js'
 export async function initLoja() {
   const pathParts = window.location.pathname.split("/")
   const loja_id = Number(pathParts[pathParts.length - 1])
+  const produtos = await renderProdutos(loja_id)
+  if(produtos.length === 0) return
 
+  await renderProdutos(loja_id)
   await renderMedia(loja_id)
   await insertNomeDaLoja(loja_id)
   await renderLists(loja_id);
   await renderDestaque(loja_id)
   await renderCategoria(loja_id);
-  await renderProdutos(loja_id)
-  renderHeaders(loja_id)
+  await renderHeaders(loja_id)
 }
 
 
- function renderHeaders (loja_id) {
-  const container = document.querySelector('.product-strip-header.destaques')
-  if (!container) return
+ async function renderHeaders (loja_id) {
+  const listas = await renderLists(loja_id)
 
-  container.innerHTML =  `
+  const containerLista = document.querySelector('.product-list.listas');
+
+  if (containerLista && listas.length === 0) {
+    containerLista.classList.add("hidden");
+  }
+
+  const destaques = await renderDestaque(loja_id)
+
+  const containerDestaque = document.querySelector('.product-list.destaques');
+
+  if (containerDestaque && destaques.length === 0) {
+    containerDestaque.classList.add("hidden");
+  }
+
+  const headerDestaque = document.querySelector('.product-strip-header.destaques')
+  if (!headerDestaque) return
+
+  headerDestaque.innerHTML =  `
     <h3 class="sections-title">Em destaque</h3>
     <a class="product-view-all" href="${API_BASE_URL}/destaques/${loja_id}">Ver tudo</a>
   `
 
+  
+  const categorias = await renderCategoria(loja_id)
+
+  const containerCategorias = document.querySelector('.product-list.categorias');
+
+  if (containerCategorias && categorias.length === 0) {
+    containerCategorias.classList.add("hidden");
+  }
+
+  //para produtos não precisa
 }
 
 async function renderMedia(loja_id) {
@@ -96,7 +124,7 @@ async function renderLists (loja_id) {
   );
 
   container.innerHTML = html.join("");
-
+  return listas
 }
 
 async function renderDestaque(loja_id) {
@@ -139,6 +167,8 @@ async function renderDestaque(loja_id) {
       }
     )
     .join("");
+
+    return products
 }
 
 
@@ -181,6 +211,8 @@ async function renderProdutos (loja_id) {
       }
     )
     .join("");
+
+    return products
 }
 
 async function renderCategoria(loja_id) {
@@ -197,4 +229,6 @@ async function renderCategoria(loja_id) {
       </a>
     `)
     .join('');
+
+  return categorias
 }

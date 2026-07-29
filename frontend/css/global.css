@@ -22,3 +22,7 @@ body {
     min-height: 100vh;
     padding: 16px;
 }
+
+.hidden {
+  display: none !important;
+}
