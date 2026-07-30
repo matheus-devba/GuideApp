@@ -1,7 +1,7 @@
 import { API_BASE_URL } from "../api/config.js"
 import { insertNomeDaLoja } from "../services/requisicoesConsumer.js";
 import { formatMoney } from '../utils/formatMoney.js'
-import { btnSearch } from '../components/searchButton.js'
+import { btnShare } from '../components/shareButton.js'
 
 export async function initProduto() {
   const params = new URLSearchParams(window.location.search)
@@ -23,7 +23,10 @@ async function renderProduto (produto_id, loja_id) {
   const responseProdutos = await fetch(`${API_BASE_URL}/api/produtos/${produto_id}`);
   const productSelected = await responseProdutos.json();
 
-  btnSearch(`/produtos/${productSelected.id}?loja_id=${loja_id}&produto_id=${productSelected.id}`)
+  btnShare(`/produtos/${productSelected.id}?loja_id=${loja_id}&produto_id=${productSelected.id}`,
+    "Olha o que achei no Guide!",
+    "Dê uma olhada nesse produto que encontrei no Guide:"
+  )
 
   if (!productSelected) return;
 

@@ -1,7 +1,7 @@
 import { API_BASE_URL } from "../api/config.js"
 import { insertNomeDaLoja } from "../services/requisicoesConsumer.js";
 import { formatMoney } from '../utils/formatMoney.js'
-import { btnSearch } from '../components/searchButton.js'
+import { btnShare } from '../components/shareButton.js'
 import { popupMessage, popupConfirm } from "../components/popup.js";
 
 
@@ -21,6 +21,9 @@ async function renderLista (list_id, loja_id) {
   const container = document.querySelector(".product-list-all");
   if (!container) return;
 
+  btnShare(`/listas/${list_id}?list_id=${list_id}&loja_id=${loja_id}`, 
+            "Olha o que achei no Guide",
+            "Dê uma olhada nessa lista que encontrei no Guide:")
 
   const responseLista = await fetch(`${API_BASE_URL}/api/listas/${list_id}`)
   const lista = await responseLista.json()
@@ -51,7 +54,7 @@ async function renderLista (list_id, loja_id) {
       // Define qual será o preço em destaque
       const precoExibido = temPromocao ? product.preco_promocional : product.preco_normal;
 
-      btnSearch(`/listas/${list_id}?list_id=${list_id}&loja_id=${loja_id}`)
+
 
       return `
         <div class="product-card-item">

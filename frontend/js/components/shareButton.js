@@ -1,7 +1,8 @@
 import { API_BASE_URL } from "../api/config.js"
+import { popupMessage, popupConfirm } from "./popup.js";
 
 
-export async function btnSearch(rota) {
+export async function btnShare(rota, title, text) {
     const container = document.querySelector('.top-icon-btn.share');
     if (!container) return; // Proteção caso o botão não exista na página
 
@@ -25,8 +26,8 @@ export async function btnSearch(rota) {
         if (navigator.share) {
             try {
                 await navigator.share({
-                    title: 'Confira este produto!',
-                    text: 'Dê uma olhada no produto que encontrei no Guide:',
+                    title,
+                    text,
                     url: urlParaCompartilhar // Link completo gerado dinamicamente
                 });
                 console.log('Compartilhado com sucesso!');
@@ -37,9 +38,15 @@ export async function btnSearch(rota) {
             // Fallback: Se o dispositivo não suportar (como navegadores antigos de PC), copia para a área de transferência
             try {
                 await navigator.clipboard.writeText(urlParaCompartilhar);
-                alert("Link copiado para a área de transferência!");
+                popupMessage({
+                    titulo: "Sucesso!",
+                    mensagem: "Link copiado para a área de transferência!"
+                     });
             } catch (err) {
-                alert(`Copie o link: ${urlParaCompartilhar}`);
+                popupMessage({
+                    titulo: "Opa! Não foi possível copiar automaticamente.",
+                    mensagem: `Copie o link: ${urlParaCompartilhar}`
+                     })
             }
         }
     });

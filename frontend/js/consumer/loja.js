@@ -2,7 +2,7 @@ import { API_BASE_URL } from "../api/config.js"
 import { searchRenderProduct } from "../components/searchProduto.js";
 import { insertNomeDaLoja } from "../services/requisicoesConsumer.js";
 import { formatMoney } from '../utils/formatMoney.js'
-import { btnSearch } from '../components/searchButton.js'
+import { btnShare } from '../components/shareButton.js'
 
 
 
@@ -12,7 +12,10 @@ export async function initLoja() {
   const produtos = await renderProdutos(loja_id)
   if(produtos.length === 0) return
 
-  btnSearch(`/lojas/${loja_id}?loja_id=${loja_id}`)
+  btnShare(`/lojas/${loja_id}?loja_id=${loja_id}`,
+    "Olha o que achei no Guide!",
+    "Dê uma olhada nessa loja que encontrei no Guide:"
+  )
 
   await renderProdutos(loja_id)
   await renderMedia(loja_id)

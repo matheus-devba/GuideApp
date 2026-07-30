@@ -10,6 +10,7 @@ import { initFormListaUpdate } from "./formListaUpdate.js";
 import { initFormListaCreate } from "./formListaCreate.js";
 import { initLogin } from "./login.js";
 import { initSearchLoja } from "./pesquisa.js";
+import { initHome } from "./home.js";
 
 const path = window.location.pathname;
 
@@ -59,5 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (path.includes("pesquisa.html")) {
     initSearchLoja();
+  }
+  if (path.includes("home.html")) {
+    initHome()
   }
 });
