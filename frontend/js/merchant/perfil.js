@@ -1,6 +1,7 @@
 import { setImagePreview } from "../adm/formCliente.js";
 import { API_BASE_URL } from "../api/config.js"
 import { getUserId, getLojaId, insertNomeDaLoja, verificacaoUsuario } from "../services/requisicoesMerchant.js";
+import { btnShare } from '../components/shareButton.js'
 
 export async function initPerfil() {
   const verificar = await verificacaoUsuario();
@@ -8,13 +9,17 @@ export async function initPerfil() {
 
   const lojaId = await getLojaId()
 
-  await renderPerfil()
+  await renderPerfil(lojaId)
 
 
 }
 
-async function renderPerfil() {
-  const lojaId = await getLojaId()
+async function renderPerfil(lojaId) {
+
+btnShare(`/lojas/${lojaId.id}?lojaId.id=${lojaId.id}`,
+    "Olha o que achei no Guide",
+    "Confira a minha loja no Guide:"
+)
 
   const responseLoja = await fetch(`${API_BASE_URL}/api/lojas/${lojaId.id}`);
   const loja = await responseLoja.json()

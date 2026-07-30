@@ -2,6 +2,8 @@ import { API_BASE_URL } from "../api/config.js"
 import { filterLists, searchRenderLists } from "../components/searchLista.js";
 import { verificarUser, getLojaId, insertNomeDaLoja, verificacaoUsuario } from "../services/requisicoesMerchant.js";
 import { initListas } from "./listas.js";
+import { btnShare } from '../components/shareButton.js'
+import { formatMoney } from '../utils/formatMoney.js'
 
 
 const pathParts = window.location.pathname.split("/")
@@ -15,17 +17,24 @@ export async function initLista() {
 
   const verificar = await verificacaoUsuario();
   if (!verificar) return; // Se for false (não logado), para a execução aqui.
+
+  const lojaId = await getLojaId()
   
 
   // Aguarda a lista renderizar para montar as opções e ligar o botão
-  await renderLista(idLista)
+  await renderLista(idLista, lojaId.id)
   renderListActions(idLista)
   bindDeleteItem()
 }
 
-async function renderLista(lista_id) {
+async function renderLista(lista_id, loja_id) {
   const container = document.querySelector(".product-list-all");
   if (!container) return;
+
+   btnShare(`/listas/${lista_id}?list_id=${lista_id}&loja_id=${loja_id}`,
+    "Olha o que achei no Guide!",
+    "Dê uma olhada nessa lista que encontrei no Guide:"
+  )
 
   // 1) Busca IDs dos itens da lista
   const responseIdProdutos = await fetch(`${API_BASE_URL}/api/lista-produtos/lista/${lista_id}`);
@@ -39,6 +48,13 @@ async function renderLista(lista_id) {
 
       if (!product) return "";
 
+              // Valida se há preço promocional (checa se não é null, undefined ou string vazia)
+      const temPromocao = product.preco_promocional !== null && product.preco_promocional !== "";
+      
+      // Define qual será o preço em destaque
+      const precoExibido = temPromocao ? product.preco_promocional : product.preco_normal;
+
+
       return `
         <div class="product-card-item">
           <a class="product-card-all" href="${API_BASE_URL}/produtos/merchant/${product.id}">
@@ -50,8 +66,8 @@ async function renderLista(lista_id) {
               </span>
               <div class="product-footer-all">
                 <div class="price-group-all">
-                  <span class="promocional-price">R$ ${product.preco_promocional} </span>
-                  <span class="normal-price-all">R$ ${product.preco_normal}</span>
+                  <span class="promocional-price">${formatMoney(precoExibido)} </span>
+                  <span class="normal-price-all">${temPromocao ? formatMoney(product.preco_normal) : ""}</span>
                 </div>
                 <button type="button">Ver</button>
               </div>

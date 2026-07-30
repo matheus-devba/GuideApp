@@ -1,27 +1,33 @@
 import { API_BASE_URL } from "../api/config.js"
 import { getLojaId, insertNomeDaLoja, verificacaoUsuario, verificarUser } from "../services/requisicoesMerchant.js";
 import { formatMoney } from '../utils/formatMoney.js'
+import { btnShare } from '../components/shareButton.js'
 
 
 export async function initProduto() {
   const pathParts = window.location.pathname.split("/")
   const id = pathParts[pathParts.length - 1]
 
-
-  const verificar = await verificacaoUsuario();
+ const verificar = await verificacaoUsuario();
   if (!verificar) return; // Se for false (não logado), para a execução aqui.
 
-  await renderProduto(id);
+  const lojaId = await getLojaId()
+
+
+  await renderProduto(id, lojaId.id);
   alternarStatusProduto()
   deleteItem()
 
 }
 
 
-export async function renderProduto (productId) {
+export async function renderProduto (productId, loja_id) {
   const container = document.querySelector(".product-page");
   if (!container) return;
-
+ btnShare(`/produtos/${productId.id}?loja_id=${loja_id}&produto_id=${productId.id}`,
+    "Olha o que achei no Guide!",
+    "Dê uma olhada nesse produto que encontrei no Guide:"
+  )
   const responseProdutos = await fetch(`${API_BASE_URL}/api/produtos/${productId}`);
   const productSelected = await responseProdutos.json();
 
