@@ -7,12 +7,12 @@ export async function initProduto() {
   const loja_id = Number(params.get("loja_id"))
   const produto_id = Number(params.get("produto_id"))
   await insertNomeDaLoja(loja_id)
-  await renderProduto(produto_id);
+  await renderProduto(produto_id, loja_id);
   
 }
 
 
-async function renderProduto (produto_id) {
+async function renderProduto (produto_id, loja_id) {
   const container = document.querySelector(".product-page");
   if (!container) return;
 
@@ -26,7 +26,8 @@ async function renderProduto (produto_id) {
   const responseCategoria = await fetch(`${API_BASE_URL}/api/categorias/${categoriaId}`);
   const categoria = await responseCategoria.json();
 
-
+  const responseLoja = await fetch(`${API_BASE_URL}/api/lojas/${loja_id}`)
+  const loja = await responseLoja.json()
 
   const responseImagens = await fetch(`${API_BASE_URL}/api/produto_imagens/buscar_imagens/${produto_id}`)
   const imagens = await responseImagens.json()
@@ -61,6 +62,21 @@ async function renderProduto (produto_id) {
   // Define qual será o preço em destaque
   const precoExibido = temPromocao ? productSelected.preco_promocional : productSelected.preco_normal;
 
+  let textoMensagem = `Olá \u{1F60D}! Vim do Guide e tenho interesse no produto ${productSelected.nome} no valor de ${formatMoney(precoExibido)}\n\n`;
+
+  const textoCodificado = encodeURIComponent(textoMensagem);
+    
+  let telefone = loja.whatsapp ? loja.whatsapp.replace(/\D/g, '') : '';
+    if (telefone && !telefone.startsWith('55')) {
+      telefone = `55${telefone}`;
+    }
+
+  const urlWhatsapp = `https://api.whatsapp.com/send?phone=${telefone}&text=${textoCodificado}`;
+
+
+
+
+
   initialInfo.innerHTML = ` 
     
     <h1>${productSelected.nome}</h1>
@@ -79,7 +95,7 @@ async function renderProduto (produto_id) {
     </div>
 
     <div class="right-group">  
-        <a class="cta-product" href="https://api.whatsapp.com/send?phone=5575983384725&text=Ol%C3%A1%20%F0%9F%98%8D!%20Vim%20do%20Guide%20e%20tenho%20interesse%20no%20produto%20**${productSelected.nome}**%20no%20valor%20de%20${formatMoney(precoExibido)}"> 
+        <a class="cta-product" href="${urlWhatsapp}" target="_blank" rel="noopener noreferrer">
             <img src="../assets/icons/whatsapp.png">
             <h8>Tenho Interesse</h8>
         </a>
