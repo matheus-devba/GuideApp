@@ -7,13 +7,15 @@
     "dev": "nodemon --watch backend backend/server.js",
     "migration:create": "node-pg-migrate --envPath backend/config/.env create",
     "migration:up": "node-pg-migrate --envPath backend/config/.env up",
-    "migration:down": "node-pg-migrate --envPath backend/config/.env down"
+    "migration:down": "node-pg-migrate --envPath backend/config/.env down",
+    "start": "node backend/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.967.0",
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
