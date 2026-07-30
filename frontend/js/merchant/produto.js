@@ -60,6 +60,12 @@ export async function renderProduto (productId) {
   
 
   const initialInfo = document.querySelector('.initial-info')
+    // Valida se há preço promocional (checa se não é null, undefined ou string vazia)
+  const temPromocao = productSelected.preco_promocional !== null && productSelected.preco_promocional !== "";
+  
+  // Define qual será o preço em destaque
+  const precoExibido = temPromocao ? productSelected.preco_promocional : productSelected.preco_normal;
+
   initialInfo.innerHTML = ` 
     
     <h1>${productSelected.nome}</h1>
@@ -69,11 +75,11 @@ export async function renderProduto (productId) {
     <hr>
 
     <div class="left-group">
-        <span class="promocional-price">${formatMoney(productSelected.preco_promocional)} </span>
-        <span class="normal-price">${formatMoney(productSelected.preco_normal)}</span>
+        <span class="promocional-price">${formatMoney(precoExibido)} </span>
+        <span class="normal-price">${temPromocao ? formatMoney(productSelected.preco_normal) : ""}</span>
             <div class="metrics-product-merchant">
                 <p hidden>${productSelected.views} pessoas já viram</p>
-                
+                <p class="forma-de-pagamento" hidden ></p>
             </div>
     </div>
 
@@ -199,7 +205,7 @@ async function deleteItem() {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
         alert('Produto excluído com sucesso!');
-        window.location.href = './produtos.html'; // Redireciona apenas após o sucesso no banco
+        window.location.href = `${API_BASE_URL}/merchant/produtos.html`; // Redireciona apenas após o sucesso no banco
       } catch (error) {
         console.error("Erro ao excluir produto:", error);
         alert('Não foi possível excluir o produto. Tente novamente mais tarde.');

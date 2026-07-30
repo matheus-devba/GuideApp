@@ -115,6 +115,16 @@ app.get("/produtos/:id", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "produto.html"))
 })
 
+app.get("/consumer/pesquisa/:id", (req, res) => {
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+
+  res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "pesquisa.html"))
+})
+
 
 
 

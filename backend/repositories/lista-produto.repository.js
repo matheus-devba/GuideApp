@@ -1,17 +1,17 @@
 const pool = require("../database/connection.js")
 class ListaProdutoRepository {
-    async buscarProdutosEmLista (lista_id) {
-        // desestruturação do pool com {rows}
-        const { rows } = await pool.query(` 
-            SELECT produto_id FROM lista_produto 
-            WHERE lista_id = $1
-            ORDER BY created_at desc
-        `,
-        [lista_id]
-    )
+  async buscarProdutosEmLista(lista_id) {
+    const { rows } = await pool.query(` 
+      SELECT lp.produto_id
+      FROM lista_produto lp
+      INNER JOIN produtos p ON p.id = lp.produto_id
+      WHERE lp.lista_id = $1
+        AND p.ativo = true
+      ORDER BY lp.created_at DESC
+    `, [lista_id])
 
-        return rows
-    }
+    return rows
+  }
 
     async buscarIdPorListaId (lista_id) {
         // desestruturação do pool com {rows}

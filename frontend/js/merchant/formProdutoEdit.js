@@ -119,7 +119,7 @@ async function handleEditSubmit(event, produtoId) {
     // 5. Envia as fotos NOVAS adicionadas (arquivos do tipo File)
     await uploadProdutoImagens(produtoId, itensAtuais);
     alert("Produto e imagens atualizados com sucesso!");
-    window.location.href = `/produtos/${produtoAtualizado.id || produtoId}`;
+    window.location.href = `/produtos/merchant/${produtoAtualizado.id || produtoId}`;
   } catch (error) {
     console.error("Erro ao atualizar produto:", error);
   }

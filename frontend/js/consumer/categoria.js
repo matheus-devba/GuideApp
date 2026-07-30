@@ -10,9 +10,32 @@ export async function initCategoria() {
   await insertNomeDaLoja(loja_id)
 
   await renderCategoria(loja_id, categoria_id);
-  
+  submitPesquisa(loja_id, categoria_id)
 }
 
+function submitPesquisa(loja_id, categoria_id) {
+  const form = document.querySelector(".store-search-form");
+  if (!form) return;
+
+  const input = form.querySelector("input[name='query']");
+  if (!input) return;
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const query = input.value.trim();
+    if (!query) return; // evita enviar busca vazia
+
+    // // Abre a página de pesquisa com contexto da loja
+    const params = new URLSearchParams()
+    params.set("query", query)
+    params.set("loja_id", loja_id)
+    params.set("categoria_id", categoria_id)
+    
+
+    window.location.href = `${API_BASE_URL}/consumer/pesquisa/${loja_id}?${params.toString()}`
+  });
+}
 
 async function renderCategoria (loja_id, categoria_id) {
   const container = document.querySelector(".product-list-all");

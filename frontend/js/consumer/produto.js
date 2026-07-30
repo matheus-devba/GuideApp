@@ -55,6 +55,12 @@ async function renderProduto (produto_id) {
     }
 
   const initialInfo = document.querySelector('.initial-info')
+    // Valida se há preço promocional (checa se não é null, undefined ou string vazia)
+  const temPromocao = productSelected.preco_promocional !== null && productSelected.preco_promocional !== "";
+  
+  // Define qual será o preço em destaque
+  const precoExibido = temPromocao ? productSelected.preco_promocional : productSelected.preco_normal;
+
   initialInfo.innerHTML = ` 
     
     <h1>${productSelected.nome}</h1>
@@ -64,8 +70,8 @@ async function renderProduto (produto_id) {
     <hr>
 
     <div class="left-group">
-        <span class="promocional-price">${formatMoney(productSelected.preco_promocional)} </span>
-        <span class="normal-price">${formatMoney(productSelected.preco_normal)}</span>
+        <span class="promocional-price">${formatMoney(precoExibido)} </span>
+        <span class="normal-price">${temPromocao ? formatMoney(productSelected.preco_normal) : ""}</span>
             <div class="metrics-product-merchant">
                 <p hidden>${productSelected.views} pessoas já viram</p>
                 <p class="forma-de-pagamento" hidden ></p>
@@ -73,7 +79,7 @@ async function renderProduto (produto_id) {
     </div>
 
     <div class="right-group">  
-        <a class="cta-product" href="https://api.whatsapp.com/send?phone=5575983384725&text=Ol%C3%A1%20%F0%9F%98%8D!%20Vim%20do%20Guide%20e%20tenho%20interesse%20no%20produto%20**${productSelected.name}**%20no%20valor%20de%20R%24${productSelected.promocionalPrice}"> 
+        <a class="cta-product" href="https://api.whatsapp.com/send?phone=5575983384725&text=Ol%C3%A1%20%F0%9F%98%8D!%20Vim%20do%20Guide%20e%20tenho%20interesse%20no%20produto%20**${productSelected.nome}**%20no%20valor%20de%20${formatMoney(precoExibido)}"> 
             <img src="../assets/icons/whatsapp.png">
             <h8>Tenho Interesse</h8>
         </a>

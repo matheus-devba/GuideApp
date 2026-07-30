@@ -80,7 +80,7 @@ async function handleCreateSubmit(event) {
     await uploadProdutoImagens(produto.id, gallery?.getItems?.() || []);
 
     alert("Produto criado com sucesso!");
-    window.location.href = `/produtos/${produto.id}`;
+    window.location.href = `/produtos/merchant/${produto.id}`;
   } catch (error) {
     console.error("Erro ao criar produto:", error);
   }

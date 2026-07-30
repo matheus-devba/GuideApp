@@ -8,6 +8,30 @@ export async function initDestaques() {
 
   await insertNomeDaLoja(loja_id)
   await renderDestaque(loja_id);
+  submitPesquisa(loja_id)
+}
+
+function submitPesquisa(loja_id) {
+  const form = document.querySelector(".store-search-form");
+  if (!form) return;
+
+  const input = form.querySelector("input[name='query']");
+  if (!input) return;
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const query = input.value.trim();
+    if (!query) return; // evita enviar busca vazia
+
+    // // Abre a página de pesquisa com contexto da loja
+    const params = new URLSearchParams()
+    params.set("query", query)
+    params.set("filter", "destaques")
+    
+
+    window.location.href = `${API_BASE_URL}/consumer/pesquisa/${loja_id}?${params.toString()}`
+  });
 }
 
 async function renderDestaque (loja_id) {

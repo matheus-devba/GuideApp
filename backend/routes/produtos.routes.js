@@ -3,17 +3,19 @@ const express = require("express")
 const router = express.Router()
 
 
-router.post("/merchant/new", ProdutoController.criar) //nao pode ser assim por conta da categoria. tem que vim com o id do merchant
+router.post("/merchant/new", ProdutoController.criar)
 router.put("/update/:id", ProdutoController.atualizar)
 router.get("/ativosAll", ProdutoController.buscarAtivos)
 router.get("/destaques", ProdutoController.buscarDestaques)
+router.get("/search/loja/:id", ProdutoController.buscarPorTermoPorLoja)
 router.get("/:id", ProdutoController.buscarProduto)
 
 router.get("/destaques/:id", ProdutoController.buscarDestaquesPorLoja)
 router.get("/ativos/:id", ProdutoController.buscarAtivosPorLoja)
-// router.get("/ativo/:id", ProdutoController.buscarProdutoAtivo) // para consumer
 router.get("/ocultos/:id", ProdutoController.buscarOcultosPorLoja)
-router.get("/categorias/:id", ProdutoController.buscarPorCategoria)
+
+router.get("/categorias/:id", ProdutoController.buscarPorCategoria) // ja busca por loja
+
 
 router.patch("/hidden/:id", ProdutoController.desativar)
 router.patch("/active/:id", ProdutoController.ativar)

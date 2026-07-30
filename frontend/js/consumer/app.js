@@ -13,6 +13,9 @@ import { initLojas } from "../consumer/lojas.js";
 // }
 const path = window.location.pathname;
 
+ if (path === "/lojas") {
+  initLojas()
+}
  if (/^\/lojas\/\d+$/.test(path)) {
   initLoja()
 }
@@ -28,7 +31,9 @@ const path = window.location.pathname;
  if (/^\/produtos\/\d+$/.test(path)) {
   initProduto()
 }
-
+if (/^\/consumer\/pesquisa\/\d+$/.test(path)) {
+    initSearch();
+  }
 // document.addEventListener("DOMContentLoaded", () => {
 //   const path = window.location.pathname;
 

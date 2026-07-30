@@ -12,6 +12,9 @@ class ProdutosService {
     async buscarProduto (id) {
         return await ProdutosRepository.buscarProduto(id)
     }
+    async buscarPorTermoPorLoja(id_loja, query, apenasDestaques = false) {
+        return await ProdutosRepository.buscarPorTermoPorLoja(id_loja, query,apenasDestaques)
+    }
     
     async buscarProdutoAtivo (id) {
         return await ProdutosRepository.buscarProdutoAtivo(id)

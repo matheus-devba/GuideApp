@@ -15,15 +15,17 @@ export function filterProducts (query, products) {
 
 }
 
-export function searchRenderProduct(query, products) {
+export function searchRenderProduct(query, products, loja_id) {
     if (query == "") return
-    console.log(query)
 
     const awnserProduct = filterProducts(query, products) // Depois posso colocar uma lista específica (ex: hidratantes, perfumes...)
 
     const container = document.querySelector(".product-list-all");
 
-    container.innerHTML = awnserProduct
+    if (!awnserProduct || awnserProduct.length === 0) {
+        container.innerHTML = "Sem resultados";
+    } else {
+        container.innerHTML = awnserProduct
     .map(
       (product) => {
         // Valida se há preço promocional (checa se não é null, undefined ou string vazia)
@@ -33,13 +35,13 @@ export function searchRenderProduct(query, products) {
         const precoExibido = temPromocao ? product.preco_promocional : product.preco_normal;
 
         return `
-            <a class="product-card-all" href="${API_BASE_URL}/produtos/${product.id}">
+            <a class="product-card-all" href="${API_BASE_URL}/produtos/${product.id}?loja_id=${loja_id}&produto_id=${product.id}">
                 <img class="product-image-all" src="${API_BASE_URL}/api/produto_imagens/buscar_imagem/${product.id}">
                 <div class="product-info-all">
                 <h2>${product.nome}</h2>
                 <span class="metrics-product-all">
-                    <img class="eye" src="../assets/icons/eye.png">
-                    <p class="views">${product.views}</p>
+                    <img class="eye" src="/assets/icons/eye.png" hidden>
+                    <p class="views" hidden>${product.views}</p>
                 </span>
                 <div class="product-footer-all">
                     <div class="price-group-all">
@@ -56,6 +58,7 @@ export function searchRenderProduct(query, products) {
     )
     .join("");
 
+}
 }
 
 function normalizeText (text) {

@@ -12,6 +12,22 @@ class ProdutoController {
             })
         }
     }
+
+    async buscarPorTermoPorLoja(req, res) {
+    try {
+        const { id } = req.params
+        const { q = "", destaque } = req.query
+        const somenteDestaques = destaque === "true" || destaque === "1"
+
+        const produtos = await ProdutosService.buscarPorTermoPorLoja(id, q, somenteDestaques)    
+        return res.status(200).json(produtos)
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message
+        })
+    }
+}
+
     async buscarDestaques(req, res) {
         try {
             const produtosDestaques = await ProdutosService.buscarDestaques()

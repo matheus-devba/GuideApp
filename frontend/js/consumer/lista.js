@@ -7,6 +7,7 @@ export async function initLista() {
   const params = new URLSearchParams(window.location.search)
   const loja_id = Number(params.get("loja_id"))
   const list_id = Number(params.get("list_id"))
+  await insertNomeDaLoja(loja_id)
   await renderLista(list_id, loja_id);
   selectedProdutos()
 }

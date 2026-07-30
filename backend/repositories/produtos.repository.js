@@ -22,6 +22,40 @@ class ProdutosRepository {
         return rows
     }
 
+    async buscarPorTermoPorLoja(id_loja, query, apenasDestaques = false) {
+         // Base da busca sempre por loja e somente ativos
+        const busca = `%${String(query || "").trim()}%`
+        const params = [id_loja]
+        const filtros = [
+           "loja_id = $1",
+           "ativo = true"
+      ]
+
+      // Filtro opcional para buscar só destaque
+       if (apenasDestaques) {
+            filtros.push("destaque = true")
+        }
+
+        // Se existir texto, filtra também pelo nome
+      if (busca) {
+          filtros.push(`LOWER(nome) LIKE LOWER($${params.length + 1})`)
+           params.push(`%${busca}%`)
+       }
+
+       const whereClause = `WHERE ${filtros.join(" AND ")}`
+
+        if (!busca || busca === "%%") return []
+
+        const { rows } = await pool.query(`
+            SELECT *
+            FROM produtos
+            ${whereClause}
+            ORDER BY id DESC
+            `, params)
+
+        return rows
+    }
+
     async buscarTodos() {
         const { rows } = await pool.query(`
             SELECT * FROM produtos

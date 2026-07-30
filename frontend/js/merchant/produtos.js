@@ -20,8 +20,9 @@ export async function initProdutos() {
   const sectionFilter = document.querySelector('.filter')
   sectionFilter.innerHTML = `
             <a class="all" href="#">Todos</a>
-            <a class="hidden" href="#">Ocultos</a>
             <a class="destaque" href="#">Destacados</a>
+            <a class="ocultos" href="#">Ocultos</a>
+
 
   `
 
@@ -30,7 +31,7 @@ export async function initProdutos() {
   btnAll.addEventListener('click', async() => {
     renderProdutos("ativos", lojaId.id)
   })
-  const btnHidden = document.querySelector('.hidden')
+  const btnHidden = document.querySelector('.ocultos')
 
   btnHidden.addEventListener('click', async() => {
     renderProdutos("ocultos", lojaId.id)

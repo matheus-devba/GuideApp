@@ -1,12 +1,13 @@
 import { API_BASE_URL } from "../api/config.js"
+import { searchRenderProduct } from "../components/searchProduto.js";
 import { insertNomeDaLoja } from "../services/requisicoesConsumer.js";
 import { formatMoney } from '../utils/formatMoney.js'
 
 
 
 export async function initLoja() {
-  const pathParts = window.location.pathname.split("/")
-  const loja_id = Number(pathParts[pathParts.length - 1])
+  const params = new URLSearchParams(window.location.search)
+  const loja_id = Number(params.get("loja_id"))
   const produtos = await renderProdutos(loja_id)
   if(produtos.length === 0) return
 
@@ -17,6 +18,29 @@ export async function initLoja() {
   await renderDestaque(loja_id)
   await renderCategoria(loja_id);
   await renderHeaders(loja_id)
+  submitPesquisa(loja_id)
+}
+
+ function submitPesquisa(loja_id) {
+  const form = document.querySelector(".store-search-form");
+  if (!form) return;
+
+  const input = form.querySelector("input[name='query']");
+  if (!input) return;
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const query = input.value.trim();
+    if (!query) return; // evita enviar busca vazia
+
+    // // Abre a página de pesquisa com contexto da loja
+    const params = new URLSearchParams()
+    params.set("query", query)
+    
+
+    window.location.href = `${API_BASE_URL}/consumer/pesquisa/${loja_id}?${params.toString()}`
+  });
 }
 
 
