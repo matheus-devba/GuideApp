@@ -2,6 +2,8 @@ import { API_BASE_URL } from "../api/config.js"
 import { insertNomeDaLoja } from "../services/requisicoesConsumer.js";
 import { formatMoney } from '../utils/formatMoney.js'
 import { btnSearch } from '../components/searchButton.js'
+import { popupMessage, popupConfirm } from "../components/popup.js";
+
 
 
 export async function initLista() {
@@ -109,7 +111,10 @@ function ctaLista(loja_id, list_id) {
       
     // Se o usuário não marcou nenhum produto, avisa e para a execução
     if (produtosSelecionados.length === 0) {
-      alert("Por favor, selecione pelo menos um produto!");
+      popupMessage({
+      titulo: "Opa!",
+      mensagem: "Por favor, selecione pelo menos um produto!"
+      })
       return;
     }
 
@@ -151,7 +156,10 @@ function ctaLista(loja_id, list_id) {
 
   } catch (error) {
     console.error("Erro na execução do CTA:", error);
-    alert("Houve um problema ao processar seu pedido. Tente novamente.");
+          popupMessage({
+          titulo: "Opa!",
+          mensagem: "Houve um problema ao processar seu pedido. Tente novamente."
+      })
   }
   });
 }
