@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../api/config.js";
+import { formatMoney } from "../utils/formatMoney.js";
 
 export function getListaID() {
   const parts = window.location.pathname.split("/").filter(Boolean);
@@ -107,6 +108,13 @@ export async function renderSelectedProducts(selectedState, container) {
 
       if (!produtos) return ""; // Evita renderizar cards vazios caso o produto seja deletado
 
+      // Valida se há preço promocional (checa se não é null, undefined ou string vazia)
+      const temPromocao = produtos.preco_promocional !== null && produtos.preco_promocional !== "";
+      
+      // Define qual será o preço em destaque
+      const precoExibido = temPromocao ? produtos.preco_promocional : produtos.preco_normal;
+
+
       return `
         <a class="product-card-selected" data-id="${produtos.id}" href="${API_BASE_URL}/produtos/merchant/${produtos.id}">
           <input type="checkbox" class="selectProduct" checked>
@@ -114,8 +122,8 @@ export async function renderSelectedProducts(selectedState, container) {
           <img src="${API_BASE_URL}/api/produto_imagens/buscar_imagem/${produtos.id}">
           <h2>${produtos.nome}</h2>
             <div class="price-group-selected">
-              <span class="promocional-price">R$ ${produtos.preco_promocional}</span>
-              <span class="normal-price-all">R$ ${produtos.preco_normal}</span>
+              <span class="promocional-price">${formatMoney(precoExibido)}</span>
+              <span class="normal-price-all">${temPromocao ? formatMoney(produtos.preco_normal) : ""}</span>
             </div>
         </a>
       `;

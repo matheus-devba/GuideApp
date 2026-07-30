@@ -4,6 +4,7 @@ import { verificarUser, getLojaId, insertNomeDaLoja, verificacaoUsuario } from "
 import { initListas } from "./listas.js";
 import { btnShare } from '../components/shareButton.js'
 import { formatMoney } from '../utils/formatMoney.js'
+import { popupMessage, popupConfirm } from "../components/popup.js";
 
 
 const pathParts = window.location.pathname.split("/")
@@ -24,7 +25,7 @@ export async function initLista() {
   // Aguarda a lista renderizar para montar as opções e ligar o botão
   await renderLista(idLista, lojaId.id)
   renderListActions(idLista)
-  bindDeleteItem()
+  await bindDeleteItem()
 }
 
 async function renderLista(lista_id, loja_id) {
@@ -91,7 +92,7 @@ function renderListActions(lista_id) {
   `;
 }
 
-function bindDeleteItem() {
+async function bindDeleteItem() {
   const deleteBtn = optionsContainer?.querySelector('#delete');
 
   // Não quebra se o botão não existir
@@ -99,11 +100,15 @@ function bindDeleteItem() {
 
   deleteBtn.addEventListener('click', async (e) => {
     e.preventDefault();
+    
+    const confirmAction = await popupConfirm();
 
-    const confirmAction = prompt('Deseja realmente excluir esta Lista? (Digite "sim" para confirmar)');
 
-    if (confirmAction && confirmAction.toLowerCase() === "sim") {
+
+    if (confirmAction && confirmAction === true) {
       try {
+        const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
         // Rota correta no backend é /merchant/deletar/:id
         const response = await fetch(`${API_BASE_URL}/api/listas/merchant/deletar/${idLista}`, {
           method: "DELETE",
@@ -112,12 +117,20 @@ function bindDeleteItem() {
         });
 
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        alert('Lista excluída com sucesso!');
-        history.back()
+          popupMessage({
+                titulo: "Sucesso!",
+                mensagem: "Lista excluída com sucesso!"
+          })
+        await delay(2000)
         initListas()
+        history.back()
+        
       } catch (error) {
         console.error("Erro ao excluir lista:", error);
-        alert('Não foi possível excluir lista. Tente novamente mais tarde.');
+        popupMessage({
+                titulo: "Erro!",
+                mensagem: "Não foi possível excluir lista. Tente novamente mais tarde."
+          })
       }
     }
   });

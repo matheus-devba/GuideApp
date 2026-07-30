@@ -2,6 +2,7 @@ import { setImagePreview } from "../adm/formCliente.js";
 import { API_BASE_URL } from "../api/config.js"
 import { getUserId, getLojaId, insertNomeDaLoja, verificacaoUsuario } from "../services/requisicoesMerchant.js";
 import { btnShare } from '../components/shareButton.js'
+import { popupMessage, popupConfirm } from "../components/popup.js";
 
 export async function initPerfil() {
   const verificar = await verificacaoUsuario();
@@ -46,7 +47,10 @@ async function updatePerfil(lojaId) {
         const whatsappEl = document.querySelector("#whatsapp");
 
         if (storeNameEl.value =="" || whatsappEl.value == "" ) {
-            alert("Dados vazios")
+            popupMessage({
+                titulo: "Erro!",
+                mensagem: "Dados vazios"
+                })
             return
         }
 
@@ -60,7 +64,7 @@ async function updatePerfil(lojaId) {
         if (bannerFile) formData.append("banner", bannerFile)
 
         try {
-        
+            const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
             const response = await fetch(`${API_BASE_URL}/api/lojas/update/perfil/${lojaId}`, {
                 method: "PUT",
                 body: formData
@@ -71,11 +75,19 @@ async function updatePerfil(lojaId) {
             }
 
             const loja = await response.json()
-            alert("Loja Editada")
+            popupMessage({
+                titulo: "Sucesso!",
+                mensagem: "Loja Editada."
+            })
+            await delay(2000)
             console.log("Loja Editada", loja)
             history.back()
 
         } catch (error) {
+            popupMessage({
+                titulo: "Erro!",
+                mensagem: "Erro ao editar a loja. Tente novamente."
+            })
             console.error("Erro ao editar a loja", error)
         }
 

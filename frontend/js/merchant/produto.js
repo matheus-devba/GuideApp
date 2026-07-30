@@ -2,6 +2,7 @@ import { API_BASE_URL } from "../api/config.js"
 import { getLojaId, insertNomeDaLoja, verificacaoUsuario, verificarUser } from "../services/requisicoesMerchant.js";
 import { formatMoney } from '../utils/formatMoney.js'
 import { btnShare } from '../components/shareButton.js'
+import { popupMessage, popupConfirm } from "../components/popup.js";
 
 
 export async function initProduto() {
@@ -142,7 +143,7 @@ async function alternarStatusProduto() {
 
   btnMuted.addEventListener('click', async (e) => {
     e.preventDefault();
-
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     // Verifica se o botão tem a classe 'activate' (significa que o produto está oculto e o usuário quer ATIVAR)
     const querAtivar = btnMuted.classList.contains('activate');
     
@@ -153,8 +154,8 @@ async function alternarStatusProduto() {
 
     // Se for para ocultar, pede a confirmação por segurança
     if (!querAtivar) {
-      const confirmAction = prompt('Deseja realmente ocultar este produto? (Digite "sim" para confirmar)');
-      if (!confirmAction || confirmAction.toLowerCase() !== "sim") return;
+      const confirmAction = await popupConfirm();
+      if (!confirmAction || confirmAction !== true) return;
     }
 
     try {
@@ -167,21 +168,33 @@ async function alternarStatusProduto() {
 
       // Atualiza o visual do botão dependendo do sucesso da ação realizada
       if (querAtivar) {
-        alert('Produto ativado com sucesso!');
+                   
+
+        popupMessage({
+                titulo: "Sucesso!",
+                mensagem: 'Produto ativado com sucesso!'
+          })
         btnMuted.textContent = 'Ocultar Produto';
         btnMuted.className = 'product-options muted';
-
+        await delay(1000)
       } else {
-        alert('Produto oculto com sucesso!');
+        popupMessage({
+                titulo: "Sucesso!",
+                mensagem: 'Produto ocultado com sucesso!'
+        })
         btnMuted.textContent = 'Ativar Produto';
         btnMuted.className = 'product-options activate';
+         await delay(1000)
       }
 
       window.location.href = `${API_BASE_URL}/merchant/produtos.html`
 
     } catch (error) {
       console.error(`Erro ao processar requisição (${url}):`, error);
-      alert('Não foi possível alterar o status do produto.');
+      popupMessage({
+        titulo: "Erro!",
+        mensagem: 'Não foi possível alterar o status do produto.'
+      })
     }
   });
 }
@@ -198,10 +211,12 @@ async function deleteItem() {
 
   deleteBtn.addEventListener('click', async (e) => {
     e.preventDefault();
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-    const confirmAction = prompt('Deseja realmente excluir este produto? (Digite "sim" para confirmar)');
+    const confirmAction = await popupConfirm()
     
-    if (confirmAction && confirmAction.toLowerCase() === "sim") {
+    
+    if (confirmAction && confirmAction == true) {
       try {
         const response = await fetch(`${API_BASE_URL}/api/produtos/delete/${idProduto}`, {
           method: "DELETE", // Envia o método correto de exclusão para a API
@@ -210,11 +225,19 @@ async function deleteItem() {
 
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
-        alert('Produto excluído com sucesso!');
+        popupMessage({
+          titulo: "Sucesso!",
+          mensagem: 'Produto excluído com sucesso!'
+        })
+        await delay(2000)
         window.location.href = `${API_BASE_URL}/merchant/produtos.html`; // Redireciona apenas após o sucesso no banco
       } catch (error) {
         console.error("Erro ao excluir produto:", error);
-        alert('Não foi possível excluir o produto. Tente novamente mais tarde.');
+
+        popupMessage({
+          titulo: "Opa!",
+          mensagem: 'Não foi possível excluir o produto. Tente novamente mais tarde.'
+        })
       }
     }
   });

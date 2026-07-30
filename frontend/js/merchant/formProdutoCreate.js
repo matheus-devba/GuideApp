@@ -7,6 +7,7 @@ import {
   setupImageGallery,
   uploadProdutoImagens
 } from "./formProduto.shared.js";
+import { popupMessage, popupConfirm } from "../components/popup.js";
 
 
 
@@ -53,12 +54,16 @@ async function handleCreateSubmit(event) {
   event.preventDefault();
 
   try {
-    
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
     const payload = await buildProdutoPayload();
     console.log(payload)
 
     if (!payload.nome || !payload.categoria_id || Number.isNaN(payload.preco_normal)) {
-      alert("Preencha os campos obrigatórios.");
+      popupMessage({
+      titulo: "Opa!",
+      mensagem: "Preencha os campos obrigatórios."
+      })
       return;
     }
 
@@ -79,8 +84,12 @@ async function handleCreateSubmit(event) {
     // Depois que o produto existe, sobe as imagens do carrossel
     await uploadProdutoImagens(produto.id, gallery?.getItems?.() || []);
 
-    alert("Produto criado com sucesso!");
-    window.location.href = `/produtos/merchant/${produto.id}`;
+    popupMessage({
+      titulo: "Sucesso!",
+      mensagem: "Produto criado com sucesso!"
+      })
+      await delay(2000)
+    window.location.href = `/merchant/produtos.html`;
   } catch (error) {
     console.error("Erro ao criar produto:", error);
   }

@@ -1,12 +1,14 @@
 import { API_BASE_URL } from "../api/config.js";
 import {getListaID, renderProdutos, searchProductList, bindSelection, renderSelectedProducts} from "./formLista.shared.js"
 import { filterProducts } from "../components/searchProduto.js"
-import { verificacaoUsuario } from "../services/requisicoesMerchant.js";
+import { getLojaId, verificacaoUsuario } from "../services/requisicoesMerchant.js";
+import { popupMessage } from "../components/popup.js";
 
 
 export async function initFormListaCreate() {
   const verificar = await verificacaoUsuario();
   if (!verificar) return; // Se for false (não logado), para a execução aqui.
+ 
 
   const containerPrincipal = document.querySelector(".product-list-all");
   const containerSelected = document.querySelector(".selected-products");
@@ -31,13 +33,19 @@ export async function initFormListaCreate() {
 
 async function handleSubmitCreate(event) {
   // Evita recarregar a página
+  
   event.preventDefault();
 
   // Pega o nome digitado no formulário
   const nome = document.querySelector("#list-name").value.trim();
+  const lojaId = await getLojaId()
+  const loja_id = lojaId.id
 
   if (nome === "") {
-    alert("Defina o nome antes de criar a lista");
+    popupMessage({
+      titulo: "Opa!",
+      mensagem: "Defina o nome antes de criar a lista"
+    })
     return;
   }
 
@@ -49,11 +57,17 @@ async function handleSubmitCreate(event) {
     .filter((id) => Number.isInteger(id) && id > 0);
 
   if (produtos.length < 2 ) {
-    alert("Adicione ao menos 2 produtos")
+    popupMessage({
+      titulo: "Opa!",
+      mensagem: "Adicione ao menos 2 produtos"
+    })
     return
   }
 
   try {
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+
     const payload = {nome: nome, loja_id: loja_id}
     // 1. Cria a lista e obtém o ID retornado pelo backend
     const responseLista = await fetch(`${API_BASE_URL}/api/listas/merchant/new`, {
@@ -85,10 +99,17 @@ async function handleSubmitCreate(event) {
       }
     }
 
-    alert("Lista criada com sucesso!");
-    window.location.href = `/listas/merchant/${idLista}`;
+    popupMessage({
+      titulo: "Sucesso!",
+      mensagem: "Lista criada com sucesso!"
+    })
+    await delay(2000)
+    window.location.href = `${API_BASE_URL}/merchant/listas.html`;
   } catch (error) {
     console.error("Erro ao processar lista:", error);
-    alert(error.message || "Não foi possível criar a lista.");
+    popupMessage({
+      titulo: "Erro!",
+      mensagem: "Não foi possível criar a lista. Tente novamente"
+    })
   }
 }

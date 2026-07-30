@@ -9,6 +9,7 @@ import {
   uploadProdutoImagens,
 } from "./formProduto.shared.js";
 import { verificarUser, insertNomeDaLoja, getLojaId, verificacaoUsuario } from "../services/requisicoesMerchant.js";
+import { popupMessage, popupConfirm } from "../components/popup.js";
 
 
 let gallery = null;
@@ -38,7 +39,10 @@ export async function initEditProduto() {
   const produto = await fetchProduto(produtoId);
 
   if (!produto) {
-    alert("Produto não encontrado.");
+    popupMessage({
+      titulo: "Erro!",
+      mensagem: "Produto não encontrado."
+    })
     return;
   }
 
@@ -95,6 +99,8 @@ function preencherCampos(produto) {
 async function handleEditSubmit(event, produtoId) {
   event.preventDefault();
   try {
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
     const payload = await buildProdutoPayload();
     // 1. Atualiza dados do produto (nome, preço, etc.)
     const response = await fetch(`${API_BASE_URL}/api/produtos/update/${produtoId}`, {
@@ -118,9 +124,17 @@ async function handleEditSubmit(event, produtoId) {
     }
     // 5. Envia as fotos NOVAS adicionadas (arquivos do tipo File)
     await uploadProdutoImagens(produtoId, itensAtuais);
-    alert("Produto e imagens atualizados com sucesso!");
-    window.location.href = `/produtos/merchant/${produtoAtualizado.id || produtoId}`;
+    popupMessage({
+      titulo: "Sucesso!",
+      mensagem: "Produto e imagens atualizados com sucesso!"
+    })
+    await delay(2000)
+    window.location.href = `/merchant/produtos.html`;
   } catch (error) {
+    popupMessage({
+      titulo: "Erro!",
+      mensagem: "Erro ao atualizar produto. Tente novamente."
+    })
     console.error("Erro ao atualizar produto:", error);
   }
 }

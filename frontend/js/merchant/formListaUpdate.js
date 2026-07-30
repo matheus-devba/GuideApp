@@ -2,6 +2,7 @@ import { API_BASE_URL } from "../api/config.js";
 import {getListaID, renderProdutos, searchProductList, bindSelection, renderSelectedProducts} from "./formLista.shared.js"
 import { filterProducts } from "../components/searchProduto.js"
 import { verificacaoUsuario } from "../services/requisicoesMerchant.js";
+import { popupMessage } from "../components/popup.js";
 
 
 
@@ -52,7 +53,10 @@ export async function initFormListaUpdate() {
       const hasProdutsSelected = containerProducts ? containerProducts.children.length > 0 : false;
 
       if (hasProdutsSelected) {
-        alert("Salve a lista antes de sair.");
+        popupMessage({
+          titulo: "Sucesso!",
+          mensagem: "Salve a lista antes de sair."
+        })
         return; 
       }
       history.back();
@@ -76,7 +80,10 @@ async function handleSubmitEdit(event) {
   const lista_id = Number(getListaID());
 
   if (!lista_id) {
-    alert("ID da lista não encontrado.");
+    popupMessage({
+      titulo: "Erro!",
+      mensagem: "Lista não encontrada!"
+    })
     return;
   }
 
@@ -91,7 +98,10 @@ async function handleSubmitEdit(event) {
     .filter((id) => Number.isInteger(id) && id > 0);
 
   try {
+    const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
     // Primeiro salva o nome (rota de listas)
+
     if (nome.length > 0) {
       const rNome = await fetch(`${API_BASE_URL}/api/listas/merchant/update/${lista_id}`, {
         method: "PUT",
@@ -117,10 +127,17 @@ async function handleSubmitEdit(event) {
       throw new Error(`HTTP ${rProdutos.status} - ${erroProdutos.message || "Erro ao atualizar produtos"}`);
     }
 
-    alert("Lista atualizada com sucesso!");
-    window.location.href = `/listas/merchant/${lista_id}`;
+    popupMessage({
+      titulo: "Sucesso!",
+      mensagem: "Lista atualizada com sucesso!"
+    })
+    await delay(2000)
+    window.location.href = `${API_BASE_URL}/merchant/listas.html`;
   } catch (error) {
     console.error("Erro ao atualizar lista:", error);
-    alert("Não foi possível atualizar a lista.");
+    popupMessage({
+      titulo: "Erro!",
+      mensagem: "Não foi possível atualizar a lista.Tente Novamente"
+    })
   }
 }

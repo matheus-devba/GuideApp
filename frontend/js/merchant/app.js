@@ -4,7 +4,6 @@ import { initProduto } from "../merchant/produto.js";
 import { initCreateProduto } from "./formProdutoCreate.js";
 import { initEditProduto } from "./formProdutoEdit.js";
 import { initListas } from "../merchant/listas.js";
-import { initDestaques } from "../merchant/destaques.js";
 import { initLista } from "./lista.js";
 import { initFormListaUpdate } from "./formListaUpdate.js";
 import { initFormListaCreate } from "./formListaCreate.js";
