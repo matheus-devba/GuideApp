@@ -1,6 +1,7 @@
 import { API_BASE_URL } from "../api/config.js"
 import { insertNomeDaLoja } from "../services/requisicoesConsumer.js";
 import { formatMoney } from '../utils/formatMoney.js'
+import { btnSearch } from '../components/searchButton.js'
 
 export async function initProduto() {
   const params = new URLSearchParams(window.location.search)
@@ -9,15 +10,20 @@ export async function initProduto() {
   await insertNomeDaLoja(loja_id)
   await renderProduto(produto_id, loja_id);
   
+  
 }
+
 
 
 async function renderProduto (produto_id, loja_id) {
   const container = document.querySelector(".product-page");
   if (!container) return;
 
- const responseProdutos = await fetch(`${API_BASE_URL}/api/produtos/${produto_id}`);
+
+  const responseProdutos = await fetch(`${API_BASE_URL}/api/produtos/${produto_id}`);
   const productSelected = await responseProdutos.json();
+
+  btnSearch(`/produtos/${productSelected.id}?loja_id=${loja_id}&produto_id=${productSelected.id}`)
 
   if (!productSelected) return;
 
@@ -55,12 +61,18 @@ async function renderProduto (produto_id, loja_id) {
       inicializarCarrossel();
     }
 
+
+   
+
   const initialInfo = document.querySelector('.initial-info')
     // Valida se há preço promocional (checa se não é null, undefined ou string vazia)
   const temPromocao = productSelected.preco_promocional !== null && productSelected.preco_promocional !== "";
   
   // Define qual será o preço em destaque
   const precoExibido = temPromocao ? productSelected.preco_promocional : productSelected.preco_normal;
+
+
+
 
   let textoMensagem = `Olá \u{1F60D}! Vim do Guide e tenho interesse no produto ${productSelected.nome} no valor de ${formatMoney(precoExibido)}\n\n`;
 
