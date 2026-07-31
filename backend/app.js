@@ -66,6 +66,58 @@ app.get("/lojas/:id", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "loja.html"))
 })
 
+app.get("/produtos/merchant/new", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "formProduto.html"))
+})
+
+
+app.get("/produtos/update/:id", (req, res) => {
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+
+  res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "formProduto.html"))
+})
+
+
+app.get("/produtos/merchant/:id", (req, res) => { // tem que ser merchant/produtos/id
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+
+  res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "produto.html"))
+})
+
+
+app.get("/listas/merchant/new", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "formLista.html"))
+})
+
+
+app.get("/listas/merchant/:id", (req, res) => { // tem que ser merchant/listas/id
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+
+  res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "lista.html"))
+})
+
+app.get("/lista-produto/update/:id", (req, res) => { 
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+
+  res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "formLista.html"))
+})
+
 app.get("/produtos/:id", (req, res) => {
     const { id } = req.params
 
@@ -103,16 +155,6 @@ app.get("/categorias/:id", (req, res) => {
   }
 
   res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "categoria.html"))
-})
-
-app.get("/produtos/:id", (req, res) => {
-  const { id } = req.params
-
-  if (!/^\d+$/.test(id)) {
-    return res.status(404).send("Página não encontrada")
-  }
-
-  res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "produto.html"))
 })
 
 app.get("/consumer/pesquisa/:id", (req, res) => {
@@ -165,61 +207,6 @@ app.get("/adm/categorias/:id", (req, res) => {
 
   res.sendFile(path.join(__dirname, "..", "frontend", "adm", "formNewCategoria.html"))
 })
-
-app.get("/produtos/merchant/new", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "formProduto.html"))
-})
-
-
-app.get("/produtos/update/:id", (req, res) => {
-  const { id } = req.params
-
-  if (!/^\d+$/.test(id)) {
-    return res.status(404).send("Página não encontrada")
-  }
-
-  res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "formProduto.html"))
-})
-
-
-app.get("/produtos/merchant/:id", (req, res) => { // tem que ser merchant/produtos/id
-  const { id } = req.params
-
-  if (!/^\d+$/.test(id)) {
-    return res.status(404).send("Página não encontrada")
-  }
-
-  res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "produto.html"))
-})
-
-
-app.get("/listas/merchant/new", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "formLista.html"))
-})
-
-app.get("/listas/merchant/:id", (req, res) => { // tem que ser merchant/listas/id
-  const { id } = req.params
-
-  if (!/^\d+$/.test(id)) {
-    return res.status(404).send("Página não encontrada")
-  }
-
-  res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "lista.html"))
-})
-
-
-
-
-app.get("/lista-produto/update/:id", (req, res) => { 
-  const { id } = req.params
-
-  if (!/^\d+$/.test(id)) {
-    return res.status(404).send("Página não encontrada")
-  }
-
-  res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "formLista.html"))
-})
-
 
 
 
