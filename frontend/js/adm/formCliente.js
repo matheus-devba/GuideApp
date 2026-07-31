@@ -24,6 +24,8 @@ function createClient() {
         formData.append("whatsapp", document.querySelector("#whatsapp").value)
         formData.append("ativo", document.querySelector("#ativo").value)
 
+        console.log(formData)
+
         const logoFile = document.querySelector("#logo-file")?.files[0]
         const bannerFile = document.querySelector("#banner-file")?.files[0]
 
