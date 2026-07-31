@@ -19,7 +19,7 @@ function createClient() {
         formData.append("nome", document.querySelector("#store-name").value)
         formData.append("endereco", document.querySelector("#endereco").value)
         formData.append("telefone", document.querySelector("#telefone").value)
-        formData.append("nicho", document.querySelector("#nicho").value)
+        formData.append("nicho_id", document.querySelector("#nicho_id").value)
         formData.append("descricao", document.querySelector("#descricao").value)
         formData.append("whatsapp", document.querySelector("#whatsapp").value)
         formData.append("ativo", document.querySelector("#ativo").value)
