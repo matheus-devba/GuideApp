@@ -94,7 +94,7 @@ async function renderCliente(id) {
         
         <div class="form-group">
             <label for="rota">Rota</label>
-            <input id="rota" name="rota" value="${API_BASE_URL}/lojas/${data.id}" disabled>
+            <input id="rota" name="rota" value="${API_BASE_URL}/lojas/${data.id}?loja_id=${data.id}" disabled>
         </div>
 
         <button type="submit" id="submit-button" class="submit-button">Salvar</button>
