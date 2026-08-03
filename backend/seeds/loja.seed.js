@@ -1,4 +1,5 @@
 const pool = require("../database/connection.js")
+//nao vai funcionar as imagens por conta do supabase
 
 async function seedLojas() {
 

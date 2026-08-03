@@ -1,4 +1,6 @@
 const LojaService = require("../services/loja.service.js")
+const { uploadParaSupabase } = require("../middleware/helperSupabase.js")
+
 
 class LojaController {
     async buscarAtivas(req, res) {
@@ -36,24 +38,25 @@ class LojaController {
     }
 
     async criar(req, res) {
-        try {
-            const { body, files } = req
+    try {
+        const { body, files } = req
+        const logoFile = files?.logo?.[0]
+        const bannerFile = files?.banner?.[0]
 
-            const logoFile = files?.logo?.[0]
-            const bannerFile = files?.banner?.[0]
+        const logoUrl = logoFile ? await uploadParaSupabase(logoFile, "lojas", "logos") : null
+        const bannerUrl = bannerFile ? await uploadParaSupabase(bannerFile, "lojas", "banners") : null
 
-            const loja = await LojaService.criar({
+        const loja = await LojaService.criar({
             ...body,
-            logo_url: logoFile ? `/uploads/logo/${logoFile.filename}` : null,
-            banner_url: bannerFile ? `/uploads/banners/${bannerFile.filename}` : null,
-            })
-            return res.status(201).json(loja)
-        } catch (error) {
-            return res.status(400).json({
-                message: error.message
-            })
-        }
+            logo_url: logoUrl,
+            banner_url: bannerUrl,
+        })
+
+        return res.status(201).json(loja)
+    } catch (error) {
+        return res.status(400).json({ message: error.message })
     }
+}
 
     async atualizar(req, res) {
         try {
@@ -63,11 +66,14 @@ class LojaController {
 
             const logoFile = files?.logo?.[0]
             const bannerFile = files?.banner?.[0]
+            
+            const logoUrl = logoFile ? await uploadParaSupabase(logoFile, "lojas", "logos") : null
+            const bannerUrl = bannerFile ? await uploadParaSupabase(bannerFile, "lojas", "banners") : null
 
             const loja = await LojaService.atualizar(id, {
             ...body,
-            logo_url: logoFile ? `/uploads/logo/${logoFile.filename}` : current.logo_url,
-            banner_url: bannerFile ? `/uploads/banners/${bannerFile.filename}` : current.banner_url,
+            logo_url: logoFile ? logoUrl : current.logo_url,
+            banner_url: bannerFile ? bannerUrl : current.banner_url,
             })
 
             return res.status(200).json(loja)
