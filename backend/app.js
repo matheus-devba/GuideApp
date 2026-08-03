@@ -48,7 +48,9 @@ app.use("/api/lista-produtos", listaProdutoRoutes)
 app.use("/api/usuarios", usuariosRoutes)
 
 
-
+router.get("/health", (req, res) => {
+  res.status(200).send("OK")
+})
 
 
 //emulação front end
