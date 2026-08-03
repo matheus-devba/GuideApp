@@ -99,7 +99,6 @@ async function renderCliente(id) {
 
         <button type="submit" id="submit-button" class="submit-button">Salvar</button>
 
-
         
     `
 }
