@@ -17,12 +17,10 @@ export async function initLoja() {
     "Dê uma olhada nessa loja que encontrei no Guide:"
   )
 
-  await renderProdutos(loja_id)
   await renderMedia(loja_id)
-  await insertNomeDaLoja(loja_id)
-  await renderLists(loja_id);
-  await renderDestaque(loja_id)
-  await renderCategoria(loja_id);
+  // await renderLists(loja_id);
+  // await renderDestaque(loja_id)
+  // await renderCategoria(loja_id);
   await renderHeaders(loja_id)
   submitPesquisa(loja_id)
 }
@@ -93,6 +91,7 @@ async function renderMedia(loja_id) {
 
   const response = await fetch(`${API_BASE_URL}/api/lojas/${loja_id}`)
   const loja = await response.json()
+  await insertNomeDaLoja(loja_id)
 
   container.innerHTML = `
     <img class="banner-media" src="${loja.banner_url}" alt="Banner da loja">
