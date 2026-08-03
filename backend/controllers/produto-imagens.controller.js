@@ -1,3 +1,4 @@
+const { uploadParaSupabase } = require('../middleware/helperSupabase.js')
 const ProdutoImagensService = require('../services/produto-imagens.service.js')
 
 class ProdutoImagensController {
@@ -26,10 +27,16 @@ async criarImagens(req, res) {
         })
       }
 
-      const imagens = files.map((file, index) => ({
-        url: `/uploads/produto_imagens/${file.filename}`,
-        ordem: index + 1
-      }))
+      const imagens = await Promise.all(
+            files.map(async (file, index) => ({
+              url: await uploadParaSupabase(file, "produtos", "imagens"),
+              ordem: index + 1,
+            }))
+          )
+      // const imagens = files.map((file, index) => ({
+      //   url: `/uploads/produto_imagens/${file.filename}`,
+      //   ordem: index + 1
+      // }))
 
       const result = await ProdutoImagensService.criarImagens(id, imagens)
       return res.status(201).json(result)

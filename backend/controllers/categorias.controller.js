@@ -1,3 +1,4 @@
+const { uploadParaSupabase } = require("../middleware/helperSupabase.js")
 const CategoriaService = require("../services/categorias.service.js")
 
 class CategoriasController {
@@ -59,10 +60,11 @@ class CategoriasController {
             const { body, files } = req
 
             const iconFile = files?.icon?.[0]
+            const iconUrl = iconFile ? await uploadParaSupabase(iconFile, "categorias", "icons") : null
 
             const categoria = await CategoriaService.criar({
             ...body,
-            icon_url: iconFile ? `/uploads/icons_categorias/${iconFile.filename}` : null,
+            icon_url: iconFile ? iconUrl : null,
             })
             return res.status(201).json(categoria)
         } catch (error) {
@@ -83,10 +85,11 @@ class CategoriasController {
             const current = await CategoriaService.buscarPorId(id) // para pegar a imagem atual (caso ela não for alterada para nao dá null)
 
             const iconFile = files?.icon?.[0]
+            const iconUrl = iconFile ? await uploadParaSupabase(iconFile, "categorias", "icons") : null
 
             const categoria = await CategoriaService.atualizar(id, {
             ...body,
-            icon_url: iconFile ? `/uploads/icons_categorias/${iconFile.filename}` : current.icone_url,
+            icon_url: iconFile ? iconUrl : current.icone_url,
             })
 
             return res.status(200).json(categoria)

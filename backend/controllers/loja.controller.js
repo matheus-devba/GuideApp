@@ -93,10 +93,13 @@ class LojaController {
             const logoFile = files?.logo?.[0]
             const bannerFile = files?.banner?.[0]
 
+            const logoUrl = logoFile ? await uploadParaSupabase(logoFile, "lojas", "logos") : null
+            const bannerUrl = bannerFile ? await uploadParaSupabase(bannerFile, "lojas", "banners") : null
+
             const loja = await LojaService.atualizarPerfil(id, {
             ...body,
-            logo_url: logoFile ? `/uploads/logo/${logoFile.filename}` : current.logo_url,
-            banner_url: bannerFile ? `/uploads/banners/${bannerFile.filename}` : current.banner_url,
+            logo_url: logoFile ? logoUrl : current.logo_url,
+            banner_url: bannerFile ? bannerUrl : current.banner_url,
             })
 
             return res.status(200).json(loja)
