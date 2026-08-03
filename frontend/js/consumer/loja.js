@@ -6,23 +6,65 @@ import { btnShare } from '../components/shareButton.js'
 
 
 
-export async function initLoja() {
-  const params = new URLSearchParams(window.location.search)
-  const loja_id = Number(params.get("loja_id"))
-  const produtos = await renderProdutos(loja_id)
-  if(produtos.length === 0) return
+const requestJSON = async (url) => {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`HTTP ${response.status}`);
+  return response.json();
+};
 
-  btnShare(`/lojas/${loja_id}?loja_id=${loja_id}`,
+function renderLojaTopo(loja, loja_id) {
+  const container = document.querySelector(".media-store");
+  if (container) {
+    container.innerHTML = `
+      <img class="banner-media" src="${loja.banner_url}" alt="Banner da loja" loading="eager" fetchpriority="high" decoding="async" width="860" height="380">
+      <img class="logo-media" src="${loja.logo_url}" alt="Logo da loja" loading="eager" decoding="async" width="90" height="90">
+    `;
+  }
+
+  const title = document.querySelector(".store-title");
+  if (title) title.textContent = loja.nome;
+
+  btnShare(
+    `/lojas/${loja_id}?loja_id=${loja_id}`,
     "Olha o que achei no Guide!",
     "Dê uma olhada nessa loja que encontrei no Guide:"
-  )
+  );
+}
 
-  await renderMedia(loja_id)
-  // await renderLists(loja_id);
-  // await renderDestaque(loja_id)
-  // await renderCategoria(loja_id);
-  await renderHeaders(loja_id)
-  submitPesquisa(loja_id)
+export async function initLoja() {
+  const params = new URLSearchParams(window.location.search);
+  const loja_id = Number(params.get("loja_id"));
+  if (!loja_id) return;
+
+  const [loja, produtos, listas, destaques, categorias] = await Promise.all([
+    requestJSON(`${API_BASE_URL}/api/lojas/${loja_id}`),
+    requestJSON(`${API_BASE_URL}/api/produtos/ativos/${loja_id}`),
+    requestJSON(`${API_BASE_URL}/api/listas/lojas/${loja_id}`),
+    requestJSON(`${API_BASE_URL}/api/produtos/destaques/${loja_id}`),
+    requestJSON(`${API_BASE_URL}/api/categorias/lojas/${loja_id}`),
+  ]);
+
+  renderLojaTopo(loja, loja_id);
+
+  if (!produtos.length) return;
+
+  await Promise.all([
+    renderProdutosFromData(produtos, loja_id),
+    renderListsFromData(listas,produtos, loja_id),
+    renderDestaqueFromData(destaques, loja_id),
+    renderCategoriaFromData(categorias, loja_id),
+  ]);
+
+  //headers
+  const containerLista = document.querySelector(".product-list.listas");
+  const containerDestaque = document.querySelector(".product-list.destaques");
+  const containerCategoria = document.querySelector(".list-category");
+
+  if (containerLista && !listas.length) containerLista.classList.add("hidden");
+  if (containerDestaque && !destaques.length) containerDestaque.classList.add("hidden");
+  if (containerCategoria && !categorias.length) containerCategoria.closest(".product-list")?.classList.add("hidden");
+
+  submitPesquisa(loja_id);
 }
 
  function submitPesquisa(loja_id) {
@@ -48,65 +90,9 @@ export async function initLoja() {
 }
 
 
- async function renderHeaders (loja_id) {
-  const listas = await renderLists(loja_id)
-
-  const containerLista = document.querySelector('.product-list.listas');
-
-  if (containerLista && listas.length === 0) {
-    containerLista.classList.add("hidden");
-  }
-
-  const destaques = await renderDestaque(loja_id)
-
-  const containerDestaque = document.querySelector('.product-list.destaques');
-
-  if (containerDestaque && destaques.length === 0) {
-    containerDestaque.classList.add("hidden");
-  }
-
-  const headerDestaque = document.querySelector('.product-strip-header.destaques')
-  if (!headerDestaque) return
-
-  headerDestaque.innerHTML =  `
-    <h3 class="sections-title">Em destaque</h3>
-    <a class="product-view-all" href="${API_BASE_URL}/destaques/${loja_id}">Ver tudo</a>
-  `
-
-  
-  const categorias = await renderCategoria(loja_id)
-
-  const containerCategorias = document.querySelector('.product-list.categorias');
-
-  if (containerCategorias && categorias.length === 0) {
-    containerCategorias.classList.add("hidden");
-  }
-
-  //para produtos não precisa
-}
-
-async function renderMedia(loja_id) {
-  const container = document.querySelector('.media-store')
-  if (!container) return;
-
-  const response = await fetch(`${API_BASE_URL}/api/lojas/${loja_id}`)
-  const loja = await response.json()
-  await insertNomeDaLoja(loja_id)
-
-  container.innerHTML = `
-    <img class="banner-media" src="${loja.banner_url}" alt="Banner da loja">
-    <img class="logo-media" src="${loja.logo_url}" alt="Logo da loja"></img>
-  `
-
-}
-
-
-async function renderLists (loja_id) {
+async function renderListsFromData (listas, produtos, loja_id) {
   const container = document.querySelector('.list-grid');
   if (!container) return;
-
-  const response = await fetch(`${API_BASE_URL}/api/listas/lojas/${loja_id}`)
-  const listas = await response.json()
 
 
   const html = await Promise.all(
@@ -114,7 +100,6 @@ async function renderLists (loja_id) {
       const responseProdutos = await fetch(
         `${API_BASE_URL}/api/lista-produtos/lista/${list.id}`
       );
-      const produtos = await responseProdutos.json();
       
       if(produtos.length < 1) return //caso nao tiver produtos (mas posso colocar um <=)
 
@@ -156,12 +141,11 @@ async function renderLists (loja_id) {
   return listas
 }
 
-async function renderDestaque(loja_id) {
+async function renderDestaqueFromData(destaques, loja_id) {
  const container = document.querySelector(".product-grid");
   if (!container) return;
 
-  const response = await fetch(`${API_BASE_URL}/api/produtos/destaques/${loja_id}`);
-  const products = await response.json();
+  const products = destaques
   
 
   container.innerHTML = products
@@ -201,12 +185,9 @@ async function renderDestaque(loja_id) {
 }
 
 
-async function renderProdutos (loja_id) {
+async function renderProdutosFromData (products, loja_id) {
   const container = document.querySelector(".product-list-all");
   if (!container) return;
-
-  const response = await fetch(`${API_BASE_URL}/api/produtos/ativos/${loja_id}`);
-  const products = await response.json();
 
   container.innerHTML = products
     .map(
@@ -244,12 +225,11 @@ async function renderProdutos (loja_id) {
     return products
 }
 
-async function renderCategoria(loja_id) {
+async function renderCategoriaFromData(categorias, loja_id) {
   const container = document.querySelector(".list-category");
   if (!container) return;
   // Busca apenas as categorias que possuem produtos dessa loja
-  const response = await fetch(`${API_BASE_URL}/api/categorias/lojas/${loja_id}`);
-  const categorias = await response.json();
+
   container.innerHTML = categorias
     .map((cat) => `
           <a class="circle-category" href="${API_BASE_URL}/categorias/${loja_id}?categoria_id=${cat.id}&loja_id=${loja_id}">          <img src="${cat.icone_url || '../assets/images/default.webp'}" class="category-image">
