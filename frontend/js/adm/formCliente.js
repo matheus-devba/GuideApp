@@ -1,4 +1,5 @@
 
+import { uploadParaSupabase } from "../../../backend/middleware/helperSupabase.js"
 import { API_BASE_URL } from "../api/config.js"
 import { renderClientes } from "./clientes.js"
 
@@ -24,13 +25,29 @@ function createClient() {
         formData.append("whatsapp", document.querySelector("#whatsapp").value)
         formData.append("ativo", document.querySelector("#ativo").value)
 
-        console.log(formData)
-
+        // req.files['logo'] e req.files['banner'] serão arrays
+        
         const logoFile = document.querySelector("#logo-file")?.files[0]
         const bannerFile = document.querySelector("#banner-file")?.files[0]
 
-        if (logoFile) formData.append("logo", logoFile)
-        if (bannerFile) formData.append("banner", bannerFile)
+        let logoUrl = null
+        let bannerUrl = null
+
+        // Nome do bucket que você criou no Supabase (ex: 'lojas')
+        const BUCKET_NAME = "lojas"
+
+        // Processa o upload do logo
+        if (logoFile) {
+            logoUrl = await uploadParaSupabase(logoFile, BUCKET_NAME, "logos")
+        }
+
+        // Processa o upload do banner
+        if (bannerFile) {
+            bannerUrl = await uploadParaSupabase(bannerFile, BUCKET_NAME, "banners")
+        }
+
+        if (logoFile) formData.append("logo", logoUrl)
+        if (bannerFile) formData.append("banner", bannerUrl)
 
         try {
         

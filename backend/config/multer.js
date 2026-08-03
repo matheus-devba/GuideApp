@@ -31,6 +31,15 @@ const storage = multer.diskStorage({
   },
 })
 
-const upload = multer({ storage })
+// const upload = multer({ storage })
+//todo o codigo acima ficou obsoleto
+
+// Em vez de salvar em pastas locais, mantemos o arquivo no buffer da RAM
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 5 * 1024 * 1024 // Exemplo: limite de 5MB por arquivo
+  }
+})
 
 module.exports = upload
