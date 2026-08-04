@@ -4,7 +4,7 @@ import { pedirHashAoBackend } from "../components/gerenciamentoHash.js"
 import { verificacaoAdm } from "../services/requisicoesAdm.js";
 
 
-export function initNewAdm() {
+export async function initNewAdm() {
 const verificar = await verificacaoAdm();
 if (!verificar) return; // Se for false (não logado), para a execução aqui.
 

@@ -6,13 +6,14 @@ import { verificacaoAdm } from "../services/requisicoesAdm.js"
 export async function initClientes() {
     const pathParts = window.location.pathname.split("-")
     const id = pathParts[pathParts.length - 1] // pega sempre o ultimo pathParts que é o ID
+
+    const verificar = await verificacaoAdm();
+    if (!verificar) return; // Se for false (não logado), para a execução aqui.
+
     await renderClientes()
     renderMenuAdm()
     btnNewClient()
 
-    
-    const verificar = await verificacaoAdm();
-    if (!verificar) return; // Se for false (não logado), para a execução aqui.
     
     const btnHidden = document.querySelectorAll(".btn.btn-hidden")
     const btnActive = document.querySelectorAll(".btn.btn-active")
