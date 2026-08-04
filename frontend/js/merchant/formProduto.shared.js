@@ -201,7 +201,7 @@ export function setupImageGallery({
         <input type="file" id="${inputId}" accept="image/*" multiple hidden>
         <label for="${inputId}" class="add-block-label">
           <span class="camera-icon">📷</span>
-          <span class="add-text">Adicionar fotos e vídeos</span>
+          <span class="add-text">Adicionar fotos</span>
         </label>
       `;
       mediaProduct.appendChild(addBlock);

@@ -19,9 +19,12 @@ async function renderProduto (produto_id, loja_id) {
   const container = document.querySelector(".product-page");
   if (!container) return;
 
-
-  const responseProdutos = await fetch(`${API_BASE_URL}/api/produtos/${produto_id}`);
-  const productSelected = await responseProdutos.json();
+  try {
+    const [loja, productSelected, imagens] = await Promise.all([
+      fetch(`${API_BASE_URL}/api/lojas/${loja_id}`).then(res => res.json()),
+      fetch(`${API_BASE_URL}/api/produtos/${produto_id}`).then(res => res.json()),
+      fetch(`${API_BASE_URL}/api/produto_imagens/buscar_imagens/${produto_id}`).then(res => res.json()),
+    ]);
 
   btnShare(`/produtos/${productSelected.id}?loja_id=${loja_id}&produto_id=${productSelected.id}`,
     "Olha o que achei no Guide!",
@@ -34,12 +37,6 @@ async function renderProduto (produto_id, loja_id) {
 
   const responseCategoria = await fetch(`${API_BASE_URL}/api/categorias/${categoriaId}`);
   const categoria = await responseCategoria.json();
-
-  const responseLoja = await fetch(`${API_BASE_URL}/api/lojas/${loja_id}`)
-  const loja = await responseLoja.json()
-
-  const responseImagens = await fetch(`${API_BASE_URL}/api/produto_imagens/buscar_imagens/${produto_id}`)
-  const imagens = await responseImagens.json()
 
   const mediaProduct = document.querySelector('.media-product')
 
@@ -121,7 +118,10 @@ async function renderProduto (produto_id, loja_id) {
       <p class="description">${productSelected.descricao} </p>
     </div>
   `
-
+} catch (error) {
+    console.error("Erro ao buscar dados:", error);
+    return;
+  }
 
   
 }
