@@ -1,7 +1,11 @@
 import { API_BASE_URL } from "../api/config.js"
+import { verificacaoAdm } from "../services/requisicoesAdm.js";
 import { renderCategorias } from "./categorias.js"
 
 export async function initNewCategoria () {
+    const verificar = await verificacaoAdm();
+    if (!verificar) return; // Se for false (não logado), para a execução aqui.
+
     await createCategoria()
     setImagePreview()
 }

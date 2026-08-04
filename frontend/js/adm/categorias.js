@@ -1,10 +1,15 @@
 import { API_BASE_URL } from "../api/config.js"
 import { formatDateTime, formatUpdatedAt } from "../utils/formatDate.js"
 import { renderMenuAdm } from "../components/renderMenuAdm.js"
+import { verificacaoAdm } from "../services/requisicoesAdm.js"
 
 export async function initCategorias() {
     const pathParts = window.location.pathname.split("-")
     const id = pathParts[pathParts.length - 1] // pega sempre o ultimo pathParts que é o ID
+
+    const verificar = await verificacaoAdm();
+    if (!verificar) return; // Se for false (não logado), para a execução aqui.
+
     await renderCategorias()
     renderMenuAdm()
     btnNewCategoria()

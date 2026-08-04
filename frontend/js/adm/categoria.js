@@ -1,13 +1,18 @@
 import { API_BASE_URL } from "../api/config.js"
+import { verificacaoAdm } from "../services/requisicoesAdm.js";
 import { renderCategorias } from "./categorias.js"
 
 export async function initCategoria() {
 
     const pathParts = window.location.pathname.split("/")
     const id = pathParts[pathParts.length - 1] // pega sempre o ultimo pathParts que é o ID
+    const verificar = await verificacaoAdm();
+    if (!verificar) return; // Se for false (não logado), para a execução aqui.
+
     await renderCategoria(id)
     await editCategoria(id)
     setImagePreview()
+
 }
 
 async function renderCategoria(id) {

@@ -1,10 +1,14 @@
 import { API_BASE_URL } from "../api/config.js"
 import { renderMenuAdm } from "../components/renderMenuAdm.js"
+import { verificacaoAdm } from "../services/requisicoesAdm.js";
 import { formatDateTime, formatUpdatedAt } from "../utils/formatDate.js"
 
 
 
 export async function initUsuarios() {
+    const verificar = await verificacaoAdm();
+    if (!verificar) return; // Se for false (não logado), para a execução aqui.
+
     await renderMenuAdm()
     await renderUsuarios()
     btnNewUser()

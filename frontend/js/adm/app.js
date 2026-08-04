@@ -9,6 +9,7 @@ import { initCategoria } from "./categoria.js"
 import { initUsuarios } from "./usuarios.js"
 import { initUsuario } from "./usuario.js"
 import { initNewUsuario, initNewAdm } from "./formUsuario.js"
+import { initHome } from "./home.js"
 
 
 const path = window.location.pathname
@@ -38,4 +39,8 @@ if (path === "/adm/usuarios") {
   initNewAdm()
 } else if (/^\/adm\/usuarios\/\d+$/.test(path)) {
   initUsuario()
+}
+
+if (path === "/adm/home" || path.includes("/adm/home.html")) {
+  initHome()
 }

@@ -1,13 +1,20 @@
 import { API_BASE_URL } from "../api/config.js"
+import { verificacaoAdm } from "../services/requisicoesAdm.js"
 import { renderClientes } from "./clientes.js"
 
 export async function initCliente() {
 
     const pathParts = window.location.pathname.split("/")
     const id = pathParts[pathParts.length - 1] // pega sempre o ultimo pathParts que é o ID
+
+    const verificar = await verificacaoAdm();
+    if (!verificar) return; // Se for false (não logado), para a execução aqui.
+    
     await renderCliente(id)
     await editClient(id)
     setImagePreview()
+
+
 }
 
 async function renderCliente(id) {
