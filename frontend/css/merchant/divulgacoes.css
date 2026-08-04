@@ -1,0 +1,74 @@
+@import  url("../merchant/home.css");
+/* @import url("../merchant/listas.css") */
+
+/* Container em grade compacta */
+.divulgacoes-list-all {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  padding: 12px;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* O Card */
+.divulgacao-card {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #333333;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  padding: 8px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.divulgacao-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Espaço onde fica o Emoji (Antes era a Imagem) */
+.divulgacao-card-images {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 8px;
+  background-color: #f0f2f5; /* Fundo cinza bem sutil para destacar o emoji */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* O tamanho e alinhamento do Emoji */
+.card-emoji {
+  font-size: 1.4rem; /* Tamanho ideal para o emoji */
+  line-height: 1;
+}
+
+/* Conteúdo de Texto */
+.divulgacao-content {
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+}
+
+.divulgacao-content h4 {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.divulgacao-content p {
+  margin: 0;
+  font-size: 0.72rem;
+  color: #8c8c8c;
+}
