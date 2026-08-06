@@ -1,8 +1,11 @@
 @import url("../global.css");
 @import url("../reset.css");
+@import url("../components/featured-card.css");
 @import url("../components/navbar.css");
 @import url("../components/card-product.css");
-@import url("../merchant/produto.css")  ;;
+@import url("../merchant/produto.css");
+
+
 
 /* Configuação do campo da imagem do produto */
 .media-product {

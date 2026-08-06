@@ -48,7 +48,7 @@ app.use("/api/lista-produtos", listaProdutoRoutes)
 
 app.use("/api/usuarios", usuariosRoutes)
 
-app.use("/eventos", eventoRoutes)
+app.use("/api/eventos", eventoRoutes)
 
 app.get("/health", (req, res) => {
   res.status(200).send("OK")

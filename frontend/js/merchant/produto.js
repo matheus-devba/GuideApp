@@ -72,6 +72,8 @@ export async function renderProduto (productId, loja_id) {
   
   // Define qual será o preço em destaque
   const precoExibido = temPromocao ? productSelected.preco_promocional : productSelected.preco_normal;
+  const countViews = productSelected.views >= 2 ? productSelected.views + " visualizações" : "" 
+
 
   initialInfo.innerHTML = ` 
     
@@ -84,9 +86,9 @@ export async function renderProduto (productId, loja_id) {
     <div class="left-group">
         <span class="promocional-price">${formatMoney(precoExibido)} </span>
         <span class="normal-price">${temPromocao ? formatMoney(productSelected.preco_normal) : ""}</span>
-            <div class="metrics-product-merchant">
-                <p hidden>${productSelected.views} pessoas já viram</p>
-                <p class="forma-de-pagamento" hidden ></p>
+            <div class="metrics-product-all">
+                <img class="eye" ${countViews === "" ? "hidden" : ""} src="../../assets/icons/eye.png">
+                <p class="views">${countViews}</p>
             </div>
     </div>
 

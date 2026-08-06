@@ -3,6 +3,7 @@
 @import url("../components/navbar.css");
 @import url("../components/button.css");
 @import url("../components/card-product.css");
+@import url("../components/featured-card.css");
 
 /* Configuação do campo da imagem do produto */
 .media-product {

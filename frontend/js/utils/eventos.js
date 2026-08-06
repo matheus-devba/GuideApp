@@ -1,0 +1,6 @@
+export const Eventos = {
+    VIEW_PRODUTO: "VIEW_PRODUTO",
+    VIEW_LOJA: "VIEW_LOJA",
+    CLICK_WHATSAPP: "CLICK_WHATSAPP",
+    VIEW_LISTA: "VIEW_LISTA",
+};

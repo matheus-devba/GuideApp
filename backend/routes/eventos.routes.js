@@ -4,7 +4,7 @@ const router = express.Router();
 
 const EventoController = require("../controllers/eventos.controller.js");
 
-router.post("/", EventoController.create);
+router.post("/newEvent", EventoController.create);
 
 router.get("/", EventoController.findAll);
 

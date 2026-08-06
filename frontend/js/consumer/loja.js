@@ -31,9 +31,13 @@ function renderLojaTopo(loja, loja_id) {
   );
 }
 
-export async function initLoja() {
+function getLojaId() {
   const params = new URLSearchParams(window.location.search);
-  const loja_id = Number(params.get("loja_id"));
+  return Number(params.get("loja_id"));
+}
+
+export async function initLoja() {
+  const loja_id = getLojaId()
   if (!loja_id) return;
 
   const [loja, produtos, listas, destaques, categorias] = await Promise.all([
@@ -65,7 +69,7 @@ export async function initLoja() {
   if (containerCategoria && !categorias.length) containerCategoria.closest(".product-list")?.classList.add("hidden");
 
   submitPesquisa(loja_id);
-  viewsProdutos()
+
 }
 
  function submitPesquisa(loja_id) {
@@ -199,14 +203,16 @@ async function renderProdutosFromData (products, loja_id) {
         // Define qual será o preço em destaque
         const precoExibido = temPromocao ? product.preco_promocional : product.preco_normal;
 
+        const countViews = product.views >= 2 ? product.views + " visualizações" : "" 
+
         return `
             <a class="product-card-all" data-id="${product.id}" href="${API_BASE_URL}/produtos/${product.id}?loja_id=${loja_id}&produto_id=${product.id}">
                 <img class="product-image-all" src="${API_BASE_URL}/api/produto_imagens/buscar_imagem/${product.id}">
                 <div class="product-info-all">
                 <h2>${product.nome}</h2>
                 <span class="metrics-product-all">
-                    <img class="eye" hidden src="../assets/icons/eye.png">
-                    <p class="views" hidden>${product.views}</p>
+                    <img class="eye" ${countViews === "" ? "hidden" : ""} src="../assets/icons/eye.png">
+                    <p class="views">${countViews}</p>
                 </span>
                 <div class="product-footer-all">
                     <div class="price-group-all">
@@ -242,23 +248,3 @@ async function renderCategoriaFromData(categorias, loja_id) {
   return categorias
 }
 
-function viewsProdutos() {
-  const cards = document.querySelectorAll('.product-card-all')
-  if (!cards) return
-
-  cards.forEach((card) => {
-    card.addEventListener("click", async () => {
-      try {
-        const responseViews = await fetch(`${API_BASE_URL}/api/produtos/newView/${card.dataset.id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" }
-        });
-        
-        if (!responseViews.ok) throw new Error(`HTTP ${responseViews.status}`)
-
-      } catch (error) {
-        console.error(erro)
-      }
-    })
-  })
-}

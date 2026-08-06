@@ -2,15 +2,16 @@ import { API_BASE_URL } from "../api/config.js"
 import { insertNomeDaLoja } from "../services/requisicoesConsumer.js";
 import { formatMoney } from '../utils/formatMoney.js'
 import { btnShare } from '../components/shareButton.js'
+import { Eventos } from "../utils/eventos.js";
+
+const params = new URLSearchParams(window.location.search)
+const loja_id = Number(params.get("loja_id"))
+const produto_id = Number(params.get("produto_id"))
 
 export async function initProduto() {
-  const params = new URLSearchParams(window.location.search)
-  const loja_id = Number(params.get("loja_id"))
-  const produto_id = Number(params.get("produto_id"))
   await insertNomeDaLoja(loja_id)
   await renderProduto(produto_id, loja_id);
-  
-  
+  await enviarEventos()
 }
 
 
@@ -87,6 +88,7 @@ async function renderProduto (produto_id, loja_id) {
 
 
 
+  const countViews = productSelected.views >= 2 ? productSelected.views + " visualizações" : "" 
 
 
   initialInfo.innerHTML = ` 
@@ -100,9 +102,9 @@ async function renderProduto (produto_id, loja_id) {
     <div class="left-group">
         <span class="promocional-price">${formatMoney(precoExibido)} </span>
         <span class="normal-price">${temPromocao ? formatMoney(productSelected.preco_normal) : ""}</span>
-            <div class="metrics-product-merchant">
-                <p hidden>${productSelected.views} pessoas já viram</p>
-                <p class="forma-de-pagamento" hidden ></p>
+            <div class="metrics-product-all">
+              <img class="eye" ${countViews === "" ? "hidden" : ""} src="../assets/icons/eye.png">
+              <p class="views">${countViews}</p>
             </div>
     </div>
 
@@ -156,5 +158,34 @@ function inicializarCarrossel() {
       currentIndex = (currentIndex === imagens.length - 1) ? 0 : currentIndex + 1;
       mostrarImagem(currentIndex);
     });
+  }
+}
+
+async function enviarEventos() {
+  try {
+    const responseViews = await fetch(`${API_BASE_URL}/api/produtos/newView/${produto_id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" }
+    });
+
+    const payload = {
+      tipo_evento: Eventos.VIEW_PRODUTO,
+      loja_id: loja_id,
+      produto_id: produto_id
+      }
+      
+    const responseEvent = await fetch(`${API_BASE_URL}/api/eventos/newEvent`, {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: { "Content-Type": "application/json" }
+    });
+    
+    if (!responseViews.ok || !responseEvent.ok) {
+      throw new Error("Erro ao processar as requisições da API");
+      return
+    }
+
+  } catch (error) {
+    console.error("Falha ao registrar visualização/evento:", error);
   }
 }

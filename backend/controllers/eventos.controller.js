@@ -6,6 +6,7 @@ class EventoController {
     try {
 
       const evento = await EventoService.registrarEvento(req.body);
+      
 
       return res.status(201).json(evento);
 
