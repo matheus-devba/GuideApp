@@ -65,6 +65,7 @@ export async function initLoja() {
   if (containerCategoria && !categorias.length) containerCategoria.closest(".product-list")?.classList.add("hidden");
 
   submitPesquisa(loja_id);
+  viewsProdutos()
 }
 
  function submitPesquisa(loja_id) {
@@ -199,7 +200,7 @@ async function renderProdutosFromData (products, loja_id) {
         const precoExibido = temPromocao ? product.preco_promocional : product.preco_normal;
 
         return `
-            <a class="product-card-all" href="${API_BASE_URL}/produtos/${product.id}?loja_id=${loja_id}&produto_id=${product.id}">
+            <a class="product-card-all" data-id="${product.id}" href="${API_BASE_URL}/produtos/${product.id}?loja_id=${loja_id}&produto_id=${product.id}">
                 <img class="product-image-all" src="${API_BASE_URL}/api/produto_imagens/buscar_imagem/${product.id}">
                 <div class="product-info-all">
                 <h2>${product.nome}</h2>
@@ -239,4 +240,25 @@ async function renderCategoriaFromData(categorias, loja_id) {
     .join('');
 
   return categorias
+}
+
+function viewsProdutos() {
+  const cards = document.querySelectorAll('.product-card-all')
+  if (!cards) return
+
+  cards.forEach((card) => {
+    card.addEventListener("click", async () => {
+      try {
+        const responseViews = await fetch(`${API_BASE_URL}/api/produtos/newView/${card.dataset.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" }
+        });
+        
+        if (!responseViews.ok) throw new Error(`HTTP ${responseViews.status}`)
+
+      } catch (error) {
+        console.error(erro)
+      }
+    })
+  })
 }

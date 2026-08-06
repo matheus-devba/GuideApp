@@ -248,6 +248,19 @@ class ProdutosRepository {
         return rows[0]
     }
 
+    async addView(id) {
+        const { rows } = await pool.query(`
+            UPDATE produtos
+            SET views = views + 1
+            WHERE id = $1
+            RETURNING *
+            `,
+            
+            [id]
+        )
+        return rows[0]
+    }
+
     async deletar(id) {
         const { rows } = await pool.query(`
             DELETE FROM produtos
