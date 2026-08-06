@@ -12,6 +12,7 @@ const produtoImagensRoutes = require("./routes/produto-imagens.routes.js")
 const listasRoutes = require("./routes/listas.routes.js")
 const listaProdutoRoutes = require("./routes/lista-produto.routes.js")
 const usuariosRoutes = require("./routes/usuarios.routes.js")
+const eventoRoutes = require("./routes/eventos.routes");
 
 const app = express()
 
@@ -47,6 +48,7 @@ app.use("/api/lista-produtos", listaProdutoRoutes)
 
 app.use("/api/usuarios", usuariosRoutes)
 
+app.use("/eventos", eventoRoutes)
 
 app.get("/health", (req, res) => {
   res.status(200).send("OK")
