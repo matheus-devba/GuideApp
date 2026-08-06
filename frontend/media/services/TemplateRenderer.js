@@ -1,34 +1,34 @@
 // services/media/TemplateRenderer.js
 
-const puppeteer = require("puppeteer");
+// const puppeteer = require("puppeteer");
 
-class TemplateRenderer {
+// export class TemplateRenderer {
 
-    async render(html) {
+//     async render(html) {
 
-        const browser = await puppeteer.launch({
-            headless: true
-        });
+//         const browser = await puppeteer.launch({
+//             headless: true
+//         });
 
-        const page = await browser.newPage();
+//         const page = await browser.newPage();
 
-        await page.setViewport({
-            width: 1080,
-            height: 1920
-        });
+//         await page.setViewport({
+//             width: 1080,
+//             height: 1920
+//         });
 
-        await page.setContent(html);
+//         await page.setContent(html);
 
-        const image = await page.screenshot({
-            type: "png"
-        });
+//         const image = await page.screenshot({
+//             type: "png"
+//         });
 
-        await browser.close();
+//         await browser.close();
 
-        return image;
+//         return image;
 
-    }
+//     }
 
-}
+// }
 
-module.exports = new TemplateRenderer();
+// module.exports = new TemplateRenderer();

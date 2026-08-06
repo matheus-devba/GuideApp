@@ -1,10 +1,9 @@
 // services/media/MediaService.js
+// const TemplateRenderer = require("./TemplateRenderer");
+import { Template } from "./Template.js"
+// import { TemplateRenderer } from "./TemplateRenderer.js"
 
-const StoryTemplate = require("./templates/story/StoryTemplate");
-const StatusTemplate = require("./templates/status/StatusTemplate");
-const TemplateRenderer = require("./TemplateRenderer");
-
-class MediaService {
+export class MediaService {
 
     async generate(options) {
 
@@ -15,14 +14,16 @@ class MediaService {
 
         let html;
 
+        
+
         switch (template) {
 
-            case "story":
-                html = StoryTemplate.render(data);
+            case "template_1":
+                html = Template.render1(data); // template com 2 fotos
                 break;
 
-            case "status":
-                html = StatusTemplate.render(data);
+            case "template_2":
+                html = Template.render2(data); // template com 4 fotos
                 break;
 
             default:
@@ -30,10 +31,11 @@ class MediaService {
 
         }
 
-        return await TemplateRenderer.render(html);
+        console.log(html)
+        // return await TemplateRenderer.render(html);
 
     }
 
 }
 
-module.exports = new MediaService();
+// module.exports = new MediaService();
