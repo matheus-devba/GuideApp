@@ -52,6 +52,9 @@ class ProdutosService {
     async addView (id) {
         return await ProdutosRepository.addView(id)
     }
+    async addInteresse (id) {
+        return await ProdutosRepository.addInteresse(id)
+    }
     async destacar (id, status) {
         return await ProdutosRepository.destacar(id, status)
     }

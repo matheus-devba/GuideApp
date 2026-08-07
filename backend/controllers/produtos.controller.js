@@ -182,6 +182,18 @@ class ProdutoController {
             })
         }
     }
+    async addInteresse(req, res) {
+        try {
+            const { id } = req.params
+            const produto = await ProdutosService.addInteresse(id)
+            return res.status(200).json(produto)
+        }
+        catch (error) {
+            return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
     async destacar(req, res) {
         try {
             const { id } = req.params

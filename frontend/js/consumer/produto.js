@@ -11,7 +11,7 @@ const produto_id = Number(params.get("produto_id"))
 export async function initProduto() {
   await insertNomeDaLoja(loja_id)
   await renderProduto(produto_id, loja_id);
-  await enviarEventos()
+  await addView()
 }
 
 
@@ -74,20 +74,6 @@ async function renderProduto (produto_id, loja_id) {
 
 
 
-
-  let textoMensagem = `Olá \u{1F60D}! Vim do Guide e tenho interesse no produto ${productSelected.nome} no valor de ${formatMoney(precoExibido)}\n\n`;
-
-  const textoCodificado = encodeURIComponent(textoMensagem);
-    
-  let telefone = loja.whatsapp ? loja.whatsapp.replace(/\D/g, '') : '';
-    if (telefone && !telefone.startsWith('55')) {
-      telefone = `55${telefone}`;
-    }
-
-  const urlWhatsapp = `https://api.whatsapp.com/send?phone=${telefone}&text=${textoCodificado}`;
-
-
-
   const countViews = productSelected.views >= 2 ? productSelected.views + " visualizações" : "" 
 
 
@@ -109,7 +95,7 @@ async function renderProduto (produto_id, loja_id) {
     </div>
 
     <div class="right-group">  
-        <a class="cta-product" href="${urlWhatsapp}" target="_blank" rel="noopener noreferrer">
+        <a class="cta-product" href="" target="_blank" rel="noopener noreferrer">
             <img src="../assets/icons/whatsapp.png">
             <h8>Tenho Interesse</h8>
         </a>
@@ -120,6 +106,9 @@ async function renderProduto (produto_id, loja_id) {
       <p class="description">${productSelected.descricao} </p>
     </div>
   `
+
+    addInteresse(loja, productSelected, precoExibido) // para botao de interesse
+
 } catch (error) {
     console.error("Erro ao buscar dados:", error);
     return;
@@ -161,7 +150,7 @@ function inicializarCarrossel() {
   }
 }
 
-async function enviarEventos() {
+async function addView() {
   try {
     const responseViews = await fetch(`${API_BASE_URL}/api/produtos/newView/${produto_id}`, {
     method: "PATCH",
@@ -189,3 +178,52 @@ async function enviarEventos() {
     console.error("Falha ao registrar visualização/evento:", error);
   }
 }
+
+function addInteresse(productSelected,loja, precoExibido) {
+  let textoMensagem = `Olá \u{1F60D}! Vim do Guide e tenho interesse no produto ${productSelected.nome} no valor de ${formatMoney(precoExibido)}\n\n`;
+
+  const textoCodificado = encodeURIComponent(textoMensagem);
+    
+  let telefone = loja.whatsapp ? loja.whatsapp.replace(/\D/g, '') : '';
+    if (telefone && !telefone.startsWith('55')) {
+      telefone = `55${telefone}`;
+    }
+
+  const urlWhatsapp = `https://api.whatsapp.com/send?phone=${telefone}&text=${textoCodificado}`;
+  
+  const botao = document.querySelector('.cta-product')
+  if(!botao) return
+
+  botao.addEventListener("click", async(e) => {
+    e.preventDefault()
+    window.open(urlWhatsapp, '_blank', 'noopener,noreferrer');
+
+    try {
+    const responseViews = await fetch(`${API_BASE_URL}/api/produtos/addInteresse/${produto_id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" }
+    });
+
+    const payload = {
+      tipo_evento: Eventos.INTERESSE_PRODUTO,
+      loja_id: loja_id,
+      produto_id: produto_id
+      }
+      
+    const responseEvent = await fetch(`${API_BASE_URL}/api/eventos/newEvent`, {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: { "Content-Type": "application/json" }
+    });
+    
+    if (!responseViews.ok || !responseEvent.ok) {
+      throw new Error("Erro ao processar as requisições da API");
+      return
+    }
+
+  } catch (error) {
+    console.error("Falha ao registrar visualização/evento:", error);
+  }
+  })
+}
+  

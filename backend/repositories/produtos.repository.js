@@ -260,6 +260,18 @@ class ProdutosRepository {
         )
         return rows[0]
     }
+    async addInteresse(id) {
+        const { rows } = await pool.query(`
+            UPDATE produtos
+            SET interesses = interesses + 1
+            WHERE id = $1
+            RETURNING *
+            `,
+            
+            [id]
+        )
+        return rows[0]
+    }
 
     async deletar(id) {
         const { rows } = await pool.query(`

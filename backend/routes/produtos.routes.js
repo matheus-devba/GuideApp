@@ -18,6 +18,7 @@ router.get("/categorias/:id", ProdutoController.buscarPorCategoria) // ja busca 
 
 
 router.patch("/newView/:id", ProdutoController.addView)
+router.patch("/addInteresse/:id", ProdutoController.addInteresse)
 router.patch("/hidden/:id", ProdutoController.desativar)
 router.patch("/active/:id", ProdutoController.ativar)
 router.patch("/destacar/:id", ProdutoController.destacar)
