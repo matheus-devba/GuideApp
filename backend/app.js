@@ -58,6 +58,9 @@ app.get("/health", (req, res) => {
 //emulação front end
 
 // CONSUMER
+app.get("/home", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "home.html"))
+})
 app.get("/lojas", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "lojas.html"))
 })

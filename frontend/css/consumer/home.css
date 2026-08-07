@@ -1,0 +1,100 @@
+@import url("../components/navbar.css");
+@import url("../components/topic-headers.css");
+@import url("../components/card-product.css");
+@import url("../components/button.css");
+@import url("../components/featured-card.css");
+@import url("../components/list-product.css");
+@import url("../components/category-list.css");
+@import url("../global.css");
+@import url("../reset.css");
+@import url("../consumer/produtos.css");
+
+/* Container principal da tela: centraliza no desktop e separa os blocos verticalmente */
+.home-page {
+    max-width: 860px;
+    margin: 0 auto;
+    display: grid;
+    gap: 16px;
+    padding-bottom: 96px;
+}
+/* Container principal da seção */
+.location-section {
+    padding: 12px 16px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+/* Alinha o ícone, o texto e o select em linha */
+.location-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap; /* Garante boa exibição em telas menores/mobile */
+}
+
+/* Ícone de localização */
+.location-icon {
+    width: 17px;
+    height: 17px;
+    object-fit: contain;
+    opacity: 0.7;
+}
+
+/* Texto de rótulo */
+.location-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333333;
+    margin: 0;
+}
+
+/* Campo de seleção de cidade */
+#city {
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #333333;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+/* Destaque ao focar no select */
+#city:focus {
+    border-color: var(--primary);
+}
+
+/* Container estilo pílula cinza claro */
+.niche-selector {
+  display: inline-flex;
+  background-color: #e9ecef;
+  padding: 4px;
+  border-radius: 50px;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Botões do nicho */
+.niche-btn {
+  border: none;
+  background: transparent;
+  padding: 10px 28px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #495057;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Botão selecionado/ativo (azul escuro igual à imagem) */
+.niche-btn.active {
+  background-color: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+

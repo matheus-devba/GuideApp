@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/consumer/home.css">
+    <link rel="preconnect" href="https://vodetbuknsfmkliasvkr.supabase.co">
+</head>
+<body>
+    
+    <!--NavBar -->
+    <div class="home-page">
+        <header class="top-bar">
+            <img class="guide-icon" src="../assets/icons/icone-guide.png" >
+            <h1 class="store-title">Página Inicial</h1>
+            <a class="top-icon-btn share"></a>
+        </header>
+
+
+        <!-- Localizacao -->
+        <section class="location-section">
+            <div class="location-info">
+                <img class="location-icon" src="../assets/icons/location.png" >
+                <select id="city">
+                    <option value="">Selecione a sua cidade</option>
+                    <option value="1">Conceição do Jacuípe</option>
+                    <option value="2">Riachão do Jacuípe</option>
+                </select>
+            </div>
+            
+        </section>
+
+        <!-- Container do seletor de nichos -->
+        <div class="niche-selector">
+            <button class="niche-btn active" data-niche="moda">Moda</button>
+            <button class="niche-btn" data-niche="cosmeticos">Cosméticos</button>
+        </div>
+    
+        <!-- banners -->
+        <section class="media-banner">
+             <img class="banner-media" src="../assets/images/lojas/banners/perfumaria-store.jpeg" alt="Banner da loja" loading="eager" fetchpriority="high" decoding="async" width="860" height="380">
+        </section>
+
+    <main class="principal-info" >
+        <!-- Listas -->
+        <section class="product-list listas">
+            <header class="product-strip-header" >
+                <h3 class="sections-title">Listas para você</h3>
+                <a class="product-view-all" href="./produtos.html">Ver tudo</a>
+            </header>
+
+            <section class="list-grid" role="list">
+                <!-- Dados -->
+            </section>
+        </section>
+
+         <!-- Promoções perto de você -->
+        <section class="product-list promocoes">
+            <header class="product-strip-header promocoes">
+                <h3 class="sections-title">Promoções perto de você</h3>
+                <a class="product-view-all" href="./produtos.html">Ver tudo</a>
+            </header>
+    
+            <section class="product-grid" >
+                <!-- Dados -->
+            </section>
+        </section>
+
+        <!-- O que você quer hoje -->
+        <section class="product-list categorias">
+            <header class="product-strip-header">
+                <h3 class="sections-title">O que você quer hoje?</h3>
+                <a class="product-view-all" href="./produtos.html">Ver tudo</a>
+            </header>
+
+            <section class="list-grid" role="list">
+                <div class="list-category" role="listitem">
+                    <!-- Dados -->
+                </div>
+            </section>
+        </section>
+
+        <!-- Lojas perto de você -->
+        <section class="stores-list" >
+            <header class="product-strip-header">
+                <h3 class="sections-title">Lojas perto de você</h3>
+                <a class="product-view-all" href="./produtos.html">Ver tudo</a>
+            </header>
+
+            <section class="list-grid" role="list">
+              
+            </section>
+        </section>
+             
+
+     </div>
+    </main>
+</body>
+<script type="module" src="../js/consumer/app.js" defer></script>
+</html>

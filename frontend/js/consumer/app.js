@@ -6,13 +6,14 @@ import { initCategoria } from "../consumer/categoria.js";
 import { initProduto} from "../consumer/produto.js";
 import { initSearch} from "../consumer/pesquisa.js";
 import { initLojas } from "../consumer/lojas.js";
+import { initHome } from "./home.js";
 
-// const path = window.location.pathname
-// if (path.startsWith("/lojas/")) {
-//   initLoja()
-// }
+
 const path = window.location.pathname;
 
+ if (path === "/home") {
+  initHome()
+}
  if (path === "/lojas") {
   initLojas()
 }
