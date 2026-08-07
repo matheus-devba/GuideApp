@@ -66,7 +66,7 @@ export async function renderProdutos (filter, loja_id) {
         
         // Define qual será o preço em destaque
         const precoExibido = temPromocao ? product.preco_promocional : product.preco_normal;
-          const countViews = product.views >= 2 ? product.views + " visualizações" : "" 
+        const countViews = product.views >= 2 ? product.views + " visualizações" : "" 
 
 
         return `
@@ -75,9 +75,10 @@ export async function renderProdutos (filter, loja_id) {
                 <div class="product-info-all">
                 <h2>${product.nome}</h2>
                 <span class="metrics-product-all">
+                <div class="views-wrapper">
                   <img class="eye" ${countViews === "" ? "hidden" : ""} src="../assets/icons/eye.png">
                   <p class="views">${countViews}</p>
-                </span>
+                </div>
                 <div class="product-footer-all">
                     <div class="price-group-all">
                       <!-- O formatMoney já adiciona o "R$" automaticamente -->

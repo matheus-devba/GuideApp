@@ -73,6 +73,7 @@ export async function renderProduto (productId, loja_id) {
   // Define qual será o preço em destaque
   const precoExibido = temPromocao ? productSelected.preco_promocional : productSelected.preco_normal;
   const countViews = productSelected.views >= 2 ? productSelected.views + " visualizações" : "" 
+  const interesses = productSelected.interesses >=2 ? productSelected.interesses + " pessoas já se interessaram" : ""
 
 
   initialInfo.innerHTML = ` 
@@ -86,10 +87,13 @@ export async function renderProduto (productId, loja_id) {
     <div class="left-group">
         <span class="promocional-price">${formatMoney(precoExibido)} </span>
         <span class="normal-price">${temPromocao ? formatMoney(productSelected.preco_normal) : ""}</span>
-            <div class="metrics-product-all">
-                <img class="eye" ${countViews === "" ? "hidden" : ""} src="../../assets/icons/eye.png">
-                <p class="views">${countViews}</p>
-            </div>
+        <span class="metrics-product-all">
+        <div class="views-wrapper">
+          <img class="eye" ${countViews === "" ? "hidden" : ""} src="../../assets/icons/eye.png">
+          <p class="views">${countViews}</p>
+          
+        </div>
+        <p class="interesses">${interesses}</p>
     </div>
 
     <div class="options-group">  

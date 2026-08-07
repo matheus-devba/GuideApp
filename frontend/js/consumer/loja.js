@@ -211,8 +211,10 @@ async function renderProdutosFromData (products, loja_id) {
                 <div class="product-info-all">
                 <h2>${product.nome}</h2>
                 <span class="metrics-product-all">
-                    <img class="eye" ${countViews === "" ? "hidden" : ""} src="../assets/icons/eye.png">
-                    <p class="views">${countViews}</p>
+                <div class="views-wrapper">
+                  <img class="eye" ${countViews === "" ? "hidden" : ""} src="../assets/icons/eye.png">
+                  <p class="views">${countViews}</p>
+                </div>
                 </span>
                 <div class="product-footer-all">
                     <div class="price-group-all">

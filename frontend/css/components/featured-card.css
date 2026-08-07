@@ -67,17 +67,27 @@
 
 .metrics-product-all {
     display: flex;
-    align-items: center;
-    gap: 4px; /* Espaço entre o ícone do olho e o texto de visualizações */
+    flex-direction: column; /* Coloca cada linha em uma coluna (uma abaixo da outra) */
+    gap: 4px; /* Espaço vertical entre a linha de visualizações e a de interesses */
     margin: 4px 0;
 }
+
+/* Opcional: Se quiser que o ícone do olho e o texto de views fiquem alinhados na mesma linha */
+.metrics-product-all .views-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 4px; /* Espaço entre o ícone do olho e o número de views */
+}
+
 .metrics-product-all .eye {
     width: 14px;
     height: 14px;
     object-fit: contain;
-    opacity: 0.6; /* Deixa o ícone sutil e elegante */
+    opacity: 0.6;
 }
-.metrics-product-all .views {
+
+.metrics-product-all .views,
+.metrics-product-all .interesses {
     font-size: 12px;
     margin: 0;
     color: var(--muted);
