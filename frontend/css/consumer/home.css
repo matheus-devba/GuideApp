@@ -115,3 +115,55 @@
 .final-icon {
     width: 30px;
 }
+
+/* Celular (Telas pequenas até 480px) */
+.banner-media {
+    width: 100%; 
+    max-width: 340px; /* Evita que fique gigante em celulares maiores */
+    height: 200px; /* Define uma altura para o object-fit funcionar bem */
+    object-fit: cover;
+    object-position: center;
+    border-radius: 20px; 
+}
+
+/* Tablet (Telas médias de 481px até 768px) */
+@media (min-width: 481px) {
+    .banner-media {
+        width: 450px;
+        /* height: 280px; */
+        border-radius: 25px;
+    }
+}
+
+/* Computador / Desktop (Telas grandes acima de 769px) */
+@media (min-width: 769px) {
+    .banner-media {
+        width: 800px;
+        /* height: 400px; */
+        border-radius: 30px; /* Seus 30px originais */
+    }
+}
+
+
+.media-banner {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.logo-store {
+    width: 60px;
+    border-radius: 60px;
+}
+
+.loja-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+}
+
+.list-grid.lojas {
+    margin-bottom: 50px;
+    
+}

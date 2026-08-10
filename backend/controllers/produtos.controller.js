@@ -79,12 +79,36 @@ class ProdutoController {
             })
         }
     }
+    async buscarPromocoesPorNicho(req, res) {
+        try {
+            const { id } = req.params 
+            const destaques = await ProdutosService.buscarPromocoesPorNicho(id)
+            return res.status(200).json(destaques)
+        }
+        catch (error) {
+            return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
     
     async buscarProduto(req, res) {
         try {
             const { id } = req.params 
             const produto = await ProdutosService.buscarProduto(id)
             return res.status(200).json(produto)
+        }
+        catch (error) {
+            return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
+    async buscarProdutosPorNicho(req, res) {
+        try {
+            const { id } = req.params 
+            const produtos = await ProdutosService.buscarProdutosPorNicho(id)
+            return res.status(200).json(produtos)
         }
         catch (error) {
             return res.status(500).json({

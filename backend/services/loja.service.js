@@ -8,6 +8,15 @@ class LojaService{
     return await LojaRepository.buscarAtivas();
     }
 
+    async buscarPorNicho(id) {
+        const loja = await LojaRepository.buscarPorNicho(id)
+
+        if (!loja) {
+            throw new Error("Loja não encontrada")
+        }
+
+        return loja
+    }
     async buscarPorId(id) {
         const loja = await LojaRepository.buscarPorId(id)
 

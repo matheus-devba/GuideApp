@@ -1,9 +1,10 @@
 const pool = require("../database/connection.js")
 class ListasRepository {
-    async buscarListas () {
+    async buscarListasPorNicho (id) {
         const { rows } = await pool.query(`
             SELECT * FROM listas
-            `)
+            WHERE nicho_id = $1
+            `, [id])
         return rows
     }
     async buscarListaPorId (id) {
@@ -48,13 +49,14 @@ class ListasRepository {
     }
     async criar (dados) {
         const { rows } = await pool.query(`
-            INSERT INTO listas (loja_id ,nome)
+            INSERT INTO listas (loja_id ,nome, nicho_id)
             VALUES
-            ($1, $2)
+            ($1, $2, $3)
             RETURNING *
             `,
             [   dados.loja_id,
-                dados.nome
+                dados.nome,
+                dados.nicho_id
             ]
         )
         return rows[0]

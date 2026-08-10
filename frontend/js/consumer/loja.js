@@ -100,11 +100,15 @@ async function renderListsFromData (listas, produtos, loja_id) {
   if (!container) return;
 
 
+
+
   const html = await Promise.all(
     listas.map(async (list) => {
       const responseProdutos = await fetch(
         `${API_BASE_URL}/api/lista-produtos/lista/${list.id}`
       );
+      const produtos = await responseProdutos.json()
+
       
       if(produtos.length < 1) return //caso nao tiver produtos (mas posso colocar um <=)
 

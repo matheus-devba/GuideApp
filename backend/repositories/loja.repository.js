@@ -24,6 +24,17 @@ class LojaRepository {
     return rows;
     }
 
+    async buscarPorNicho(id) {
+        const { rows } = await pool.query(`
+            SELECT * FROM lojas
+            WHERE nicho_id = $1
+            AND ativo = true
+            `,
+            [id]
+        )
+            
+        return rows
+    }
     async buscarPorId(id) {
         const { rows } = await pool.query(`
             SELECT * FROM lojas

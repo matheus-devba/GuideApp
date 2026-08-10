@@ -67,8 +67,11 @@ async function handleSubmitCreate(event) {
   try {
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+    const responseLoja = await fetch(`${API_BASE_URL}/api/lojas/${loja_id}`)
+    const loja = await responseLoja.json()
+    const nicho_id = loja.nicho_id
 
-    const payload = {nome: nome, loja_id: loja_id}
+    const payload = {nome: nome, loja_id: loja_id, nicho_id: nicho_id }
     // 1. Cria a lista e obtém o ID retornado pelo backend
     const responseLista = await fetch(`${API_BASE_URL}/api/listas/merchant/new`, {
       method: "POST",

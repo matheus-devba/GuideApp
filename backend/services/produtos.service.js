@@ -12,6 +12,9 @@ class ProdutosService {
     async buscarProduto (id) {
         return await ProdutosRepository.buscarProduto(id)
     }
+    async buscarProdutosPorNicho (id) {
+        return await ProdutosRepository.buscarProdutosPorNicho(id)
+    }
     async buscarPorTermoPorLoja(id_loja, query, apenasDestaques = false) {
         return await ProdutosRepository.buscarPorTermoPorLoja(id_loja, query,apenasDestaques)
     }
@@ -22,6 +25,9 @@ class ProdutosService {
     
     async buscarAtivosPorLoja (id_loja) {
         return await ProdutosRepository.buscarAtivosPorLoja(id_loja)
+    }
+    async buscarPromocoesPorNicho (id_nicho) {
+        return await ProdutosRepository.buscarPromocoesPorNicho(id_nicho)
     }
     async buscarPorCategoria (categoria_id, loja_id) {
         return await ProdutosRepository.buscarPorCategoria(categoria_id, loja_id)

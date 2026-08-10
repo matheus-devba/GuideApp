@@ -22,6 +22,7 @@ router.put("/update/perfil/:id", upload.fields([
 router.get("/", LojaController.buscarAtivas)
 router.get("/all", LojaController.buscarTodas)
 router.get("/:id", LojaController.buscarPorId)
+router.get("/nichos/:id", LojaController.buscarPorNicho)
 router.patch("/hidden/:id", LojaController.ocultar)
 router.patch("/active/:id", LojaController.ativar)
 

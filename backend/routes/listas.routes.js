@@ -2,7 +2,7 @@ const ListasController = require("../controllers/listas.controller.js")
 const express = require("express")
 const router = express.Router()
 
-router.get("/", ListasController.buscarListas)
+router.get("/nichos/:id", ListasController.buscarListasPorNicho)
 router.get("/:id", ListasController.buscarLista) //para consumer
 router.get("/merchant/:id", ListasController.buscarListaPorId) 
 router.get("/lojas/:id", ListasController.buscarListaPorLojaId) //para render

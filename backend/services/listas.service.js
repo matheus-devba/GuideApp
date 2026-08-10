@@ -1,8 +1,8 @@
 const ListasRepository = require('../repositories/listas.repository.js')
 
 class ListasService {
-    async buscarListas () {
-        return await ListasRepository.buscarListas()
+    async buscarListasPorNicho (id) {
+        return await ListasRepository.buscarListasPorNicho(id)
     }
     async buscarListaPorId (id) {
         const lista = await ListasRepository.buscarListaPorId(id)

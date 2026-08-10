@@ -25,6 +25,17 @@ class LojaController {
         }
     }
 
+    async buscarPorNicho(req, res) {
+        try {
+            const { id } = req.params //desestruturação para quando tiver outros parametros, so colocar uma ","
+            const loja = await LojaService.buscarPorNicho(id)
+            return res.status(200).json(loja)
+        } catch (error) {
+            return res.status(404).json({
+                message: error.message
+            })
+        }
+    }
     async buscarPorId(req, res) {
         try {
             const { id } = req.params //desestruturação para quando tiver outros parametros, so colocar uma ","

@@ -11,6 +11,21 @@ class ProdutosRepository {
 
         return rows
     }
+
+    async buscarProdutosPorNicho(nicho) {
+        const { rows } = await pool.query(` 
+        SELECT prd.*
+        FROM produtos prd
+        INNER JOIN categorias cat ON cat.id = prd.categoria_id
+        INNER JOIN nicho n ON n.id = cat.nicho_id
+        WHERE n.id = $1
+        AND prd.ativo = true
+        ORDER BY prd.created_at DESC
+        `, [nicho]);
+
+        return rows
+    }
+
     async buscarDestaques () {
         // desestruturação do pool com {rows}
         const { rows } = await pool.query(` 
@@ -117,6 +132,21 @@ class ProdutosRepository {
         )
         return rows
     } 
+
+    async buscarPromocoesPorNicho(id_nicho) {
+        const { rows } = await pool.query(`
+            SELECT prd.* 
+            FROM produtos prd
+            INNER JOIN categorias cat ON cat.id = prd.categoria_id
+            INNER JOIN nicho n ON n.id = cat.nicho_id
+            WHERE n.id = $1
+            AND prd.preco_promocional > 0
+            AND prd.ativo = true
+            ORDER BY prd.id DESC
+        `, [id_nicho]);
+
+        return rows;
+    }
     async buscarDestaquesPorLoja(id_loja) {
         const { rows } = await pool.query(`
             SELECT * FROM produtos

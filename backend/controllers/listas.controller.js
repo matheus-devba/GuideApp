@@ -1,9 +1,10 @@
 const ListasService = require('../services/listas.service.js')
 
 class ListasController {
-    async buscarListas(req, res) {
+    async buscarListasPorNicho(req, res) {
         try {
-            const listas =  await ListasService.buscarListas()
+            const { id } = req.params
+            const listas =  await ListasService.buscarListasPorNicho(id)
             return res.status(200).json(listas)
         } catch (error) {
              return res.status(500).json({
@@ -59,8 +60,8 @@ class ListasController {
     }
     async criar(req, res) {
         try {
-            const { nome, loja_id } = req.body
-            const lista = await ListasService.criar({ nome, loja_id });
+            const { nome, loja_id, nicho_id } = req.body
+            const lista = await ListasService.criar({ nome, loja_id, nicho_id });
             return res.status(201).json(lista)
         } catch (error) {
              return res.status(500).json({
