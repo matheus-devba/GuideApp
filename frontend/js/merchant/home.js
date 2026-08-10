@@ -4,6 +4,7 @@ import { API_BASE_URL } from "../api/config.js"
 
 
 
+
 export async function initHome() {
   const verificar = await verificacaoUsuario();
   if (!verificar) return; // Se for false (não logado), para a execução aqui.
@@ -11,7 +12,7 @@ export async function initHome() {
   const lojaId = await getLojaId()
 
   await insertNomeDaLoja(lojaId.id)
-    btnShare(`/lojas/${lojaId.id}?lojaId.id=${lojaId.id}`,
+    btnShare(`/lojas/${lojaId.id}?loja_id=${lojaId.id}`,
         "Olha o que achei no Guide",
         "Confira a minha loja no Guide:"
     )
@@ -21,6 +22,14 @@ export async function initHome() {
    
 
     renderImagePreview(loja.logo_url, loja.banner_url)
+
+    // link loja
+    const linkLoja = document.querySelector('.link-loja')
+    linkLoja.addEventListener('click', (e) => {
+        e.preventDefault()
+        const url = `${API_BASE_URL}/lojas/${lojaId.id}?loja_id=${lojaId.id}`;
+        window.open(url, '_blank');
+    })
     
 }
 
