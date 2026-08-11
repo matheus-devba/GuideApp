@@ -3,14 +3,10 @@ import { searchRenderProduct } from "../components/searchProduto.js";
 import { insertNomeDaLoja } from "../services/requisicoesConsumer.js";
 import { formatMoney } from '../utils/formatMoney.js'
 import { btnShare } from '../components/shareButton.js'
+import { requestJSON } from "../components/responseJSON.js";
 
 
 
-const requestJSON = async (url) => {
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`HTTP ${response.status}`);
-  return response.json();
-};
 
 function renderLojaTopo(loja, loja_id) {
   const container = document.querySelector(".media-store");

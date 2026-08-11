@@ -1,7 +1,7 @@
 import { initLoja } from "../consumer/loja.js";
 import { initLista } from "../consumer/lista.js";
 import { initDestaques } from "../consumer/destaques.js";
-import { initProdutos } from "../consumer/produtos.js";
+import { initPromocoes } from "./promocoes.js";
 import { initCategoria } from "../consumer/categoria.js";
 import { initProduto} from "../consumer/produto.js";
 import { initSearch} from "../consumer/pesquisa.js";
@@ -15,9 +15,16 @@ const path = window.location.pathname;
  if (path === "/home") {
   initHome()
 }
- if (path === "/lojas") {
+ if (/^\/lojasAll\/\d+$/.test(path)) {
   initLojas()
 }
+ if (/^\/promocoesAll\/\d+$/.test(path)) {
+  initPromocoes()
+}
+ if (/^\/listasAll\/\d+$/.test(path)) {
+  initLoja()
+}
+
 if (/^\/categorias\/guide\/\d+$/.test(path)) {
     initCategorias();
   }

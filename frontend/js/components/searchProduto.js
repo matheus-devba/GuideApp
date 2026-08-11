@@ -15,7 +15,7 @@ export function filterProducts (query, products) {
 
 }
 
-export function searchRenderProduct(query, products, loja_id) {
+export function searchRenderProduct(query, products) {
     if (query == "") return
 
     const awnserProduct = filterProducts(query, products) // Depois posso colocar uma lista específica (ex: hidratantes, perfumes...)
@@ -35,7 +35,7 @@ export function searchRenderProduct(query, products, loja_id) {
         const precoExibido = temPromocao ? product.preco_promocional : product.preco_normal;
 
         return `
-            <a class="product-card-all" href="${API_BASE_URL}/produtos/${product.id}?loja_id=${loja_id}&produto_id=${product.id}">
+            <a class="product-card-all" href="${API_BASE_URL}/produtos/${product.id}?loja_id=${product.loja_id}&produto_id=${product.id}">
                 <img class="product-image-all" src="${API_BASE_URL}/api/produto_imagens/buscar_imagem/${product.id}">
                 <div class="product-info-all">
                 <h2>${product.nome}</h2>

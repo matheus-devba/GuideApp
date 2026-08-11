@@ -1,13 +1,9 @@
 import { API_BASE_URL } from "../api/config.js"
 import { formatMoney } from '../utils/formatMoney.js'
 import { btnShare } from '../components/shareButton.js'
+import { embaralharArray } from "../components/embaralharArray.js";
+import { requestJSON } from "../components/responseJSON.js";
 
-
-const requestJSON = async (url) => {
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`HTTP ${response.status}`);
-  return response.json();
-};
 
 function renderBanner() {
   const container = document.querySelector(".media-banner");
@@ -92,7 +88,10 @@ export async function initHome() {
         const [lojas, produtos, listas, promocoes, categorias] = await promisses(nichoSelecionado);
         nichoAtual = nichoSelecionado;
         atualizarTela(nichoAtual)
+        
     })
+   compartilhar()
+   viewAll(nichoAtual)
    
 }
 
@@ -100,27 +99,36 @@ async function atualizarTela(nicho) {
     const [lojas, produtos, listas, promocoes, categorias] = await promisses(nicho);
    
     await Promise.all([
-        renderProdutosFromData(produtos, nicho),
-        renderListsFromData(listas, produtos, nicho),
+        renderProdutosFromData(produtos),
+        renderListsFromData(listas, produtos),
         renderPromocoesFromData(promocoes, nicho),
-        renderCategoriaFromData(categorias, nicho),
-        renderLojasFromData(lojas, nicho),
+        renderCategoriaFromData(categorias),
+        renderLojasFromData(lojas),
+        
     ]);
     
 }
 
 // Função pura para embaralhar sem alterar o array original
-function embaralharArray(array) {
-  const list = [...array]; // cria uma cópia para não mutar o original
-  for (let i = list.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [list[i], list[j]] = [list[j], list[i]];
-  }
-  return list;
+
+
+function viewAll(nichoAtual) {
+  const viewAllListas = document.getElementById('listas')
+  viewAllListas.href= `listasAll/${nichoAtual}`
+
+  const viewAllProdutosPromocoes = document.getElementById('promocoes')
+  viewAllProdutosPromocoes.href= `promocoesAll/${nichoAtual}`
+
+  const viewAllLojas = document.getElementById('lojas')
+  viewAllLojas.href= `lojasAll/${nichoAtual}`
+
 }
 
+async function renderAllProducts() {
 
-async function renderListsFromData (listas, produtos, nicho) {
+}
+
+async function renderListsFromData (listas, produtos) {
   const container = document.querySelector('.list-grid.listas');
   if (!container) return;
   
@@ -186,7 +194,6 @@ async function renderPromocoesFromData(promocoes, nicho_id) {
     products = embaralharArray(allProducts.slice(0,10))
   }
 
-  const teste = products.slice(0, 10)
 
   
 
@@ -230,7 +237,7 @@ async function renderPromocoesFromData(promocoes, nicho_id) {
     return products
 }
 
-async function renderProdutosFromData (products, loja_id) {
+async function renderProdutosFromData (products) {
   const container = document.querySelector(".product-list-all");
   if (!container) return;
 
@@ -246,7 +253,7 @@ async function renderProdutosFromData (products, loja_id) {
         const countViews = product.views >= 2 ? product.views + " visualizações" : "" 
 
         return `
-            <a class="product-card-all" data-id="${product.id}" href="${API_BASE_URL}/produtos/${product.id}?loja_id=${loja_id}&produto_id=${product.id}">
+            <a class="product-card-all" data-id="${product.id}" href="${API_BASE_URL}/produtos/${product.id}?loja_id=${product.loja_id}&produto_id=${product.id}">
                 <img class="product-image-all" src="${API_BASE_URL}/api/produto_imagens/buscar_imagem/${product.id}">
                 <div class="product-info-all">
                 <h2>${product.nome}</h2>
@@ -274,7 +281,7 @@ async function renderProdutosFromData (products, loja_id) {
     return products
 }
 
-async function renderLojasFromData(lojas, loja_id) {
+async function renderLojasFromData(lojas) {
   const container = document.querySelector(".list-grid.lojas");
   if (!container) return;
   // Busca apenas as categorias que possuem produtos dessa loja
@@ -302,11 +309,11 @@ async function renderLojasFromData(lojas, loja_id) {
   return embaralharArray(lojas.slice(0,15))
 }
 
-async function renderCategoriaFromData(categorias, nicho) {
+async function renderCategoriaFromData(categorias) {
   const container = document.querySelector(".list-category");
   if (!container) return;
   // Busca apenas as categorias que possuem produtos dessa loja
-  console.log(categorias)
+
 
   container.innerHTML = categorias
     .map((cat) => `

@@ -61,9 +61,33 @@ app.get("/health", (req, res) => {
 app.get("/home", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "home.html"))
 })
-app.get("/lojas", (req, res) => {
+app.get("/lojasAll/:id", (req, res) => {
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
   res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "lojas.html"))
 })
+
+app.get("/promocoesAll/:id", (req, res) => {
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+  res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "promocoes.html"))
+})
+
+app.get("/listasAll/:id", (req, res) => {
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+  res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "listas.html"))
+})
+
 
 app.get("/lojas/:id", (req, res) => {
   const { id } = req.params
