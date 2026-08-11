@@ -92,6 +92,7 @@ export async function initHome() {
     })
    compartilhar()
    viewAll(nichoAtual)
+
    
 }
 

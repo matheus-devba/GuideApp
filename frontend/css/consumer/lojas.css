@@ -13,3 +13,7 @@
 
 }
 
+.muted {
+    color: var(--muted);
+}
+

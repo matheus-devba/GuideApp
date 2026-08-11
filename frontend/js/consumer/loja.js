@@ -36,6 +36,16 @@ export async function initLoja() {
   const loja_id = getLojaId()
   if (!loja_id) return;
 
+
+  const back = document.querySelector('.top-icon-btn.back');
+  if(!back) return
+  back.addEventListener("click", (e) => {
+    e.preventDefault()
+    window.location.href = `${API_BASE_URL}/home`
+  })
+
+
+
   const [loja, produtos, listas, destaques, categorias] = await Promise.all([
     requestJSON(`${API_BASE_URL}/api/lojas/${loja_id}`),
     requestJSON(`${API_BASE_URL}/api/produtos/ativos/${loja_id}`),
