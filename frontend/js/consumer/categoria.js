@@ -7,6 +7,8 @@ export async function initCategoria() {
   const loja_id = Number(params.get("loja_id"))
   const categoria_id = Number(params.get("categoria_id"))
 
+  console.log(loja_id)
+
   await insertNomeDaLoja(loja_id)
 
   await renderCategoria(loja_id, categoria_id);

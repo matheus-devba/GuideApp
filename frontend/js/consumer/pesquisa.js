@@ -16,6 +16,7 @@ export async function initSearch() {
   // Captura o loja_id e garante um valor padrão caso dê NaN
   const lojaParam = params.get("loja_id") || caminho[caminho.length - 1];
   const loja_id = Number(lojaParam) || 0; 
+  
 
   let produtos = [];
 

@@ -302,14 +302,16 @@ async function renderLojasFromData(lojas, loja_id) {
   return embaralharArray(lojas.slice(0,15))
 }
 
-async function renderCategoriaFromData(categorias, loja_id) {
+async function renderCategoriaFromData(categorias, nicho) {
   const container = document.querySelector(".list-category");
   if (!container) return;
   // Busca apenas as categorias que possuem produtos dessa loja
+  console.log(categorias)
 
   container.innerHTML = categorias
     .map((cat) => `
-          <a class="circle-category" href="${API_BASE_URL}/categorias/${loja_id}?categoria_id=${cat.id}&loja_id=${loja_id}">          <img src="${cat.icone_url || '../assets/images/default.webp'}" class="category-image">
+          <a class="circle-category" href="${API_BASE_URL}/categorias/guide/${cat.id}">
+          <img src="${cat.icone_url || '../assets/images/default.webp'}" class="category-image">
           <h4>${cat.nome}</h4>
       </a>
     `)

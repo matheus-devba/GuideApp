@@ -73,6 +73,14 @@ app.get("/lojas/:id", (req, res) => {
   }
   res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "loja.html"))
 })
+app.get("/categorias/guide/:id", (req, res) => {
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+  res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "categorias.html"))
+})
 
 app.get("/produtos/merchant/new", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "formProduto.html"))

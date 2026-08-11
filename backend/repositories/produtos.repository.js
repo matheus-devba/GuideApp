@@ -132,6 +132,16 @@ class ProdutosRepository {
         )
         return rows
     } 
+    async buscarPorCategoriaConsumer(categoria_id) {
+        const { rows } = await pool.query(`
+            SELECT * FROM produtos
+            WHERE categoria_id = $1 AND ativo = true
+            ORDER BY id ASC 
+            `,
+            [categoria_id]
+        )
+        return rows
+    } 
 
     async buscarPromocoesPorNicho(id_nicho) {
         const { rows } = await pool.query(`

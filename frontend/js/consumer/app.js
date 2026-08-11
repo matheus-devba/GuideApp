@@ -7,6 +7,7 @@ import { initProduto} from "../consumer/produto.js";
 import { initSearch} from "../consumer/pesquisa.js";
 import { initLojas } from "../consumer/lojas.js";
 import { initHome } from "./home.js";
+import { initCategorias } from "./categorias.js";
 
 
 const path = window.location.pathname;
@@ -17,6 +18,9 @@ const path = window.location.pathname;
  if (path === "/lojas") {
   initLojas()
 }
+if (/^\/categorias\/guide\/\d+$/.test(path)) {
+    initCategorias();
+  }
  if (/^\/lojas\/\d+$/.test(path)) {
   initLoja()
 }
