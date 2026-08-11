@@ -18,7 +18,9 @@ export function filterLists (query, listas) {
 export async function searchRenderLists(query, listas) {
     const awnserList = filterLists(query, listas) // Depois posso colocar uma lista específica (ex: hidratantes, perfumes...)
     const container = document.querySelector(".product-list-all");
-
+    if (!awnserList || awnserList.length === 0) {
+        container.innerHTML = "Sem resultados";
+    } else {
     const html = await Promise.all(
     awnserList.map(async (list) => {
       const responseProdutos = await fetch(
@@ -64,7 +66,7 @@ export async function searchRenderLists(query, listas) {
 
   container.innerHTML = html.join("");
 
-}
+}}
 
 function normalizeText (text) {
     return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")

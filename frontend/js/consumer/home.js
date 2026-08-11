@@ -156,13 +156,15 @@ async function renderListsFromData (listas, produtos) {
         imageFront = `${API_BASE_URL}/api/produto_imagens/buscar_imagem/${produtoFront.produto_id}`;
       }
 
+      const badge = produtos.length - 2 == 0 ? "" :"+ " + produtos.length - 2
+
 
       return `
         <a class="list-product-card" href="${API_BASE_URL}/listas/${list.id}?list_id=${list.id}&loja_id=${list.loja_id}">
           <div class="list-card-images">
             <img src="${imageBack}" class="list-image back">
             <img src="${imageFront}" class="list-image front">
-            <span class="badge">+${produtos.length}</span>
+            ${badge == 0 ? "" : `<span class="badge">${badge}</span>`}
           </div>
           <div class="list-content">
             <h4>${list.nome}</h4>

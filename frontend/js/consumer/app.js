@@ -8,6 +8,7 @@ import { initSearch} from "../consumer/pesquisa.js";
 import { initLojas } from "../consumer/lojas.js";
 import { initHome } from "./home.js";
 import { initCategorias } from "./categorias.js";
+import { initListas } from "./listas.js";
 
 
 const path = window.location.pathname;
@@ -22,7 +23,7 @@ const path = window.location.pathname;
   initPromocoes()
 }
  if (/^\/listasAll\/\d+$/.test(path)) {
-  initLoja()
+  initListas()
 }
 
 if (/^\/categorias\/guide\/\d+$/.test(path)) {
