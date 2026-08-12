@@ -3,6 +3,7 @@ import { insertNomeDaLoja } from "../services/requisicoesConsumer.js";
 import { formatMoney } from '../utils/formatMoney.js'
 import { btnShare } from '../components/shareButton.js'
 import { popupMessage, popupConfirm } from "../components/popup.js";
+import { requestJSON } from "../components/responseJSON.js";
 
 
 
@@ -25,24 +26,23 @@ async function renderLista (list_id, loja_id) {
             "Olha o que achei no Guide",
             "Dê uma olhada nessa lista que encontrei no Guide:")
 
-  const responseLista = await fetch(`${API_BASE_URL}/api/listas/${list_id}`)
-  const lista = await responseLista.json()
+  
 
-  const responseListaProduto = await fetch(`${API_BASE_URL}/api/lista-produtos/lista/${list_id}`)
-  const listaProduto = await responseListaProduto.json()
+  const [lista, listaProduto] = await Promise.all([
+    requestJSON(`${API_BASE_URL}/api/listas/${list_id}`),
+    requestJSON(`${API_BASE_URL}/api/lista-produtos/lista/${list_id}`)
+  ]);   
+
 
   if (!lista || !listaProduto) return;
 
   const titleList = document.querySelector(".sections-title")
   titleList.innerHTML = lista.nome
 
- // 1) Busca IDs dos itens da lista
-  const responseIdProdutos = await fetch(`${API_BASE_URL}/api/lista-produtos/lista/${list_id}`);
-  const idProdutos = await responseIdProdutos.json();
 
   // 2) Busca dados reais de cada produto
   const cardsHtml = await Promise.all(
-    idProdutos.map(async (item) => {
+    listaProduto.map(async (item) => {
       const responseProdutos = await fetch(`${API_BASE_URL}/api/produtos/${item.produto_id}`);
       const product = await responseProdutos.json();
 
