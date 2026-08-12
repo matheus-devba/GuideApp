@@ -6,6 +6,23 @@
     padding: 12px; /* Espaçamento opcional nas bordas da tela */
 }
 
+/* Tablet (ex: a partir de 640px): 3 Colunas */
+@media (min-width: 640px) {
+    .product-list-all {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+}
+
+/* Computador / Telas Grandes (ex: a partir de 1024px): 4 Colunas */
+@media (min-width: 1024px) {
+    .product-list-all {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        padding: 16px 24px;
+    }
+}
+
 /* Lista de cards na lateral (Rolagem) */
 .product-grid, .products-grid {
     display: flex;
