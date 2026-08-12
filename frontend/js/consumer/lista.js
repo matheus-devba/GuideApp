@@ -4,6 +4,7 @@ import { formatMoney } from '../utils/formatMoney.js'
 import { btnShare } from '../components/shareButton.js'
 import { popupMessage, popupConfirm } from "../components/popup.js";
 import { requestJSON } from "../components/responseJSON.js";
+import { renderFooter } from "../components/footerNavegation.js";
 
 
 
@@ -14,6 +15,7 @@ export async function initLista() {
   await insertNomeDaLoja(loja_id)
   await renderLista(list_id, loja_id);
   ctaLista(loja_id, list_id);
+  renderFooter()
 }
 
 

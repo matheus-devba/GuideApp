@@ -3,6 +3,7 @@ import { insertNomeDaLoja } from "../services/requisicoesConsumer.js";
 import { formatMoney } from '../utils/formatMoney.js'
 import { btnShare } from '../components/shareButton.js'
 import { Eventos } from "../utils/eventos.js";
+import { renderFooter } from "../components/footerNavegation.js";
 
 const params = new URLSearchParams(window.location.search)
 const loja_id = Number(params.get("loja_id"))
@@ -12,6 +13,7 @@ export async function initProduto() {
   await insertNomeDaLoja(loja_id)
   await renderProduto(produto_id, loja_id);
   await addView()
+  renderFooter()
 }
 
 

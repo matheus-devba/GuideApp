@@ -2,6 +2,7 @@
 import { API_BASE_URL } from "../api/config.js"
 import { formatMoney } from '../utils/formatMoney.js'
 import { filterProducts, searchRenderProduct } from "../components/searchProduto.js";
+import { renderFooter } from "../components/footerNavegation.js";
 
 export async function initCategorias() {
 // Pega o caminho da URL (ex: "/categorias/3")
@@ -17,6 +18,7 @@ export async function initCategorias() {
   // await renderCategoria (categoria_id);
   submitPesquisa(categoria_id)
   renderCategoria(categoria_id)
+  renderFooter()
  
 }
 

@@ -3,6 +3,7 @@ import { embaralharArray } from "../components/embaralharArray.js";
 import { requestJSON } from "../components/responseJSON.js";
 import { formatMoney } from "../utils/formatMoney.js";
 import { filterProducts, searchRenderProduct } from "../components/searchProduto.js";
+import { renderFooter } from "../components/footerNavegation.js";
 
 export async function initPromocoes() {
  
@@ -14,6 +15,7 @@ export async function initPromocoes() {
   
   renderProdutos(promocoes, nicho);
   submitPesquisa(nicho)
+  renderFooter()
 
   return promocoes
 }

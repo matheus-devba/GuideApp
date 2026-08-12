@@ -16,6 +16,10 @@ const path = window.location.pathname;
  if (path === "/home") {
   initHome()
 }
+
+ if (path === "/lojasAll") {
+  initLojas()
+}
  if (/^\/lojasAll\/\d+$/.test(path)) {
   initLojas()
 }

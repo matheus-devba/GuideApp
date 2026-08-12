@@ -1,6 +1,7 @@
 import { searchRenderProduct } from "../components/searchProduto.js";
 import { API_BASE_URL } from "../api/config.js";
 import { insertNomeDaLoja } from "../services/requisicoesConsumer.js";
+import { renderFooter } from "../components/footerNavegation.js";
 
 export async function initSearch() {
   const params = new URLSearchParams(window.location.search);
@@ -16,7 +17,7 @@ export async function initSearch() {
   // Captura o loja_id e garante um valor padrão caso dê NaN
   const lojaParam = params.get("loja_id") || caminho[caminho.length - 1];
   const loja_id = Number(lojaParam) || 0; 
-  
+  renderFooter()
 
   let produtos = [];
 

@@ -1,20 +1,33 @@
 import { API_BASE_URL } from "../api/config.js"
 import { embaralharArray } from "../components/embaralharArray.js";
+import { renderFooter } from "../components/footerNavegation.js";
 import { requestJSON } from "../components/responseJSON.js";
 
 export function initLojas() {
   const parts = window.location.pathname.split("/").filter(Boolean);
-  const nicho =  parts[parts.length - 1] || null;
-  
-renderLojas(nicho)
-
+  const nicho =  Number(parts[parts.length - 1]) || null;
+ 
+  if (nicho) {
+    renderLojas(nicho) 
+  } else {
+    renderLojas(false)
+  }
+ 
+  renderFooter()
 }
 
 async function renderLojas(nicho_id) {
     try {
-        
-        const lojas = await requestJSON(`${API_BASE_URL}/api/lojas/nichos/${nicho_id}`); // 1. Aguarda a resposta da requisição HTTP
+      let lojas = ""
+        if (nicho_id) {
+          lojas = await requestJSON(`${API_BASE_URL}/api/lojas/nichos/${nicho_id}`); // 1. Aguarda a resposta da requisição HTTP
+        } else {
+           lojas = await requestJSON(`${API_BASE_URL}/api/lojas`);
+        }
+
         await createListLojas(lojas)
+
+        
         
     } catch (error) {
         console.error("Erro ao buscar lojas do servidor:", error);

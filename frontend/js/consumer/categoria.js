@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../api/config.js"
+import { renderFooter } from "../components/footerNavegation.js";
 import { insertNomeDaLoja } from "../services/requisicoesConsumer.js";
 import { formatMoney } from '../utils/formatMoney.js'
 
@@ -13,6 +14,7 @@ export async function initCategoria() {
 
   await renderCategoria(loja_id, categoria_id);
   submitPesquisa(loja_id, categoria_id)
+  renderFooter()
 }
 
 function submitPesquisa(loja_id, categoria_id) {

@@ -3,6 +3,7 @@ import { formatMoney } from '../utils/formatMoney.js';
 import { btnShare } from '../components/shareButton.js';
 import { embaralharArray } from "../components/embaralharArray.js";
 import { requestJSON } from "../components/responseJSON.js";
+import { renderFooter } from "../components/footerNavegation.js";
 
 function renderBanner() {
   const container = document.querySelector(".media-banner");
@@ -67,6 +68,7 @@ export async function initHome() {
     nichoAtual = nichoSelecionado;
     await atualizarTela(nichoAtual);
   });
+  renderFooter()
 }
 
 async function atualizarTela(nicho) {
@@ -82,6 +84,7 @@ async function atualizarTela(nicho) {
     renderLojasFromData(lojas)
   ]);
 }
+
 
 function viewAll(nichoAtual) {
   const viewAllListas = document.getElementById('listas');

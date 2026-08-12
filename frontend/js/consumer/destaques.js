@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../api/config.js"
+import { renderFooter } from "../components/footerNavegation.js";
 import { insertNomeDaLoja } from "../services/requisicoesConsumer.js";
 import { formatMoney } from '../utils/formatMoney.js'
 
@@ -9,6 +10,7 @@ export async function initDestaques() {
   await insertNomeDaLoja(loja_id)
   await renderDestaque(loja_id);
   submitPesquisa(loja_id)
+  renderFooter()
 }
 
 function submitPesquisa(loja_id) {

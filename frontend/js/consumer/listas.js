@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "../api/config.js"
+import { renderFooter } from "../components/footerNavegation.js";
 import { requestJSON } from "../components/responseJSON.js";
 import { filterLists } from "../components/searchLista.js";
 
@@ -13,6 +14,7 @@ export async function initListas() {
   const containerSelector = ".product-list-all";
   await renderLists("", listas);
   submitPesquisa(nicho)
+  renderFooter()
 
   return listas
 

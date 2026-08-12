@@ -4,6 +4,7 @@ import { insertNomeDaLoja } from "../services/requisicoesConsumer.js";
 import { formatMoney } from '../utils/formatMoney.js'
 import { btnShare } from '../components/shareButton.js'
 import { requestJSON } from "../components/responseJSON.js";
+import { renderFooter } from "../components/footerNavegation.js";
 
 
 
@@ -43,7 +44,7 @@ export async function initLoja() {
     e.preventDefault()
     window.location.href = `${API_BASE_URL}/home`
   })
-
+  renderFooter()
 
 
   const [loja, produtos, listas, destaques, categorias] = await Promise.all([
