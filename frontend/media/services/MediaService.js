@@ -1,7 +1,7 @@
 // services/media/MediaService.js
 // const TemplateRenderer = require("./TemplateRenderer");
 import { Template } from "./Template.js"
-// import { TemplateRenderer } from "./TemplateRenderer.js"
+import { TemplateRenderer } from "./TemplateRenderer.js"
 
 export class MediaService {
 
@@ -9,30 +9,30 @@ export class MediaService {
 
         const {
             template,
-            data
+            data,
+            tipo,
+            divulgacao
         } = options;
 
         let html;
 
         
-
-        switch (template) {
-
-            case "template_1":
-                html = Template.render1(data); // template com 2 fotos
-                break;
-
-            case "template_2":
-                html = Template.render2(data); // template com 4 fotos
-                break;
-
-            default:
-                throw new Error("Template não encontrado.");
-
+        if (tipo == "produtos") {
+            html = await Template.template_produtos(data, divulgacao); // template com 2 fotos
+            
         }
-
-        console.log(html)
-        // return await TemplateRenderer.render(html);
+        if ( tipo == "categorias") {
+            html = await Template.template_categorias(data, divulgacao); // template com 4 fotos
+            
+        }
+        
+        if (tipo == "listas") {
+            html = await Template.template_listas(data, divulgacao); // template com 4 fotos
+            
+        }
+        
+         
+        return html
 
     }
 

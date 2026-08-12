@@ -113,6 +113,11 @@ app.get("/categorias/guide/:id", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "categorias.html"))
 })
 
+
+//Merchant
+
+
+
 app.get("/produtos/merchant/new", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "formProduto.html"))
 })

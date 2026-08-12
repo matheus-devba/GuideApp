@@ -49,7 +49,7 @@ async function renderProdutos (promocoes, nicho_id) {
              <a class="product-card" href="${API_BASE_URL}/produtos/${product.id}?loja_id=${product.loja_id}&produto_id=${product.id}" >
              <img class="product-image" src="${API_BASE_URL}/api/produto_imagens/buscar_imagem/${product.id}">
              <div class="product-info-all">
-               <h2>${product.nome}</h2>
+               <h3>${product.nome}</h3>
                <span class="metrics-product-all">
                  <div class="views-wrapper">
                    <img class="eye" ${countViews === "" ? "hidden" : ""} src="../assets/icons/eye.png">

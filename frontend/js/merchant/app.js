@@ -11,6 +11,8 @@ import { initLogin } from "./login.js";
 import { initSearchLoja } from "./pesquisa.js";
 import { initHome } from "./home.js";
 import { initDivulgacoes } from "./divulgacoes.js";
+import { TemplateRenderer } from "../../media/services/TemplateRenderer.js";
+import { initDivulgacao } from "./divulgacao.js";
 
 const path = window.location.pathname;
 
@@ -66,5 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   if (path.includes("divulgacoes.html")) {
     initDivulgacoes()
+  }
+  if (path.includes("divulgacao.html")) {
+    initDivulgacao()
   }
 });

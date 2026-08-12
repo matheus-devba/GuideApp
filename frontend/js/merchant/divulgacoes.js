@@ -1,6 +1,10 @@
 import { MediaService } from "../../media/services/MediaService.js"
 import { API_BASE_URL } from "../api/config.js"
+import { embaralharArray } from "../components/embaralharArray.js";
+import { popupMessage } from "../components/popup.js";
+import { requestJSON } from "../components/responseJSON.js";
 import { getLojaId } from "../services/requisicoesMerchant.js";
+import { initDivulgacao } from "./divulgacao.js";
 
 const lojaId = 24 //fixo por enquanto
 
@@ -9,11 +13,14 @@ const divulgacoes = [
     {
       "id": 2,
       "titulo": "Divulgar promoções",
-      "descricao": "Destaque suas ofertas e descontos especiais para atrair compradores rrotadamente.",
+      "descricao": "Destaque suas ofertas e descontos especiais para atrair compradores rapidamente.",
       "emoji": "🏷️",
       "template": "template_2",
       "rota": "/produtos/ativos",
-      "limit": 4
+      "limit": 4,
+      "tipo": "produtos",
+      "headline": "Super Ofertas Liberadas!",
+      "sub_headline": "Clique no link abaixo para ver todas as promoções no nosso catálogo do Guide."
     },
     {
       "id": 10,
@@ -22,7 +29,10 @@ const divulgacoes = [
       "emoji": "⭐",
       "template": "template_2",
       "rota": "/produtos/destaques",
-      "limit": 4
+      "limit": 4,
+      "tipo": "produtos",
+      "headline": "Os Mais Desejados da Loja",
+      "sub_headline": "Acesse nosso espaço no Guide e confira a seleção exclusiva dos favoritos."
     },
     {
       "id": 3,
@@ -31,7 +41,10 @@ const divulgacoes = [
       "emoji": "🚀",
       "template": "template_1",
       "rota": "/produtos/ativos",
-      "limit": 2
+      "limit": 2,
+      "tipo": "produtos",
+      "headline": "Novidades Chegando Agora!",
+      "sub_headline": "Clique no link para explorar em primeira mão os lançamentos no Guide."
     },
     {
       "id": 1,
@@ -40,7 +53,10 @@ const divulgacoes = [
       "emoji": "📖",
       "template": "template_2",
       "rota": "/produtos/ativos",
-      "limit": 4
+      "limit": 4,
+      "tipo": "produtos",
+      "headline": "Conheça Nossa Loja Completa",
+      "sub_headline": "Clique abaixo para navegar pelo nosso catálogo interativo no Guide."
     },
     {
       "id": 8,
@@ -49,8 +65,10 @@ const divulgacoes = [
       "emoji": "💬",
       "template": "template_1",
       "rota": "/produtos/ativos",
-      "limit": 2
-      
+      "limit": 2,
+      "tipo": "produtos",
+      "headline": "Confira Nossas Opções Exclusivas!",
+      "sub_headline": "Clique no link para abrir nosso catálogo completo no Guide e escolher os seus favoritos."
     },
     {
       "id": 9,
@@ -59,7 +77,10 @@ const divulgacoes = [
       "emoji": "📸",
       "template": "template_1",
       "rota": "/produtos/ativos",
-      "limit": 2
+      "limit": 2,
+      "tipo": "produtos",
+      "headline": "Viu no Story? Tem Muito Mais!",
+      "sub_headline": "Acesse o link da nossa bio ou toque abaixo para ver a vitrine completa no Guide."
     },
     {
       "id": 4,
@@ -67,8 +88,11 @@ const divulgacoes = [
       "descricao": "Organize e apresente suas diferentes seções de produtos para facilitar a navegação.",
       "emoji": "🗂️",
       "template": "template_2",
-      "rota" :"/categorias/lojas",
-      "limit": 4
+      "rota": "/categorias/lojas",
+      "limit": 4,
+      "tipo": "categorias",
+      "headline": "Tudo Separado para Você",
+      "sub_headline": "Clique no link para explorar nossas categorias organizadas no Guide."
     },
     {
       "id": 5,
@@ -76,8 +100,11 @@ const divulgacoes = [
       "descricao": "Compartilhe seleções personalizadas e temáticas de produtos com seus clientes.",
       "emoji": "📝",
       "template": "template_2",
-      "rota" :"/listas/lojas",
-      "limit": 4
+      "rota": "/listas/lojas",
+      "limit": 4,
+      "tipo": "listas",
+      "headline": "Seleção Especial Esperando por Você",
+      "sub_headline": "Acesse o link e veja a lista completa que preparamos no Guide."
     },
     {
       "id": 6,
@@ -86,17 +113,23 @@ const divulgacoes = [
       "emoji": "🎯",
       "template": "template_2",
       "rota": "/produtos/ativos",
-      "limit": 4
+      "limit": 4,
+      "tipo": "produtos",
+      "headline": "Venha Descobrir Nossas Vantagens!",
+      "sub_headline": "Clique no link para acessar nossa vitrine digital no Guide agora mesmo."
     },
-    {
-      "id": 7,
-      "titulo": "Imprimir QR Code",
-      "descricao": "Gere códigos escaneáveis para materiais impressos e facilite o acesso rápido ao seu catálogo.",
-      "emoji": "🖨️",
-      "template": "template_1",
-      "rota": "/produtos/ativos",
-      "limit": 2
-    }
+    // {
+    //   "id": 7,
+    //   "titulo": "Imprimir QR Code",
+    //   "descricao": "Gere códigos escaneáveis para materiais impressos e facilite o acesso rápido ao seu catálogo.",
+    //   "emoji": "🖨️",
+    //   "template": "template_1",
+    //   "rota": "/produtos/ativos",
+    //   "limit": 2,
+    //   "tipo": "produtos",
+    //   "headline": "Aponte a Câmera do Seu Celular!",
+    //   "sub_headline": "Escaneie o QR Code para abrir direto a nossa loja no Guide."
+    // }
 ];
 
 
@@ -131,7 +164,7 @@ function renderDivulgacoes() {
   
 }
 
-function eventosDivulgacoes() {
+export function eventosDivulgacoes() {
   const cards = document.querySelectorAll('.divulgacao-card')
   cards.forEach((button) => {
         button.addEventListener("click", async() => {
@@ -140,12 +173,29 @@ function eventosDivulgacoes() {
           if (divulgacao) {
             const data = await buscarDados(divulgacao)
             const mediaService = new MediaService()
+
+            if (data.length == 0) {
+              popupMessage({
+                titulo : "Opa!",
+                mensagem : "Você não tem produtos suficientes para isso.",
+                textoBotao : "OK"
+              })
+              return
+            }
       
-            await mediaService.generate({
+            const html = await mediaService.generate({
               template : divulgacao.template, 
-              data : data
+              data : data,
+              tipo: divulgacao.tipo,
+              divulgacao: divulgacao
             })
-          }
+          // 1. Salva o HTML no localStorage para ser lido na próxima página
+          localStorage.setItem("divulgacao_html", html);
+          
+
+          // 2. Redireciona para a nova página
+          window.location.href = "/merchant/divulgacao.html";
+            }
         })
     })
 
@@ -158,11 +208,10 @@ async function buscarDados (divulgacao) {
     const template = divulgacao.template
     const limit = divulgacao.limit
 
-    const response = await fetch(`${API_BASE_URL}/api${rota}/${lojaId}`)
-    const data = await response.json()
-
-    const dataLimit = data.slice(0, limit)
-
+    const data = await requestJSON(`${API_BASE_URL}/api${rota}/${lojaId}`)
+    const produtos = embaralharArray(data)
+    const dataLimit = produtos.slice(0, limit)
+    console.log(dataLimit)
     return dataLimit
 
   } catch (error) {

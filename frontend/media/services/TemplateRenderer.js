@@ -1,4 +1,12 @@
 // services/media/TemplateRenderer.js
+export class TemplateRenderer {
+
+    static async render(html) {
+
+       
+    }
+}
+
 
 // const puppeteer = require("puppeteer");
 

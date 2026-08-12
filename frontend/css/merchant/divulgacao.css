@@ -1,0 +1,117 @@
+
+@import url("../merchant/home.css");
+/* =========================================================
+   CONTAINER STORY (9:16)
+   ========================================================= */
+/* Mantém o título do card de produto intacto e alinhado à esquerda */
+.product-card h3 {
+    margin: 0;
+    font-size: 1.0rem;
+    text-align: left;
+}
+
+.story-card {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+/* Header da Loja - Centralizado */
+.header-loja {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center; /* Garante o alinhamento do texto */
+    gap: 8px;
+}
+
+.logo-loja {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.nome-loja {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+/* Conteúdo de Divulgação - Corrigido e Centralizado */
+.content-divulgacao {
+    margin: 12px 0;
+    display: flex;             /* Ativa o flexbox para permitir o alinhamento */
+    flex-direction: column;    /* Alinha o título e a descrição verticalmente */
+    align-items: center;       /* Centraliza horizontalmente na tela */
+    text-align: center;        /* Garante que o texto de várias linhas fique centralizado */
+}
+
+.titulo-divulgacao {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+
+.descricao-divulgacao {
+    font-size: 0.9rem;
+    color: var(--muted, #666);
+    margin-top: 4px;
+}
+/* Grid para ajustar seus .product-card dentro da tela */
+.produtos-grid-story{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    width: 100%;
+    margin: 16px 0;
+}
+
+
+.categorias-grid-story {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    width: 100%;
+    margin: 16px 0;
+}
+
+.listas-grid-story {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    width: 100%;
+    margin: 16px 0; 
+}
+/* Sobrescreve apenas a flexão do card dentro da grid do story */
+.produtos-grid-story .product-card {
+    flex: unset;
+    width: 100%;
+}
+
+
+/* Footer do Story - Centralizado */
+.footer-story {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center; /* Garante o alinhamento do texto */
+    gap: 4px;
+}
+
+.call-to-action {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.brand-guide {
+    font-size: 0.8rem;
+    color: var(--muted, #888);
+    text-transform: uppercase;
+}
+
+.icone-guide {
+    width: 80px;
+}
