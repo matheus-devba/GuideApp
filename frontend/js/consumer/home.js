@@ -58,6 +58,7 @@ async function carregarDadosNicho(nicho) {
 
 export async function initHome() {
   renderBanner();
+  renderFooter()
   let nichoAtual = getNichoAtual();
   
   await atualizarTela(nichoAtual);
@@ -68,7 +69,7 @@ export async function initHome() {
     nichoAtual = nichoSelecionado;
     await atualizarTela(nichoAtual);
   });
-  renderFooter()
+  
 }
 
 async function atualizarTela(nicho) {
