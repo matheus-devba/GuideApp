@@ -22,12 +22,13 @@ async function renderProdutos (promocoes, nicho_id) {
   const container = document.querySelector(".product-list-all");
   if (!container) return;
 
+
    let products = embaralharArray(promocoes)
  
  
    if (products.length == 0) {
      const allProducts = await requestJSON(`${API_BASE_URL}/api/produtos/nichos/${nicho_id}`)
-     products = embaralharArray(allProducts.slice(0,10))
+     products = embaralharArray(allProducts.slice(0,allProducts.length))
    }
  
  
