@@ -8,7 +8,7 @@ function renderBanner() {
   const container = document.querySelector(".media-banner");
   if (container) {
     container.innerHTML = `
-      <img class="banner-media" src="../assets/images/lojas/banners/perfumaria-store.jpeg" alt="Banner da loja" loading="eager" fetchpriority="high" decoding="async">
+      <img class="banner-media" src="../assets/images/banner-guide.png" loading="eager" fetchpriority="high" decoding="async">
     `;
   }
 }
