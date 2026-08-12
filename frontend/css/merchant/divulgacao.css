@@ -1,34 +1,38 @@
-
 @import url("../merchant/home.css");
+
 /* =========================================================
    CONTAINER STORY (9:16)
    ========================================================= */
-/* Mantém o título do card de produto intacto e alinhado à esquerda */
+
 body {
     background-color: var(--bg) !important;
 }
 
-.product-card h3 {
-    margin: 0;
-    font-size: 1.0rem;
-    text-align: left;
-}
-
 .story-card {
-    width: 100%;
-    max-width: 420px;
-    margin: 0 auto;
+    /* Trava na proporção perfeita de Story */
+    width: 360px;
+    height: 640px; 
+    aspect-ratio: 9 / 16;
+    
+    background-color: #ffffff;
     padding: 24px 16px;
+    box-sizing: border-box;
+
+    /* Organização vertical mantendo tudo dentro da tela */
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
+    justify-content: space-between;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 16px;
 }
-/* Header da Loja - Centralizado */
+
+/* Header da Loja */
 .header-loja {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center; /* Garante o alinhamento do texto */
+    text-align: center;
     gap: 8px;
 }
 
@@ -39,69 +43,222 @@ body {
     object-fit: cover;
 }
 
-
 .nome-loja {
     font-size: 1.2rem;
     font-weight: 600;
-}
-/* Conteúdo de Divulgação - Corrigido e Centralizado */
-.content-divulgacao {
-    margin: 12px 0;
-    display: flex;             /* Ativa o flexbox para permitir o alinhamento */
-    flex-direction: column;    /* Alinha o título e a descrição verticalmente */
-    align-items: center;       /* Centraliza horizontalmente na tela */
-    text-align: center;        /* Garante que o texto de várias linhas fique centralizado */
+    margin: 0;
 }
 
-.titulo-divulgacao {
+/* Conteúdo de Divulgação */
+.content-divulgacao {
+    margin: 8px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.content-divulgacao .titulo-divulgacao {
     font-size: 1.1rem;
+    line-height: 1.2;
+    margin-bottom: 4px;
     font-weight: 600;
 }
 
-
-.descricao-divulgacao {
-    font-size: 0.9rem;
+.content-divulgacao .descricao-divulgacao {
+    font-size: 0.85rem;
+    line-height: 1.3;
     color: var(--muted, #666);
-    margin-top: 4px;
-}
-/* Grid para ajustar seus .product-card dentro da tela */
-.produtos-grid-story{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    width: 100%;
-    margin: 16px 0;
+    margin: 0;
 }
 
+/* =========================================================
+   GRIDS DE EXIBIÇÃO (MÁXIMO 4 ITENS)
+   ========================================================= */
 
-.categorias-grid-story {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    width: 100%;
-    margin: 16px 0;
-}
-
+/* Grid com tamanho fixo que cabe perfeitamente na tela do Story */
+.produtos-grid-story,
 .listas-grid-story {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    width: 100%;
-    margin: 16px 0; 
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: repeat(2, 1fr) !important;
+    gap: 8px !important;
+    width: 100% !important;
+    height: 340px !important; /* Trava a altura total dos 4 cards */
+    margin: 8px 0 !important;
+    box-sizing: border-box !important;
 }
-/* Sobrescreve apenas a flexão do card dentro da grid do story */
+
+/* =========================================================
+   GRID DE CATEGORIAS (2x2 - Quebrando linha a cada 2 itens)
+   ========================================================= */
+
+/* Container da Grid 2x2 */
+.categorias-grid-story {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-rows: repeat(4, 1fr) !important;
+    gap: 10px 4px !important;
+    width: 100% !important;
+    margin: 16px 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Card individual da Categoria */
+.categorias-grid-story .categoria-card,
+.categorias-grid-story a,
+.categorias-grid-story > div {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    text-decoration: none !important;
+}
+
+/* Imagem Redonda da Categoria */
+.categorias-grid-story img {
+    width: 80px !important;
+    height: 80px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    border: 2px solid #2563eb !important; /* Borda ao redor da foto */
+    padding: 2px !important;
+    box-sizing: border-box !important;
+    margin-bottom: 6px !important;
+}
+
+/* Nome da Categoria abaixo da Imagem */
+.categorias-grid-story span,
+.categorias-grid-story h3,
+.categorias-grid-story p {
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: #1a1a1a !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+    
+    /* Trunca o texto com ... caso seja muito longo */
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+.list-content span,
+.list-content h4,
+.list-content p {
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    color: #1a1a1a !important;
+    margin: 0 !important;
+    line-height: 1.2 !important;
+    
+    /* Trunca o texto com ... caso seja muito longo */
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* Card individual do produto */
 .produtos-grid-story .product-card {
-    flex: unset;
-    width: 100%;
+    display: flex !important;
+    flex-direction: column !important;
+    background: #ffffff !important;
+    border-radius: 10px !important;
+    overflow: hidden !important;
+    border: 1px solid #eaeaea !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04) !important;
+    height: 100% !important;
+    text-decoration: none !important;
+    box-sizing: border-box !important;
 }
 
+/* Imagem ajustada proporcionalmente */
+.produtos-grid-story .product-card .product-image {
+    width: 100% !important;
+    height: 105px !important;
+    object-fit: cover !important;
+    object-position: top center !important;
+    display: block !important;
+}
 
-/* Footer do Story - Centralizado */
+/* Container com as informações do produto */
+.produtos-grid-story .product-info-all {
+    padding: 6px 8px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    flex: 1 !important;
+    gap: 2px !important;
+}
+
+/* Título do produto com truncamento de texto (...) */
+.produtos-grid-story .product-info-all h2,
+.produtos-grid-story .product-card h3 {
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+    line-height: 1.15 !important;
+    color: #1a1a1a !important;
+    margin: 0 !important;
+    
+    /* Corta o texto em no máximo 2 linhas com ... */
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* ESCONDE ELEMENTOS QUE POLUEM O STORY E OCUPAM ESPAÇO */
+.produtos-grid-story .metrics-product-all,
+.produtos-grid-story .views-wrapper,
+.produtos-grid-story .eye,
+.produtos-grid-story .product-footer-all button {
+    display: none !important;
+}
+
+/* Footer do Card com Preços */
+.produtos-grid-story .product-footer-all {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    margin-top: auto !important;
+}
+
+.produtos-grid-story .price-group-all {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 4px !important;
+    flex-wrap: wrap !important;
+}
+
+/* Preço Promocional (Principal) */
+.produtos-grid-story .promocional-price {
+    font-size: 0.8rem !important;
+    font-weight: 700 !important;
+    color: var(--primary) !important;
+}
+
+/* Preço Normal (Riscado) */
+.produtos-grid-story .normal-price-all {
+    font-size: 0.65rem !important;
+    color: #888888 !important;
+    text-decoration: line-through !important;
+}
+
+/* =========================================================
+   FOOTER STORY E BOTÃO DOWNLOAD
+   ========================================================= */
+
 .footer-story {
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center; /* Garante o alinhamento do texto */
+    text-align: center;
     gap: 4px;
 }
 
@@ -120,45 +277,44 @@ body {
     width: 80px;
 }
 
+/* Botão Flutuante de Download */
 .cta-download {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 
-  padding: 17px 29px;
-  background-color: var(--primary, #2563eb);
-  color: #ffffff;
-  border-radius: 50px; /* Borda arredondada no estilo 'pill' */
-  text-decoration: none;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+    padding: 17px 29px;
+    background-color: var(--primary, #2563eb);
+    color: #ffffff;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .cta-download:hover {
-  transform: translateX(-50%) scale(1.03);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    transform: translateX(-50%) scale(1.03);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
 }
 
 .cta-download img {
-  width: 20px;
-  height: 20px;
-  color: #ffffff;
-  object-fit: contain;
+    width: 20px;
+    height: 20px;
+    color: #ffffff;
+    object-fit: contain;
 }
 
-/* Ajuste de tipografia (removendo a tag h8 inválida via CSS) */
 .cta-download h8, 
 .cta-download span {
-  font-size: 0.85rem;
-  font-weight: 300;
-  margin: 0;
-  line-height: 1;
-  
+    font-size: 0.85rem;
+    font-weight: 300;
+    margin: 0;
+    line-height: 1;
 }

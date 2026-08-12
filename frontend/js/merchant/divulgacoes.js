@@ -3,10 +3,10 @@ import { API_BASE_URL } from "../api/config.js"
 import { embaralharArray } from "../components/embaralharArray.js";
 import { popupMessage } from "../components/popup.js";
 import { requestJSON } from "../components/responseJSON.js";
-import { getLojaId } from "../services/requisicoesMerchant.js";
+import { getLojaId, insertNomeDaLoja } from "../services/requisicoesMerchant.js";
 import { initDivulgacao } from "./divulgacao.js";
 
-const lojaId = 24 //fixo por enquanto
+const lojaId = await getLojaId() //fixo por enquanto
 
 
 const divulgacoes = [
@@ -41,7 +41,7 @@ const divulgacoes = [
       "emoji": "🚀",
       "template": "template_1",
       "rota": "/produtos/ativos",
-      "limit": 2,
+      "limit": 4,
       "tipo": "produtos",
       "headline": "Novidades Chegando Agora!",
       "sub_headline": "Clique no link para explorar em primeira mão os lançamentos no Guide."
@@ -65,7 +65,7 @@ const divulgacoes = [
       "emoji": "💬",
       "template": "template_1",
       "rota": "/produtos/ativos",
-      "limit": 2,
+      "limit": 4,
       "tipo": "produtos",
       "headline": "Confira Nossas Opções Exclusivas!",
       "sub_headline": "Clique no link para abrir nosso catálogo completo no Guide e escolher os seus favoritos."
@@ -77,7 +77,7 @@ const divulgacoes = [
       "emoji": "📸",
       "template": "template_1",
       "rota": "/produtos/ativos",
-      "limit": 2,
+      "limit": 4,
       "tipo": "produtos",
       "headline": "Viu no Story? Tem Muito Mais!",
       "sub_headline": "Acesse o link da nossa bio ou toque abaixo para ver a vitrine completa no Guide."
@@ -89,7 +89,7 @@ const divulgacoes = [
       "emoji": "🗂️",
       "template": "template_2",
       "rota": "/categorias/lojas",
-      "limit": 4,
+      "limit": 6,
       "tipo": "categorias",
       "headline": "Tudo Separado para Você",
       "sub_headline": "Clique no link para explorar nossas categorias organizadas no Guide."
@@ -133,9 +133,12 @@ const divulgacoes = [
 ];
 
 
-export function initDivulgacoes() {
+export async function initDivulgacoes() {
     renderDivulgacoes()
     eventosDivulgacoes()
+    await insertNomeDaLoja(lojaId.id)
+    
+    
 }
 
 
@@ -143,7 +146,10 @@ function renderDivulgacoes() {
   const container = document.querySelector('.divulgacoes-list-all')
   if (!container) return
 
-
+  const menuItem = document.querySelector('.menu-item.divulgacoes');
+  if (menuItem) {
+    menuItem.classList.add('selected-item');
+  }
   container.innerHTML = divulgacoes.map((divulgacao) => {
       // Adicionado o 'return' para que o HTML de cada item seja retornado
       return `
@@ -208,7 +214,7 @@ async function buscarDados (divulgacao) {
     const template = divulgacao.template
     const limit = divulgacao.limit
 
-    const data = await requestJSON(`${API_BASE_URL}/api${rota}/${lojaId}`)
+    const data = await requestJSON(`${API_BASE_URL}/api${rota}/${lojaId.id}`)
     const produtos = embaralharArray(data)
     const dataLimit = produtos.slice(0, limit)
   
