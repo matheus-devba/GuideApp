@@ -9,12 +9,16 @@ import { initLojas } from "../consumer/lojas.js";
 import { initHome } from "./home.js";
 import { initCategorias } from "./categorias.js";
 import { initListas } from "./listas.js";
+import { initProdutos } from "./produtos.js";
 
 
 const path = window.location.pathname;
 
  if (path === "/home") {
   initHome()
+}
+ if (path === "/pesquisa") {
+  initProdutos()
 }
 
  if (path === "/lojasAll") {

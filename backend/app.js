@@ -64,6 +64,10 @@ app.get("/home", (req, res) => {
 app.get("/lojasAll", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "lojas.html"))
 })
+app.get("/pesquisa", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "produtos.html"))
+})
+
 app.get("/lojasAll/:id", (req, res) => {
   const { id } = req.params
 

@@ -19,6 +19,7 @@ export async function initSearch() {
   const loja_id = Number(lojaParam) || 0; 
   renderFooter()
 
+
   let produtos = [];
 
   // Tratamento de erros básico para as requisições
@@ -46,6 +47,9 @@ export async function initSearch() {
   
   searchRenderProduct(itemQuery, produtos, loja_id);
 } 
+
+
+
 
 //   const params = new URLSearchParams(window.location.search)
 //   const caminho = window.location.pathname.split("/").filter(Boolean)
