@@ -115,3 +115,46 @@
 .icone-guide {
     width: 80px;
 }
+
+.cta-download {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 17px 29px;
+  background-color: var(--primary, #2563eb);
+  color: #ffffff;
+  border-radius: 50px; /* Borda arredondada no estilo 'pill' */
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta-download:hover {
+  transform: translateX(-50%) scale(1.03);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.cta-download img {
+  width: 20px;
+  height: 20px;
+  color: #ffffff;
+  object-fit: contain;
+}
+
+/* Ajuste de tipografia (removendo a tag h8 inválida via CSS) */
+.cta-download h8, 
+.cta-download span {
+  font-size: 0.85rem;
+  font-weight: 300;
+  margin: 0;
+  line-height: 1;
+  
+}
