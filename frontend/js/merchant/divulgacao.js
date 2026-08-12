@@ -1,5 +1,6 @@
+import { popupMessage } from "../components/popup.js";
 import { eventosDivulgacoes } from "./divulgacoes.js";
-// import * as htmlToImage from 'html-to-image';
+
 export async function initDivulgacao() {
     const container = document.querySelector('.render-divulgacao');
     if (!container) return;
@@ -28,16 +29,36 @@ function aplicarEventoDownload() {
 
         try {
         // Gera a imagem em formato PNG preservando o estilo do Story
-        const dataUrl = await htmlToImage.toPng(storyCard, {
-            quality: 0.95,
-            pixelRatio: 2 // Melhora a resolução para Stories (HD)
-        });
+            const dataUrl = await window.htmlToImage.toPng(storyCard, {
+                quality: 0.95,
+                pixelRatio: 2,
+                backgroundColor: '#ffffff', // Define o fundo como branco sólido
+                // Desativa a tentativa de ler e embutir folhas de estilo externas do Google Fonts
+                fontEmbedCSS: '', 
+                // Filtra links CSS que quebraram ou não pertencem ao mesmo domínio
+                filter: (node) => {
+                if (node.tagName === 'LINK' && node.rel === 'stylesheet') {
+                    return node.href.includes(window.location.origin);
+                }
+                return true;
+                },
+                // Ignora erros de imagens ou fontes que falharem ao carregar
+                skipAnimationFrame: true,
+            });
 
         // Cria um link temporário para forçar o download
         const link = document.createElement('a');
         link.download = `divulgacao-story-${Date.now()}.png`;
         link.href = dataUrl;
         link.click();
+
+        popupMessage({
+        titulo : "Sucesso!",
+        mensagem : "Download iniciado! Divulgue como quiser.",
+        textoBotao : "OK"
+        })
+       
+    
 
         } catch (error) {
         console.error('Erro ao gerar a imagem do story:', error);

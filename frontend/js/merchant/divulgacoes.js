@@ -211,7 +211,7 @@ async function buscarDados (divulgacao) {
     const data = await requestJSON(`${API_BASE_URL}/api${rota}/${lojaId}`)
     const produtos = embaralharArray(data)
     const dataLimit = produtos.slice(0, limit)
-    console.log(dataLimit)
+  
     return dataLimit
 
   } catch (error) {

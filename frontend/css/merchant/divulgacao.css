@@ -4,6 +4,10 @@
    CONTAINER STORY (9:16)
    ========================================================= */
 /* Mantém o título do card de produto intacto e alinhado à esquerda */
+body {
+    background-color: var(--bg) !important;
+}
+
 .product-card h3 {
     margin: 0;
     font-size: 1.0rem;
