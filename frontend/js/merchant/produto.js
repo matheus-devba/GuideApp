@@ -96,10 +96,18 @@ export async function renderProduto (productId, loja_id) {
         <p class="interesses">${interesses}</p>
     </div>
 
+    
+
     <div class="options-group">  
+      <a class="product-options view" href="${API_BASE_URL}/produtos/${productSelected.id}?loja_id=${productSelected.loja_id}&produto_id=${productSelected.id}">Ver como cliente</a>
       <a class="product-options edit" href="${API_BASE_URL}/produtos/update/${productSelected.id}">Editar</a>
       ${productSelected.ativo == true ? `<a class="product-options muted" id="muted" href="#">Ocultar</a>`: `<a class="product-options activate" id="muted" href="#">Ativar</a>` }
       <a class="product-options delete" id="delete" href="#">Excluir</a>
+    </div>
+
+    <div class="description-group ${productSelected.descricao == "" || productSelected.descricao == null ? "hidden":""} ">
+      <h4 class="description-title"> Descrição </h4>
+      <p class="description">${productSelected.descricao} </p>
     </div>
   `
   }

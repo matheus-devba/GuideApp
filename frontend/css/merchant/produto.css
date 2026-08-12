@@ -86,6 +86,9 @@
 .product-options.muted {
     background: var(--muted);
 }
+.product-options.view {
+    background: var(--primary);
+}
 
 .product-options.activate {
     background: var(--secundary);
@@ -143,3 +146,11 @@
 
 .prev-btn { left: 10px; }
 .next-btn { right: 10px; }
+
+.description-group {
+    margin-top: 20px;
+
+}
+.description {
+    white-space: pre-line
+}
