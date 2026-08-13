@@ -63,7 +63,7 @@ export async function renderClientes() {
 
 
 function createListClientes(client) {
-    const createdAt = formatDateTime(client.created_at)
+    const createdAt = formatUpdatedAt(client.created_at)
     const updatedAt = formatUpdatedAt(client.updated_at)
  
     return `
