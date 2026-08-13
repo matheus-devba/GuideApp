@@ -11,6 +11,8 @@ router.post("/merchant/new", ListasController.criar)
 router.delete("/merchant/deletar/:id", ListasController.deletar) 
 router.patch("/merchant/ocultar/:id", ListasController.ocultar) 
 
+router.patch("/newView/:id", ListasController.addView)
+router.patch("/addInteresse/:id", ListasController.addInteresse)
 
 
 module.exports = router

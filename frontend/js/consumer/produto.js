@@ -2,18 +2,28 @@ import { API_BASE_URL } from "../api/config.js"
 import { insertNomeDaLoja } from "../services/requisicoesConsumer.js";
 import { formatMoney } from '../utils/formatMoney.js'
 import { btnShare } from '../components/shareButton.js'
-import { Eventos } from "../utils/eventos.js";
+import { addEventos, Eventos } from "../utils/eventos.js";
 import { renderFooter } from "../components/footerNavegation.js";
 
 const params = new URLSearchParams(window.location.search)
 const loja_id = Number(params.get("loja_id"))
 const produto_id = Number(params.get("produto_id"))
+const source = String(params.get("source")) || null
+
+let tipo_evento = ""
+if (source === "null") {
+  tipo_evento = Eventos.VIEW_PRODUTO
+} else {
+  tipo_evento = Eventos.VIEW_PRODUTO_HOME
+}
 
 export async function initProduto() {
   await insertNomeDaLoja(loja_id)
   await renderProduto(produto_id, loja_id);
-  await addView()
   renderFooter()
+  await addEvento(produto_id, loja_id, "views", tipo_evento)
+
+
 }
 
 
@@ -153,34 +163,6 @@ function inicializarCarrossel() {
   }
 }
 
-async function addView() {
-  try {
-    const responseViews = await fetch(`${API_BASE_URL}/api/produtos/newView/${produto_id}`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" }
-    });
-
-    const payload = {
-      tipo_evento: Eventos.VIEW_PRODUTO,
-      loja_id: loja_id,
-      produto_id: produto_id
-      }
-      
-    const responseEvent = await fetch(`${API_BASE_URL}/api/eventos/newEvent`, {
-    method: "POST",
-    body: JSON.stringify(payload),
-    headers: { "Content-Type": "application/json" }
-    });
-    
-    if (!responseViews.ok || !responseEvent.ok) {
-      throw new Error("Erro ao processar as requisições da API");
-      return
-    }
-
-  } catch (error) {
-    console.error("Falha ao registrar visualização/evento:", error);
-  }
-}
 
 function addInteresse(productSelected,loja, precoExibido) {
   let textoMensagem = `Olá \u{1F60D}! Vim do Guide e tenho interesse no produto ${productSelected.nome} no valor de ${formatMoney(precoExibido)}\n\n`;
@@ -201,32 +183,34 @@ function addInteresse(productSelected,loja, precoExibido) {
     e.preventDefault()
     window.open(urlWhatsapp, '_blank', 'noopener,noreferrer');
 
-    try {
-    const responseViews = await fetch(`${API_BASE_URL}/api/produtos/addInteresse/${produto_id}`, {
-    method: "PATCH",
-    headers: { "Content-Type": "application/json" }
-    });
-
-    const payload = {
-      tipo_evento: Eventos.INTERESSE_PRODUTO,
-      loja_id: loja_id,
-      produto_id: produto_id
-      }
-      
-    const responseEvent = await fetch(`${API_BASE_URL}/api/eventos/newEvent`, {
-    method: "POST",
-    body: JSON.stringify(payload),
-    headers: { "Content-Type": "application/json" }
-    });
-    
-    if (!responseViews.ok || !responseEvent.ok) {
-      throw new Error("Erro ao processar as requisições da API");
-      return
+    if (source) {
+      await addEvento(produto_id, loja_id, "interesse", Eventos.INTERESSE_PRODUTO_HOME)
     }
-
-  } catch (error) {
-    console.error("Falha ao registrar visualização/evento:", error);
-  }
+    else {
+      await addEvento(produto_id, loja_id, "interesse", Eventos.INTERESSE_PRODUTO)
+    }
+    
   })
 }
   
+
+async function addEvento(produto_id, loja_id, tipo, tipo_evento) {
+  const payload = {
+    tipo_evento: tipo_evento,
+    produto_id: produto_id,
+    loja_id: loja_id
+  }
+
+  const rotaView = `/api/produtos/newView/${produto_id}`
+  const rotaInteresse = `/api/produtos/addInteresse/${produto_id}`
+
+  if (tipo == "views") {
+    await addEventos(rotaView, payload)
+    return
+  }
+
+  if (tipo == "interesse") {
+    await addEventos(rotaInteresse, payload)
+    return
+  }
+}

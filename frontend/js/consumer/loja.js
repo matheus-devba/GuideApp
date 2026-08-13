@@ -5,8 +5,17 @@ import { formatMoney } from '../utils/formatMoney.js'
 import { btnShare } from '../components/shareButton.js'
 import { requestJSON } from "../components/responseJSON.js";
 import { renderFooter } from "../components/footerNavegation.js";
+import { addEventos, Eventos } from "../utils/eventos.js";
 
+const params = new URLSearchParams(window.location.search)
+const source = String(params.get("source")) || null
 
+let tipo_evento = ""
+if (source === "null") {
+  tipo_evento = Eventos.VIEW_LOJA
+} else {
+  tipo_evento = Eventos.VIEW_LOJA_HOME 
+}
 
 
 function renderLojaTopo(loja, loja_id) {
@@ -76,6 +85,7 @@ export async function initLoja() {
   if (containerCategoria && !categorias.length) containerCategoria.closest(".product-list")?.classList.add("hidden");
 
   submitPesquisa(loja_id);
+  await addEvento(loja_id, "views", tipo_evento)
 
 }
 
@@ -261,3 +271,16 @@ async function renderCategoriaFromData(categorias, loja_id) {
   return categorias
 }
 
+async function addEvento( loja_id, tipo, tipo_evento) {
+  const payload = {
+    tipo_evento: tipo_evento,
+    loja_id: loja_id
+  }
+
+  const rotaView = `/api/lojas/newView/${loja_id}`
+
+  await addEventos(rotaView, payload)
+
+  
+
+}

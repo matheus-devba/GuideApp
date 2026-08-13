@@ -26,7 +26,7 @@ router.get("/nichos/:id", LojaController.buscarPorNicho)
 router.patch("/hidden/:id", LojaController.ocultar)
 router.patch("/active/:id", LojaController.ativar)
 
-
+router.patch("/newView/:id", LojaController.addView)
 
 
 

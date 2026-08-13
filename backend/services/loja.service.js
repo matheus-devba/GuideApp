@@ -26,7 +26,9 @@ class LojaService{
 
         return loja
     }
-
+    async addView (id) {
+        return await LojaRepository.addView(id)
+    }
     async criar (dados) {
         return await LojaRepository.criarLoja(dados)
     }

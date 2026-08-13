@@ -27,6 +27,12 @@ class ListasService {
         const lista = await ListasRepository.atualizar(id, nome )
         return lista
     }
+    async addView (id) {
+        return await ListasRepository.addView(id)
+    }
+    async addInteresse (id) {
+        return await ListasRepository.addInteresse(id)
+    }
     async criar (dados ) {
         const lista = await ListasRepository.criar(dados)
         return lista

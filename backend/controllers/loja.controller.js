@@ -47,6 +47,18 @@ class LojaController {
             })
         }
     }
+     async addView(req, res) {
+            try {
+                const { id } = req.params
+                const loja = await LojaService.addView(id)
+                return res.status(200).json(loja)
+            }
+            catch (error) {
+                return res.status(500).json({
+                    message: error.message
+                })
+            }
+        }
 
     async criar(req, res) {
     try {

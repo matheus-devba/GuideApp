@@ -46,6 +46,20 @@ class LojaRepository {
         return rows[0]
     }
 
+        async addView(id) {
+        const { rows } = await pool.query(`
+            UPDATE lojas
+            SET views = views + 1
+            WHERE id = $1
+            RETURNING *
+            `,
+            
+            [id]
+        )
+        return rows[0]
+    }
+
+
     async criarLoja(loja) {
         const { rows } = await pool.query(`
             INSERT INTO lojas

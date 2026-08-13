@@ -132,7 +132,7 @@ async function renderListsFromData(listas) {
         const badgeHtml = badgeCount > 0 ? `<span class="badge">+ ${badgeCount}</span>` : "";
 
         return `
-          <a class="list-product-card" href="${API_BASE_URL}/listas/${list.id}?list_id=${list.id}&loja_id=${list.loja_id}">
+          <a class="list-product-card" href="${API_BASE_URL}/listas/${list.id}?list_id=${list.id}&loja_id=${list.loja_id}&source=home">
             <div class="list-card-images">
               <img src="${imageBack}" class="list-image back" loading="lazy">
               <img src="${imageFront}" class="list-image front" loading="lazy">
@@ -184,7 +184,7 @@ async function renderPromocoesFromData(promocoes, nicho_id) {
     const countViews = product.views >= 2 ? `${product.views} visualizações` : "";
 
     return `
-      <a class="product-card" href="${API_BASE_URL}/produtos/${product.id}?loja_id=${product.loja_id}&produto_id=${product.id}">
+      <a class="product-card" href="${API_BASE_URL}/produtos/${product.id}?loja_id=${product.loja_id}&produto_id=${product.id}&source=home"">
         <img class="product-image" src="${API_BASE_URL}/api/produto_imagens/buscar_imagem/${product.id}" loading="lazy">
         <div class="product-info-all">
           <h2>${product.nome}</h2>
@@ -222,7 +222,7 @@ async function renderProdutosFromData(products) {
     const countViews = product.views >= 2 ? `${product.views} visualizações` : "";
 
     return `
-      <a class="product-card-all" data-id="${product.id}" href="${API_BASE_URL}/produtos/${product.id}?loja_id=${product.loja_id}&produto_id=${product.id}">
+      <a class="product-card-all" data-id="${product.id}" href="${API_BASE_URL}/produtos/${product.id}?loja_id=${product.loja_id}&produto_id=${product.id}&source=home"">
         <img class="product-image-all" src="${API_BASE_URL}/api/produto_imagens/buscar_imagem/${product.id}" loading="lazy">
         <div class="product-info-all">
           <h2>${product.nome}</h2>
@@ -262,7 +262,7 @@ async function renderLojasFromData(lojas) {
 
   container.innerHTML = exibicao.map((loja) => `
     <div class="loja-content">
-      <a class="list-product-card" href="${API_BASE_URL}/lojas/${loja.id}?loja_id=${loja.id}">
+      <a class="list-product-card" href="${API_BASE_URL}/lojas/${loja.id}?loja_id=${loja.id}&source=home">
         <img src="${loja.logo_url}" class="logo-store" loading="lazy">
         <div class="list-content">
           <h4>${loja.nome}</h4>

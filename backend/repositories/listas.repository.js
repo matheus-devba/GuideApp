@@ -47,6 +47,34 @@ class ListasRepository {
         )
         return rows[0]
     }
+
+    async addView(id) {
+        const { rows } = await pool.query(`
+            UPDATE listas
+            SET views = views + 1
+            WHERE id = $1
+            RETURNING *
+            `,
+            
+            [id]
+        )
+        return rows[0]
+    }
+    async addInteresse(id) {
+        const { rows } = await pool.query(`
+            UPDATE listas
+            SET interesses = interesses + 1
+            WHERE id = $1
+            RETURNING *
+            `,
+            
+            [id]
+        )
+        return rows[0]
+    }
+
+
+
     async criar (dados) {
         const { rows } = await pool.query(`
             INSERT INTO listas (loja_id ,nome, nicho_id)

@@ -5,17 +5,25 @@ import { btnShare } from '../components/shareButton.js'
 import { popupMessage, popupConfirm } from "../components/popup.js";
 import { requestJSON } from "../components/responseJSON.js";
 import { renderFooter } from "../components/footerNavegation.js";
+import { addEventos, Eventos } from "../utils/eventos.js";
 
+const params = new URLSearchParams(window.location.search)
+const loja_id = Number(params.get("loja_id"))
+const list_id = Number(params.get("list_id"))
+const source = String(params.get("source")) || false
 
-
+let tipo_evento = ""
+if (source === "null") {
+  tipo_evento = Eventos.VIEW_LISTA 
+} else {
+  tipo_evento = Eventos.VIEW_LISTA_HOME
+}
 export async function initLista() {
-  const params = new URLSearchParams(window.location.search)
-  const loja_id = Number(params.get("loja_id"))
-  const list_id = Number(params.get("list_id"))
   await insertNomeDaLoja(loja_id)
   await renderLista(list_id, loja_id);
   ctaLista(loja_id, list_id);
   renderFooter()
+  await addEvento(list_id, loja_id, "views", tipo_evento)
 }
 
 
@@ -55,7 +63,7 @@ async function renderLista (list_id, loja_id) {
       
       // Define qual será o preço em destaque
       const precoExibido = temPromocao ? product.preco_promocional : product.preco_normal;
-
+      const countViews = product.views >= 2 ? product.views + " visualizações" : "" 
 
 
       return `
@@ -71,8 +79,8 @@ async function renderLista (list_id, loja_id) {
             <div class="product-info-all">
                 <h2>${product.nome}</h2>
                 <span class="metrics-product-all">
-                    <img class="eye" hidden src="../assets/icons/eye.png">
-                    <p class="views" hidden>${product.views}</p>
+                    <img class="eye" ${countViews === "" ? "hidden" : ""} src="../assets/icons/eye.png">
+                <p class="views">${countViews}</p>
                 </span>
               <div class="product-footer-all">
                     <div class="price-group-all">
@@ -106,7 +114,7 @@ function obterProdutosSelecionados() {
   });
 }
 
-function ctaLista(loja_id, list_id) {
+async function ctaLista(loja_id, list_id) {
   const btn = document.querySelector('.cta-product');
   if (!btn) return;
 
@@ -133,6 +141,14 @@ function ctaLista(loja_id, list_id) {
 
     const loja = await responseLoja.json()
     const lista = await responseLista.json()
+
+    if (source) {
+      await addEvento(lista.id, loja.id, "interesse", Eventos.INTERESSE_LISTA_HOME)
+    }
+    else {
+      await addEvento(lista.id, loja.id, "interesse", Eventos.INTERESSE_LISTA)
+    }
+        
 
     // Cria o cabeçalho da mensagem
     let textoMensagem = `Olá \u{1F60D}! Vim do Guide e tenho interesse nos seguintes produtos da lista ${lista.nome}:\n\n`;
@@ -168,3 +184,26 @@ function ctaLista(loja_id, list_id) {
   }
   });
 }
+
+
+async function addEvento(lista_id, loja_id, tipo, tipo_evento) {
+  const payload = {
+    tipo_evento: tipo_evento,
+    lista_id: lista_id,
+    loja_id: loja_id
+  }
+
+  const rotaView = `/api/listas/newView/${lista_id}`
+  const rotaInteresse = `/api/listas/addInteresse/${lista_id}`
+
+  if (tipo == "views") {
+    await addEventos(rotaView, payload)
+    return
+  }
+
+  if (tipo == "interesse") {
+    await addEventos(rotaInteresse, payload)
+    return
+  }
+}
+

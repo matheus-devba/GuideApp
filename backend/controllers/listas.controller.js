@@ -69,6 +69,32 @@ class ListasController {
             })
         }
     }
+
+ async addView(req, res) {
+        try {
+            const { id } = req.params
+            const lista = await ListasService.addView(id)
+            return res.status(200).json(lista)
+        }
+        catch (error) {
+            return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
+    async addInteresse(req, res) {
+        try {
+            const { id } = req.params
+            const lista = await ListasService.addInteresse(id)
+            return res.status(200).json(lista)
+        }
+        catch (error) {
+            return res.status(500).json({
+                message: error.message
+            })
+        }
+    }
+
     async deletar(req, res) {
         try {
             const { id } = req.body
