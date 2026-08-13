@@ -8,8 +8,8 @@ import { formatMoney } from "../../js/utils/formatMoney.js";
 
 export class Template {
     static async buscarLoja() {
-        const lojaId = 24 // fixo por enquanto
-        const response = await requestJSON(`${API_BASE_URL}/api/lojas/${lojaId}`)
+        const lojaId = await getLojaId() // fixo por enquanto
+        const response = await requestJSON(`${API_BASE_URL}/api/lojas/${lojaId.id}`)
         return response
     }
 

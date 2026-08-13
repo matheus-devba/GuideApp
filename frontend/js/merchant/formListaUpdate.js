@@ -1,7 +1,7 @@
 import { API_BASE_URL } from "../api/config.js";
 import {getListaID, renderProdutos, searchProductList, bindSelection, renderSelectedProducts} from "./formLista.shared.js"
 import { filterProducts } from "../components/searchProduto.js"
-import { verificacaoUsuario } from "../services/requisicoesMerchant.js";
+import { getLojaId, verificacaoUsuario } from "../services/requisicoesMerchant.js";
 import { popupMessage } from "../components/popup.js";
 
 
@@ -15,13 +15,14 @@ export async function initFormListaUpdate() {
   const idLista = getListaID()
 
   if (!idLista) return
+  const lojaId = await getLojaId()
 
   const responseLista = await fetch(`${API_BASE_URL}/api/lista-produtos/lista/${idLista}`)
   const produtosDaLista = await responseLista.json()
 
   const selectedProductsState = produtosDaLista ?? [];
 
-  const responseProdutos = await fetch(`${API_BASE_URL}/api/produtos/ativosAll`)
+  const responseProdutos = await fetch(`${API_BASE_URL}/api/produtos/ativos/${lojaId.id}`)
   const produtosAtivos = await responseProdutos.json()
 
   const responseNomeLista = await fetch(`${API_BASE_URL}/api/listas/merchant/${idLista}`)
