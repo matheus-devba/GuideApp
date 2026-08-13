@@ -40,8 +40,11 @@ if (/^\/lista-produto\/update\/\d+$/.test(path)) {
   initFormListaUpdate()
 }
 
-if (path === '/merchant/login') {
-  initLogin()
+if (
+  path === "/merchant/login" ||
+  path.endsWith("/merchant/login.html")
+) {
+  initLogin();
 }
 
 document.addEventListener("DOMContentLoaded", () => {

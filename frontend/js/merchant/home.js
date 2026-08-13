@@ -9,7 +9,10 @@ export async function initHome() {
   const verificar = await verificacaoUsuario();
   if (!verificar) return; // Se for false (não logado), para a execução aqui.
 
+
+
   const lojaId = await getLojaId()
+  if(!lojaId) return
 
   await insertNomeDaLoja(lojaId.id)
     btnShare(`/lojas/${lojaId.id}?loja_id=${lojaId.id}`,

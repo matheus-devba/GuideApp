@@ -1,5 +1,4 @@
 import { popupMessage } from "../components/popup.js";
-import { eventosDivulgacoes } from "./divulgacoes.js";
 
 export async function initDivulgacao() {
     const container = document.querySelector('.render-divulgacao');

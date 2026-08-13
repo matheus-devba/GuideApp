@@ -6,8 +6,7 @@ import { requestJSON } from "../components/responseJSON.js";
 import { getLojaId, insertNomeDaLoja } from "../services/requisicoesMerchant.js";
 import { initDivulgacao } from "./divulgacao.js";
 
-const lojaId = await getLojaId() //fixo por enquanto
-
+let lojaId = null
 
 const divulgacoes = [
     {
@@ -134,6 +133,8 @@ const divulgacoes = [
 
 
 export async function initDivulgacoes() {
+   lojaId = await getLojaId();
+     if (!lojaId) return;
     renderDivulgacoes()
     eventosDivulgacoes()
     await insertNomeDaLoja(lojaId.id)
