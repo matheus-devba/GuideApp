@@ -6,6 +6,6 @@ const EventoController = require("../controllers/eventos.controller.js");
 
 router.post("/newEvent", EventoController.create);
 
-router.get("/", EventoController.findAll);
+router.get("/:id", EventoController.findAllPorLoja);
 
 module.exports = router;

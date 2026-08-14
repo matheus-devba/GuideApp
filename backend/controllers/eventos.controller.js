@@ -17,11 +17,11 @@ class EventoController {
     }
   }
 
-  async findAll(req, res) {
+  async findAllPorLoja(req, res) {
 
     try {
-
-      const eventos = await EventoService.listarEventos();
+      const { id } = req.params
+      const eventos = await EventoService.findAllPorLoja(id);
 
       return res.json(eventos);
 

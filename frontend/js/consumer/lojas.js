@@ -3,10 +3,11 @@ import { embaralharArray } from "../components/embaralharArray.js";
 import { renderFooter } from "../components/footerNavegation.js";
 import { requestJSON } from "../components/responseJSON.js";
 
+
 export function initLojas() {
   const parts = window.location.pathname.split("/").filter(Boolean);
   const nicho =  Number(parts[parts.length - 1]) || null;
- 
+
   if (nicho) {
     renderLojas(nicho) 
   } else {
@@ -48,7 +49,7 @@ async function createListLojas(lists) {
 
 
      return `
-        <a class="list-product-card" href="${API_BASE_URL}/lojas/${list.id}?loja_id=${list.id}">
+        <a class="list-product-card" href="${API_BASE_URL}/lojas/${list.id}?loja_id=${list.id}&source=home">
         <img src="${list.logo_url}" class="logo-store">
           <div class="list-content">
             <h4>${list.nome}</h4>

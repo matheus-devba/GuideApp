@@ -21,12 +21,13 @@ class EventoRepository {
     return result.rows[0];
   }
 
-  async findAll() {
+  async findAllPorLoja(id) {
     const result = await pool.query(`
       SELECT *
       FROM eventos
+      WHERE loja_id = $1
       ORDER BY created_at DESC;
-    `);
+    `, [id]);
 
     return result.rows;
   }

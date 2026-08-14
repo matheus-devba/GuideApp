@@ -24,7 +24,7 @@ export function renderFooter() {
         </li>
 
         <li class="footer-nav-item">
-          <a href="/lojasAll" class="footer-nav-link store-mode ${currentPath.includes('/lojasAll') || currentPath.includes('/lojas/') ?  'active' : ''}">
+          <a href="/lojasAll?source=home" class="footer-nav-link store-mode ${currentPath.includes('/lojasAll') || currentPath.includes('/lojas/') ?  'active' : ''}">
             <img src="/assets/icons/varejo.png" alt="Modo Loja" class="footer-nav-icon">
             <span class="footer-nav-text">Modo Loja</span>
           </a>

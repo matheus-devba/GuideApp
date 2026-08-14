@@ -1,0 +1,161 @@
+/* ============================================================
+   PAINEL DE DESEMPENHO DA LOJA — estilos
+   Usa as variáveis já definidas no seu global.css (--bg, --surface,
+   --text, --muted, --line, --primary, --card-shadow, etc).
+   ============================================================ */
+
+/* Container geral: empilha as seções com espaço entre elas */
+.painel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 480px; /* pensado pra tela de celular, já que o lojista provavelmente vai olhar no telefone */
+  margin: 0 auto;
+}
+
+/* Cada bloco (KPIs, funil, tabela...) é um card branco simples */
+.painel-secao {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  padding: 20px;
+}
+
+/* Título de cada seção: discreto, maiúsculo, sem gritar */
+.painel-titulo {
+  margin: 0 0 16px 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---------- Bloco 1: KPIs (números principais) ---------- */
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+/* Card individual do número, no mesmo espírito do print do PowerBI:
+   borda fina, cantos arredondados, número grande e label pequena embaixo */
+.kpi-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 16px 8px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.kpi-numero {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.kpi-label {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ---------- Linha simples de dado (usada em "origem" e "intenção") ---------- */
+
+.linha-dado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.linha-dado:last-child {
+  border-bottom: none;
+}
+
+.linha-label {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.linha-valor {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* ---------- Bloco 3: Funil ---------- */
+
+.funil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.funil-etapa {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 0;
+}
+
+.funil-label {
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.funil-valor {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.funil-seta {
+  font-size: 16px;
+  color: var(--muted);
+}
+
+/* ---------- Bloco 4: Tabela de produtos mais vistos ---------- */
+
+.painel-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.painel-tabela th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.painel-tabela td {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+}
+
+.painel-tabela tr:last-child td {
+  border-bottom: none;
+}
+
+/* Mensagem exibida quando ainda não há dados suficientes */
+.painel-vazio {
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+  margin: 0;
+}

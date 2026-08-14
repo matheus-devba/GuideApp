@@ -6,8 +6,8 @@ class EventoService {
     return await EventoRepository.create(dados);
   }
 
-  async listarEventos() {
-    return await EventoRepository.findAll();
+  async findAllPorLoja(id) {
+    return await EventoRepository.findAllPorLoja(id);
   }
 
 }
