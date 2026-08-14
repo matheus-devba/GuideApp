@@ -10,6 +10,10 @@ export async function initHome() {
   const verificar = await verificacaoUsuario();
   if (!verificar) return; // Se for false (não logado), para a execução aqui.
 
+  const menuItem = document.querySelector('.menu-item.home');
+  if (menuItem) {
+    menuItem.classList.add('selected-item');
+  }
 
 
   const lojaId = await getLojaId()
@@ -23,10 +27,14 @@ export async function initHome() {
 
     const responseLoja = await fetch(`${API_BASE_URL}/api/lojas/${lojaId.id}`);
     const loja = await responseLoja.json()
+
     const containerEl = document.getElementById('painel-loja')
+
 
     renderImagePreview(loja.logo_url, loja.banner_url)
     await renderPainel(loja.id, containerEl)
+
+
     // link loja
     const linkLoja = document.querySelector('.link-loja')
     linkLoja.addEventListener('click', (e) => {

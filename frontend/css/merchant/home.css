@@ -50,3 +50,21 @@
         justify-content: flex-start;
     }
 }
+
+.section-final {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--offwhite);
+    padding: 10px;
+    border-radius: 10px;
+}
+.text-final {
+    color: var(--muted);
+    text-align: center;
+}
+
+.final-icon {
+    width: 30px;
+}

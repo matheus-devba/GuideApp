@@ -38,9 +38,23 @@
 
         <a class="link-loja submit-button" target="_blank" rel="noopener noreferrer" >Acessar Loja como Visitante</a>
         <div id="painel-loja"></div>
+        <section class="section-final">
+            <img class="final-icon" src="../assets/icons/varejo.png" >
+            <p class="text-final">Sucesso! O Guide trouxe pessoas até sua loja, mostrou seus produtos e gerou oportunidades comerciais.</p>
+        </section>
 
     </div>
 <script type="module" src="../js/merchant/app.js" defer></script>
+<script>
+    const section = document.querySelector('.section-final')
+    const dashboard = document.querySelector('#painel-loja')
+
+    if (dashboard.innerHTML.trim() !== '') {
+        section.classList.add('hidden')
+    } else {
+        section.classList.remove('hidden')
+    }
+</script>
 
 </body>
 </html>
