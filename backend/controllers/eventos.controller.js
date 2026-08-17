@@ -17,6 +17,22 @@ class EventoController {
     }
   }
 
+  async findAll(req, res) {
+
+    try {
+      const eventos = await EventoService.findAll();
+
+      return res.json(eventos);
+
+    } catch (error) {
+
+      return res.status(500).json({
+        message: error.message
+      });
+
+    }
+
+  }
   async findAllPorLoja(req, res) {
 
     try {

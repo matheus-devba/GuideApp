@@ -8,4 +8,6 @@ router.post("/newEvent", EventoController.create);
 
 router.get("/:id", EventoController.findAllPorLoja);
 
+router.get("/", EventoController.findAll);
+
 module.exports = router;
