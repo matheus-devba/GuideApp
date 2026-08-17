@@ -163,7 +163,7 @@ async function renderPromocoesFromData(promocoes, nicho_id) {
 
   let products = promocoes || [];
 
-  if (products.length === 0) {
+  if (products.length < 10) {
     const allProducts = await requestJSON(`${API_BASE_URL}/api/produtos/nichos/${nicho_id}`);
     products = allProducts || [];
   }

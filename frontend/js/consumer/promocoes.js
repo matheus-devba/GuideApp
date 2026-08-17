@@ -28,7 +28,7 @@ async function renderProdutos (promocoes, nicho_id) {
    let products = embaralharArray(promocoes)
  
  
-   if (products.length == 0) {
+   if (products.length < 10) {
      const allProducts = await requestJSON(`${API_BASE_URL}/api/produtos/nichos/${nicho_id}`)
      products = embaralharArray(allProducts.slice(0,allProducts.length))
    }
