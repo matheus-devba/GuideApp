@@ -40,7 +40,7 @@ function renderLojaTopo(loja, loja_id) {
   btnShare(
     `/share/loja/${loja_id}`,
     loja.nome,
-    `${textoVisualizacoes}. Conheça a ${loja.nome} no Guide!`
+    `Já temos ${textoVisualizacoes}. Conheça a ${loja.nome} no Guide!`
   );
 }
 
