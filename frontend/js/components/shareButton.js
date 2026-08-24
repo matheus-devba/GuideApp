@@ -24,14 +24,14 @@ export async function btnShare(rota, title, text) {
     // Adiciona o evento de clique para abrir o compartilhamento nativo
     novoBotao.addEventListener("click", async (e) => {
         e.preventDefault();
+        const mensagem = `${text}\n\n${urlParaCompartilhar}`;
 
         // Verifica se o navegador/dispositivo suporta o compartilhamento nativo
         if (navigator.share) {
             try {
                 await navigator.share({
                     title,
-                    text,
-                    url: urlParaCompartilhar // Link completo gerado dinamicamente
+                    text: mensagem
                 });
                 console.log('Compartilhado com sucesso!');
             } catch (error) {
@@ -40,7 +40,7 @@ export async function btnShare(rota, title, text) {
         } else {
             // Fallback: Se o dispositivo não suportar (como navegadores antigos de PC), copia para a área de transferência
             try {
-                await navigator.clipboard.writeText(urlParaCompartilhar);
+                await navigator.clipboard.writeText(mensagem);
                 popupMessage({
                     titulo: "Sucesso!",
                     mensagem: "Link copiado para a área de transferência!"

@@ -25,20 +25,7 @@ export async function initProduto() {
 
 
 }
-// function renderMeta(produto, url) {
-//   const container = document.querySelector('.meta')
-//   if(!container) return
 
-//   container.innerHTML = `
-//           <!-- Open Graph para o WhatsApp / Redes -->
-//         <meta property="og:title" content="${produto.nome}" />
-//         <meta property="og:description" content="${produto.descricao || 'Confira no Guide!'}" />
-//         <meta property="og:image" content="${API_BASE_URL}/api/produto_imagens/buscar_imagem/${produto.id}" />
-//         <meta property="og:url" content="${url}" />
-//         <meta property="og:type" content="product" />
-
-//   `
-// }
 
 
 async function renderProduto (produto_id, loja_id) {

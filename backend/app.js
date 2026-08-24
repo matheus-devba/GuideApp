@@ -196,16 +196,28 @@ app.get("/share/produto/:id", async (req, res) => {
 
     if (!produto) return res.status(404).send("Produto não encontrado");
 
-
     const titulo = String(produto.nome || "Produto no Guide");
 
-    const descricao = String(
+    const temPromocao =
+      produto.preco_promocional !== null &&
+      produto.preco_promocional !== "";
+
+    const precoNormal = formatMoney(produto.preco_normal);
+    const precoPromocional = formatMoney(produto.preco_promocional);
+
+    const textoPreco = temPromocao
+      ? `De ${precoNormal} por ${precoPromocional}`
+      : `Preço: ${precoNormal}`;
+
+    const textoDescricao = String(
       produto.descricao ||
       "Dê uma olhada nesse produto que encontrei no Guide!"
     )
       .replace(/\s+/g, " ")
-      .trim()
-      .slice(0, 160);
+      .trim();
+
+    const descricao = `${textoPreco}. ${textoDescricao}`
+      .slice(0, 180);
 
     const imagemUrl =
       imagem?.url ||
@@ -271,6 +283,18 @@ function escapeHtml(value = "") {
     .replace(/"/g, "&quot;");
 }
 
+function formatMoney(value) {
+  const numero = Number(value);
+
+  if (!Number.isFinite(numero)) {
+    return "R$ 0,00";
+  }
+
+  return new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL"
+  }).format(numero);
+}
 
 
 //Merchant
