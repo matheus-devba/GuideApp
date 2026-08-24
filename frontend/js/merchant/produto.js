@@ -25,7 +25,7 @@ export async function initProduto() {
 export async function renderProduto (productId, loja_id) {
   const container = document.querySelector(".product-page");
   if (!container) return;
- btnShare(`/produtos/${productId.id}?loja_id=${loja_id}&produto_id=${productId.id}`,
+ btnShare(`/produtos/${productId}?loja_id=${loja_id}&produto_id=${productId}`,
     "Olha o que achei no Guide!",
     "Dê uma olhada nesse produto que encontrei no Guide:"
   )
