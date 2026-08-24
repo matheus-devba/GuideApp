@@ -120,7 +120,7 @@ async function renderProduto (produto_id, loja_id) {
     </div>
   `
 
-    addInteresse(loja, productSelected, precoExibido) // para botao de interesse
+    addInteresse(productSelected, loja, precoExibido) // para botao de interesse
 
 } catch (error) {
     console.error("Erro ao buscar dados:", error);
