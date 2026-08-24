@@ -25,7 +25,20 @@ export async function initProduto() {
 
 
 }
+// function renderMeta(produto, url) {
+//   const container = document.querySelector('.meta')
+//   if(!container) return
 
+//   container.innerHTML = `
+//           <!-- Open Graph para o WhatsApp / Redes -->
+//         <meta property="og:title" content="${produto.nome}" />
+//         <meta property="og:description" content="${produto.descricao || 'Confira no Guide!'}" />
+//         <meta property="og:image" content="${API_BASE_URL}/api/produto_imagens/buscar_imagem/${produto.id}" />
+//         <meta property="og:url" content="${url}" />
+//         <meta property="og:type" content="product" />
+
+//   `
+// }
 
 
 async function renderProduto (produto_id, loja_id) {
@@ -39,10 +52,15 @@ async function renderProduto (produto_id, loja_id) {
       fetch(`${API_BASE_URL}/api/produto_imagens/buscar_imagens/${produto_id}`).then(res => res.json()),
     ]);
 
-  btnShare(`/produtos/${productSelected.id}?loja_id=${loja_id}&produto_id=${productSelected.id}`,
-    "Olha o que achei no Guide!",
-    "Dê uma olhada nesse produto que encontrei no Guide:"
-  )
+    // const url = `/produtos/${productSelected.id}?loja_id=${loja_id}&produto_id=${productSelected.id}`
+    // renderMeta(productSelected, url)
+    const url = `/share/produto/${productSelected.id}?loja_id=${loja_id}`;
+    console.log(url)
+
+    btnShare(url,
+      "Olha o que achei no Guide!",
+      "Dê uma olhada nesse produto que encontrei no Guide:"
+    )
 
   if (!productSelected) return;
 

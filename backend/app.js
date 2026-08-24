@@ -1,8 +1,8 @@
 const path = require("path")
 const express = require("express")
 const cors = require("cors")
-
-
+const ProdutosService = require("./services/produtos.service.js");
+const ProdutoImagensService = require("./services/produto-imagens.service.js");
 
 const hash = require("./routes/criarHash.routes.js")
 const lojaRoutes = require("./routes/loja.routes.js")
@@ -114,6 +114,165 @@ app.get("/categorias/guide/:id", (req, res) => {
 })
 
 
+app.get("/produtos/:id", (req, res) => {
+    const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+  res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "produto.html"))
+})
+
+
+app.get("/listas/:id", (req, res) => {
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+
+  res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "lista.html"))
+})
+
+app.get("/destaques/:id", (req, res) => {
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+
+  res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "destaques.html"))
+})
+
+app.get("/categorias/:id", (req, res) => {
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+
+  res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "categoria.html"))
+})
+
+app.get("/consumer/pesquisa/:id", (req, res) => {
+  const { id } = req.params
+
+  if (!/^\d+$/.test(id)) {
+    return res.status(404).send("Página não encontrada")
+  }
+
+  res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "pesquisa.html"))
+})
+
+
+
+
+
+app.set("trust proxy", 1);
+
+app.get("/share/produto/:id", async (req, res) => {
+// Trata HTTPS quando rodando atrás de proxies (Render, Heroku, Nginx)
+  const produtoId = Number(req.params.id);
+
+  if (!Number.isInteger(produtoId) || produtoId <= 0) {
+    return res.status(400).send("ID de produto inválido");
+  }
+
+  try {
+    const [produto, imagem] = await Promise.all([
+    ProdutosService.buscarProdutoAtivo(produtoId),
+    ProdutoImagensService.buscarPrimeiraImagem(produtoId)
+  ]);
+
+    if (!produto) {
+      return res.status(404).send("Produto não encontrado");
+    }
+
+    const baseUrl = (
+      process.env.PUBLIC_BASE_URL ||
+      `${req.protocol}://${req.get("host")}`
+    ).replace(/\/+$/, "");
+
+
+    if (!produto) return res.status(404).send("Produto não encontrado");
+
+
+    const titulo = String(produto.nome || "Produto no Guide");
+
+    const descricao = String(
+      produto.descricao ||
+      "Dê uma olhada nesse produto que encontrei no Guide!"
+    )
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 160);
+
+    const imagemUrl =
+      imagem?.url ||
+      `${baseUrl}/assets/images/default.webp`;
+
+    const shareUrl =
+      `${baseUrl}/share/produto/${produtoId}` +
+      `?loja_id=${produto.loja_id}`;
+
+    const urlDestino =
+      `${baseUrl}/produtos/${produtoId}` +
+      `?loja_id=${produto.loja_id}` +
+      `&produto_id=${produtoId}`;
+
+    res.type("html").send(`
+      <!DOCTYPE html>
+      <html lang="pt-BR">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+
+          <title>${escapeHtml(titulo)}</title>
+          <meta name="description" content="${escapeHtml(descricao)}">
+
+          <meta property="og:type" content="website">
+          <meta property="og:site_name" content="Guide">
+          <meta property="og:locale" content="pt_BR">
+          <meta property="og:title" content="${escapeHtml(titulo)}">
+          <meta property="og:description" content="${escapeHtml(descricao)}">
+          <meta property="og:image" content="${escapeHtml(imagemUrl)}">
+          <meta property="og:image:secure_url" content="${escapeHtml(imagemUrl)}">
+          <meta property="og:url" content="${escapeHtml(shareUrl)}">
+
+          <meta name="twitter:card" content="summary_large_image">
+          <meta name="twitter:title" content="${escapeHtml(titulo)}">
+          <meta name="twitter:description" content="${escapeHtml(descricao)}">
+          <meta name="twitter:image" content="${escapeHtml(imagemUrl)}">
+        </head>
+
+        <body>
+          <p>
+            Redirecionando...
+            <a href="${escapeHtml(urlDestino)}">Clique aqui</a>
+          </p>
+
+          <script>
+            window.location.replace(${JSON.stringify(urlDestino)});
+          </script>
+        </body>
+      </html>
+    `);
+  } catch (error) {
+    console.error("Erro ao gerar preview:", error);
+    return res.status(500).send("Erro ao gerar preview");
+  }
+});
+
+function escapeHtml(value = "") {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+
+
 //Merchant
 
 
@@ -170,54 +329,8 @@ app.get("/lista-produto/update/:id", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "merchant", "formLista.html"))
 })
 
-app.get("/produtos/:id", (req, res) => {
-    const { id } = req.params
 
-  if (!/^\d+$/.test(id)) {
-    return res.status(404).send("Página não encontrada")
-  }
-  res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "produto.html"))
-})
 
-app.get("/listas/:id", (req, res) => {
-  const { id } = req.params
-
-  if (!/^\d+$/.test(id)) {
-    return res.status(404).send("Página não encontrada")
-  }
-
-  res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "lista.html"))
-})
-
-app.get("/destaques/:id", (req, res) => {
-  const { id } = req.params
-
-  if (!/^\d+$/.test(id)) {
-    return res.status(404).send("Página não encontrada")
-  }
-
-  res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "destaques.html"))
-})
-
-app.get("/categorias/:id", (req, res) => {
-  const { id } = req.params
-
-  if (!/^\d+$/.test(id)) {
-    return res.status(404).send("Página não encontrada")
-  }
-
-  res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "categoria.html"))
-})
-
-app.get("/consumer/pesquisa/:id", (req, res) => {
-  const { id } = req.params
-
-  if (!/^\d+$/.test(id)) {
-    return res.status(404).send("Página não encontrada")
-  }
-
-  res.sendFile(path.join(__dirname, "..", "frontend", "consumer", "pesquisa.html"))
-})
 
 
 

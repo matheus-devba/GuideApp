@@ -7,8 +7,11 @@ export async function btnShare(rota, title, text) {
     if (!container) return; // Proteção caso o botão não exista na página
 
     // Monta a URL completa que será compartilhada
-    const urlParaCompartilhar = `${API_BASE_URL}${rota}`;
-
+    const urlParaCompartilhar = new URL(
+    rota,
+    window.location.origin
+    ).href;
+    
     // Altera o HTML inserindo a imagem de forma limpa
     container.innerHTML = ` 
         <img class="top-icon" src="/assets/icons/share.png" alt="Compartilhar">
