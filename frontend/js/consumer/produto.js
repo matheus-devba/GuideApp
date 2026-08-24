@@ -42,7 +42,6 @@ async function renderProduto (produto_id, loja_id) {
     // const url = `/produtos/${productSelected.id}?loja_id=${loja_id}&produto_id=${productSelected.id}`
     // renderMeta(productSelected, url)
     const url = `/share/produto/${productSelected.id}?loja_id=${loja_id}`;
-    console.log(url)
 
     btnShare(url,
       "Olha o que achei no Guide!",

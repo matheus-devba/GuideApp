@@ -25,7 +25,11 @@ export async function initProduto() {
 export async function renderProduto (productId, loja_id) {
   const container = document.querySelector(".product-page");
   if (!container) return;
- btnShare(`/produtos/${productId}?loja_id=${loja_id}&produto_id=${productId}`,
+
+  const url = `/share/produto/${productId}?loja_id=${loja_id}`;
+  // `/produtos/${productId}?loja_id=${loja_id}&produto_id=${productId}`
+
+ btnShare(url,
     "Olha o que achei no Guide!",
     "Dê uma olhada nesse produto que encontrei no Guide:"
   )

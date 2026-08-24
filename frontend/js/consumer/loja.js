@@ -30,10 +30,17 @@ function renderLojaTopo(loja, loja_id) {
   const title = document.querySelector(".store-title");
   if (title) title.textContent = loja.nome;
 
+  const totalVisualizacoes = Number(loja.views) || 0;
+
+  const textoVisualizacoes =
+    totalVisualizacoes === 1
+      ? "1 visualização"
+      : `${totalVisualizacoes} visualizações`;
+
   btnShare(
-    `/lojas/${loja_id}?loja_id=${loja_id}`,
-    "Olha o que achei no Guide!",
-    "Dê uma olhada nessa loja que encontrei no Guide:"
+    `/share/loja/${loja_id}`,
+    loja.nome,
+    `${textoVisualizacoes}. Conheça a ${loja.nome} no Guide!`
   );
 }
 

@@ -20,10 +20,12 @@ export async function initHome() {
   if(!lojaId) return
 
   await insertNomeDaLoja(lojaId.id)
-    btnShare(`/lojas/${lojaId.id}?loja_id=${lojaId.id}`,
-        "Olha o que achei no Guide",
-        "Confira a minha loja no Guide:"
-    )
+  
+  btnShare(
+    `/share/loja/${lojaId.id}`,
+    "Confira minha loja no Guide!",
+    "Conheça minha loja e veja nossos produtos:"
+  );
 
     const responseLoja = await fetch(`${API_BASE_URL}/api/lojas/${lojaId.id}`);
     const loja = await responseLoja.json()

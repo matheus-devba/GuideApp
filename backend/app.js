@@ -3,6 +3,7 @@ const express = require("express")
 const cors = require("cors")
 const ProdutosService = require("./services/produtos.service.js");
 const ProdutoImagensService = require("./services/produto-imagens.service.js");
+const LojaService = require("./services/loja.service.js");
 
 const hash = require("./routes/criarHash.routes.js")
 const lojaRoutes = require("./routes/loja.routes.js")
@@ -166,8 +167,6 @@ app.get("/consumer/pesquisa/:id", (req, res) => {
 
 
 
-
-
 app.set("trust proxy", 1);
 
 app.get("/share/produto/:id", async (req, res) => {
@@ -274,6 +273,153 @@ app.get("/share/produto/:id", async (req, res) => {
     return res.status(500).send("Erro ao gerar preview");
   }
 });
+
+app.get("/share/loja/:id", async (req, res) => {
+  const lojaId = Number(req.params.id);
+
+  if (!Number.isInteger(lojaId) || lojaId <= 0) {
+    return res.status(400).send("ID de loja inválido");
+  }
+
+  try {
+    const loja = await LojaService.buscarPorId(lojaId);
+
+    if (!loja || !loja.ativo) {
+      return res.status(404).send("Loja não encontrada");
+    }
+
+    const baseUrl = (
+      process.env.PUBLIC_BASE_URL ||
+      `${req.protocol}://${req.get("host")}`
+    ).replace(/\/+$/, "");
+
+    const titulo = String(
+      loja.nome || "Loja no Guide"
+    );
+
+    const totalVisualizacoes = Number(loja.views) || 0;
+
+    const textoVisualizacoes =
+      totalVisualizacoes === 1
+        ? "1 visualização"
+        : `${totalVisualizacoes.toLocaleString("pt-BR")} visualizações`;
+
+    const textoLoja = String(
+      loja.descricao ||
+      `Conheça a ${titulo} e confira seus produtos no Guide!`
+    )
+      .replace(/\s+/g, " ")
+      .trim();
+
+    const descricao =
+      `${textoVisualizacoes}. ${textoLoja}`
+        .slice(0, 180);
+
+    const imagemUrl =
+      loja.logo_url ||
+      loja.banner_url ||
+      `${baseUrl}/assets/images/default.webp`;
+
+    const shareUrl =
+      `${baseUrl}/share/loja/${lojaId}`;
+
+    const urlDestino =
+      `${baseUrl}/lojas/${lojaId}?loja_id=${lojaId}`;
+
+    res.type("html").send(`
+      <!DOCTYPE html>
+      <html lang="pt-BR">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+
+          <title>${escapeHtml(titulo)}</title>
+          <meta
+            name="description"
+            content="${escapeHtml(descricao)}"
+          >
+
+          <meta property="og:type" content="website">
+          <meta property="og:site_name" content="Guide">
+          <meta property="og:locale" content="pt_BR">
+
+          <meta
+            property="og:title"
+            content="${escapeHtml(titulo)}"
+          >
+
+          <meta
+            property="og:description"
+            content="${escapeHtml(descricao)}"
+          >
+
+          <meta
+            property="og:image"
+            content="${escapeHtml(imagemUrl)}"
+          >
+
+          <meta
+            property="og:image:secure_url"
+            content="${escapeHtml(imagemUrl)}"
+          >
+
+          <meta
+            property="og:image:alt"
+            content="Logo da loja ${escapeHtml(titulo)}"
+          >
+
+          <meta
+            property="og:url"
+            content="${escapeHtml(shareUrl)}"
+          >
+
+          <meta name="twitter:card" content="summary">
+
+          <meta
+            name="twitter:title"
+            content="${escapeHtml(titulo)}"
+          >
+
+          <meta
+            name="twitter:description"
+            content="${escapeHtml(descricao)}"
+          >
+
+          <meta
+            name="twitter:image"
+            content="${escapeHtml(imagemUrl)}"
+          >
+        </head>
+
+        <body>
+          <p>
+            Redirecionando para
+            <a href="${escapeHtml(urlDestino)}">
+              ${escapeHtml(titulo)}
+            </a>
+          </p>
+
+          <script>
+            window.location.replace(
+              ${JSON.stringify(urlDestino)}
+            );
+          </script>
+        </body>
+      </html>
+    `);
+  } catch (error) {
+    console.error("Erro ao gerar preview da loja:", error);
+
+    if (error.message === "Loja não encontrada") {
+      return res.status(404).send("Loja não encontrada");
+    }
+
+    return res.status(500).send(
+      "Erro ao gerar preview da loja"
+    );
+  }
+});
+
 
 function escapeHtml(value = "") {
   return String(value)

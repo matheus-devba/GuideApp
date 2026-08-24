@@ -26,7 +26,10 @@ export async function btnShare(rota, title, text) {
         e.preventDefault();
         const mensagem = `${text}\n\n${urlParaCompartilhar}`;
 
-        // Verifica se o navegador/dispositivo suporta o compartilhamento nativo
+        // Verifica se o navegador/dispositivo suporta o compartilhamento nativo 
+
+
+        // ---->>> AINDA NAO FUNCIONA COM PC
         if (navigator.share) {
             try {
                 await navigator.share({
