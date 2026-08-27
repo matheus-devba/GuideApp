@@ -168,35 +168,63 @@ function inicializarCarrossel() {
 }
 
 
-function addInteresse(productSelected,loja, precoExibido) {
-  let textoMensagem = `Olá \u{1F60D}! Vim do Guide e tenho interesse no produto ${productSelected.nome} no valor de ${formatMoney(precoExibido)}\n\n`;
+function addInteresse(productSelected, loja, precoExibido) {
+  const linkProduto =
+    `${API_BASE_URL}/share/produto/${productSelected.id}` +
+    `?loja_id=${loja.id}`;
+
+  const textoMensagem = [
+    `Olá 😍! Vim do Guide e tenho interesse no produto ${productSelected.nome}`,
+    `Valor: ${formatMoney(precoExibido)}`,
+    "",
+    linkProduto
+  ].join("\n");
 
   const textoCodificado = encodeURIComponent(textoMensagem);
-    
-  let telefone = loja.whatsapp ? loja.whatsapp.replace(/\D/g, '') : '';
-    if (telefone && !telefone.startsWith('55')) {
-      telefone = `55${telefone}`;
-    }
 
-  const urlWhatsapp = `https://api.whatsapp.com/send?phone=${telefone}&text=${textoCodificado}`;
-  
-  const botao = document.querySelector('.cta-product')
-  if(!botao) return
+  let telefone = loja.whatsapp
+    ? loja.whatsapp.replace(/\D/g, "")
+    : "";
 
-  botao.addEventListener("click", async(e) => {
-    e.preventDefault()
-    window.open(urlWhatsapp, '_blank', 'noopener,noreferrer');
+  if (telefone && !telefone.startsWith("55")) {
+    telefone = `55${telefone}`;
+  }
+
+  const urlWhatsapp =
+    `https://api.whatsapp.com/send` +
+    `?phone=${telefone}` +
+    `&text=${textoCodificado}`;
+
+  const botao = document.querySelector(".cta-product");
+
+  if (!botao) return;
+
+  botao.addEventListener("click", async (event) => {
+    event.preventDefault();
+
+    window.open(
+      urlWhatsapp,
+      "_blank",
+      "noopener,noreferrer"
+    );
 
     if (source) {
-      await addEvento(produto_id, loja_id, "interesse", Eventos.INTERESSE_PRODUTO_HOME)
+      await addEvento(
+        produto_id,
+        loja_id,
+        "interesse",
+        Eventos.INTERESSE_PRODUTO_HOME
+      );
+    } else {
+      await addEvento(
+        produto_id,
+        loja_id,
+        "interesse",
+        Eventos.INTERESSE_PRODUTO
+      );
     }
-    else {
-      await addEvento(produto_id, loja_id, "interesse", Eventos.INTERESSE_PRODUTO)
-    }
-    
-  })
+  });
 }
-  
 
 async function addEvento(produto_id, loja_id, tipo, tipo_evento) {
   const payload = {
